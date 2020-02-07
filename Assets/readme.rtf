@@ -1,0 +1,28 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww30000\viewh14960\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Important notes about the architecture:\
+- Views [MonoBehaviour]: renders the the UI object visual and/or is a terminal for user input in the game\
+- ViewPresenters [MonoBehaviour]: are objects to handle views I/O data from/to the game\'92s logic\
+- Components [MonoBehaviour/Interface]: contains the data defining the game entities at runtime. They also act over their data when their state is changed\
+- Controllers/Presenters [Interface]: Acts as middle man between the View/ViewPresenter and the Logic/Systems. Useful in case of complex UI where requires coordination between multiple View/ViewPresenters\
+- Logic [Interface]: Acts as a system for services or controllers. It set establishes a set of available operations with deterministic response but only for internal processing and hidden from the view side.\
+- Services [Interface]: Defines as stateless as possible, an accessible interface that establishes a set of available operations with deterministic response\
+- Managers [Interface]: AVOID THIS NAMING SUFFIX. Is a too generic definition to be understandable. Use Services if has external access or Logic if has only internal access\
+- Systems [Interface]: Use only for ECS systems\
+- Factories [Interface]: Defined service responsible for creating new objects in the game \
+- States [Interface]: The representation of the object\'92s current information/state in the game\
+- StateMachines [Interface]: Abstracts the object\'92s state control. Allows to execute a defined behaviour when the objects changes it\'92s state based on external inputs\
+- Locator [Interface]: Container with defined access restrictions for multiple Services\
+- Data [Struct]: Session data and/or or persistent player data for the game\
+- Config [ScriptableObject]: Default static configurations data for the game\
+- Info [Interface]: The view only data to be returned from the game\'92s logic to the game\'92s Views\
+- Entities [Struct]: A simple Id identifying the object\
+- Event [Struct]: Triggered to sent in some point in execution time to any listener. From 1 to * \
+- Command [Struct]: Triggered to to sent in some point in execution time to invoke an operation. From * to 1\
+\
+}

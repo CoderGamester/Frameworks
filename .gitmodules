@@ -1,0 +1,36 @@
+[submodule "Packages/com.gamelovers.nsubstitute"]
+	path = Packages/com.gamelovers.nsubstitute
+	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.nsubstitute.git
+[submodule "Packages/com.gamelovers.newtonsoftjson"]
+	path = Packages/com.gamelovers.newtonsoftjson
+	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.newtonsoftjson.git
+[submodule "Packages/com.gamelovers.inputextensions"]
+	path = Packages/com.gamelovers.inputextensions
+	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.inputextensions.git
+[submodule "Packages/com.gamelovers.removeemptyfolders"]
+	path = Packages/com.gamelovers.removeemptyfolders
+	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.removeemptyfolders.git
+[submodule "Packages/com.gamelovers.services"]
+	path = Packages/com.gamelovers.services
+	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.services.git
+[submodule "Packages/com.gamelovers.statechart"]
+	path = Packages/com.gamelovers.statechart
+	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.statechart.git
+[submodule "Packages/com.gamelovers.uiservice"]
+	path = Packages/com.gamelovers.uiservice
+	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.uiservice.git
+[submodule "Packages/com.gamelovers.asyncawait"]
+	path = Packages/com.gamelovers.asyncawait
+	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.asyncawait.git
+[submodule "Packages/com.gamelovers.addressableidsscriptgenerator"]
+	path = Packages/com.gamelovers.addressableidsscriptgenerator
+	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.addressableidsscriptgenerator.git
+[submodule "Packages/com.gamelovers.configscontainer"]
+	path = Packages/com.gamelovers.configscontainer
+	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.configscontainer.git
+[submodule "Packages/com.gamelovers.googlesheetimporter"]
+	path = Packages/com.gamelovers.googlesheetimporter
+	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.googlesheetimporter.git
+[submodule "Packages/com.gamelovers.loadextension"]
+	path = Packages/com.gamelovers.loadextension
+	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.loadextension.git
