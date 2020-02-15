@@ -34,3 +34,6 @@
 [submodule "Packages/com.gamelovers.loadextension"]
 	path = Packages/com.gamelovers.loadextension
 	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.loadextension.git
+[submodule "Packages/com.gamelovers.assetloader"]
+	path = Packages/com.gamelovers.assetloader
+	url = https://github.com/CoderGamester/com.gamelovers.assetloader.git
