@@ -1,9 +1,6 @@
 [submodule "Packages/com.gamelovers.nsubstitute"]
 	path = Packages/com.gamelovers.nsubstitute
 	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.nsubstitute.git
-[submodule "Packages/com.gamelovers.newtonsoftjson"]
-	path = Packages/com.gamelovers.newtonsoftjson
-	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.newtonsoftjson.git
 [submodule "Packages/com.gamelovers.inputextensions"]
 	path = Packages/com.gamelovers.inputextensions
 	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.inputextensions.git
