@@ -28,3 +28,9 @@
 [submodule "Packages/com.gamelovers.assetloader"]
 	path = Packages/com.gamelovers.assetloader
 	url = https://github.com/CoderGamester/com.gamelovers.assetloader.git
+[submodule "Packages/com.gamelovers.tiledgrid"]
+	path = Packages/com.gamelovers.tiledgrid
+	url = https://github.com/CoderGamester/com.gamelovers.tiledgrid.git
+[submodule "com.gamelovers.tiledgrid"]
+	path = com.gamelovers.tiledgrid
+	url = C:\\Users\\Diana\\Desktop\\Frameworks\\Packages\\com.gamelovers.tiledgrid
