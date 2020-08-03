@@ -28,9 +28,15 @@
 [submodule "Packages/com.gamelovers.assetloader"]
 	path = Packages/com.gamelovers.assetloader
 	url = https://github.com/CoderGamester/com.gamelovers.assetloader.git
-[submodule "Packages/com.gamelovers.tiledgrid"]
-	path = Packages/com.gamelovers.tiledgrid
-	url = https://github.com/CoderGamester/com.gamelovers.tiledgrid.git
 [submodule "com.gamelovers.tiledgrid"]
 	path = com.gamelovers.tiledgrid
 	url = C:\\Users\\Diana\\Desktop\\Frameworks\\Packages\\com.gamelovers.tiledgrid
+[submodule "Packages/com.gamelovers.tiled"]
+	path = Packages/com.gamelovers.tiled
+	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.tiled.git
+[submodule "Packages/com.gamelovers.notificationservice"]
+	path = Packages/com.gamelovers.notificationservice
+	url = https://github.com/CoderGamester/com.gamelovers.notificationservice
+[submodule "Packages/com.gamelovers.nativeui"]
+	path = Packages/com.gamelovers.nativeui
+	url = https://github.com/CoderGamester/com.gamelovers.nativeui.git
