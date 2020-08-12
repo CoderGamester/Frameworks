@@ -4,7 +4,9 @@
       "version": "file:com.gamelovers.assetloader",
       "depth": 0,
       "source": "embedded",
-      "dependencies": {}
+      "dependencies": {
+        "com.unity.addressables": "1.8.4"
+      }
     },
     "com.gamelovers.asyncawait": {
       "version": "file:com.gamelovers.asyncawait",
@@ -87,7 +89,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.gamelovers.assetloader": "0.3.0"
+        "com.unity.addressables": "1.8.4"
       }
     },
     "com.unity.2d.tilemap": {
