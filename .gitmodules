@@ -1,9 +1,6 @@
 [submodule "Packages/com.gamelovers.nsubstitute"]
 	path = Packages/com.gamelovers.nsubstitute
 	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.nsubstitute.git
-[submodule "Packages/com.gamelovers.newtonsoftjson"]
-	path = Packages/com.gamelovers.newtonsoftjson
-	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.newtonsoftjson.git
 [submodule "Packages/com.gamelovers.inputextensions"]
 	path = Packages/com.gamelovers.inputextensions
 	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.inputextensions.git
@@ -22,15 +19,24 @@
 [submodule "Packages/com.gamelovers.asyncawait"]
 	path = Packages/com.gamelovers.asyncawait
 	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.asyncawait.git
-[submodule "Packages/com.gamelovers.addressableidsscriptgenerator"]
-	path = Packages/com.gamelovers.addressableidsscriptgenerator
-	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.addressableidsscriptgenerator.git
 [submodule "Packages/com.gamelovers.configscontainer"]
 	path = Packages/com.gamelovers.configscontainer
 	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.configscontainer.git
 [submodule "Packages/com.gamelovers.googlesheetimporter"]
 	path = Packages/com.gamelovers.googlesheetimporter
 	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.googlesheetimporter.git
-[submodule "Packages/com.gamelovers.loadextension"]
-	path = Packages/com.gamelovers.loadextension
-	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.loadextension.git
+[submodule "Packages/com.gamelovers.assetloader"]
+	path = Packages/com.gamelovers.assetloader
+	url = https://github.com/CoderGamester/com.gamelovers.assetloader.git
+[submodule "com.gamelovers.tiledgrid"]
+	path = com.gamelovers.tiledgrid
+	url = C:\\Users\\Diana\\Desktop\\Frameworks\\Packages\\com.gamelovers.tiledgrid
+[submodule "Packages/com.gamelovers.tiled"]
+	path = Packages/com.gamelovers.tiled
+	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.tiled.git
+[submodule "Packages/com.gamelovers.notificationservice"]
+	path = Packages/com.gamelovers.notificationservice
+	url = https://github.com/CoderGamester/com.gamelovers.notificationservice
+[submodule "Packages/com.gamelovers.nativeui"]
+	path = Packages/com.gamelovers.nativeui
+	url = https://github.com/CoderGamester/com.gamelovers.nativeui.git
