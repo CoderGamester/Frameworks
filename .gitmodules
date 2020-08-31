@@ -19,15 +19,9 @@
 [submodule "Packages/com.gamelovers.asyncawait"]
 	path = Packages/com.gamelovers.asyncawait
 	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.asyncawait.git
-[submodule "Packages/com.gamelovers.configscontainer"]
-	path = Packages/com.gamelovers.configscontainer
-	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.configscontainer.git
 [submodule "Packages/com.gamelovers.googlesheetimporter"]
 	path = Packages/com.gamelovers.googlesheetimporter
 	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.googlesheetimporter.git
-[submodule "Packages/com.gamelovers.assetloader"]
-	path = Packages/com.gamelovers.assetloader
-	url = https://github.com/CoderGamester/com.gamelovers.assetloader.git
 [submodule "com.gamelovers.tiledgrid"]
 	path = com.gamelovers.tiledgrid
 	url = C:\\Users\\Diana\\Desktop\\Frameworks\\Packages\\com.gamelovers.tiledgrid
@@ -40,3 +34,9 @@
 [submodule "Packages/com.gamelovers.nativeui"]
 	path = Packages/com.gamelovers.nativeui
 	url = https://github.com/CoderGamester/com.gamelovers.nativeui.git
+[submodule "Packages/com.gamelovers.dataextensions"]
+	path = Packages/com.gamelovers.dataextensions
+	url = https://github.com/CoderGamester/com.gamelovers.dataextensions.git
+[submodule "Packages/com.gamelovers.addressablesextensions"]
+	path = Packages/com.gamelovers.addressablesextensions
+	url = https://github.com/CoderGamester/com.gamelovers.addressablesextensions.git
