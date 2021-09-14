@@ -1,6 +1,3 @@
-[submodule "Packages/com.gamelovers.nsubstitute"]
-	path = Packages/com.gamelovers.nsubstitute
-	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.nsubstitute.git
 [submodule "Packages/com.gamelovers.inputextensions"]
 	path = Packages/com.gamelovers.inputextensions
 	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.inputextensions.git
@@ -16,18 +13,12 @@
 [submodule "Packages/com.gamelovers.uiservice"]
 	path = Packages/com.gamelovers.uiservice
 	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.uiservice.git
-[submodule "Packages/com.gamelovers.asyncawait"]
-	path = Packages/com.gamelovers.asyncawait
-	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.asyncawait.git
 [submodule "Packages/com.gamelovers.googlesheetimporter"]
 	path = Packages/com.gamelovers.googlesheetimporter
 	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.googlesheetimporter.git
 [submodule "com.gamelovers.tiledgrid"]
 	path = com.gamelovers.tiledgrid
 	url = C:\\Users\\Diana\\Desktop\\Frameworks\\Packages\\com.gamelovers.tiledgrid
-[submodule "Packages/com.gamelovers.tiled"]
-	path = Packages/com.gamelovers.tiled
-	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.tiled.git
 [submodule "Packages/com.gamelovers.notificationservice"]
 	path = Packages/com.gamelovers.notificationservice
 	url = https://github.com/CoderGamester/com.gamelovers.notificationservice
