@@ -9,7 +9,7 @@
       }
     },
     "com.gamelovers.configsprovider": {
-      "version": "file:com.undefined.configsprovider",
+      "version": "file:com.gamelovers.configsprovider",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
