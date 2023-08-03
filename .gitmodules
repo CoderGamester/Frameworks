@@ -1,24 +1,18 @@
 [submodule "Packages/com.gamelovers.inputextensions"]
 	path = Packages/com.gamelovers.inputextensions
 	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.inputextensions.git
-[submodule "Packages/com.gamelovers.removeemptyfolders"]
-	path = Packages/com.gamelovers.removeemptyfolders
-	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.removeemptyfolders.git
 [submodule "Packages/com.gamelovers.services"]
 	path = Packages/com.gamelovers.services
-	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.services.git
+	url = https://github.com/CoderGamester/Services.git
 [submodule "Packages/com.gamelovers.statechart"]
 	path = Packages/com.gamelovers.statechart
-	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.statechart.git
+	url = https://github.com/CoderGamester/Statechart-HFSM.git
 [submodule "Packages/com.gamelovers.uiservice"]
 	path = Packages/com.gamelovers.uiservice
 	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.uiservice.git
 [submodule "Packages/com.gamelovers.googlesheetimporter"]
 	path = Packages/com.gamelovers.googlesheetimporter
-	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.googlesheetimporter.git
-[submodule "com.gamelovers.tiledgrid"]
-	path = com.gamelovers.tiledgrid
-	url = C:\\Users\\Diana\\Desktop\\Frameworks\\Packages\\com.gamelovers.tiledgrid
+	url = https://github.com/CoderGamester/Unity-GoogleSheet-Importer.git
 [submodule "Packages/com.gamelovers.notificationservice"]
 	path = Packages/com.gamelovers.notificationservice
 	url = https://github.com/CoderGamester/com.gamelovers.notificationservice
@@ -27,7 +21,10 @@
 	url = https://github.com/CoderGamester/com.gamelovers.nativeui.git
 [submodule "Packages/com.gamelovers.dataextensions"]
 	path = Packages/com.gamelovers.dataextensions
-	url = https://github.com/CoderGamester/com.gamelovers.dataextensions.git
+	url = https://github.com/CoderGamester/Unity-DataTypeExtensions.git
 [submodule "Packages/com.gamelovers.addressablesextensions"]
 	path = Packages/com.gamelovers.addressablesextensions
 	url = https://github.com/CoderGamester/com.gamelovers.addressablesextensions.git
+[submodule "Packages/com.gamelovers.configsprovider"]
+	path = Packages/com.gamelovers.configsprovider
+	url = https://github.com/CoderGamester/Unity-ConfigsProvider.git

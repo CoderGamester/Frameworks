@@ -8,6 +8,12 @@
         "com.unity.addressables": "1.15.1"
       }
     },
+    "com.gamelovers.configsprovider": {
+      "version": "file:com.undefined.configsprovider",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.gamelovers.dataextensions": {
       "version": "file:com.gamelovers.dataextensions",
       "depth": 0,
@@ -20,7 +26,8 @@
       "source": "embedded",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "2.0.0",
-        "com.gamelovers.dataextensions": "0.3.0"
+        "com.gamelovers.dataextensions": "0.4.0",
+        "com.gamelovers.configsprovider": "0.1.0"
       }
     },
     "com.gamelovers.inputextension": {
@@ -44,12 +51,6 @@
       "dependencies": {
         "com.unity.mobile.notifications": "1.3.0"
       }
-    },
-    "com.gamelovers.removeemptyfolders": {
-      "version": "file:com.gamelovers.removeemptyfolders",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
     },
     "com.gamelovers.services": {
       "version": "file:com.gamelovers.services",
