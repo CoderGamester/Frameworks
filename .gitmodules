@@ -22,9 +22,9 @@
 [submodule "Packages/com.gamelovers.dataextensions"]
 	path = Packages/com.gamelovers.dataextensions
 	url = https://github.com/CoderGamester/Unity-DataTypeExtensions.git
-[submodule "Packages/com.gamelovers.addressablesextensions"]
-	path = Packages/com.gamelovers.addressablesextensions
-	url = https://github.com/CoderGamester/com.gamelovers.addressablesextensions.git
+[submodule "Packages/com.gamelovers.assetsimporter"]
+	path = Packages/com.gamelovers.assetsimporter
+	url = https://github.com/CoderGamester/Unity-AssetsImporter.git
 [submodule "Packages/com.gamelovers.configsprovider"]
 	path = Packages/com.gamelovers.configsprovider
 	url = https://github.com/CoderGamester/Unity-ConfigsProvider.git
