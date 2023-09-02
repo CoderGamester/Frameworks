@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.gamelovers.assetsimporter": {
-      "version": "file:com.gamelovers.addressablesextensions",
+      "version": "file:com.gamelovers.assetsimporter",
       "depth": 0,
       "source": "embedded",
       "dependencies": {
