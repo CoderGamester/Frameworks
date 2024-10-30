@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Console
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 111
+  controlID: 113
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -140,12 +140,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1208
+    width: 1313
     height: 939
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 112
+  controlID: 37
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -166,8 +166,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1208
-    height: 371
+    width: 1313
+    height: 449
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
@@ -190,8 +190,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 286
-    height: 371
+    width: 306
+    height: 449
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
@@ -214,12 +214,12 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 286
+    x: 306
     y: 0
-    width: 922
-    height: 371
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+    width: 1007
+    height: 449
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -236,24 +236,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 371
-    width: 1208
-    height: 568
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 13}
+    y: 449
+    width: 1313
+    height: 490
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 13}
   - {fileID: 17}
   - {fileID: 12}
-  m_Selected: 0
-  m_LastSelected: 2
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -269,12 +269,12 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1208
+    x: 1313
     y: 0
-    width: 712
+    width: 607
     height: 939
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -301,9 +301,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 444
-    width: 1207
-    height: 547
+    y: 522
+    width: 1312
+    height: 469
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -315,12 +315,12 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_Spl:
-    ID: 85
+    ID: 83
     splitterInitialOffset: 276
     currentActiveSplitter: -1
     realSizes:
-    - 208
-    - 269
+    - 174
+    - 225
     relativeSizes:
     - 0.4360587
     - 0.5639413
@@ -330,7 +330,7 @@ MonoBehaviour:
     maxSizes:
     - 0
     - 0
-    lastTotalSize: 477
+    lastTotalSize: 399
     splitSize: 6
     xOffset: 0
     m_Version: 1
@@ -338,7 +338,7 @@ MonoBehaviour:
     oldMinSizes: 
     oldMaxSizes: 
     oldSplitSize: 0
-  m_TestTypeToolbarIndex: 0
+  m_TestTypeToolbarIndex: 1
   m_PlayModeTestListGUI:
     m_Window: {fileID: 12}
     m_NewResultList:
@@ -543,7 +543,7 @@ MonoBehaviour:
     m_ResultText: CoroutineServiceTest (0.350s)
     m_ResultStacktrace: 
     m_TestListState:
-      scrollPos: {x: 0, y: 0}
+      scrollPos: {x: 0, y: 22}
       m_SelectedIDs: c15cf881
       m_LastClickedID: -2114429759
       m_ExpandedIDs: c15cf8811803a48882f44ca8ed00aaee2f86f846c575756affffff7f
@@ -581,7 +581,7 @@ MonoBehaviour:
       name: Idle Rainforest
       fullName: Idle Rainforest
       resultStatus: 2
-      duration: 0.0281398
+      duration: 1.4905235
       messages: One or more child tests had errors
       output: 
       stacktrace: 
@@ -597,7 +597,7 @@ MonoBehaviour:
       name: GameLovers.DataExtensions.Editor.Tests.dll
       fullName: C:/Users/migas/Desktop/Frameworks/Library/ScriptAssemblies/GameLovers.DataExtensions.Editor.Tests.dll
       resultStatus: 1
-      duration: 0.1156471
+      duration: 0.151989
       messages: 
       output: 
       stacktrace: 
@@ -613,7 +613,7 @@ MonoBehaviour:
       name: GameLoversEditor
       fullName: GameLoversEditor
       resultStatus: 1
-      duration: 0.1145705
+      duration: 0.1511923
       messages: 
       output: 
       stacktrace: 
@@ -629,7 +629,7 @@ MonoBehaviour:
       name: DataExtensions
       fullName: GameLoversEditor.DataExtensions
       resultStatus: 1
-      duration: 0.1115952
+      duration: 0.1505497
       messages: 
       output: 
       stacktrace: 
@@ -645,7 +645,7 @@ MonoBehaviour:
       name: Tests
       fullName: GameLoversEditor.DataExtensions.Tests
       resultStatus: 1
-      duration: 0.1091072
+      duration: 0.1498142
       messages: 
       output: 
       stacktrace: 
@@ -661,7 +661,7 @@ MonoBehaviour:
       name: EnumSelectorTest
       fullName: GameLoversEditor.DataExtensions.Tests.EnumSelectorTest
       resultStatus: 1
-      duration: 0.0241584
+      duration: 0.0214822
       messages: 
       output: 
       stacktrace: 
@@ -677,7 +677,7 @@ MonoBehaviour:
       name: ValueCheck
       fullName: GameLoversEditor.DataExtensions.Tests.EnumSelectorTest.ValueCheck
       resultStatus: 1
-      duration: 0.0132143
+      duration: 0.0114715
       messages: 
       output: 
       stacktrace: 
@@ -694,7 +694,7 @@ MonoBehaviour:
       name: ValueSetCheck
       fullName: GameLoversEditor.DataExtensions.Tests.EnumSelectorTest.ValueSetCheck
       resultStatus: 1
-      duration: 0.0003128
+      duration: 0.0001972
       messages: 
       output: 
       stacktrace: 
@@ -711,7 +711,7 @@ MonoBehaviour:
       name: floatPTests
       fullName: GameLoversEditor.DataExtensions.Tests.floatPTests
       resultStatus: 1
-      duration: 0.0202838
+      duration: 0.006285
       messages: 
       output: 
       stacktrace: 
@@ -727,7 +727,7 @@ MonoBehaviour:
       name: Addition
       fullName: GameLoversEditor.DataExtensions.Tests.floatPTests.Addition
       resultStatus: 1
-      duration: 0.0100275
+      duration: 0.0009011
       messages: 
       output: 
       stacktrace: 
@@ -744,7 +744,7 @@ MonoBehaviour:
       name: Equality
       fullName: GameLoversEditor.DataExtensions.Tests.floatPTests.Equality
       resultStatus: 1
-      duration: 0.0007516
+      duration: 0.0006208
       messages: 
       output: 
       stacktrace: 
@@ -761,7 +761,7 @@ MonoBehaviour:
       name: Multiplication
       fullName: GameLoversEditor.DataExtensions.Tests.floatPTests.Multiplication
       resultStatus: 1
-      duration: 0.0007038
+      duration: 0.0007097
       messages: 
       output: 
       stacktrace: 
@@ -778,7 +778,7 @@ MonoBehaviour:
       name: Representation
       fullName: GameLoversEditor.DataExtensions.Tests.floatPTests.Representation
       resultStatus: 1
-      duration: 0.0003095
+      duration: 0.0003175
       messages: 
       output: 
       stacktrace: 
@@ -795,7 +795,7 @@ MonoBehaviour:
       name: ObservableDictionaryTest
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest
       resultStatus: 1
-      duration: 0.112817
+      duration: 0.0847258
       messages: 
       output: 
       stacktrace: 
@@ -811,7 +811,7 @@ MonoBehaviour:
       name: Add_AddsKeyValuePair_WhenKeyDoesNotExist
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Add_AddsKeyValuePair_WhenKeyDoesNotExist
       resultStatus: 1
-      duration: 0.075276
+      duration: 0.0601822
       messages: 
       output: 
       stacktrace: 
@@ -828,7 +828,7 @@ MonoBehaviour:
       name: Add_ThrowsException_WhenKeyAlreadyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Add_ThrowsException_WhenKeyAlreadyExists
       resultStatus: 1
-      duration: 0.0025021
+      duration: 0.0019905
       messages: 
       output: 
       stacktrace: 
@@ -845,7 +845,7 @@ MonoBehaviour:
       name: Clear_RemovesAllKeyValuePairs
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Clear_RemovesAllKeyValuePairs
       resultStatus: 1
-      duration: 0.0006724
+      duration: 0.0005422
       messages: 
       output: 
       stacktrace: 
@@ -862,7 +862,7 @@ MonoBehaviour:
       name: ContainsKey_ReturnsFalse_WhenKeyDoesNotExist
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.ContainsKey_ReturnsFalse_WhenKeyDoesNotExist
       resultStatus: 1
-      duration: 0.0005318
+      duration: 0.0002634
       messages: 
       output: 
       stacktrace: 
@@ -879,7 +879,7 @@ MonoBehaviour:
       name: ContainsKey_ReturnsTrue_WhenKeyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.ContainsKey_ReturnsTrue_WhenKeyExists
       resultStatus: 1
-      duration: 0.0003115
+      duration: 0.0001208
       messages: 
       output: 
       stacktrace: 
@@ -896,7 +896,7 @@ MonoBehaviour:
       name: Indexer_ReturnsValue_WhenKeyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Indexer_ReturnsValue_WhenKeyExists
       resultStatus: 1
-      duration: 0.0001579
+      duration: 0.0001136
       messages: 
       output: 
       stacktrace: 
@@ -913,7 +913,7 @@ MonoBehaviour:
       name: Indexer_SetsValue_WhenKeyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Indexer_SetsValue_WhenKeyExists
       resultStatus: 1
-      duration: 0.0003246
+      duration: 0.0002352
       messages: 
       output: 
       stacktrace: 
@@ -930,7 +930,7 @@ MonoBehaviour:
       name: InvokeObserve_MissingKey_ThrowsException
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.InvokeObserve_MissingKey_ThrowsException
       resultStatus: 1
-      duration: 0.0010233
+      duration: 0.000899
       messages: 
       output: 
       stacktrace: 
@@ -947,7 +947,7 @@ MonoBehaviour:
       name: InvokeObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.InvokeObserveCheck
       resultStatus: 1
-      duration: 0.0100157
+      duration: 0.0086561
       messages: 
       output: 
       stacktrace: 
@@ -964,7 +964,7 @@ MonoBehaviour:
       name: InvokeUpdate_MissingKey_ThrowsException
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.InvokeUpdate_MissingKey_ThrowsException
       resultStatus: 1
-      duration: 0.0002576
+      duration: 0.0002393
       messages: 
       output: 
       stacktrace: 
@@ -981,7 +981,7 @@ MonoBehaviour:
       name: InvokeUpdate_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.InvokeUpdate_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0003976
+      duration: 0.0003351
       messages: 
       output: 
       stacktrace: 
@@ -998,7 +998,7 @@ MonoBehaviour:
       name: InvokeUpdateCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.InvokeUpdateCheck
       resultStatus: 1
-      duration: 0.0005072
+      duration: 0.0004261
       messages: 
       output: 
       stacktrace: 
@@ -1015,7 +1015,7 @@ MonoBehaviour:
       name: ObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.ObserveCheck
       resultStatus: 1
-      duration: 0.0006928
+      duration: 0.0005346
       messages: 
       output: 
       stacktrace: 
@@ -1032,7 +1032,7 @@ MonoBehaviour:
       name: Remove_RemovesKeyValuePair_WhenKeyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Remove_RemovesKeyValuePair_WhenKeyExists
       resultStatus: 1
-      duration: 0.0002055
+      duration: 0.0001483
       messages: 
       output: 
       stacktrace: 
@@ -1049,7 +1049,7 @@ MonoBehaviour:
       name: Remove_ReturnsFalse_WhenKeyDoesNotExist
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Remove_ReturnsFalse_WhenKeyDoesNotExist
       resultStatus: 1
-      duration: 0.0001304
+      duration: 0.0001055
       messages: 
       output: 
       stacktrace: 
@@ -1066,7 +1066,7 @@ MonoBehaviour:
       name: StopObserve_KeyCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObserve_KeyCheck
       resultStatus: 1
-      duration: 0.0004951
+      duration: 0.0003676
       messages: 
       output: 
       stacktrace: 
@@ -1083,7 +1083,7 @@ MonoBehaviour:
       name: StopObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObserveCheck
       resultStatus: 1
-      duration: 0.0006997
+      duration: 0.0005421
       messages: 
       output: 
       stacktrace: 
@@ -1100,7 +1100,7 @@ MonoBehaviour:
       name: StopObservingAll_Everything_Check
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObservingAll_Everything_Check
       resultStatus: 1
-      duration: 0.000587
+      duration: 0.0004178
       messages: 
       output: 
       stacktrace: 
@@ -1117,7 +1117,7 @@ MonoBehaviour:
       name: StopObservingAll_MultipleCalls_Check
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObservingAll_MultipleCalls_Check
       resultStatus: 1
-      duration: 0.000313
+      duration: 0.0001995
       messages: 
       output: 
       stacktrace: 
@@ -1134,7 +1134,7 @@ MonoBehaviour:
       name: StopObservingAll_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObservingAll_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0002328
+      duration: 0.0001453
       messages: 
       output: 
       stacktrace: 
@@ -1151,7 +1151,7 @@ MonoBehaviour:
       name: StopObservingAllCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObservingAllCheck
       resultStatus: 1
-      duration: 0.0002418
+      duration: 0.0001731
       messages: 
       output: 
       stacktrace: 
@@ -1168,7 +1168,7 @@ MonoBehaviour:
       name: TryGetValue_ReturnsFalse_WhenKeyDoesNotExist
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.TryGetValue_ReturnsFalse_WhenKeyDoesNotExist
       resultStatus: 1
-      duration: 0.0001763
+      duration: 0.0001257
       messages: 
       output: 
       stacktrace: 
@@ -1185,7 +1185,7 @@ MonoBehaviour:
       name: TryGetValue_ReturnsTrue_WhenKeyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.TryGetValue_ReturnsTrue_WhenKeyExists
       resultStatus: 1
-      duration: 0.0001468
+      duration: 0.0001259
       messages: 
       output: 
       stacktrace: 
@@ -1202,7 +1202,7 @@ MonoBehaviour:
       name: ValueSetCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.ValueSetCheck
       resultStatus: 1
-      duration: 0.0013507
+      duration: 0.0009336
       messages: 
       output: 
       stacktrace: 
@@ -1219,7 +1219,7 @@ MonoBehaviour:
       name: ObservableFieldTest
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest
       resultStatus: 1
-      duration: 0.0094249
+      duration: 0.0062814
       messages: 
       output: 
       stacktrace: 
@@ -1235,7 +1235,7 @@ MonoBehaviour:
       name: InvokeCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.InvokeCheck
       resultStatus: 1
-      duration: 0.0014855
+      duration: 0.0012634
       messages: 
       output: 
       stacktrace: 
@@ -1252,7 +1252,7 @@ MonoBehaviour:
       name: InvokeCheck_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.InvokeCheck_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0003188
+      duration: 0.0001609
       messages: 
       output: 
       stacktrace: 
@@ -1269,7 +1269,7 @@ MonoBehaviour:
       name: InvokeObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.InvokeObserveCheck
       resultStatus: 1
-      duration: 0.0003644
+      duration: 0.0001738
       messages: 
       output: 
       stacktrace: 
@@ -1286,7 +1286,7 @@ MonoBehaviour:
       name: ObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.ObserveCheck
       resultStatus: 1
-      duration: 0.0003811
+      duration: 0.0003734
       messages: 
       output: 
       stacktrace: 
@@ -1303,7 +1303,7 @@ MonoBehaviour:
       name: StopObserve_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObserve_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0003323
+      duration: 0.0002366
       messages: 
       output: 
       stacktrace: 
@@ -1320,7 +1320,7 @@ MonoBehaviour:
       name: StopObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObserveCheck
       resultStatus: 1
-      duration: 0.0002918
+      duration: 0.0001769
       messages: 
       output: 
       stacktrace: 
@@ -1337,7 +1337,7 @@ MonoBehaviour:
       name: StopObservingAll_Everything_Check
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObservingAll_Everything_Check
       resultStatus: 1
-      duration: 0.000342
+      duration: 0.0002164
       messages: 
       output: 
       stacktrace: 
@@ -1354,7 +1354,7 @@ MonoBehaviour:
       name: StopObservingAll_MultipleCalls_Check
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObservingAll_MultipleCalls_Check
       resultStatus: 1
-      duration: 0.0002842
+      duration: 0.0001831
       messages: 
       output: 
       stacktrace: 
@@ -1371,7 +1371,7 @@ MonoBehaviour:
       name: StopObservingAll_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObservingAll_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0002032
+      duration: 0.0001846
       messages: 
       output: 
       stacktrace: 
@@ -1388,7 +1388,7 @@ MonoBehaviour:
       name: StopObservingAllCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObservingAllCheck
       resultStatus: 1
-      duration: 0.0002238
+      duration: 0.0001642
       messages: 
       output: 
       stacktrace: 
@@ -1405,7 +1405,7 @@ MonoBehaviour:
       name: ValueCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.ValueCheck
       resultStatus: 1
-      duration: 0.0001914
+      duration: 0.0001034
       messages: 
       output: 
       stacktrace: 
@@ -1422,7 +1422,7 @@ MonoBehaviour:
       name: ValueSetCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.ValueSetCheck
       resultStatus: 1
-      duration: 0.0011835
+      duration: 0.0001446
       messages: 
       output: 
       stacktrace: 
@@ -1439,7 +1439,7 @@ MonoBehaviour:
       name: ObservableListTest
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest
       resultStatus: 1
-      duration: 0.008007
+      duration: 0.0103454
       messages: 
       output: 
       stacktrace: 
@@ -1455,7 +1455,7 @@ MonoBehaviour:
       name: AddValue_AddsValueToList
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.AddValue_AddsValueToList
       resultStatus: 1
-      duration: 0.0024873
+      duration: 0.0050783
       messages: 
       output: 
       stacktrace: 
@@ -1472,7 +1472,7 @@ MonoBehaviour:
       name: InvokeCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.InvokeCheck
       resultStatus: 1
-      duration: 0.0006835
+      duration: 0.0005746
       messages: 
       output: 
       stacktrace: 
@@ -1489,7 +1489,7 @@ MonoBehaviour:
       name: InvokeCheck_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.InvokeCheck_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0001905
+      duration: 0.0001909
       messages: 
       output: 
       stacktrace: 
@@ -1506,7 +1506,7 @@ MonoBehaviour:
       name: InvokeObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.InvokeObserveCheck
       resultStatus: 1
-      duration: 0.0002602
+      duration: 0.0002653
       messages: 
       output: 
       stacktrace: 
@@ -1523,7 +1523,7 @@ MonoBehaviour:
       name: ObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.ObserveCheck
       resultStatus: 1
-      duration: 0.0004555
+      duration: 0.0004518
       messages: 
       output: 
       stacktrace: 
@@ -1540,7 +1540,7 @@ MonoBehaviour:
       name: SetValue_UpdatesValue
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.SetValue_UpdatesValue
       resultStatus: 1
-      duration: 0.0001799
+      duration: 0.0001873
       messages: 
       output: 
       stacktrace: 
@@ -1557,7 +1557,7 @@ MonoBehaviour:
       name: StopObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObserveCheck
       resultStatus: 1
-      duration: 0.0003106
+      duration: 0.0002662
       messages: 
       output: 
       stacktrace: 
@@ -1574,7 +1574,7 @@ MonoBehaviour:
       name: StopObservingAll_Everything_Check
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObservingAll_Everything_Check
       resultStatus: 1
-      duration: 0.0002433
+      duration: 0.0002333
       messages: 
       output: 
       stacktrace: 
@@ -1591,7 +1591,7 @@ MonoBehaviour:
       name: StopObservingAll_MultipleCalls_Check
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObservingAll_MultipleCalls_Check
       resultStatus: 1
-      duration: 0.000193
+      duration: 0.0002042
       messages: 
       output: 
       stacktrace: 
@@ -1608,7 +1608,7 @@ MonoBehaviour:
       name: StopObservingAll_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObservingAll_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0001724
+      duration: 0.0001839
       messages: 
       output: 
       stacktrace: 
@@ -1625,7 +1625,7 @@ MonoBehaviour:
       name: StopObservingAllCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObservingAllCheck
       resultStatus: 1
-      duration: 0.0001725
+      duration: 0.0001913
       messages: 
       output: 
       stacktrace: 
@@ -1642,7 +1642,7 @@ MonoBehaviour:
       name: ObservableResolverDictionaryTest
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest
       resultStatus: 1
-      duration: 0.105351
+      duration: 0.0135797
       messages: 
       output: 
       stacktrace: 
@@ -1658,7 +1658,7 @@ MonoBehaviour:
       name: AddOrigin_AddsValueToOriginDictionary
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.AddOrigin_AddsValueToOriginDictionary
       resultStatus: 1
-      duration: 0.0888046
+      duration: 0.0081768
       messages: 
       output: 
       stacktrace: 
@@ -1675,7 +1675,7 @@ MonoBehaviour:
       name: ClearOrigin_ClearsOriginDictionary
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.ClearOrigin_ClearsOriginDictionary
       resultStatus: 1
-      duration: 0.001478
+      duration: 0.0004576
       messages: 
       output: 
       stacktrace: 
@@ -1692,7 +1692,7 @@ MonoBehaviour:
       name: RemoveOrigin_RemovesValueFromOriginDictionary
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.RemoveOrigin_RemovesValueFromOriginDictionary
       resultStatus: 1
-      duration: 0.003015
+      duration: 0.0007094
       messages: 
       output: 
       stacktrace: 
@@ -1709,7 +1709,7 @@ MonoBehaviour:
       name: TryGetOriginValue_KeyDoesNotExist_ReturnsFalseAndOutDefault
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.TryGetOriginValue_KeyDoesNotExist_ReturnsFalseAndOutDefault
       resultStatus: 1
-      duration: 0.0008743
+      duration: 0.0005969
       messages: 
       output: 
       stacktrace: 
@@ -1726,7 +1726,7 @@ MonoBehaviour:
       name: TryGetOriginValue_KeyExists_ReturnsTrueAndOutValue
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.TryGetOriginValue_KeyExists_ReturnsTrueAndOutValue
       resultStatus: 1
-      duration: 0.0007124
+      duration: 0.0007005
       messages: 
       output: 
       stacktrace: 
@@ -1743,7 +1743,7 @@ MonoBehaviour:
       name: UpdateOrigin_UpdatesValueInOriginDictionary
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.UpdateOrigin_UpdatesValueInOriginDictionary
       resultStatus: 1
-      duration: 0.0011478
+      duration: 0.0010023
       messages: 
       output: 
       stacktrace: 
@@ -1760,7 +1760,7 @@ MonoBehaviour:
       name: ObservableResolverListTest
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest
       resultStatus: 1
-      duration: 0.1062852
+      duration: 0.005152
       messages: 
       output: 
       stacktrace: 
@@ -1776,7 +1776,7 @@ MonoBehaviour:
       name: AddOrigin_AddsValueToOriginList
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.AddOrigin_AddsValueToOriginList
       resultStatus: 1
-      duration: 0.0847725
+      duration: 0.0021241
       messages: 
       output: 
       stacktrace: 
@@ -1793,7 +1793,7 @@ MonoBehaviour:
       name: ClearOrigin_ClearsOriginList
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.ClearOrigin_ClearsOriginList
       resultStatus: 1
-      duration: 0.0012024
+      duration: 0.0003568
       messages: 
       output: 
       stacktrace: 
@@ -1810,7 +1810,7 @@ MonoBehaviour:
       name: RemoveOrigin_RemovesValueFromOriginList
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.RemoveOrigin_RemovesValueFromOriginList
       resultStatus: 1
-      duration: 0.0944492
+      duration: 0.0004596
       messages: 
       output: 
       stacktrace: 
@@ -1827,7 +1827,7 @@ MonoBehaviour:
       name: UpdateOrigin_UpdatesOriginList
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.UpdateOrigin_UpdatesOriginList
       resultStatus: 1
-      duration: 0.0013082
+      duration: 0.0003161
       messages: 
       output: 
       stacktrace: 
@@ -1844,7 +1844,7 @@ MonoBehaviour:
       name: GameLovers.GoogleSheetImporter.Editor.Tests.dll
       fullName: C:/Users/migas/Desktop/Frameworks/Library/ScriptAssemblies/GameLovers.GoogleSheetImporter.Editor.Tests.dll
       resultStatus: 2
-      duration: 0.026581
+      duration: 0.0233184
       messages: One or more child tests had errors
       output: 
       stacktrace: 
@@ -1860,7 +1860,7 @@ MonoBehaviour:
       name: GameLoversEditor
       fullName: GameLoversEditor
       resultStatus: 2
-      duration: 0.025039
+      duration: 0.0221404
       messages: One or more child tests had errors
       output: 
       stacktrace: 
@@ -1876,7 +1876,7 @@ MonoBehaviour:
       name: GoogleSheetImporter
       fullName: GameLoversEditor.GoogleSheetImporter
       resultStatus: 2
-      duration: 0.0243803
+      duration: 0.0215828
       messages: One or more child tests had errors
       output: 
       stacktrace: 
@@ -1892,7 +1892,7 @@ MonoBehaviour:
       name: Tests
       fullName: GameLoversEditor.GoogleSheetImporter.Tests
       resultStatus: 2
-      duration: 0.0206444
+      duration: 0.0213541
       messages: One or more child tests had errors
       output: 
       stacktrace: 
@@ -1908,7 +1908,7 @@ MonoBehaviour:
       name: CsvParserTest
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest
       resultStatus: 2
-      duration: 0.017339
+      duration: 0.0201847
       messages: One or more child tests had errors
       output: 
       stacktrace: 
@@ -1924,7 +1924,7 @@ MonoBehaviour:
       name: ArrayParse_Successfully
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.ArrayParse_Successfully
       resultStatus: 1
-      duration: 0.0018262
+      duration: 0.0017537
       messages: 
       output: 
       stacktrace: 
@@ -1941,7 +1941,7 @@ MonoBehaviour:
       name: ConvertCsv_MissMatchColumnsCount_ThrowsException
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.ConvertCsv_MissMatchColumnsCount_ThrowsException
       resultStatus: 2
-      duration: 0.0010976
+      duration: 0.0036396
       messages: "  Expected: <System.IndexOutOfRangeException>\r\n  But was:  null\r\n"
       output: 
       stacktrace: 'at GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.ConvertCsv_MissMatchColumnsCount_ThrowsException
@@ -1961,7 +1961,7 @@ MonoBehaviour:
       name: ConvertCsv_OnlyHeadlines_EmptyResult
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.ConvertCsv_OnlyHeadlines_EmptyResult
       resultStatus: 1
-      duration: 0.00021
+      duration: 0.0001283
       messages: 
       output: 
       stacktrace: 
@@ -1978,7 +1978,7 @@ MonoBehaviour:
       name: ConvertCsv_Successfully
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.ConvertCsv_Successfully
       resultStatus: 1
-      duration: 0.0005059
+      duration: 0.0003069
       messages: 
       output: 
       stacktrace: 
@@ -1995,7 +1995,7 @@ MonoBehaviour:
       name: ConvertCsv_WrongFormatSeparator_EmptyResult
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.ConvertCsv_WrongFormatSeparator_EmptyResult
       resultStatus: 1
-      duration: 0.0001965
+      duration: 0.0000913
       messages: 
       output: 
       stacktrace: 
@@ -2012,7 +2012,7 @@ MonoBehaviour:
       name: Deserialize_ExtraFields_Successfully
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.Deserialize_ExtraFields_Successfully
       resultStatus: 1
-      duration: 0.0020702
+      duration: 0.0016967
       messages: 
       output: 
       stacktrace: 
@@ -2029,7 +2029,7 @@ MonoBehaviour:
       name: Deserialize_MissingFields_Successfully
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.Deserialize_MissingFields_Successfully
       resultStatus: 1
-      duration: 0.0003265
+      duration: 0.0061421
       messages: 
       output: 
       stacktrace: 
@@ -2046,7 +2046,7 @@ MonoBehaviour:
       name: Deserialize_Successfully
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.Deserialize_Successfully
       resultStatus: 1
-      duration: 0.0026118
+      duration: 0.0024079
       messages: 
       output: 
       stacktrace: 
@@ -2063,7 +2063,7 @@ MonoBehaviour:
       name: DictionaryParse_ElementOddAmount_ThrowsException
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.DictionaryParse_ElementOddAmount_ThrowsException
       resultStatus: 1
-      duration: 0.0005571
+      duration: 0.0004094
       messages: 
       output: 
       stacktrace: 
@@ -2080,7 +2080,7 @@ MonoBehaviour:
       name: DictionaryParse_Successfully
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.DictionaryParse_Successfully
       resultStatus: 1
-      duration: 0.0002736
+      duration: 0.0001896
       messages: 
       output: 
       stacktrace: 
@@ -2097,7 +2097,7 @@ MonoBehaviour:
       name: DictionaryParsePair_Successfully
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.DictionaryParsePair_Successfully
       resultStatus: 1
-      duration: 0.0002279
+      duration: 0.000165
       messages: 
       output: 
       stacktrace: 
@@ -2114,7 +2114,7 @@ MonoBehaviour:
       name: ParseInt_Successfully
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.ParseInt_Successfully
       resultStatus: 1
-      duration: 0.0002378
+      duration: 0.0001272
       messages: 
       output: 
       stacktrace: 
@@ -2131,7 +2131,7 @@ MonoBehaviour:
       name: ParseInt_WithFloat_ThrowsException
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.ParseInt_WithFloat_ThrowsException
       resultStatus: 1
-      duration: 0.0008927
+      duration: 0.0006933
       messages: 
       output: 
       stacktrace: 
@@ -2148,7 +2148,7 @@ MonoBehaviour:
       name: GameLovers.Services.Editor.Tests.dll
       fullName: C:/Users/migas/Desktop/Frameworks/Library/ScriptAssemblies/GameLovers.Services.Editor.Tests.dll
       resultStatus: 2
-      duration: 0.0259995
+      duration: 0.0437085
       messages: One or more child tests had errors
       output: 
       stacktrace: 
@@ -2164,7 +2164,7 @@ MonoBehaviour:
       name: GameLovers
       fullName: GameLovers
       resultStatus: 1
-      duration: 0.0127039
+      duration: 0.007727
       messages: 
       output: 
       stacktrace: 
@@ -2180,7 +2180,7 @@ MonoBehaviour:
       name: Services
       fullName: GameLovers.Services
       resultStatus: 1
-      duration: 0.0124448
+      duration: 0.0075172
       messages: 
       output: 
       stacktrace: 
@@ -2196,7 +2196,7 @@ MonoBehaviour:
       name: Tests
       fullName: GameLovers.Services.Tests
       resultStatus: 1
-      duration: 0.0094023
+      duration: 0.0073878
       messages: 
       output: 
       stacktrace: 
@@ -2212,7 +2212,7 @@ MonoBehaviour:
       name: InstallerTest
       fullName: GameLovers.Services.Tests.InstallerTest
       resultStatus: 1
-      duration: 0.0060106
+      duration: 0.0043909
       messages: 
       output: 
       stacktrace: 
@@ -2228,7 +2228,7 @@ MonoBehaviour:
       name: Bind_NotInterface_ThrowsException
       fullName: GameLovers.Services.Tests.InstallerTest.Bind_NotInterface_ThrowsException
       resultStatus: 1
-      duration: 0.0005744
+      duration: 0.0003997
       messages: 
       output: 
       stacktrace: 
@@ -2245,7 +2245,7 @@ MonoBehaviour:
       name: Bind_Resolve_Successfully
       fullName: GameLovers.Services.Tests.InstallerTest.Bind_Resolve_Successfully
       resultStatus: 1
-      duration: 0.0005646
+      duration: 0.0003564
       messages: 
       output: 
       stacktrace: 
@@ -2262,7 +2262,7 @@ MonoBehaviour:
       name: Resolve_NotBinded_ThrowsException
       fullName: GameLovers.Services.Tests.InstallerTest.Resolve_NotBinded_ThrowsException
       resultStatus: 1
-      duration: 0.0002468
+      duration: 0.0001374
       messages: 
       output: 
       stacktrace: 
@@ -2279,7 +2279,7 @@ MonoBehaviour:
       name: GameLoversEditor
       fullName: GameLoversEditor
       resultStatus: 2
-      duration: 0.0217787
+      duration: 0.0346088
       messages: One or more child tests had errors
       output: 
       stacktrace: 
@@ -2295,7 +2295,7 @@ MonoBehaviour:
       name: Services
       fullName: GameLoversEditor.Services
       resultStatus: 2
-      duration: 0.0187967
+      duration: 0.0336113
       messages: One or more child tests had errors
       output: 
       stacktrace: 
@@ -2311,7 +2311,7 @@ MonoBehaviour:
       name: Tests
       fullName: GameLoversEditor.Services.Tests
       resultStatus: 2
-      duration: 0.0158313
+      duration: 0.0332738
       messages: One or more child tests had errors
       output: 
       stacktrace: 
@@ -2327,7 +2327,7 @@ MonoBehaviour:
       name: CommandServiceTest
       fullName: GameLoversEditor.Services.Tests.CommandServiceTest
       resultStatus: 1
-      duration: 0.0046263
+      duration: 0.0038198
       messages: 
       output: 
       stacktrace: 
@@ -2343,7 +2343,7 @@ MonoBehaviour:
       name: ExecuteCommand_Successfully
       fullName: GameLoversEditor.Services.Tests.CommandServiceTest.ExecuteCommand_Successfully
       resultStatus: 1
-      duration: 0.001229
+      duration: 0.0009762
       messages: 
       output: 
       stacktrace: 
@@ -2360,7 +2360,7 @@ MonoBehaviour:
       name: DataServiceTest
       fullName: GameLoversEditor.Services.Tests.DataServiceTest
       resultStatus: 1
-      duration: 0.014256
+      duration: 0.002427
       messages: 
       output: 
       stacktrace: 
@@ -2376,7 +2376,7 @@ MonoBehaviour:
       name: AddData_Successfully
       fullName: GameLoversEditor.Services.Tests.DataServiceTest.AddData_Successfully
       resultStatus: 1
-      duration: 0.0115751
+      duration: 0.0009161
       messages: 
       output: 
       stacktrace: 
@@ -2393,7 +2393,7 @@ MonoBehaviour:
       name: GetData_NotFound_ThrowsException
       fullName: GameLoversEditor.Services.Tests.DataServiceTest.GetData_NotFound_ThrowsException
       resultStatus: 1
-      duration: 0.0002681
+      duration: 0.0001475
       messages: 
       output: 
       stacktrace: 
@@ -2410,7 +2410,7 @@ MonoBehaviour:
       name: ReplaceData_Successfully
       fullName: GameLoversEditor.Services.Tests.DataServiceTest.ReplaceData_Successfully
       resultStatus: 1
-      duration: 0.000362
+      duration: 0.0002261
       messages: 
       output: 
       stacktrace: 
@@ -2427,7 +2427,7 @@ MonoBehaviour:
       name: MessageBrokerServiceTest
       fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest
       resultStatus: 1
-      duration: 0.0093682
+      duration: 0.0055631
       messages: 
       output: 
       stacktrace: 
@@ -2443,7 +2443,7 @@ MonoBehaviour:
       name: Publish_WithoutSubscription_DoesNothing
       fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest.Publish_WithoutSubscription_DoesNothing
       resultStatus: 1
-      duration: 0.0017849
+      duration: 0.0012527
       messages: 
       output: 
       stacktrace: 
@@ -2460,7 +2460,7 @@ MonoBehaviour:
       name: Subscribe_Publish_Successfully
       fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest.Subscribe_Publish_Successfully
       resultStatus: 1
-      duration: 0.0008805
+      duration: 0.0006476
       messages: 
       output: 
       stacktrace: 
@@ -2477,7 +2477,7 @@ MonoBehaviour:
       name: Unsubscribe_Successfully
       fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest.Unsubscribe_Successfully
       resultStatus: 1
-      duration: 0.000591
+      duration: 0.0004055
       messages: 
       output: 
       stacktrace: 
@@ -2494,7 +2494,7 @@ MonoBehaviour:
       name: Unsubscribe_WithoutSubscription_DoesNothing
       fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest.Unsubscribe_WithoutSubscription_DoesNothing
       resultStatus: 1
-      duration: 0.0008689
+      duration: 0.0006787
       messages: 
       output: 
       stacktrace: 
@@ -2511,7 +2511,7 @@ MonoBehaviour:
       name: UnsubscribeAll_Successfully
       fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest.UnsubscribeAll_Successfully
       resultStatus: 1
-      duration: 0.0009716
+      duration: 0.0007344
       messages: 
       output: 
       stacktrace: 
@@ -2528,7 +2528,7 @@ MonoBehaviour:
       name: UnsubscribeWithAction_KeepsSubscriptionSameType_Successfully
       fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest.UnsubscribeWithAction_KeepsSubscriptionSameType_Successfully
       resultStatus: 1
-      duration: 0.0006986
+      duration: 0.0002009
       messages: 
       output: 
       stacktrace: 
@@ -2545,7 +2545,7 @@ MonoBehaviour:
       name: UnsubscribeWithoutAction_KeepsSubscriptionDifferentType_Successfully
       fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest.UnsubscribeWithoutAction_KeepsSubscriptionDifferentType_Successfully
       resultStatus: 1
-      duration: 0.0003516
+      duration: 0.0001879
       messages: 
       output: 
       stacktrace: 
@@ -2562,7 +2562,7 @@ MonoBehaviour:
       name: ObjectPoolTest
       fullName: GameLoversEditor.Services.Tests.ObjectPoolTest
       resultStatus: 1
-      duration: 0.0115507
+      duration: 0.0053084
       messages: 
       output: 
       stacktrace: 
@@ -2578,7 +2578,7 @@ MonoBehaviour:
       name: Clear_Successfully
       fullName: GameLoversEditor.Services.Tests.ObjectPoolTest.Clear_Successfully
       resultStatus: 1
-      duration: 0.0043815
+      duration: 0.0019998
       messages: 
       output: 
       stacktrace: 
@@ -2595,7 +2595,7 @@ MonoBehaviour:
       name: Despawn_NotSpawnedObject_ReturnsFalse
       fullName: GameLoversEditor.Services.Tests.ObjectPoolTest.Despawn_NotSpawnedObject_ReturnsFalse
       resultStatus: 1
-      duration: 0.0006516
+      duration: 0.0004424
       messages: 
       output: 
       stacktrace: 
@@ -2612,7 +2612,7 @@ MonoBehaviour:
       name: Despawn_Successfully
       fullName: GameLoversEditor.Services.Tests.ObjectPoolTest.Despawn_Successfully
       resultStatus: 1
-      duration: 0.0004853
+      duration: 0.0004254
       messages: 
       output: 
       stacktrace: 
@@ -2629,7 +2629,7 @@ MonoBehaviour:
       name: DespawnAll_Successfully
       fullName: GameLoversEditor.Services.Tests.ObjectPoolTest.DespawnAll_Successfully
       resultStatus: 1
-      duration: 0.0002854
+      duration: 0.0002638
       messages: 
       output: 
       stacktrace: 
@@ -2646,7 +2646,7 @@ MonoBehaviour:
       name: Spawn_Successfully
       fullName: GameLoversEditor.Services.Tests.ObjectPoolTest.Spawn_Successfully
       resultStatus: 1
-      duration: 0.0004086
+      duration: 0.0001649
       messages: 
       output: 
       stacktrace: 
@@ -2663,7 +2663,7 @@ MonoBehaviour:
       name: Spawn_WithData_Successfully
       fullName: GameLoversEditor.Services.Tests.ObjectPoolTest.Spawn_WithData_Successfully
       resultStatus: 1
-      duration: 0.0004671
+      duration: 0.0003867
       messages: 
       output: 
       stacktrace: 
@@ -2680,7 +2680,7 @@ MonoBehaviour:
       name: Spawn_ZeroInitialSize_Successfully
       fullName: GameLoversEditor.Services.Tests.ObjectPoolTest.Spawn_ZeroInitialSize_Successfully
       resultStatus: 1
-      duration: 0.0002074
+      duration: 0.0002013
       messages: 
       output: 
       stacktrace: 
@@ -2697,7 +2697,7 @@ MonoBehaviour:
       name: PoolServiceTest
       fullName: GameLoversEditor.Services.Tests.PoolServiceTest
       resultStatus: 2
-      duration: 0.0127688
+      duration: 0.0105997
       messages: One or more child tests had errors
       output: 
       stacktrace: 
@@ -2713,7 +2713,7 @@ MonoBehaviour:
       name: AddPool_SameType_ThrowsException
       fullName: GameLoversEditor.Services.Tests.PoolServiceTest.AddPool_SameType_ThrowsException
       resultStatus: 2
-      duration: 0.0055143
+      duration: 0.0032367
       messages: 'SetUp : System.ArgumentNullException : Value cannot be null.
 
         Parameter
@@ -2803,7 +2803,7 @@ MonoBehaviour:
       name: AddPool_Successfully
       fullName: GameLoversEditor.Services.Tests.PoolServiceTest.AddPool_Successfully
       resultStatus: 2
-      duration: 0.0006585
+      duration: 0.0006525
       messages: 'SetUp : System.ArgumentNullException : Value cannot be null.
 
         Parameter
@@ -2893,7 +2893,7 @@ MonoBehaviour:
       name: Despawn_NotAddedPool_ThrowsException
       fullName: GameLoversEditor.Services.Tests.PoolServiceTest.Despawn_NotAddedPool_ThrowsException
       resultStatus: 2
-      duration: 0.0004837
+      duration: 0.0005745
       messages: 'SetUp : System.ArgumentNullException : Value cannot be null.
 
         Parameter
@@ -2983,7 +2983,7 @@ MonoBehaviour:
       name: Despawn_Successfully
       fullName: GameLoversEditor.Services.Tests.PoolServiceTest.Despawn_Successfully
       resultStatus: 2
-      duration: 0.0004158
+      duration: 0.0005229
       messages: 'SetUp : System.ArgumentNullException : Value cannot be null.
 
         Parameter
@@ -3073,7 +3073,7 @@ MonoBehaviour:
       name: DespawnAll_Successfully
       fullName: GameLoversEditor.Services.Tests.PoolServiceTest.DespawnAll_Successfully
       resultStatus: 2
-      duration: 0.0004322
+      duration: 0.0005309
       messages: 'SetUp : System.ArgumentNullException : Value cannot be null.
 
         Parameter
@@ -3158,12 +3158,102 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1092
       parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.PoolServiceTest][suite]
+    - id: 1136
+      uniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/PoolServiceTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.PoolServiceTest.GetPool_Successfully]
+      name: GetPool_Successfully
+      fullName: GameLoversEditor.Services.Tests.PoolServiceTest.GetPool_Successfully
+      resultStatus: 2
+      duration: 0.0005353
+      messages: 'SetUp : System.ArgumentNullException : Value cannot be null.
+
+        Parameter
+        name: localType'
+      output: 
+      stacktrace: "--SetUp\r\n  at System.Reflection.Emit.ILGenerator.DeclareLocal
+        (System.Type localType, System.Boolean pinned) [0x00009] in <8ce0bd04a7a04b4b9395538239d3fdd8>:0
+        \r\n  at System.Reflection.Emit.ILGenerator.DeclareLocal (System.Type localType)
+        [0x00000] in <8ce0bd04a7a04b4b9395538239d3fdd8>:0 \r\n  at Castle.DynamicProxy.Generators.Emitters.SimpleAST.LocalReference.Generate
+        (System.Reflection.Emit.ILGenerator gen) [0x00008] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+        \r\n  at Castle.DynamicProxy.Generators.Emitters.CodeBuilders.AbstractCodeBuilder.Generate
+        (Castle.DynamicProxy.Generators.Emitters.IMemberEmitter member, System.Reflection.Emit.ILGenerator
+        il) [0x00018] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.Emitters.MethodEmitter.Generate
+        () [0x0001e] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.Emitters.AbstractTypeEmitter.EnsureBuildersAreInAValidState
+        () [0x000f7] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.Emitters.AbstractTypeEmitter.BuildType
+        () [0x00000] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Contributors.InterfaceProxyWithoutTargetContributor+<>c__DisplayClass5_0.<GetInvocationType>b__0
+        (Castle.DynamicProxy.Generators.CacheKey _) [0x0004e] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+        \r\n  at Castle.Core.Internal.SynchronizedDictionary`2[TKey,TValue].GetOrAddWithoutTakingLock
+        (TKey key, System.Func`2[T,TResult] valueFactory) [0x00015] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+        \r\n  at Castle.DynamicProxy.Contributors.InterfaceProxyWithoutTargetContributor.GetInvocationType
+        (Castle.DynamicProxy.Generators.MetaMethod method, Castle.DynamicProxy.Generators.Emitters.ClassEmitter
+        emitter, Castle.DynamicProxy.ProxyGenerationOptions options) [0x00091] in
+        <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Contributors.InterfaceProxyWithoutTargetContributor.GetMethodGenerator
+        (Castle.DynamicProxy.Generators.MetaMethod method, Castle.DynamicProxy.Generators.Emitters.ClassEmitter
+        class, Castle.DynamicProxy.ProxyGenerationOptions options, Castle.DynamicProxy.Contributors.OverrideMethodDelegate
+        overrideMethod) [0x00014] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at
+        Castle.DynamicProxy.Contributors.CompositeTypeContributor.ImplementMethod
+        (Castle.DynamicProxy.Generators.MetaMethod method, Castle.DynamicProxy.Generators.Emitters.ClassEmitter
+        class, Castle.DynamicProxy.ProxyGenerationOptions options, Castle.DynamicProxy.Contributors.OverrideMethodDelegate
+        overrideMethod) [0x00000] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at
+        Castle.DynamicProxy.Contributors.CompositeTypeContributor.Generate (Castle.DynamicProxy.Generators.Emitters.ClassEmitter
+        class, Castle.DynamicProxy.ProxyGenerationOptions options) [0x00023] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+        \r\n  at Castle.DynamicProxy.Generators.ClassProxyGenerator.GenerateType
+        (System.String name, System.Type[] interfaces, Castle.DynamicProxy.Generators.INamingScope
+        namingScope) [0x000aa] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.ClassProxyGenerator+<>c__DisplayClass1_0.<GenerateCode>b__0
+        (System.String n, Castle.DynamicProxy.Generators.INamingScope s) [0x00000]
+        in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.BaseProxyGenerator+<>c__DisplayClass34_0.<ObtainProxyType>b__0
+        (Castle.DynamicProxy.Generators.CacheKey _) [0x0009c] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+        \r\n  at Castle.Core.Internal.SynchronizedDictionary`2[TKey,TValue].GetOrAdd
+        (TKey key, System.Func`2[T,TResult] valueFactory) [0x0005b] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+        \r\n  at Castle.DynamicProxy.Generators.BaseProxyGenerator.ObtainProxyType
+        (Castle.DynamicProxy.Generators.CacheKey cacheKey, System.Func`3[T1,T2,TResult]
+        factory) [0x00026] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.ClassProxyGenerator.GenerateCode
+        (System.Type[] interfaces, Castle.DynamicProxy.ProxyGenerationOptions options)
+        [0x00056] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.DefaultProxyBuilder.CreateClassProxyType
+        (System.Type classToProxy, System.Type[] additionalInterfacesToProxy, Castle.DynamicProxy.ProxyGenerationOptions
+        options) [0x00026] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyType
+        (System.Type classToProxy, System.Type[] additionalInterfacesToProxy, Castle.DynamicProxy.ProxyGenerationOptions
+        options) [0x00006] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy
+        (System.Type classToProxy, System.Type[] additionalInterfacesToProxy, Castle.DynamicProxy.ProxyGenerationOptions
+        options, System.Object[] constructorArguments, Castle.DynamicProxy.IInterceptor[]
+        interceptors) [0x00060] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at
+        NSubstitute.Proxies.CastleDynamicProxy.CastleDynamicProxyFactory.CreateProxyUsingCastleProxyGenerator
+        (System.Type typeToProxy, System.Type[] additionalInterfaces, System.Object[]
+        constructorArguments, Castle.DynamicProxy.IInterceptor[] interceptors, Castle.DynamicProxy.ProxyGenerationOptions
+        proxyGenerationOptions) [0x00056] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+        \r\n  at NSubstitute.Proxies.CastleDynamicProxy.CastleDynamicProxyFactory.GenerateTypeProxy
+        (NSubstitute.Core.ICallRouter callRouter, System.Type typeToProxy, System.Type[]
+        additionalInterfaces, System.Object[] constructorArguments) [0x0001d] in
+        <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at NSubstitute.Proxies.CastleDynamicProxy.CastleDynamicProxyFactory.GenerateProxy
+        (NSubstitute.Core.ICallRouter callRouter, System.Type typeToProxy, System.Type[]
+        additionalInterfaces, System.Object[] constructorArguments) [0x0000b] in
+        <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at NSubstitute.Core.SubstituteFactory.Create
+        (System.Type[] typesToProxy, System.Object[] constructorArguments, System.Boolean
+        callBaseByDefault) [0x0006a] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n 
+        at NSubstitute.Core.SubstituteFactory.Create (System.Type[] typesToProxy,
+        System.Object[] constructorArguments) [0x00000] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+        \r\n  at NSubstitute.Substitute.For (System.Type[] typesToProxy, System.Object[]
+        constructorArguments) [0x0000a] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n 
+        at NSubstitute.Substitute.For[T] (System.Object[] constructorArguments) [0x00000]
+        in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at GameLoversEditor.Services.Tests.PoolServiceTest.Init
+        () [0x0000b] in .\\Packages\\com.gamelovers.services\\Tests\\Editor\\EditMode\\PoolServiceTest.cs:23
+        \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+        at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+        invokeAttr, System.Reflection.Binder binder, System.Object[] parameters,
+        System.Globalization.CultureInfo culture) [0x0006a] in <8ce0bd04a7a04b4b9395538239d3fdd8>:0 "
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1134
+      parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.PoolServiceTest][suite]
     - id: 1101
       uniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/PoolServiceTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.PoolServiceTest.RemovePool_NotAdded_DoesNothing]
       name: RemovePool_NotAdded_DoesNothing
       fullName: GameLoversEditor.Services.Tests.PoolServiceTest.RemovePool_NotAdded_DoesNothing
       resultStatus: 2
-      duration: 0.000438
+      duration: 0.0005341
       messages: 'SetUp : System.ArgumentNullException : Value cannot be null.
 
         Parameter
@@ -3253,7 +3343,7 @@ MonoBehaviour:
       name: RemovePool_Successfully
       fullName: GameLoversEditor.Services.Tests.PoolServiceTest.RemovePool_Successfully
       resultStatus: 2
-      duration: 0.000437
+      duration: 0.0005304
       messages: 'SetUp : System.ArgumentNullException : Value cannot be null.
 
         Parameter
@@ -3343,7 +3433,7 @@ MonoBehaviour:
       name: Spawn_NotAddedPool_ThrowsException
       fullName: GameLoversEditor.Services.Tests.PoolServiceTest.Spawn_NotAddedPool_ThrowsException
       resultStatus: 2
-      duration: 0.0005564
+      duration: 0.0005328
       messages: 'SetUp : System.ArgumentNullException : Value cannot be null.
 
         Parameter
@@ -3433,7 +3523,7 @@ MonoBehaviour:
       name: Spawn_Successfully
       fullName: GameLoversEditor.Services.Tests.PoolServiceTest.Spawn_Successfully
       resultStatus: 2
-      duration: 0.0005223
+      duration: 0.000526
       messages: 'SetUp : System.ArgumentNullException : Value cannot be null.
 
         Parameter
@@ -3518,12 +3608,102 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1092
       parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.PoolServiceTest][suite]
+    - id: 1135
+      uniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/PoolServiceTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.PoolServiceTest.TryGetPool_Successfully]
+      name: TryGetPool_Successfully
+      fullName: GameLoversEditor.Services.Tests.PoolServiceTest.TryGetPool_Successfully
+      resultStatus: 2
+      duration: 0.0005137
+      messages: 'SetUp : System.ArgumentNullException : Value cannot be null.
+
+        Parameter
+        name: localType'
+      output: 
+      stacktrace: "--SetUp\r\n  at System.Reflection.Emit.ILGenerator.DeclareLocal
+        (System.Type localType, System.Boolean pinned) [0x00009] in <8ce0bd04a7a04b4b9395538239d3fdd8>:0
+        \r\n  at System.Reflection.Emit.ILGenerator.DeclareLocal (System.Type localType)
+        [0x00000] in <8ce0bd04a7a04b4b9395538239d3fdd8>:0 \r\n  at Castle.DynamicProxy.Generators.Emitters.SimpleAST.LocalReference.Generate
+        (System.Reflection.Emit.ILGenerator gen) [0x00008] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+        \r\n  at Castle.DynamicProxy.Generators.Emitters.CodeBuilders.AbstractCodeBuilder.Generate
+        (Castle.DynamicProxy.Generators.Emitters.IMemberEmitter member, System.Reflection.Emit.ILGenerator
+        il) [0x00018] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.Emitters.MethodEmitter.Generate
+        () [0x0001e] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.Emitters.AbstractTypeEmitter.EnsureBuildersAreInAValidState
+        () [0x000f7] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.Emitters.AbstractTypeEmitter.BuildType
+        () [0x00000] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Contributors.InterfaceProxyWithoutTargetContributor+<>c__DisplayClass5_0.<GetInvocationType>b__0
+        (Castle.DynamicProxy.Generators.CacheKey _) [0x0004e] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+        \r\n  at Castle.Core.Internal.SynchronizedDictionary`2[TKey,TValue].GetOrAddWithoutTakingLock
+        (TKey key, System.Func`2[T,TResult] valueFactory) [0x00015] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+        \r\n  at Castle.DynamicProxy.Contributors.InterfaceProxyWithoutTargetContributor.GetInvocationType
+        (Castle.DynamicProxy.Generators.MetaMethod method, Castle.DynamicProxy.Generators.Emitters.ClassEmitter
+        emitter, Castle.DynamicProxy.ProxyGenerationOptions options) [0x00091] in
+        <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Contributors.InterfaceProxyWithoutTargetContributor.GetMethodGenerator
+        (Castle.DynamicProxy.Generators.MetaMethod method, Castle.DynamicProxy.Generators.Emitters.ClassEmitter
+        class, Castle.DynamicProxy.ProxyGenerationOptions options, Castle.DynamicProxy.Contributors.OverrideMethodDelegate
+        overrideMethod) [0x00014] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at
+        Castle.DynamicProxy.Contributors.CompositeTypeContributor.ImplementMethod
+        (Castle.DynamicProxy.Generators.MetaMethod method, Castle.DynamicProxy.Generators.Emitters.ClassEmitter
+        class, Castle.DynamicProxy.ProxyGenerationOptions options, Castle.DynamicProxy.Contributors.OverrideMethodDelegate
+        overrideMethod) [0x00000] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at
+        Castle.DynamicProxy.Contributors.CompositeTypeContributor.Generate (Castle.DynamicProxy.Generators.Emitters.ClassEmitter
+        class, Castle.DynamicProxy.ProxyGenerationOptions options) [0x00023] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+        \r\n  at Castle.DynamicProxy.Generators.ClassProxyGenerator.GenerateType
+        (System.String name, System.Type[] interfaces, Castle.DynamicProxy.Generators.INamingScope
+        namingScope) [0x000aa] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.ClassProxyGenerator+<>c__DisplayClass1_0.<GenerateCode>b__0
+        (System.String n, Castle.DynamicProxy.Generators.INamingScope s) [0x00000]
+        in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.BaseProxyGenerator+<>c__DisplayClass34_0.<ObtainProxyType>b__0
+        (Castle.DynamicProxy.Generators.CacheKey _) [0x0009c] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+        \r\n  at Castle.Core.Internal.SynchronizedDictionary`2[TKey,TValue].GetOrAdd
+        (TKey key, System.Func`2[T,TResult] valueFactory) [0x0005b] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+        \r\n  at Castle.DynamicProxy.Generators.BaseProxyGenerator.ObtainProxyType
+        (Castle.DynamicProxy.Generators.CacheKey cacheKey, System.Func`3[T1,T2,TResult]
+        factory) [0x00026] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.ClassProxyGenerator.GenerateCode
+        (System.Type[] interfaces, Castle.DynamicProxy.ProxyGenerationOptions options)
+        [0x00056] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.DefaultProxyBuilder.CreateClassProxyType
+        (System.Type classToProxy, System.Type[] additionalInterfacesToProxy, Castle.DynamicProxy.ProxyGenerationOptions
+        options) [0x00026] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyType
+        (System.Type classToProxy, System.Type[] additionalInterfacesToProxy, Castle.DynamicProxy.ProxyGenerationOptions
+        options) [0x00006] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy
+        (System.Type classToProxy, System.Type[] additionalInterfacesToProxy, Castle.DynamicProxy.ProxyGenerationOptions
+        options, System.Object[] constructorArguments, Castle.DynamicProxy.IInterceptor[]
+        interceptors) [0x00060] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at
+        NSubstitute.Proxies.CastleDynamicProxy.CastleDynamicProxyFactory.CreateProxyUsingCastleProxyGenerator
+        (System.Type typeToProxy, System.Type[] additionalInterfaces, System.Object[]
+        constructorArguments, Castle.DynamicProxy.IInterceptor[] interceptors, Castle.DynamicProxy.ProxyGenerationOptions
+        proxyGenerationOptions) [0x00056] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+        \r\n  at NSubstitute.Proxies.CastleDynamicProxy.CastleDynamicProxyFactory.GenerateTypeProxy
+        (NSubstitute.Core.ICallRouter callRouter, System.Type typeToProxy, System.Type[]
+        additionalInterfaces, System.Object[] constructorArguments) [0x0001d] in
+        <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at NSubstitute.Proxies.CastleDynamicProxy.CastleDynamicProxyFactory.GenerateProxy
+        (NSubstitute.Core.ICallRouter callRouter, System.Type typeToProxy, System.Type[]
+        additionalInterfaces, System.Object[] constructorArguments) [0x0000b] in
+        <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at NSubstitute.Core.SubstituteFactory.Create
+        (System.Type[] typesToProxy, System.Object[] constructorArguments, System.Boolean
+        callBaseByDefault) [0x0006a] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n 
+        at NSubstitute.Core.SubstituteFactory.Create (System.Type[] typesToProxy,
+        System.Object[] constructorArguments) [0x00000] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+        \r\n  at NSubstitute.Substitute.For (System.Type[] typesToProxy, System.Object[]
+        constructorArguments) [0x0000a] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n 
+        at NSubstitute.Substitute.For[T] (System.Object[] constructorArguments) [0x00000]
+        in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at GameLoversEditor.Services.Tests.PoolServiceTest.Init
+        () [0x0000b] in .\\Packages\\com.gamelovers.services\\Tests\\Editor\\EditMode\\PoolServiceTest.cs:23
+        \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+        at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+        invokeAttr, System.Reflection.Binder binder, System.Object[] parameters,
+        System.Globalization.CultureInfo culture) [0x0006a] in <8ce0bd04a7a04b4b9395538239d3fdd8>:0 "
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1134
+      parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.PoolServiceTest][suite]
     - id: 1102
       uniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.TimeServiceTest][suite]
       name: TimeServiceTest
       fullName: GameLoversEditor.Services.Tests.TimeServiceTest
       resultStatus: 1
-      duration: 0.0069844
+      duration: 0.0047938
       messages: 
       output: 
       stacktrace: 
@@ -3539,7 +3719,7 @@ MonoBehaviour:
       name: AddTime_AllTimeTypes_Successfully
       fullName: GameLoversEditor.Services.Tests.TimeServiceTest.AddTime_AllTimeTypes_Successfully
       resultStatus: 1
-      duration: 0.0028394
+      duration: 0.0019808
       messages: 
       output: 
       stacktrace: 
@@ -3556,7 +3736,7 @@ MonoBehaviour:
       name: DateTime_Convertions_Successfully
       fullName: GameLoversEditor.Services.Tests.TimeServiceTest.DateTime_Convertions_Successfully
       resultStatus: 1
-      duration: 0.000355
+      duration: 0.0002301
       messages: 
       output: 
       stacktrace: 
@@ -3573,7 +3753,7 @@ MonoBehaviour:
       name: UnityTime_Convertions_Successfully
       fullName: GameLoversEditor.Services.Tests.TimeServiceTest.UnityTime_Convertions_Successfully
       resultStatus: 1
-      duration: 0.0002614
+      duration: 0.0001938
       messages: 
       output: 
       stacktrace: 
@@ -3590,7 +3770,7 @@ MonoBehaviour:
       name: UnixTime_Convertions_Successfully
       fullName: GameLoversEditor.Services.Tests.TimeServiceTest.UnixTime_Convertions_Successfully
       resultStatus: 1
-      duration: 0.0002224
+      duration: 0.0001579
       messages: 
       output: 
       stacktrace: 
@@ -3607,7 +3787,7 @@ MonoBehaviour:
       name: GameLovers.Statechart.Editor.Tests.dll
       fullName: C:/Users/migas/Desktop/Frameworks/Library/ScriptAssemblies/GameLovers.Statechart.Editor.Tests.dll
       resultStatus: 1
-      duration: 1.3613824
+      duration: 1.256648
       messages: 
       output: 
       stacktrace: 
@@ -3623,7 +3803,7 @@ MonoBehaviour:
       name: GameLoversEditor
       fullName: GameLoversEditor
       resultStatus: 1
-      duration: 1.3593646
+      duration: 1.2552795
       messages: 
       output: 
       stacktrace: 
@@ -3639,7 +3819,7 @@ MonoBehaviour:
       name: StatechartMachine
       fullName: GameLoversEditor.StatechartMachine
       resultStatus: 1
-      duration: 1.3581907
+      duration: 1.2547115
       messages: 
       output: 
       stacktrace: 
@@ -3655,7 +3835,7 @@ MonoBehaviour:
       name: Tests
       fullName: GameLoversEditor.StatechartMachine.Tests
       resultStatus: 1
-      duration: 1.3543032
+      duration: 1.2507414
       messages: 
       output: 
       stacktrace: 
@@ -3671,7 +3851,7 @@ MonoBehaviour:
       name: StatechartChoiceTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest
       resultStatus: 1
-      duration: 0.0541322
+      duration: 0.0471849
       messages: 
       output: 
       stacktrace: 
@@ -3687,7 +3867,7 @@ MonoBehaviour:
       name: ChoiceState_MissingConditionTransition_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest.ChoiceState_MissingConditionTransition_ThrowsException
       resultStatus: 1
-      duration: 0.0073665
+      duration: 0.0066114
       messages: 
       output: 
       stacktrace: 
@@ -3704,7 +3884,7 @@ MonoBehaviour:
       name: ChoiceState_MissingTransitions_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest.ChoiceState_MissingTransitions_ThrowsException
       resultStatus: 1
-      duration: 0.0032415
+      duration: 0.0027662
       messages: 
       output: 
       stacktrace: 
@@ -3721,7 +3901,7 @@ MonoBehaviour:
       name: ChoiceState_MultipleTrueConditions_PicksFirstTransition
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest.ChoiceState_MultipleTrueConditions_PicksFirstTransition
       resultStatus: 1
-      duration: 0.0074128
+      duration: 0.0066528
       messages: 
       output: 
       stacktrace: 
@@ -3738,7 +3918,7 @@ MonoBehaviour:
       name: ChoiceState_OnlyConditionTransition_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest.ChoiceState_OnlyConditionTransition_ThrowsException
       resultStatus: 1
-      duration: 0.0053837
+      duration: 0.0102404
       messages: 
       output: 
       stacktrace: 
@@ -3755,7 +3935,7 @@ MonoBehaviour:
       name: ChoiceState_WithoutTarget_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest.ChoiceState_WithoutTarget_ThrowsException
       resultStatus: 1
-      duration: 0.0141959
+      duration: 0.005744
       messages: 
       output: 
       stacktrace: 
@@ -3772,7 +3952,7 @@ MonoBehaviour:
       name: SimpleTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest.SimpleTest
       resultStatus: 1
-      duration: 0.0054724
+      duration: 0.0051738
       messages: 
       output: 
       stacktrace: 
@@ -3789,7 +3969,7 @@ MonoBehaviour:
       name: StateTransitionsLoop_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest.StateTransitionsLoop_ThrowsException
       resultStatus: 1
-      duration: 0.0061199
+      duration: 0.0057032
       messages: 
       output: 
       stacktrace: 
@@ -3806,7 +3986,7 @@ MonoBehaviour:
       name: StatechartLeaveTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest
       resultStatus: 1
-      duration: 0.0772382
+      duration: 0.065102
       messages: 
       output: 
       stacktrace: 
@@ -3822,7 +4002,7 @@ MonoBehaviour:
       name: LeaveState_MissingConfiguration_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest.LeaveState_MissingConfiguration_ThrowsException
       resultStatus: 1
-      duration: 0.0040545
+      duration: 0.0031179
       messages: 
       output: 
       stacktrace: 
@@ -3839,7 +4019,7 @@ MonoBehaviour:
       name: LeaveState_MissingTarget_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest.LeaveState_MissingTarget_ThrowsException
       resultStatus: 1
-      duration: 0.0043565
+      duration: 0.0035029
       messages: 
       output: 
       stacktrace: 
@@ -3856,7 +4036,7 @@ MonoBehaviour:
       name: LeaveState_MultipleTransitions_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest.LeaveState_MultipleTransitions_ThrowsException
       resultStatus: 1
-      duration: 0.0084582
+      duration: 0.0069147
       messages: 
       output: 
       stacktrace: 
@@ -3873,7 +4053,7 @@ MonoBehaviour:
       name: LeaveState_SameLayerTarget_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest.LeaveState_SameLayerTarget_ThrowsException
       resultStatus: 1
-      duration: 0.0043579
+      duration: 0.0035032
       messages: 
       output: 
       stacktrace: 
@@ -3890,7 +4070,7 @@ MonoBehaviour:
       name: LeaveState_WrongLayerTarget_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest.LeaveState_WrongLayerTarget_ThrowsException
       resultStatus: 1
-      duration: 0.0133497
+      duration: 0.0185007
       messages: 
       output: 
       stacktrace: 
@@ -3907,7 +4087,7 @@ MonoBehaviour:
       name: SimpleNestTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest.SimpleNestTest
       resultStatus: 1
-      duration: 0.0173651
+      duration: 0.0076747
       messages: 
       output: 
       stacktrace: 
@@ -3924,7 +4104,7 @@ MonoBehaviour:
       name: SimpleSplitTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest.SimpleSplitTest
       resultStatus: 1
-      duration: 0.010851
+      duration: 0.0097408
       messages: 
       output: 
       stacktrace: 
@@ -3941,7 +4121,7 @@ MonoBehaviour:
       name: SplitState_OnlyLeaveInnerStates_LeaveFirstState
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest.SplitState_OnlyLeaveInnerStates_LeaveFirstState
       resultStatus: 1
-      duration: 0.0109157
+      duration: 0.009588
       messages: 
       output: 
       stacktrace: 
@@ -3958,7 +4138,7 @@ MonoBehaviour:
       name: StatechartNestSplit_IntegrationTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest
       resultStatus: 1
-      duration: 0.3191133
+      duration: 0.324493
       messages: 
       output: 
       stacktrace: 
@@ -3974,7 +4154,7 @@ MonoBehaviour:
       name: NestedState_TaskWaitStateInner_EventTrigger_QueueEvent
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest.NestedState_TaskWaitStateInner_EventTrigger_QueueEvent
       resultStatus: 1
-      duration: 0.1009998
+      duration: 0.1084537
       messages: 
       output: 
       stacktrace: 
@@ -3991,7 +4171,7 @@ MonoBehaviour:
       name: NestedState_WaitStateInner_EventTrigger_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest.NestedState_WaitStateInner_EventTrigger_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0093412
+      duration: 0.008751
       messages: 
       output: 
       stacktrace: 
@@ -4008,7 +4188,7 @@ MonoBehaviour:
       name: SplitState_LeaveTaskWaitStateInner_EventTrigger_QueueEvent_LeaveExitSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest.SplitState_LeaveTaskWaitStateInner_EventTrigger_QueueEvent_LeaveExitSuccess
       resultStatus: 1
-      duration: 0.0931029
+      duration: 0.0860496
       messages: 
       output: 
       stacktrace: 
@@ -4025,7 +4205,7 @@ MonoBehaviour:
       name: SplitState_LeaveWaitStateInner_EventTrigger_LeaveExitSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest.SplitState_LeaveWaitStateInner_EventTrigger_LeaveExitSuccess
       resultStatus: 1
-      duration: 0.0114741
+      duration: 0.0100117
       messages: 
       output: 
       stacktrace: 
@@ -4042,7 +4222,7 @@ MonoBehaviour:
       name: SplitState_TaskWaitStateInner_EventTrigger_QueueEvent_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest.SplitState_TaskWaitStateInner_EventTrigger_QueueEvent_CompleteSuccess
       resultStatus: 1
-      duration: 0.0902157
+      duration: 0.0912434
       messages: 
       output: 
       stacktrace: 
@@ -4059,7 +4239,7 @@ MonoBehaviour:
       name: SplitState_WaitStateInner_EventTrigger_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest.SplitState_WaitStateInner_EventTrigger_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0105461
+      duration: 0.0168888
       messages: 
       output: 
       stacktrace: 
@@ -4076,7 +4256,7 @@ MonoBehaviour:
       name: StatechartNestTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest
       resultStatus: 1
-      duration: 0.1675914
+      duration: 0.1484205
       messages: 
       output: 
       stacktrace: 
@@ -4092,7 +4272,7 @@ MonoBehaviour:
       name: MultipleNestedStates_EventTrigger__DisableExecuteExitFinal_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.MultipleNestedStates_EventTrigger__DisableExecuteExitFinal_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0119463
+      duration: 0.0109602
       messages: 
       output: 
       stacktrace: 
@@ -4109,7 +4289,7 @@ MonoBehaviour:
       name: MultipleNestedStates_EventTrigger_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.MultipleNestedStates_EventTrigger_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0198174
+      duration: 0.0102997
       messages: 
       output: 
       stacktrace: 
@@ -4126,7 +4306,7 @@ MonoBehaviour:
       name: MultipleNestedStates_InnerEventTrigger_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.MultipleNestedStates_InnerEventTrigger_CompleteSuccess
       resultStatus: 1
-      duration: 0.012006
+      duration: 0.0104892
       messages: 
       output: 
       stacktrace: 
@@ -4143,7 +4323,7 @@ MonoBehaviour:
       name: MultipleNestedStates_InnerEventTrigger_DisableExecuteExitFinal_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.MultipleNestedStates_InnerEventTrigger_DisableExecuteExitFinal_CompleteSuccess
       resultStatus: 1
-      duration: 0.0120838
+      duration: 0.017771
       messages: 
       output: 
       stacktrace: 
@@ -4160,7 +4340,7 @@ MonoBehaviour:
       name: NestedState_EventTrigger_DisableExecuteExit_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_EventTrigger_DisableExecuteExit_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0077168
+      duration: 0.0064817
       messages: 
       output: 
       stacktrace: 
@@ -4177,7 +4357,7 @@ MonoBehaviour:
       name: NestedState_EventTrigger_DisableExecuteExitFinal_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_EventTrigger_DisableExecuteExitFinal_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0160893
+      duration: 0.0064902
       messages: 
       output: 
       stacktrace: 
@@ -4194,7 +4374,7 @@ MonoBehaviour:
       name: NestedState_EventTrigger_DisableExecuteFinal_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_EventTrigger_DisableExecuteFinal_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0072201
+      duration: 0.0064224
       messages: 
       output: 
       stacktrace: 
@@ -4211,7 +4391,7 @@ MonoBehaviour:
       name: NestedState_EventTrigger_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_EventTrigger_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.007208
+      duration: 0.0066992
       messages: 
       output: 
       stacktrace: 
@@ -4228,7 +4408,7 @@ MonoBehaviour:
       name: NestedState_InnerEventTrigger_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_InnerEventTrigger_CompleteSuccess
       resultStatus: 1
-      duration: 0.0069946
+      duration: 0.0131079
       messages: 
       output: 
       stacktrace: 
@@ -4245,7 +4425,7 @@ MonoBehaviour:
       name: NestedState_InnerEventTrigger_DisableExecuteExit_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_InnerEventTrigger_DisableExecuteExit_CompleteSuccess
       resultStatus: 1
-      duration: 0.0069988
+      duration: 0.0066604
       messages: 
       output: 
       stacktrace: 
@@ -4262,7 +4442,7 @@ MonoBehaviour:
       name: NestedState_InnerEventTrigger_DisableExecuteExitFinal_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_InnerEventTrigger_DisableExecuteExitFinal_CompleteSuccess
       resultStatus: 1
-      duration: 0.007129
+      duration: 0.0065127
       messages: 
       output: 
       stacktrace: 
@@ -4279,7 +4459,7 @@ MonoBehaviour:
       name: NestedState_InnerEventTrigger_DisableExecuteFinal_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_InnerEventTrigger_DisableExecuteFinal_CompleteSuccess
       resultStatus: 1
-      duration: 0.0071951
+      duration: 0.0065899
       messages: 
       output: 
       stacktrace: 
@@ -4296,7 +4476,7 @@ MonoBehaviour:
       name: NestedState_InnerEventTrigger_RunResetRun_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_InnerEventTrigger_RunResetRun_CompleteSuccess
       resultStatus: 1
-      duration: 0.0150634
+      duration: 0.006509
       messages: 
       output: 
       stacktrace: 
@@ -4313,7 +4493,7 @@ MonoBehaviour:
       name: NestedState_MissingConfiguration_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_MissingConfiguration_ThrowsException
       resultStatus: 1
-      duration: 0.0033285
+      duration: 0.0028134
       messages: 
       output: 
       stacktrace: 
@@ -4330,7 +4510,7 @@ MonoBehaviour:
       name: NestedState_TransitionsLoop_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_TransitionsLoop_ThrowsException
       resultStatus: 1
-      duration: 0.0074375
+      duration: 0.0130552
       messages: 
       output: 
       stacktrace: 
@@ -4347,7 +4527,7 @@ MonoBehaviour:
       name: NestedState_WithoutTarget_Successful
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_WithoutTarget_Successful
       resultStatus: 1
-      duration: 0.0067709
+      duration: 0.0062133
       messages: 
       output: 
       stacktrace: 
@@ -4364,7 +4544,7 @@ MonoBehaviour:
       name: SimpleTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.SimpleTest
       resultStatus: 1
-      duration: 0.0070255
+      duration: 0.0068429
       messages: 
       output: 
       stacktrace: 
@@ -4381,7 +4561,7 @@ MonoBehaviour:
       name: StatechartSplitTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest
       resultStatus: 1
-      duration: 0.2809342
+      duration: 0.2334059
       messages: 
       output: 
       stacktrace: 
@@ -4397,7 +4577,7 @@ MonoBehaviour:
       name: MultipleSplitedStates_EventTrigger__DisableExecuteExitFinal_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.MultipleSplitedStates_EventTrigger__DisableExecuteExitFinal_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.027288
+      duration: 0.0163045
       messages: 
       output: 
       stacktrace: 
@@ -4414,7 +4594,7 @@ MonoBehaviour:
       name: MultipleSplitedStates_EventTrigger_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.MultipleSplitedStates_EventTrigger_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0189074
+      duration: 0.0222966
       messages: 
       output: 
       stacktrace: 
@@ -4431,7 +4611,7 @@ MonoBehaviour:
       name: MultipleSplitedStates_InnerEventTrigger_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.MultipleSplitedStates_InnerEventTrigger_CompleteSuccess
       resultStatus: 1
-      duration: 0.0185957
+      duration: 0.0159762
       messages: 
       output: 
       stacktrace: 
@@ -4448,7 +4628,7 @@ MonoBehaviour:
       name: MultipleSplitedStates_InnerEventTrigger_DisableExecuteExitFinal_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.MultipleSplitedStates_InnerEventTrigger_DisableExecuteExitFinal_CompleteSuccess
       resultStatus: 1
-      duration: 0.0279619
+      duration: 0.0160758
       messages: 
       output: 
       stacktrace: 
@@ -4465,7 +4645,7 @@ MonoBehaviour:
       name: SimpleTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SimpleTest
       resultStatus: 1
-      duration: 0.0111461
+      duration: 0.015986
       messages: 
       output: 
       stacktrace: 
@@ -4482,7 +4662,7 @@ MonoBehaviour:
       name: SplitedState_EventTrigger_DisableExecuteExit_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_EventTrigger_DisableExecuteExit_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0118012
+      duration: 0.0093317
       messages: 
       output: 
       stacktrace: 
@@ -4499,7 +4679,7 @@ MonoBehaviour:
       name: SplitedState_EventTrigger_DisableExecuteExitFinal_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_EventTrigger_DisableExecuteExitFinal_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0116793
+      duration: 0.0092676
       messages: 
       output: 
       stacktrace: 
@@ -4516,7 +4696,7 @@ MonoBehaviour:
       name: SplitedState_EventTrigger_DisableExecuteFinal_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_EventTrigger_DisableExecuteFinal_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.020201
+      duration: 0.00922
       messages: 
       output: 
       stacktrace: 
@@ -4533,7 +4713,7 @@ MonoBehaviour:
       name: SplitedState_EventTrigger_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_EventTrigger_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0116092
+      duration: 0.01527
       messages: 
       output: 
       stacktrace: 
@@ -4550,7 +4730,7 @@ MonoBehaviour:
       name: SplitedState_InnerEventTrigger_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_InnerEventTrigger_CompleteSuccess
       resultStatus: 1
-      duration: 0.0114372
+      duration: 0.0092928
       messages: 
       output: 
       stacktrace: 
@@ -4567,7 +4747,7 @@ MonoBehaviour:
       name: SplitedState_InnerEventTrigger_DisableExecuteExit_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_InnerEventTrigger_DisableExecuteExit_CompleteSuccess
       resultStatus: 1
-      duration: 0.0113858
+      duration: 0.0095024
       messages: 
       output: 
       stacktrace: 
@@ -4584,7 +4764,7 @@ MonoBehaviour:
       name: SplitedState_InnerEventTrigger_DisableExecuteExitFinal_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_InnerEventTrigger_DisableExecuteExitFinal_CompleteSuccess
       resultStatus: 1
-      duration: 0.0114702
+      duration: 0.0092087
       messages: 
       output: 
       stacktrace: 
@@ -4601,7 +4781,7 @@ MonoBehaviour:
       name: SplitedState_InnerEventTrigger_DisableExecuteFinal_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_InnerEventTrigger_DisableExecuteFinal_CompleteSuccess
       resultStatus: 1
-      duration: 0.0191366
+      duration: 0.0179155
       messages: 
       output: 
       stacktrace: 
@@ -4618,7 +4798,7 @@ MonoBehaviour:
       name: SplitedState_InnerEventTrigger_HalfFinalized_OnHold
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_InnerEventTrigger_HalfFinalized_OnHold
       resultStatus: 1
-      duration: 0.0105502
+      duration: 0.0087828
       messages: 
       output: 
       stacktrace: 
@@ -4635,7 +4815,7 @@ MonoBehaviour:
       name: SplitedState_InnerEventTrigger_RunResetRun_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_InnerEventTrigger_RunResetRun_CompleteSuccess
       resultStatus: 1
-      duration: 0.0105907
+      duration: 0.0093247
       messages: 
       output: 
       stacktrace: 
@@ -4652,7 +4832,7 @@ MonoBehaviour:
       name: SplitedState_WithoutTarget_Successful
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_WithoutTarget_Successful
       resultStatus: 1
-      duration: 0.0101584
+      duration: 0.0086698
       messages: 
       output: 
       stacktrace: 
@@ -4669,7 +4849,7 @@ MonoBehaviour:
       name: SplitState_MissingConfiguration_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitState_MissingConfiguration_ThrowsException
       resultStatus: 1
-      duration: 0.003292
+      duration: 0.0028409
       messages: 
       output: 
       stacktrace: 
@@ -4686,7 +4866,7 @@ MonoBehaviour:
       name: SplitState_SingleConfiguration_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitState_SingleConfiguration_ThrowsException
       resultStatus: 1
-      duration: 0.0159287
+      duration: 0.0141322
       messages: 
       output: 
       stacktrace: 
@@ -4703,7 +4883,7 @@ MonoBehaviour:
       name: SplitState_TransitionsLoop_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitState_TransitionsLoop_ThrowsException
       resultStatus: 1
-      duration: 0.0119685
+      duration: 0.0098194
       messages: 
       output: 
       stacktrace: 
@@ -4720,7 +4900,7 @@ MonoBehaviour:
       name: StatechartStateTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartStateTest
       resultStatus: 1
-      duration: 0.0248898
+      duration: 0.0208636
       messages: 
       output: 
       stacktrace: 
@@ -4736,7 +4916,7 @@ MonoBehaviour:
       name: SimpleTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartStateTest.SimpleTest
       resultStatus: 1
-      duration: 0.0044704
+      duration: 0.0034052
       messages: 
       output: 
       stacktrace: 
@@ -4753,7 +4933,7 @@ MonoBehaviour:
       name: State_PauseRunStatechart_Success
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartStateTest.State_PauseRunStatechart_Success
       resultStatus: 1
-      duration: 0.0033146
+      duration: 0.0030051
       messages: 
       output: 
       stacktrace: 
@@ -4770,7 +4950,7 @@ MonoBehaviour:
       name: State_ResetRunStatechart_Success
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartStateTest.State_ResetRunStatechart_Success
       resultStatus: 1
-      duration: 0.0035158
+      duration: 0.0029666
       messages: 
       output: 
       stacktrace: 
@@ -4787,7 +4967,7 @@ MonoBehaviour:
       name: State_TransitionWithoutTarget_Succeeds
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartStateTest.State_TransitionWithoutTarget_Succeeds
       resultStatus: 1
-      duration: 0.003452
+      duration: 0.0031179
       messages: 
       output: 
       stacktrace: 
@@ -4804,7 +4984,7 @@ MonoBehaviour:
       name: State_TriggerNotConfiguredEvent_NoEffect
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartStateTest.State_TriggerNotConfiguredEvent_NoEffect
       resultStatus: 1
-      duration: 0.0032551
+      duration: 0.0029508
       messages: 
       output: 
       stacktrace: 
@@ -4821,7 +5001,7 @@ MonoBehaviour:
       name: StateTransitionsLoop_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartStateTest.StateTransitionsLoop_ThrowsException
       resultStatus: 1
-      duration: 0.003759
+      duration: 0.0033057
       messages: 
       output: 
       stacktrace: 
@@ -4838,7 +5018,7 @@ MonoBehaviour:
       name: StatechartTaskWaitTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest
       resultStatus: 1
-      duration: 0.2030501
+      duration: 0.1990235
       messages: 
       output: 
       stacktrace: 
@@ -4854,7 +5034,7 @@ MonoBehaviour:
       name: SimpleTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest.SimpleTest
       resultStatus: 1
-      duration: 0.0781405
+      duration: 0.0801074
       messages: 
       output: 
       stacktrace: 
@@ -4871,7 +5051,7 @@ MonoBehaviour:
       name: TaskWait_EventTrigger_DoesNothing
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest.TaskWait_EventTrigger_DoesNothing
       resultStatus: 1
-      duration: 0.1033162
+      duration: 0.1007033
       messages: 
       output: 
       stacktrace: 
@@ -4888,7 +5068,7 @@ MonoBehaviour:
       name: TaskWait_MissingConfiguration_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest.TaskWait_MissingConfiguration_ThrowsException
       resultStatus: 1
-      duration: 0.0031334
+      duration: 0.0030801
       messages: 
       output: 
       stacktrace: 
@@ -4905,7 +5085,7 @@ MonoBehaviour:
       name: TaskWait_MissingTarget_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest.TaskWait_MissingTarget_ThrowsException
       resultStatus: 1
-      duration: 0.0036896
+      duration: 0.003508
       messages: 
       output: 
       stacktrace: 
@@ -4922,7 +5102,7 @@ MonoBehaviour:
       name: TaskWait_TransitionsLoop_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest.TaskWait_TransitionsLoop_ThrowsException
       resultStatus: 1
-      duration: 0.0122778
+      duration: 0.0033548
       messages: 
       output: 
       stacktrace: 
@@ -4939,7 +5119,7 @@ MonoBehaviour:
       name: StatechartTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest
       resultStatus: 1
-      duration: 0.0205611
+      duration: 0.0181019
       messages: 
       output: 
       stacktrace: 
@@ -4955,7 +5135,7 @@ MonoBehaviour:
       name: InitialState_MissingTransition_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest.InitialState_MissingTransition_ThrowsException
       resultStatus: 1
-      duration: 0.0020622
+      duration: 0.0017887
       messages: 
       output: 
       stacktrace: 
@@ -4972,7 +5152,7 @@ MonoBehaviour:
       name: InitialState_MultipleTransitions_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest.InitialState_MultipleTransitions_ThrowsException
       resultStatus: 1
-      duration: 0.0024307
+      duration: 0.0022079
       messages: 
       output: 
       stacktrace: 
@@ -4989,7 +5169,7 @@ MonoBehaviour:
       name: InitialState_StateTransitionsLoop_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest.InitialState_StateTransitionsLoop_ThrowsException
       resultStatus: 1
-      duration: 0.0023824
+      duration: 0.0020692
       messages: 
       output: 
       stacktrace: 
@@ -5006,7 +5186,7 @@ MonoBehaviour:
       name: InitialState_TransitionWithoutTarget_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest.InitialState_TransitionWithoutTarget_ThrowsException
       resultStatus: 1
-      duration: 0.0023282
+      duration: 0.0020829
       messages: 
       output: 
       stacktrace: 
@@ -5023,7 +5203,7 @@ MonoBehaviour:
       name: MultipleFinalState_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest.MultipleFinalState_ThrowsException
       resultStatus: 1
-      duration: 0.0025102
+      duration: 0.0021244
       messages: 
       output: 
       stacktrace: 
@@ -5040,7 +5220,7 @@ MonoBehaviour:
       name: MultipleInitialStates_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest.MultipleInitialStates_ThrowsException
       resultStatus: 1
-      duration: 0.0024211
+      duration: 0.0020655
       messages: 
       output: 
       stacktrace: 
@@ -5057,7 +5237,7 @@ MonoBehaviour:
       name: NoInitialState_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest.NoInitialState_ThrowsException
       resultStatus: 1
-      duration: 0.0011837
+      duration: 0.0008783
       messages: 
       output: 
       stacktrace: 
@@ -5074,7 +5254,7 @@ MonoBehaviour:
       name: SimpleTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest.SimpleTest
       resultStatus: 1
-      duration: 0.0022297
+      duration: 0.0018236
       messages: 
       output: 
       stacktrace: 
@@ -5091,7 +5271,7 @@ MonoBehaviour:
       name: StatechartTransitionTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTransitionTest
       resultStatus: 1
-      duration: 0.0171238
+      duration: 0.0170857
       messages: 
       output: 
       stacktrace: 
@@ -5107,7 +5287,7 @@ MonoBehaviour:
       name: SimpleTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTransitionTest.SimpleTest
       resultStatus: 1
-      duration: 0.0040501
+      duration: 0.0040921
       messages: 
       output: 
       stacktrace: 
@@ -5124,7 +5304,7 @@ MonoBehaviour:
       name: TransitionState_TransitionsLoop_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTransitionTest.TransitionState_TransitionsLoop_ThrowsException
       resultStatus: 1
-      duration: 0.0039832
+      duration: 0.0037372
       messages: 
       output: 
       stacktrace: 
@@ -5141,7 +5321,7 @@ MonoBehaviour:
       name: TransitionState_TransitionWithoutTarget_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTransitionTest.TransitionState_TransitionWithoutTarget_ThrowsException
       resultStatus: 1
-      duration: 0.0036706
+      duration: 0.0036845
       messages: 
       output: 
       stacktrace: 
@@ -5158,7 +5338,7 @@ MonoBehaviour:
       name: TransitionState_TransitionWithoutTransition_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTransitionTest.TransitionState_TransitionWithoutTransition_ThrowsException
       resultStatus: 1
-      duration: 0.003164
+      duration: 0.0027936
       messages: 
       output: 
       stacktrace: 
@@ -5175,7 +5355,7 @@ MonoBehaviour:
       name: StatechartWaitTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest
       resultStatus: 1
-      duration: 0.1844807
+      duration: 0.1734497
       messages: 
       output: 
       stacktrace: 
@@ -5191,7 +5371,7 @@ MonoBehaviour:
       name: SimpleTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest.SimpleTest
       resultStatus: 1
-      duration: 0.053492
+      duration: 0.0514549
       messages: 
       output: 
       stacktrace: 
@@ -5208,7 +5388,7 @@ MonoBehaviour:
       name: SplitActivity_CompleteBoth_Success
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest.SplitActivity_CompleteBoth_Success
       resultStatus: 1
-      duration: 0.0506784
+      duration: 0.0514343
       messages: 
       output: 
       stacktrace: 
@@ -5225,7 +5405,7 @@ MonoBehaviour:
       name: SplitActivity_CompleteOnlyOneActivity_OnHold
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest.SplitActivity_CompleteOnlyOneActivity_OnHold
       resultStatus: 1
-      duration: 0.0503382
+      duration: 0.0510718
       messages: 
       output: 
       stacktrace: 
@@ -5242,7 +5422,7 @@ MonoBehaviour:
       name: WaitState_EventTrigger_ForceCompleted
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest.WaitState_EventTrigger_ForceCompleted
       resultStatus: 1
-      duration: 0.0125871
+      duration: 0.0040568
       messages: 
       output: 
       stacktrace: 
@@ -5259,7 +5439,7 @@ MonoBehaviour:
       name: WaitState_EventTriggerWithoutTarget_OnlyEvokesOnTransition
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest.WaitState_EventTriggerWithoutTarget_OnlyEvokesOnTransition
       resultStatus: 1
-      duration: 0.0039798
+      duration: 0.0036763
       messages: 
       output: 
       stacktrace: 
@@ -5276,7 +5456,7 @@ MonoBehaviour:
       name: WaitState_MissingConfiguration_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest.WaitState_MissingConfiguration_ThrowsException
       resultStatus: 1
-      duration: 0.0032968
+      duration: 0.002897
       messages: 
       output: 
       stacktrace: 
@@ -5293,7 +5473,7 @@ MonoBehaviour:
       name: WaitState_MissingTarget_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest.WaitState_MissingTarget_ThrowsException
       resultStatus: 1
-      duration: 0.0032808
+      duration: 0.0027991
       messages: 
       output: 
       stacktrace: 
@@ -5310,7 +5490,7 @@ MonoBehaviour:
       name: WaitState_TransitionsLoop_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest.WaitState_TransitionsLoop_ThrowsException
       resultStatus: 1
-      duration: 0.0036548
+      duration: 0.0034605
       messages: 
       output: 
       stacktrace: 
@@ -5327,7 +5507,7 @@ MonoBehaviour:
       name: Unity.Addressables.Editor.Tests.DocExampleCode.dll
       fullName: C:/Users/migas/Desktop/Frameworks/Library/ScriptAssemblies/Unity.Addressables.Editor.Tests.DocExampleCode.dll
       resultStatus: 1
-      duration: 0.0090426
+      duration: 0.0087033
       messages: 
       output: 
       stacktrace: 
@@ -5343,7 +5523,7 @@ MonoBehaviour:
       name: AddressableAssets
       fullName: AddressableAssets
       resultStatus: 1
-      duration: 0.0077259
+      duration: 0.0067822
       messages: 
       output: 
       stacktrace: 
@@ -5359,7 +5539,7 @@ MonoBehaviour:
       name: DocExampleCode
       fullName: AddressableAssets.DocExampleCode
       resultStatus: 1
-      duration: 0.0073641
+      duration: 0.0066429
       messages: 
       output: 
       stacktrace: 
@@ -5375,7 +5555,7 @@ MonoBehaviour:
       name: TestStub
       fullName: AddressableAssets.DocExampleCode.TestStub
       resultStatus: 1
-      duration: 0.0040343
+      duration: 0.0038164
       messages: 
       output: 
       stacktrace: 
@@ -5391,7 +5571,7 @@ MonoBehaviour:
       name: RequiredTest
       fullName: AddressableAssets.DocExampleCode.TestStub.RequiredTest
       resultStatus: 1
-      duration: 0.000106
+      duration: 0.000084
       messages: 
       output: 
       stacktrace: 
@@ -5403,43 +5583,150 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1252
       parentUniqueId: Unity.Addressables.Editor.Tests.DocExampleCode.dll/AddressableAssets/DocExampleCode/[Unity.Addressables.Editor.Tests.DocExampleCode][AddressableAssets.DocExampleCode.TestStub][suite]
-    m_ResultText: "StartAsyncCoroutine_Successfully (0.005s)\n---\nSetUp : System.InvalidOperationException
-      : The following game object is invoking the DontDestroyOnLoad method: CoroutineServiceMonoBehaviour.
-      Notice that DontDestroyOnLoad can only be used in play mode and, as such, cannot
-      be part of an editor script.\nTearDown : System.NullReferenceException : Object
-      reference not set to an instance of an object\n---\n--SetUp\r\n  at (wrapper
-      managed-to-native) UnityEngine.Object.DontDestroyOnLoad(UnityEngine.Object)\r\n 
-      at GameLovers.Services.CoroutineService..ctor () [0x00027] in .\\Packages\\com.gamelovers.services\\Runtime\\CoroutineService.cs:93
-      \r\n  at GameLoversEditor.Services.Tests.CoroutineServiceTest.Init () [0x00000]
-      in .\\Packages\\com.gamelovers.services\\Tests\\Editor\\PlayMode\\CoroutineServiceTest.cs:26
-      \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
-      at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
-      invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo
-      culture) [0x0006a] in <8ce0bd04a7a04b4b9395538239d3fdd8>:0 \r\n--TearDown\r\n 
-      at GameLoversEditor.Services.Tests.CoroutineServiceTest.Dispose () [0x00000]
-      in .\\Packages\\com.gamelovers.services\\Tests\\Editor\\PlayMode\\CoroutineServiceTest.cs:33
+    m_ResultText: "AddPool_Successfully (0.001s)\n---\nSetUp : System.ArgumentNullException
+      : Value cannot be null.\r\nParameter name: localType\n---\n--SetUp\r\n  at
+      System.Reflection.Emit.ILGenerator.DeclareLocal (System.Type localType, System.Boolean
+      pinned) [0x00009] in <8ce0bd04a7a04b4b9395538239d3fdd8>:0 \r\n  at System.Reflection.Emit.ILGenerator.DeclareLocal
+      (System.Type localType) [0x00000] in <8ce0bd04a7a04b4b9395538239d3fdd8>:0 \r\n 
+      at Castle.DynamicProxy.Generators.Emitters.SimpleAST.LocalReference.Generate
+      (System.Reflection.Emit.ILGenerator gen) [0x00008] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at Castle.DynamicProxy.Generators.Emitters.CodeBuilders.AbstractCodeBuilder.Generate
+      (Castle.DynamicProxy.Generators.Emitters.IMemberEmitter member, System.Reflection.Emit.ILGenerator
+      il) [0x00018] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.Emitters.MethodEmitter.Generate
+      () [0x0001e] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.Emitters.AbstractTypeEmitter.EnsureBuildersAreInAValidState
+      () [0x000f7] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.Emitters.AbstractTypeEmitter.BuildType
+      () [0x00000] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Contributors.InterfaceProxyWithoutTargetContributor+<>c__DisplayClass5_0.<GetInvocationType>b__0
+      (Castle.DynamicProxy.Generators.CacheKey _) [0x0004e] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at Castle.Core.Internal.SynchronizedDictionary`2[TKey,TValue].GetOrAddWithoutTakingLock
+      (TKey key, System.Func`2[T,TResult] valueFactory) [0x00015] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at Castle.DynamicProxy.Contributors.InterfaceProxyWithoutTargetContributor.GetInvocationType
+      (Castle.DynamicProxy.Generators.MetaMethod method, Castle.DynamicProxy.Generators.Emitters.ClassEmitter
+      emitter, Castle.DynamicProxy.ProxyGenerationOptions options) [0x00091] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at Castle.DynamicProxy.Contributors.InterfaceProxyWithoutTargetContributor.GetMethodGenerator
+      (Castle.DynamicProxy.Generators.MetaMethod method, Castle.DynamicProxy.Generators.Emitters.ClassEmitter
+      class, Castle.DynamicProxy.ProxyGenerationOptions options, Castle.DynamicProxy.Contributors.OverrideMethodDelegate
+      overrideMethod) [0x00014] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at
+      Castle.DynamicProxy.Contributors.CompositeTypeContributor.ImplementMethod (Castle.DynamicProxy.Generators.MetaMethod
+      method, Castle.DynamicProxy.Generators.Emitters.ClassEmitter class, Castle.DynamicProxy.ProxyGenerationOptions
+      options, Castle.DynamicProxy.Contributors.OverrideMethodDelegate overrideMethod)
+      [0x00000] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Contributors.CompositeTypeContributor.Generate
+      (Castle.DynamicProxy.Generators.Emitters.ClassEmitter class, Castle.DynamicProxy.ProxyGenerationOptions
+      options) [0x00023] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.ClassProxyGenerator.GenerateType
+      (System.String name, System.Type[] interfaces, Castle.DynamicProxy.Generators.INamingScope
+      namingScope) [0x000aa] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.ClassProxyGenerator+<>c__DisplayClass1_0.<GenerateCode>b__0
+      (System.String n, Castle.DynamicProxy.Generators.INamingScope s) [0x00000]
+      in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.BaseProxyGenerator+<>c__DisplayClass34_0.<ObtainProxyType>b__0
+      (Castle.DynamicProxy.Generators.CacheKey _) [0x0009c] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at Castle.Core.Internal.SynchronizedDictionary`2[TKey,TValue].GetOrAdd
+      (TKey key, System.Func`2[T,TResult] valueFactory) [0x0005b] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at Castle.DynamicProxy.Generators.BaseProxyGenerator.ObtainProxyType
+      (Castle.DynamicProxy.Generators.CacheKey cacheKey, System.Func`3[T1,T2,TResult]
+      factory) [0x00026] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.ClassProxyGenerator.GenerateCode
+      (System.Type[] interfaces, Castle.DynamicProxy.ProxyGenerationOptions options)
+      [0x00056] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.DefaultProxyBuilder.CreateClassProxyType
+      (System.Type classToProxy, System.Type[] additionalInterfacesToProxy, Castle.DynamicProxy.ProxyGenerationOptions
+      options) [0x00026] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyType
+      (System.Type classToProxy, System.Type[] additionalInterfacesToProxy, Castle.DynamicProxy.ProxyGenerationOptions
+      options) [0x00006] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy
+      (System.Type classToProxy, System.Type[] additionalInterfacesToProxy, Castle.DynamicProxy.ProxyGenerationOptions
+      options, System.Object[] constructorArguments, Castle.DynamicProxy.IInterceptor[]
+      interceptors) [0x00060] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at NSubstitute.Proxies.CastleDynamicProxy.CastleDynamicProxyFactory.CreateProxyUsingCastleProxyGenerator
+      (System.Type typeToProxy, System.Type[] additionalInterfaces, System.Object[]
+      constructorArguments, Castle.DynamicProxy.IInterceptor[] interceptors, Castle.DynamicProxy.ProxyGenerationOptions
+      proxyGenerationOptions) [0x00056] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n 
+      at NSubstitute.Proxies.CastleDynamicProxy.CastleDynamicProxyFactory.GenerateTypeProxy
+      (NSubstitute.Core.ICallRouter callRouter, System.Type typeToProxy, System.Type[]
+      additionalInterfaces, System.Object[] constructorArguments) [0x0001d] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at NSubstitute.Proxies.CastleDynamicProxy.CastleDynamicProxyFactory.GenerateProxy
+      (NSubstitute.Core.ICallRouter callRouter, System.Type typeToProxy, System.Type[]
+      additionalInterfaces, System.Object[] constructorArguments) [0x0000b] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at NSubstitute.Core.SubstituteFactory.Create (System.Type[] typesToProxy,
+      System.Object[] constructorArguments, System.Boolean callBaseByDefault) [0x0006a]
+      in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at NSubstitute.Core.SubstituteFactory.Create
+      (System.Type[] typesToProxy, System.Object[] constructorArguments) [0x00000]
+      in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at NSubstitute.Substitute.For
+      (System.Type[] typesToProxy, System.Object[] constructorArguments) [0x0000a]
+      in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at NSubstitute.Substitute.For[T]
+      (System.Object[] constructorArguments) [0x00000] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at GameLoversEditor.Services.Tests.PoolServiceTest.Init () [0x0000b]
+      in .\\Packages\\com.gamelovers.services\\Tests\\Editor\\EditMode\\PoolServiceTest.cs:23
       \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
       at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
       invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo
       culture) [0x0006a] in <8ce0bd04a7a04b4b9395538239d3fdd8>:0"
-    m_ResultStacktrace: "--SetUp\r\n  at (wrapper managed-to-native) UnityEngine.Object.DontDestroyOnLoad(UnityEngine.Object)\r\n 
-      at GameLovers.Services.CoroutineService..ctor () [0x00027] in .\\Packages\\com.gamelovers.services\\Runtime\\CoroutineService.cs:93
-      \r\n  at GameLoversEditor.Services.Tests.CoroutineServiceTest.Init () [0x00000]
-      in .\\Packages\\com.gamelovers.services\\Tests\\Editor\\PlayMode\\CoroutineServiceTest.cs:26
-      \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
-      at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
-      invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo
-      culture) [0x0006a] in <8ce0bd04a7a04b4b9395538239d3fdd8>:0 \r\n--TearDown\r\n 
-      at GameLoversEditor.Services.Tests.CoroutineServiceTest.Dispose () [0x00000]
-      in .\\Packages\\com.gamelovers.services\\Tests\\Editor\\PlayMode\\CoroutineServiceTest.cs:33
+    m_ResultStacktrace: "--SetUp\r\n  at System.Reflection.Emit.ILGenerator.DeclareLocal
+      (System.Type localType, System.Boolean pinned) [0x00009] in <8ce0bd04a7a04b4b9395538239d3fdd8>:0
+      \r\n  at System.Reflection.Emit.ILGenerator.DeclareLocal (System.Type localType)
+      [0x00000] in <8ce0bd04a7a04b4b9395538239d3fdd8>:0 \r\n  at Castle.DynamicProxy.Generators.Emitters.SimpleAST.LocalReference.Generate
+      (System.Reflection.Emit.ILGenerator gen) [0x00008] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at Castle.DynamicProxy.Generators.Emitters.CodeBuilders.AbstractCodeBuilder.Generate
+      (Castle.DynamicProxy.Generators.Emitters.IMemberEmitter member, System.Reflection.Emit.ILGenerator
+      il) [0x00018] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.Emitters.MethodEmitter.Generate
+      () [0x0001e] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.Emitters.AbstractTypeEmitter.EnsureBuildersAreInAValidState
+      () [0x000f7] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.Emitters.AbstractTypeEmitter.BuildType
+      () [0x00000] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Contributors.InterfaceProxyWithoutTargetContributor+<>c__DisplayClass5_0.<GetInvocationType>b__0
+      (Castle.DynamicProxy.Generators.CacheKey _) [0x0004e] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at Castle.Core.Internal.SynchronizedDictionary`2[TKey,TValue].GetOrAddWithoutTakingLock
+      (TKey key, System.Func`2[T,TResult] valueFactory) [0x00015] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at Castle.DynamicProxy.Contributors.InterfaceProxyWithoutTargetContributor.GetInvocationType
+      (Castle.DynamicProxy.Generators.MetaMethod method, Castle.DynamicProxy.Generators.Emitters.ClassEmitter
+      emitter, Castle.DynamicProxy.ProxyGenerationOptions options) [0x00091] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at Castle.DynamicProxy.Contributors.InterfaceProxyWithoutTargetContributor.GetMethodGenerator
+      (Castle.DynamicProxy.Generators.MetaMethod method, Castle.DynamicProxy.Generators.Emitters.ClassEmitter
+      class, Castle.DynamicProxy.ProxyGenerationOptions options, Castle.DynamicProxy.Contributors.OverrideMethodDelegate
+      overrideMethod) [0x00014] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at
+      Castle.DynamicProxy.Contributors.CompositeTypeContributor.ImplementMethod (Castle.DynamicProxy.Generators.MetaMethod
+      method, Castle.DynamicProxy.Generators.Emitters.ClassEmitter class, Castle.DynamicProxy.ProxyGenerationOptions
+      options, Castle.DynamicProxy.Contributors.OverrideMethodDelegate overrideMethod)
+      [0x00000] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Contributors.CompositeTypeContributor.Generate
+      (Castle.DynamicProxy.Generators.Emitters.ClassEmitter class, Castle.DynamicProxy.ProxyGenerationOptions
+      options) [0x00023] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.ClassProxyGenerator.GenerateType
+      (System.String name, System.Type[] interfaces, Castle.DynamicProxy.Generators.INamingScope
+      namingScope) [0x000aa] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.ClassProxyGenerator+<>c__DisplayClass1_0.<GenerateCode>b__0
+      (System.String n, Castle.DynamicProxy.Generators.INamingScope s) [0x00000]
+      in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.BaseProxyGenerator+<>c__DisplayClass34_0.<ObtainProxyType>b__0
+      (Castle.DynamicProxy.Generators.CacheKey _) [0x0009c] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at Castle.Core.Internal.SynchronizedDictionary`2[TKey,TValue].GetOrAdd
+      (TKey key, System.Func`2[T,TResult] valueFactory) [0x0005b] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at Castle.DynamicProxy.Generators.BaseProxyGenerator.ObtainProxyType
+      (Castle.DynamicProxy.Generators.CacheKey cacheKey, System.Func`3[T1,T2,TResult]
+      factory) [0x00026] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.Generators.ClassProxyGenerator.GenerateCode
+      (System.Type[] interfaces, Castle.DynamicProxy.ProxyGenerationOptions options)
+      [0x00056] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.DefaultProxyBuilder.CreateClassProxyType
+      (System.Type classToProxy, System.Type[] additionalInterfacesToProxy, Castle.DynamicProxy.ProxyGenerationOptions
+      options) [0x00026] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyType
+      (System.Type classToProxy, System.Type[] additionalInterfacesToProxy, Castle.DynamicProxy.ProxyGenerationOptions
+      options) [0x00006] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy
+      (System.Type classToProxy, System.Type[] additionalInterfacesToProxy, Castle.DynamicProxy.ProxyGenerationOptions
+      options, System.Object[] constructorArguments, Castle.DynamicProxy.IInterceptor[]
+      interceptors) [0x00060] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at NSubstitute.Proxies.CastleDynamicProxy.CastleDynamicProxyFactory.CreateProxyUsingCastleProxyGenerator
+      (System.Type typeToProxy, System.Type[] additionalInterfaces, System.Object[]
+      constructorArguments, Castle.DynamicProxy.IInterceptor[] interceptors, Castle.DynamicProxy.ProxyGenerationOptions
+      proxyGenerationOptions) [0x00056] in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n 
+      at NSubstitute.Proxies.CastleDynamicProxy.CastleDynamicProxyFactory.GenerateTypeProxy
+      (NSubstitute.Core.ICallRouter callRouter, System.Type typeToProxy, System.Type[]
+      additionalInterfaces, System.Object[] constructorArguments) [0x0001d] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at NSubstitute.Proxies.CastleDynamicProxy.CastleDynamicProxyFactory.GenerateProxy
+      (NSubstitute.Core.ICallRouter callRouter, System.Type typeToProxy, System.Type[]
+      additionalInterfaces, System.Object[] constructorArguments) [0x0000b] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at NSubstitute.Core.SubstituteFactory.Create (System.Type[] typesToProxy,
+      System.Object[] constructorArguments, System.Boolean callBaseByDefault) [0x0006a]
+      in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at NSubstitute.Core.SubstituteFactory.Create
+      (System.Type[] typesToProxy, System.Object[] constructorArguments) [0x00000]
+      in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at NSubstitute.Substitute.For
+      (System.Type[] typesToProxy, System.Object[] constructorArguments) [0x0000a]
+      in <7ff0af78f8aa482982751bf18b1ec5d2>:0 \r\n  at NSubstitute.Substitute.For[T]
+      (System.Object[] constructorArguments) [0x00000] in <7ff0af78f8aa482982751bf18b1ec5d2>:0
+      \r\n  at GameLoversEditor.Services.Tests.PoolServiceTest.Init () [0x0000b]
+      in .\\Packages\\com.gamelovers.services\\Tests\\Editor\\EditMode\\PoolServiceTest.cs:23
       \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
       at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
       invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo
       culture) [0x0006a] in <8ce0bd04a7a04b4b9395538239d3fdd8>:0 "
     m_TestListState:
-      scrollPos: {x: 0, y: 132}
-      m_SelectedIDs: 5b06ba20
-      m_LastClickedID: 549062235
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: be4290d4
+      m_LastClickedID: -728743234
       m_ExpandedIDs: 1c70e488f30b0d9fcf11cfa22b2601a639f899a6b0d704b0227506ba369cf6bb94430ecabb460bccec2883cf5cf4f9cfbf4cc7d1cd0187d9c9c379dd1ce508deaf606de198e2d1eced00aaeed99876f1490f47f5a2d253fa141f8bfcc7860c01ebfa26014fa0c901f78e400911c38510aa41c71492cc3017e1f771188f6fc819e8bb8a2e27f2f42ed6b2813d3c882e442f86f84606ee90476bbb8e4a95cb3f54e87efb570806cc5bafaf105fbfe7d860db04e466109510694880277062fb2c73ffffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -5488,9 +5775,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 444
-    width: 1207
-    height: 547
+    y: 522
+    width: 1312
+    height: 469
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -5512,7 +5799,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Packages/com.gamelovers.services
+    - Packages/com.gamelovers.uiservice
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -5520,16 +5807,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Packages/com.gamelovers.services
+  - Packages/com.gamelovers.uiservice
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\migas\Desktop\Frameworks
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 161}
-    m_SelectedIDs: 12530000
-    m_LastClickedID: 21266
-    m_ExpandedIDs: 0000000010530000125300001453000016530000185300001a5300001c5300001e53000020530000505300005c53000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 211}
+    m_SelectedIDs: 00530000
+    m_LastClickedID: 21248
+    m_ExpandedIDs: 00000000ee520000f0520000f2520000f4520000f6520000f8520000fa520000fc520000fe5200000053000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -5557,7 +5844,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000010530000125300001453000016530000185300001a5300001c5300001e53000020530000
+    m_ExpandedIDs: 00000000ee520000f0520000f2520000f4520000f6520000f8520000fa520000fc520000fe52000000530000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -5582,8 +5869,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 94530000
+    m_LastClickedInstanceID: 21396
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000f87700007477000092930000be7d0000d8940000aac80000fe760000cc680000d40100006269000088680000f0680000d8730000
     m_RenameOverlay:
@@ -5636,8 +5923,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 285
-    height: 350
+    width: 305
+    height: 428
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -5651,9 +5938,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 68e3ffff
+      m_SelectedIDs: f2eeffff
       m_LastClickedID: 0
-      m_ExpandedIDs: 1ae5ffff9ae6ffff2ce9ffffb2eaffff2afbffff
+      m_ExpandedIDs: 9afaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -5698,10 +5985,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 286
+    x: 306
     y: 73
-    width: 920
-    height: 350
+    width: 1005
+    height: 428
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -6392,9 +6679,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 444
-    width: 1207
-    height: 547
+    y: 522
+    width: 1312
+    height: 469
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -6426,9 +6713,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1208
+    x: 1313
     y: 73
-    width: 711
+    width: 606
     height: 918
   m_SerializedDataModeController:
     m_DataMode: 0
