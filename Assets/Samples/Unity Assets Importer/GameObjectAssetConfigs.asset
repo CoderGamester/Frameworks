@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd545291f06b96345811208d0e9fd419, type: 3}
+  m_Name: GameObjectAssetConfigs
+  m_EditorClassIdentifier: 
+  _assetsFolderPath: Assets/Samples/Unity Assets Importer
+  _configs:
+  - Key: 0
+    Value:
+      m_AssetGUID: 9d01c7268d383fb44b7e2e5108603163
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+  - Key: 1
+    Value:
+      m_AssetGUID: 5ba4592d8f565e04aaf2859e14a2c367
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+  - Key: 2
+    Value:
+      m_AssetGUID: 18c4ce48b976fca42a9ed73315ecca16
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+  - Key: 3
+    Value:
+      m_AssetGUID: 7671a0d73c6bef540be106d64e5b2b11
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+  - Key: 4
+    Value:
+      m_AssetGUID: 61185c7eb754ab144834262ea9fbd122
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0

@@ -1,13 +1,21 @@
 {
   "dependencies": {
+    "com.cysharp.unitask": {
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "f9fd769be7c634610f2a61aa914a1a55f34740e1"
+    },
     "com.gamelovers.assetsimporter": {
       "version": "file:com.gamelovers.assetsimporter",
       "depth": 0,
       "source": "embedded",
       "dependencies": {
         "com.unity.addressables": "1.21.20",
-        "com.gamelovers.dataextensions": "0.5.1",
-        "com.gamelovers.configsprovider": "0.1.1"
+        "com.gamelovers.dataextensions": "0.6.0",
+        "com.gamelovers.configsprovider": "0.1.1",
+        "com.cysharp.unitask": "2.5.10"
       }
     },
     "com.gamelovers.configsprovider": {
@@ -59,7 +67,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.gamelovers.dataextensions": "0.6.0"
+        "com.gamelovers.dataextensions": "0.6.2"
       }
     },
     "com.gamelovers.statechart": {
@@ -125,7 +133,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.inputsystem": {
-      "version": "1.7.0",
+      "version": "1.11.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {
