@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 45
+  controlID: 80
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -140,12 +140,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1441
+    width: 1377
     height: 939
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 46
+  controlID: 37
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -166,8 +166,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1441
-    height: 389
+    width: 1377
+    height: 651
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
@@ -190,13 +190,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 335
-    height: 389
+    width: 329
+    height: 651
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 13}
+  m_ActualView: {fileID: 14}
   m_Panes:
-  - {fileID: 13}
+  - {fileID: 14}
   m_Selected: 0
   m_LastSelected: 0
 --- !u!114 &9
@@ -214,16 +214,16 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 335
+    x: 329
     y: 0
-    width: 1106
-    height: 389
+    width: 1048
+    height: 651
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 14}
+  m_ActualView: {fileID: 15}
   m_Panes:
-  - {fileID: 14}
   - {fileID: 15}
+  - {fileID: 16}
   m_Selected: 0
   m_LastSelected: 1
 --- !u!114 &10
@@ -242,16 +242,16 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 389
-    width: 1441
-    height: 550
+    y: 651
+    width: 1377
+    height: 288
   m_MinSize: {x: 101, y: 121}
   m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 16}
+  m_ActualView: {fileID: 17}
   m_Panes:
-  - {fileID: 12}
-  - {fileID: 16}
+  - {fileID: 13}
   - {fileID: 17}
+  - {fileID: 18}
   m_Selected: 1
   m_LastSelected: 0
 --- !u!114 &11
@@ -264,23 +264,58 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: InspectorWindow
+  m_Name: McpUnityEditorWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1441
+    x: 1377
     y: 0
-    width: 479
+    width: 543
     height: 939
-  m_MinSize: {x: 276, y: 71}
+  m_MinSize: {x: 601, y: 421}
   m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 18}
+  m_ActualView: {fileID: 12}
   m_Panes:
-  - {fileID: 18}
-  m_Selected: 0
-  m_LastSelected: 1
+  - {fileID: 19}
+  - {fileID: 12}
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &12
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37b7af2843115b4592e82f0a4445d47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 600, y: 400}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: MCP Unity
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 1377
+    y: 73
+    width: 542
+    height: 918
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+--- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -302,9 +337,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 462
-    width: 1440
-    height: 529
+    y: 651
+    width: 1376
+    height: 340
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -326,7 +361,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Packages/com.gamelovers.assetsimporter/Editor
+    - Packages/com.gamelovers.mcp-unity/Editor/UnityBridge
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -334,16 +369,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Packages/com.gamelovers.assetsimporter/Editor
+  - Packages/com.gamelovers.mcp-unity/Editor/UnityBridge
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\migas\Desktop\Frameworks
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 295}
-    m_SelectedIDs: 48550000
-    m_LastClickedID: 21832
-    m_ExpandedIDs: 00000000c2540000c4540000c6540000c8540000ca540000cc540000ce540000d0540000d2540000d6540000d8540000dc540000de540000e0540000e4540000e6540000e8540000ea54000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 192}
+    m_SelectedIDs: fc560000
+    m_LastClickedID: 22268
+    m_ExpandedIDs: 000000005a5600005c5600005e56000060560000625600006456000066560000685600006a5600006c5600006e56000070560000725600007456000076560000785600007a5600007c5600007e56000080560000825600008456000086560000885600008a5600008c5600008e560000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -371,7 +406,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c2540000c4540000c6540000c8540000ca540000cc540000ce540000d0540000d2540000d4540000d6540000d8540000da540000dc540000de540000e0540000e2540000e4540000e6540000e8540000ea540000
+    m_ExpandedIDs: 000000005a5600005c5600005e56000060560000625600006456000066560000685600006a5600006c5600006e56000070560000725600007456000076560000785600007a5600007c5600007e56000080560000825600008456000086560000885600008a5600008c5600008e560000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -396,9 +431,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 7e430000
-    m_LastClickedInstanceID: 17278
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000f87700007477000092930000be7d0000d8940000aac80000fe760000cc680000d40100006269000088680000f0680000d8730000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -415,7 +450,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 9}
+      m_ClientGUIView: {fileID: 10}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -427,7 +462,7 @@ MonoBehaviour:
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
---- !u!114 &13
+--- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -450,8 +485,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 334
-    height: 368
+    width: 328
+    height: 630
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -465,9 +500,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 7e430000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 2afbffff
+      m_ExpandedIDs: 1efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -491,7 +526,7 @@ MonoBehaviour:
       m_IsLocked: 0
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: 4c969a2b90040154d917609493e03593
---- !u!114 &14
+--- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -512,10 +547,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 335
+    x: 329
     y: 73
-    width: 1104
-    height: 368
+    width: 1046
+    height: 630
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -898,7 +933,7 @@ MonoBehaviour:
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Tilemap Focus
-      index: 2
+      index: 3
       layout: 4
       size: {x: 0, y: 0}
       sizeOverriden: 0
@@ -993,6 +1028,19 @@ MonoBehaviour:
       layout: 4
       size: {x: 0, y: 0}
       sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 48, y: 48}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/Path
+      index: 10
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
     m_OverlaysVisible: 1
   m_WindowGUID: cc27987af1a868c49b0894db9c0f5429
   m_Gizmos: 1
@@ -1004,9 +1052,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: 0, z: 0}
+    m_Target: {x: -47, y: 0, z: -109}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0}
+    m_Value: {x: -47, y: 0, z: -109}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1083,7 +1131,7 @@ MonoBehaviour:
   m_SceneVisActive: 1
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
---- !u!114 &15
+--- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1104,10 +1152,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 335
+    x: 336
     y: 73
-    width: 1104
-    height: 368
+    width: 1102
+    height: 557
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1126,7 +1174,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 1104, y: 347}
+  m_TargetSize: {x: 1102, y: 536}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -1141,10 +1189,10 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -552
-    m_HBaseRangeMax: 552
-    m_VBaseRangeMin: -173.5
-    m_VBaseRangeMax: 173.5
+    m_HBaseRangeMin: -551
+    m_HBaseRangeMax: 551
+    m_VBaseRangeMin: -268
+    m_VBaseRangeMax: 268
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -1162,29 +1210,30 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 1104
-      height: 347
+      width: 1102
+      height: 536
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 552, y: 173.5}
+    m_Translation: {x: 551, y: 268}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -552
-      y: -173.5
-      width: 1104
-      height: 347
+      x: -551
+      y: -268
+      width: 1102
+      height: 536
     m_MinimalGUI: 1
   m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 1104, y: 368}
+  m_LastWindowPixelSize: {x: 1102, y: 557}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
   m_XRRenderMode: 0
   m_RenderTexture: {fileID: 0}
---- !u!114 &16
+  m_showToolbar: 1
+--- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1206,9 +1255,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 462
-    width: 1440
-    height: 529
+    y: 724
+    width: 1376
+    height: 267
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1219,7 +1268,7 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
---- !u!114 &17
+--- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1240,9 +1289,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 462
-    width: 1440
-    height: 529
+    y: 673
+    width: 1435
+    height: 318
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1254,22 +1303,22 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_Spl:
-    ID: 85
-    splitterInitialOffset: 276
+    ID: 149
+    splitterInitialOffset: 322
     currentActiveSplitter: -1
     realSizes:
-    - 200
-    - 259
+    - 168
+    - 80
     relativeSizes:
-    - 0.4360587
-    - 0.5639413
+    - 0.6792453
+    - 0.3207547
     minSizes:
     - 32
     - 32
     maxSizes:
     - 0
     - 0
-    lastTotalSize: 459
+    lastTotalSize: 248
     splitSize: 6
     xOffset: 0
     m_Version: 1
@@ -1279,14 +1328,14 @@ MonoBehaviour:
     oldSplitSize: 0
   m_TestTypeToolbarIndex: 0
   m_PlayModeTestListGUI:
-    m_Window: {fileID: 17}
+    m_Window: {fileID: 18}
     m_NewResultList:
-    - id: 2044
-      uniqueId: '[Idle Rainforest][suite]'
-      name: Idle Rainforest
-      fullName: Idle Rainforest
-      resultStatus: 1
-      duration: 0.1732573
+    - id: 1247
+      uniqueId: '[Frameworks][suite]'
+      name: Frameworks
+      fullName: Frameworks
+      resultStatus: 0
+      duration: 0
       messages: 
       output: 
       stacktrace: 
@@ -1633,7 +1682,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 2d3ba632
       m_LastClickedID: 849754925
-      m_ExpandedIDs: c15cf8811803a48825fe6ca082f44ca8fe0d61a9ed00aaeee5f37a295818bd3bb389ac3c2f86f846c575756affffff7f
+      m_ExpandedIDs: c15cf8811803a48825fe6ca082f44ca8fe0d61a9752464e1ed00aaeee5f37a295818bd3bb389ac3c2f86f846c575756affffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1661,14 +1710,14 @@ MonoBehaviour:
       - Uncategorized
     m_SelectedOption: 0
   m_EditModeTestListGUI:
-    m_Window: {fileID: 17}
+    m_Window: {fileID: 18}
     m_NewResultList:
-    - id: 1000
-      uniqueId: '[Idle Rainforest][suite]'
-      name: Idle Rainforest
-      fullName: Idle Rainforest
+    - id: 1244
+      uniqueId: '[Frameworks][suite]'
+      name: Frameworks
+      fullName: Frameworks
       resultStatus: 1
-      duration: 1.5065002
+      duration: 0.0482179
       messages: 
       output: 
       stacktrace: 
@@ -1684,7 +1733,7 @@ MonoBehaviour:
       name: GameLovers.DataExtensions.Editor.Tests.dll
       fullName: C:/Users/migas/Desktop/Frameworks/Library/ScriptAssemblies/GameLovers.DataExtensions.Editor.Tests.dll
       resultStatus: 1
-      duration: 0.1427691
+      duration: 0.1930843
       messages: 
       output: 
       stacktrace: 
@@ -1700,7 +1749,7 @@ MonoBehaviour:
       name: GameLoversEditor
       fullName: GameLoversEditor
       resultStatus: 1
-      duration: 0.1390114
+      duration: 0.1917925
       messages: 
       output: 
       stacktrace: 
@@ -1716,7 +1765,7 @@ MonoBehaviour:
       name: DataExtensions
       fullName: GameLoversEditor.DataExtensions
       resultStatus: 1
-      duration: 0.1353046
+      duration: 0.1906363
       messages: 
       output: 
       stacktrace: 
@@ -1732,7 +1781,7 @@ MonoBehaviour:
       name: Tests
       fullName: GameLoversEditor.DataExtensions.Tests
       resultStatus: 1
-      duration: 0.1309496
+      duration: 0.1894531
       messages: 
       output: 
       stacktrace: 
@@ -1748,7 +1797,7 @@ MonoBehaviour:
       name: EnumSelectorTest
       fullName: GameLoversEditor.DataExtensions.Tests.EnumSelectorTest
       resultStatus: 1
-      duration: 0.0071791
+      duration: 0.0207787
       messages: 
       output: 
       stacktrace: 
@@ -1764,7 +1813,7 @@ MonoBehaviour:
       name: ValueCheck
       fullName: GameLoversEditor.DataExtensions.Tests.EnumSelectorTest.ValueCheck
       resultStatus: 1
-      duration: 0.002943
+      duration: 0.009969
       messages: 
       output: 
       stacktrace: 
@@ -1781,7 +1830,7 @@ MonoBehaviour:
       name: ValueSetCheck
       fullName: GameLoversEditor.DataExtensions.Tests.EnumSelectorTest.ValueSetCheck
       resultStatus: 1
-      duration: 0.0002073
+      duration: 0.0002053
       messages: 
       output: 
       stacktrace: 
@@ -1798,7 +1847,7 @@ MonoBehaviour:
       name: floatPTests
       fullName: GameLoversEditor.DataExtensions.Tests.floatPTests
       resultStatus: 1
-      duration: 0.0040638
+      duration: 0.0151699
       messages: 
       output: 
       stacktrace: 
@@ -1814,7 +1863,7 @@ MonoBehaviour:
       name: Addition
       fullName: GameLoversEditor.DataExtensions.Tests.floatPTests.Addition
       resultStatus: 1
-      duration: 0.0008852
+      duration: 0.0010228
       messages: 
       output: 
       stacktrace: 
@@ -1831,7 +1880,7 @@ MonoBehaviour:
       name: Equality
       fullName: GameLoversEditor.DataExtensions.Tests.floatPTests.Equality
       resultStatus: 1
-      duration: 0.0005946
+      duration: 0.000687
       messages: 
       output: 
       stacktrace: 
@@ -1848,7 +1897,7 @@ MonoBehaviour:
       name: Multiplication
       fullName: GameLoversEditor.DataExtensions.Tests.floatPTests.Multiplication
       resultStatus: 1
-      duration: 0.0006882
+      duration: 0.0007719
       messages: 
       output: 
       stacktrace: 
@@ -1865,7 +1914,7 @@ MonoBehaviour:
       name: Representation
       fullName: GameLoversEditor.DataExtensions.Tests.floatPTests.Representation
       resultStatus: 1
-      duration: 0.0002955
+      duration: 0.0003692
       messages: 
       output: 
       stacktrace: 
@@ -1882,7 +1931,7 @@ MonoBehaviour:
       name: ObservableDictionaryTest
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest
       resultStatus: 1
-      duration: 0.0786691
+      duration: 0.0958457
       messages: 
       output: 
       stacktrace: 
@@ -1898,7 +1947,7 @@ MonoBehaviour:
       name: Add_AddsKeyValuePair_WhenKeyDoesNotExist
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Add_AddsKeyValuePair_WhenKeyDoesNotExist
       resultStatus: 1
-      duration: 0.0561118
+      duration: 0.0667344
       messages: 
       output: 
       stacktrace: 
@@ -1915,7 +1964,7 @@ MonoBehaviour:
       name: Add_ThrowsException_WhenKeyAlreadyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Add_ThrowsException_WhenKeyAlreadyExists
       resultStatus: 1
-      duration: 0.0020567
+      duration: 0.0022933
       messages: 
       output: 
       stacktrace: 
@@ -1932,7 +1981,7 @@ MonoBehaviour:
       name: Clear_RemovesAllKeyValuePairs
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Clear_RemovesAllKeyValuePairs
       resultStatus: 1
-      duration: 0.0007803
+      duration: 0.0009164
       messages: 
       output: 
       stacktrace: 
@@ -1949,7 +1998,7 @@ MonoBehaviour:
       name: ContainsKey_ReturnsFalse_WhenKeyDoesNotExist
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.ContainsKey_ReturnsFalse_WhenKeyDoesNotExist
       resultStatus: 1
-      duration: 0.0002656
+      duration: 0.0003112
       messages: 
       output: 
       stacktrace: 
@@ -1966,7 +2015,7 @@ MonoBehaviour:
       name: ContainsKey_ReturnsTrue_WhenKeyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.ContainsKey_ReturnsTrue_WhenKeyExists
       resultStatus: 1
-      duration: 0.0001109
+      duration: 0.0001421
       messages: 
       output: 
       stacktrace: 
@@ -1983,7 +2032,7 @@ MonoBehaviour:
       name: Indexer_ReturnsValue_WhenKeyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Indexer_ReturnsValue_WhenKeyExists
       resultStatus: 1
-      duration: 0.0000966
+      duration: 0.0001419
       messages: 
       output: 
       stacktrace: 
@@ -2000,7 +2049,7 @@ MonoBehaviour:
       name: Indexer_SetsValue_WhenKeyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Indexer_SetsValue_WhenKeyExists
       resultStatus: 1
-      duration: 0.0002438
+      duration: 0.0003056
       messages: 
       output: 
       stacktrace: 
@@ -2017,7 +2066,7 @@ MonoBehaviour:
       name: InvokeObserve_MissingKey_ThrowsException
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.InvokeObserve_MissingKey_ThrowsException
       resultStatus: 1
-      duration: 0.0012173
+      duration: 0.0009204
       messages: 
       output: 
       stacktrace: 
@@ -2034,7 +2083,7 @@ MonoBehaviour:
       name: InvokeObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.InvokeObserveCheck
       resultStatus: 1
-      duration: 0.0085666
+      duration: 0.0096832
       messages: 
       output: 
       stacktrace: 
@@ -2051,7 +2100,7 @@ MonoBehaviour:
       name: InvokeUpdate_MissingKey_ThrowsException
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.InvokeUpdate_MissingKey_ThrowsException
       resultStatus: 1
-      duration: 0.0001779
+      duration: 0.0002602
       messages: 
       output: 
       stacktrace: 
@@ -2068,7 +2117,7 @@ MonoBehaviour:
       name: InvokeUpdate_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.InvokeUpdate_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0004117
+      duration: 0.0003666
       messages: 
       output: 
       stacktrace: 
@@ -2085,7 +2134,7 @@ MonoBehaviour:
       name: InvokeUpdateCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.InvokeUpdateCheck
       resultStatus: 1
-      duration: 0.0002895
+      duration: 0.0003148
       messages: 
       output: 
       stacktrace: 
@@ -2102,7 +2151,7 @@ MonoBehaviour:
       name: ObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.ObserveCheck
       resultStatus: 1
-      duration: 0.0005497
+      duration: 0.0006752
       messages: 
       output: 
       stacktrace: 
@@ -2119,7 +2168,7 @@ MonoBehaviour:
       name: Remove_RemovesKeyValuePair_WhenKeyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Remove_RemovesKeyValuePair_WhenKeyExists
       resultStatus: 1
-      duration: 0.0001248
+      duration: 0.0002541
       messages: 
       output: 
       stacktrace: 
@@ -2136,7 +2185,7 @@ MonoBehaviour:
       name: Remove_ReturnsFalse_WhenKeyDoesNotExist
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Remove_ReturnsFalse_WhenKeyDoesNotExist
       resultStatus: 1
-      duration: 0.0001187
+      duration: 0.0001344
       messages: 
       output: 
       stacktrace: 
@@ -2153,7 +2202,7 @@ MonoBehaviour:
       name: StopObserve_KeyCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObserve_KeyCheck
       resultStatus: 1
-      duration: 0.0003984
+      duration: 0.0004372
       messages: 
       output: 
       stacktrace: 
@@ -2170,7 +2219,7 @@ MonoBehaviour:
       name: StopObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObserveCheck
       resultStatus: 1
-      duration: 0.0003334
+      duration: 0.000456
       messages: 
       output: 
       stacktrace: 
@@ -2187,7 +2236,7 @@ MonoBehaviour:
       name: StopObservingAll_Everything_Check
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObservingAll_Everything_Check
       resultStatus: 1
-      duration: 0.0003676
+      duration: 0.0004203
       messages: 
       output: 
       stacktrace: 
@@ -2204,7 +2253,7 @@ MonoBehaviour:
       name: StopObservingAll_MultipleCalls_Check
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObservingAll_MultipleCalls_Check
       resultStatus: 1
-      duration: 0.0001704
+      duration: 0.0002287
       messages: 
       output: 
       stacktrace: 
@@ -2221,7 +2270,7 @@ MonoBehaviour:
       name: StopObservingAll_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObservingAll_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0001336
+      duration: 0.0001771
       messages: 
       output: 
       stacktrace: 
@@ -2238,7 +2287,7 @@ MonoBehaviour:
       name: StopObservingAllCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObservingAllCheck
       resultStatus: 1
-      duration: 0.000142
+      duration: 0.0001941
       messages: 
       output: 
       stacktrace: 
@@ -2255,7 +2304,7 @@ MonoBehaviour:
       name: TryGetValue_ReturnsFalse_WhenKeyDoesNotExist
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.TryGetValue_ReturnsFalse_WhenKeyDoesNotExist
       resultStatus: 1
-      duration: 0.0001551
+      duration: 0.00019
       messages: 
       output: 
       stacktrace: 
@@ -2272,7 +2321,7 @@ MonoBehaviour:
       name: TryGetValue_ReturnsTrue_WhenKeyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.TryGetValue_ReturnsTrue_WhenKeyExists
       resultStatus: 1
-      duration: 0.0001738
+      duration: 0.0001554
       messages: 
       output: 
       stacktrace: 
@@ -2289,7 +2338,7 @@ MonoBehaviour:
       name: ValueSetCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.ValueSetCheck
       resultStatus: 1
-      duration: 0.0010111
+      duration: 0.0010624
       messages: 
       output: 
       stacktrace: 
@@ -2306,7 +2355,7 @@ MonoBehaviour:
       name: ObservableFieldTest
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest
       resultStatus: 1
-      duration: 0.0075184
+      duration: 0.0115829
       messages: 
       output: 
       stacktrace: 
@@ -2322,7 +2371,7 @@ MonoBehaviour:
       name: InvokeCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.InvokeCheck
       resultStatus: 1
-      duration: 0.0014579
+      duration: 0.0016923
       messages: 
       output: 
       stacktrace: 
@@ -2339,7 +2388,7 @@ MonoBehaviour:
       name: InvokeCheck_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.InvokeCheck_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0001846
+      duration: 0.0002125
       messages: 
       output: 
       stacktrace: 
@@ -2356,7 +2405,7 @@ MonoBehaviour:
       name: InvokeObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.InvokeObserveCheck
       resultStatus: 1
-      duration: 0.0001905
+      duration: 0.0002405
       messages: 
       output: 
       stacktrace: 
@@ -2373,7 +2422,7 @@ MonoBehaviour:
       name: ObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.ObserveCheck
       resultStatus: 1
-      duration: 0.0004407
+      duration: 0.000483
       messages: 
       output: 
       stacktrace: 
@@ -2390,7 +2439,7 @@ MonoBehaviour:
       name: StopObserve_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObserve_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0002061
+      duration: 0.0002716
       messages: 
       output: 
       stacktrace: 
@@ -2407,7 +2456,7 @@ MonoBehaviour:
       name: StopObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObserveCheck
       resultStatus: 1
-      duration: 0.0002023
+      duration: 0.0002118
       messages: 
       output: 
       stacktrace: 
@@ -2424,7 +2473,7 @@ MonoBehaviour:
       name: StopObservingAll_Everything_Check
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObservingAll_Everything_Check
       resultStatus: 1
-      duration: 0.0002132
+      duration: 0.0002459
       messages: 
       output: 
       stacktrace: 
@@ -2441,7 +2490,7 @@ MonoBehaviour:
       name: StopObservingAll_MultipleCalls_Check
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObservingAll_MultipleCalls_Check
       resultStatus: 1
-      duration: 0.0002228
+      duration: 0.0002364
       messages: 
       output: 
       stacktrace: 
@@ -2458,7 +2507,7 @@ MonoBehaviour:
       name: StopObservingAll_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObservingAll_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0001458
+      duration: 0.0001705
       messages: 
       output: 
       stacktrace: 
@@ -2475,7 +2524,7 @@ MonoBehaviour:
       name: StopObservingAllCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObservingAllCheck
       resultStatus: 1
-      duration: 0.000156
+      duration: 0.0001882
       messages: 
       output: 
       stacktrace: 
@@ -2492,7 +2541,7 @@ MonoBehaviour:
       name: ValueCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.ValueCheck
       resultStatus: 1
-      duration: 0.0001075
+      duration: 0.0001591
       messages: 
       output: 
       stacktrace: 
@@ -2509,7 +2558,7 @@ MonoBehaviour:
       name: ValueSetCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.ValueSetCheck
       resultStatus: 1
-      duration: 0.0001375
+      duration: 0.0001973
       messages: 
       output: 
       stacktrace: 
@@ -2526,7 +2575,7 @@ MonoBehaviour:
       name: ObservableListTest
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest
       resultStatus: 1
-      duration: 0.0108595
+      duration: 0.0186578
       messages: 
       output: 
       stacktrace: 
@@ -2542,7 +2591,7 @@ MonoBehaviour:
       name: AddValue_AddsValueToList
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.AddValue_AddsValueToList
       resultStatus: 1
-      duration: 0.0049592
+      duration: 0.0083614
       messages: 
       output: 
       stacktrace: 
@@ -2559,7 +2608,7 @@ MonoBehaviour:
       name: InvokeCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.InvokeCheck
       resultStatus: 1
-      duration: 0.000489
+      duration: 0.0006779
       messages: 
       output: 
       stacktrace: 
@@ -2576,7 +2625,7 @@ MonoBehaviour:
       name: InvokeCheck_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.InvokeCheck_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0002205
+      duration: 0.0002381
       messages: 
       output: 
       stacktrace: 
@@ -2593,7 +2642,7 @@ MonoBehaviour:
       name: InvokeObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.InvokeObserveCheck
       resultStatus: 1
-      duration: 0.0002613
+      duration: 0.0003061
       messages: 
       output: 
       stacktrace: 
@@ -2610,7 +2659,7 @@ MonoBehaviour:
       name: ObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.ObserveCheck
       resultStatus: 1
-      duration: 0.0004327
+      duration: 0.0006152
       messages: 
       output: 
       stacktrace: 
@@ -2627,7 +2676,7 @@ MonoBehaviour:
       name: SetValue_UpdatesValue
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.SetValue_UpdatesValue
       resultStatus: 1
-      duration: 0.0001646
+      duration: 0.0002464
       messages: 
       output: 
       stacktrace: 
@@ -2639,12 +2688,29 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1055
       parentUniqueId: GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableListTest][suite]
+    - id: 1061
+      uniqueId: GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableListTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObserve_WhenCalledOnce_RemovesOnlyOneObserverInstance]
+      name: StopObserve_WhenCalledOnce_RemovesOnlyOneObserverInstance
+      fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObserve_WhenCalledOnce_RemovesOnlyOneObserverInstance
+      resultStatus: 1
+      duration: 0.000425
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1053
+      parentUniqueId: GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableListTest][suite]
     - id: 1043
       uniqueId: GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableListTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObserveCheck]
       name: StopObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObserveCheck
       resultStatus: 1
-      duration: 0.0003104
+      duration: 0.0002962
       messages: 
       output: 
       stacktrace: 
@@ -2661,7 +2727,7 @@ MonoBehaviour:
       name: StopObservingAll_Everything_Check
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObservingAll_Everything_Check
       resultStatus: 1
-      duration: 0.0003078
+      duration: 0.000311
       messages: 
       output: 
       stacktrace: 
@@ -2673,12 +2739,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1036
       parentUniqueId: GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableListTest][suite]
-    - id: 1045
-      uniqueId: GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableListTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObservingAll_MultipleCalls_Check]
-      name: StopObservingAll_MultipleCalls_Check
-      fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObservingAll_MultipleCalls_Check
+    - id: 1063
+      uniqueId: GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableListTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObservingAll_MultipleCalls_StopsAll]
+      name: StopObservingAll_MultipleCalls_StopsAll
+      fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObservingAll_MultipleCalls_StopsAll
       resultStatus: 1
-      duration: 0.0001876
+      duration: 0.0002442
       messages: 
       output: 
       stacktrace: 
@@ -2688,14 +2754,14 @@ MonoBehaviour:
       isSuite: 0
       categories:
       - Uncategorized
-      parentId: 1036
+      parentId: 1053
       parentUniqueId: GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableListTest][suite]
     - id: 1047
       uniqueId: GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableListTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObservingAll_NotObserving_DoesNothing]
       name: StopObservingAll_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObservingAll_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0002264
+      duration: 0.0002001
       messages: 
       output: 
       stacktrace: 
@@ -2712,7 +2778,7 @@ MonoBehaviour:
       name: StopObservingAllCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObservingAllCheck
       resultStatus: 1
-      duration: 0.0002975
+      duration: 0.0002053
       messages: 
       output: 
       stacktrace: 
@@ -2729,7 +2795,7 @@ MonoBehaviour:
       name: ObservableResolverDictionaryTest
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest
       resultStatus: 1
-      duration: 0.0126654
+      duration: 0.018193
       messages: 
       output: 
       stacktrace: 
@@ -2745,7 +2811,7 @@ MonoBehaviour:
       name: AddOrigin_AddsValueToOriginDictionary
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.AddOrigin_AddsValueToOriginDictionary
       resultStatus: 1
-      duration: 0.0076804
+      duration: 0.0086409
       messages: 
       output: 
       stacktrace: 
@@ -2762,7 +2828,7 @@ MonoBehaviour:
       name: ClearOrigin_ClearsOriginDictionary
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.ClearOrigin_ClearsOriginDictionary
       resultStatus: 1
-      duration: 0.0003556
+      duration: 0.0005063
       messages: 
       output: 
       stacktrace: 
@@ -2779,7 +2845,7 @@ MonoBehaviour:
       name: RemoveOrigin_RemovesValueFromOriginDictionary
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.RemoveOrigin_RemovesValueFromOriginDictionary
       resultStatus: 1
-      duration: 0.0009176
+      duration: 0.0013761
       messages: 
       output: 
       stacktrace: 
@@ -2796,7 +2862,7 @@ MonoBehaviour:
       name: TryGetOriginValue_KeyDoesNotExist_ReturnsFalseAndOutDefault
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.TryGetOriginValue_KeyDoesNotExist_ReturnsFalseAndOutDefault
       resultStatus: 1
-      duration: 0.0005163
+      duration: 0.0006945
       messages: 
       output: 
       stacktrace: 
@@ -2813,7 +2879,7 @@ MonoBehaviour:
       name: TryGetOriginValue_KeyExists_ReturnsTrueAndOutValue
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.TryGetOriginValue_KeyExists_ReturnsTrueAndOutValue
       resultStatus: 1
-      duration: 0.0002244
+      duration: 0.0003225
       messages: 
       output: 
       stacktrace: 
@@ -2830,7 +2896,7 @@ MonoBehaviour:
       name: UpdateOrigin_UpdatesValueInOriginDictionary
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.UpdateOrigin_UpdatesValueInOriginDictionary
       resultStatus: 1
-      duration: 0.0009342
+      duration: 0.001155
       messages: 
       output: 
       stacktrace: 
@@ -2847,7 +2913,7 @@ MonoBehaviour:
       name: ObservableResolverListTest
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest
       resultStatus: 1
-      duration: 0.0049965
+      duration: 0.0062252
       messages: 
       output: 
       stacktrace: 
@@ -2863,7 +2929,7 @@ MonoBehaviour:
       name: AddOrigin_AddsValueToOriginList
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.AddOrigin_AddsValueToOriginList
       resultStatus: 1
-      duration: 0.0021142
+      duration: 0.0021408
       messages: 
       output: 
       stacktrace: 
@@ -2880,7 +2946,7 @@ MonoBehaviour:
       name: ClearOrigin_ClearsOriginList
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.ClearOrigin_ClearsOriginList
       resultStatus: 1
-      duration: 0.0003358
+      duration: 0.0004418
       messages: 
       output: 
       stacktrace: 
@@ -2897,7 +2963,7 @@ MonoBehaviour:
       name: RemoveOrigin_RemovesValueFromOriginList
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.RemoveOrigin_RemovesValueFromOriginList
       resultStatus: 1
-      duration: 0.0004151
+      duration: 0.000488
       messages: 
       output: 
       stacktrace: 
@@ -2914,7 +2980,7 @@ MonoBehaviour:
       name: UpdateOrigin_UpdatesOriginList
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.UpdateOrigin_UpdatesOriginList
       resultStatus: 1
-      duration: 0.0003928
+      duration: 0.0003444
       messages: 
       output: 
       stacktrace: 
@@ -2931,7 +2997,7 @@ MonoBehaviour:
       name: GameLovers.GoogleSheetImporter.Editor.Tests.dll
       fullName: C:/Users/migas/Desktop/Frameworks/Library/ScriptAssemblies/GameLovers.GoogleSheetImporter.Editor.Tests.dll
       resultStatus: 1
-      duration: 0.0251219
+      duration: 0.0404715
       messages: 
       output: 
       stacktrace: 
@@ -2947,7 +3013,7 @@ MonoBehaviour:
       name: GameLoversEditor
       fullName: GameLoversEditor
       resultStatus: 1
-      duration: 0.0240645
+      duration: 0.0392964
       messages: 
       output: 
       stacktrace: 
@@ -2963,7 +3029,7 @@ MonoBehaviour:
       name: GoogleSheetImporter
       fullName: GameLoversEditor.GoogleSheetImporter
       resultStatus: 1
-      duration: 0.0237404
+      duration: 0.0383234
       messages: 
       output: 
       stacktrace: 
@@ -2979,7 +3045,7 @@ MonoBehaviour:
       name: Tests
       fullName: GameLoversEditor.GoogleSheetImporter.Tests
       resultStatus: 1
-      duration: 0.0193975
+      duration: 0.0373618
       messages: 
       output: 
       stacktrace: 
@@ -2995,7 +3061,7 @@ MonoBehaviour:
       name: CsvParserTest
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest
       resultStatus: 1
-      duration: 0.0145585
+      duration: 0.0356455
       messages: 
       output: 
       stacktrace: 
@@ -3011,7 +3077,7 @@ MonoBehaviour:
       name: ArrayParse_Successfully
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.ArrayParse_Successfully
       resultStatus: 1
-      duration: 0.0016195
+      duration: 0.0109216
       messages: 
       output: 
       stacktrace: 
@@ -3028,7 +3094,7 @@ MonoBehaviour:
       name: ConvertCsv_MissMatchColumnsCount_FillsWithDefaultData
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.ConvertCsv_MissMatchColumnsCount_FillsWithDefaultData
       resultStatus: 1
-      duration: 0.0000618
+      duration: 0.0008355
       messages: 
       output: 
       stacktrace: 
@@ -3045,7 +3111,7 @@ MonoBehaviour:
       name: ConvertCsv_OnlyHeadlines_EmptyResult
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.ConvertCsv_OnlyHeadlines_EmptyResult
       resultStatus: 1
-      duration: 0.0001804
+      duration: 0.0001297
       messages: 
       output: 
       stacktrace: 
@@ -3062,7 +3128,7 @@ MonoBehaviour:
       name: ConvertCsv_Successfully
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.ConvertCsv_Successfully
       resultStatus: 1
-      duration: 0.0003818
+      duration: 0.0003586
       messages: 
       output: 
       stacktrace: 
@@ -3079,7 +3145,7 @@ MonoBehaviour:
       name: ConvertCsv_WrongFormatSeparator_EmptyResult
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.ConvertCsv_WrongFormatSeparator_EmptyResult
       resultStatus: 1
-      duration: 0.0001027
+      duration: 0.0001145
       messages: 
       output: 
       stacktrace: 
@@ -3096,7 +3162,7 @@ MonoBehaviour:
       name: Deserialize_ExtraFields_Successfully
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.Deserialize_ExtraFields_Successfully
       resultStatus: 1
-      duration: 0.0016663
+      duration: 0.0017243
       messages: 
       output: 
       stacktrace: 
@@ -3113,7 +3179,7 @@ MonoBehaviour:
       name: Deserialize_MissingFields_Successfully
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.Deserialize_MissingFields_Successfully
       resultStatus: 1
-      duration: 0.0001638
+      duration: 0.0001983
       messages: 
       output: 
       stacktrace: 
@@ -3130,7 +3196,7 @@ MonoBehaviour:
       name: Deserialize_Successfully
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.Deserialize_Successfully
       resultStatus: 1
-      duration: 0.0022263
+      duration: 0.0025481
       messages: 
       output: 
       stacktrace: 
@@ -3147,7 +3213,7 @@ MonoBehaviour:
       name: DictionaryParse_ElementOddAmount_ThrowsException
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.DictionaryParse_ElementOddAmount_ThrowsException
       resultStatus: 1
-      duration: 0.000431
+      duration: 0.0024199
       messages: 
       output: 
       stacktrace: 
@@ -3164,7 +3230,7 @@ MonoBehaviour:
       name: DictionaryParse_Successfully
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.DictionaryParse_Successfully
       resultStatus: 1
-      duration: 0.0001503
+      duration: 0.000176
       messages: 
       output: 
       stacktrace: 
@@ -3181,7 +3247,7 @@ MonoBehaviour:
       name: DictionaryParsePair_Successfully
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.DictionaryParsePair_Successfully
       resultStatus: 1
-      duration: 0.0001284
+      duration: 0.0001686
       messages: 
       output: 
       stacktrace: 
@@ -3198,7 +3264,7 @@ MonoBehaviour:
       name: ParseInt_Successfully
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.ParseInt_Successfully
       resultStatus: 1
-      duration: 0.0001344
+      duration: 0.000129
       messages: 
       output: 
       stacktrace: 
@@ -3215,7 +3281,7 @@ MonoBehaviour:
       name: ParseInt_WithFloat_ThrowsException
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.ParseInt_WithFloat_ThrowsException
       resultStatus: 1
-      duration: 0.0017835
+      duration: 0.0020901
       messages: 
       output: 
       stacktrace: 
@@ -3232,7 +3298,7 @@ MonoBehaviour:
       name: GameLovers.Services.Editor.Tests.dll
       fullName: C:/Users/migas/Desktop/Frameworks/Library/ScriptAssemblies/GameLovers.Services.Editor.Tests.dll
       resultStatus: 1
-      duration: 0.054612
+      duration: 0.0486239
       messages: 
       output: 
       stacktrace: 
@@ -3243,127 +3309,12 @@ MonoBehaviour:
       categories: []
       parentId: 1000
       parentUniqueId: '[Idle Rainforest][suite]'
-    - id: 1115
-      uniqueId: GameLovers.Services.Editor.Tests.dll/[GameLovers][suite]
-      name: GameLovers
-      fullName: GameLovers
-      resultStatus: 1
-      duration: 0.0137794
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1114
-      parentUniqueId: '[GameLovers.Services.Editor.Tests.dll][suite]'
-    - id: 1116
-      uniqueId: GameLovers.Services.Editor.Tests.dll/GameLovers/[Services][suite]
-      name: Services
-      fullName: GameLovers.Services
-      resultStatus: 1
-      duration: 0.0135077
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1115
-      parentUniqueId: GameLovers.Services.Editor.Tests.dll/[GameLovers][suite]
-    - id: 1117
-      uniqueId: GameLovers.Services.Editor.Tests.dll/GameLovers/Services/[GameLovers.Services.Editor.Tests][GameLovers.Services.Tests][suite]
-      name: Tests
-      fullName: GameLovers.Services.Tests
-      resultStatus: 1
-      duration: 0.0090325
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1116
-      parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLovers/[Services][suite]
-    - id: 1070
-      uniqueId: GameLovers.Services.Editor.Tests.dll/GameLovers/Services/Tests/[GameLovers.Services.Editor.Tests][GameLovers.Services.Tests.InstallerTest][suite]
-      name: InstallerTest
-      fullName: GameLovers.Services.Tests.InstallerTest
-      resultStatus: 1
-      duration: 0.0047549
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1117
-      parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLovers/Services/[GameLovers.Services.Editor.Tests][GameLovers.Services.Tests][suite]
-    - id: 1072
-      uniqueId: GameLovers.Services.Editor.Tests.dll/GameLovers/Services/Tests/InstallerTest/[GameLovers.Services.Editor.Tests][GameLovers.Services.Tests.InstallerTest.Bind_NotInterface_ThrowsException]
-      name: Bind_NotInterface_ThrowsException
-      fullName: GameLovers.Services.Tests.InstallerTest.Bind_NotInterface_ThrowsException
-      resultStatus: 1
-      duration: 0.0003803
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1070
-      parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLovers/Services/Tests/[GameLovers.Services.Editor.Tests][GameLovers.Services.Tests.InstallerTest][suite]
-    - id: 1071
-      uniqueId: GameLovers.Services.Editor.Tests.dll/GameLovers/Services/Tests/InstallerTest/[GameLovers.Services.Editor.Tests][GameLovers.Services.Tests.InstallerTest.Bind_Resolve_Successfully]
-      name: Bind_Resolve_Successfully
-      fullName: GameLovers.Services.Tests.InstallerTest.Bind_Resolve_Successfully
-      resultStatus: 1
-      duration: 0.00033
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1070
-      parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLovers/Services/Tests/[GameLovers.Services.Editor.Tests][GameLovers.Services.Tests.InstallerTest][suite]
-    - id: 1073
-      uniqueId: GameLovers.Services.Editor.Tests.dll/GameLovers/Services/Tests/InstallerTest/[GameLovers.Services.Editor.Tests][GameLovers.Services.Tests.InstallerTest.Resolve_NotBinded_ThrowsException]
-      name: Resolve_NotBinded_ThrowsException
-      fullName: GameLovers.Services.Tests.InstallerTest.Resolve_NotBinded_ThrowsException
-      resultStatus: 1
-      duration: 0.0001664
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1070
-      parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLovers/Services/Tests/[GameLovers.Services.Editor.Tests][GameLovers.Services.Tests.InstallerTest][suite]
     - id: 1118
       uniqueId: GameLovers.Services.Editor.Tests.dll/[GameLoversEditor][suite]
       name: GameLoversEditor
       fullName: GameLoversEditor
       resultStatus: 1
-      duration: 0.0393765
+      duration: 0.0469671
       messages: 
       output: 
       stacktrace: 
@@ -3379,7 +3330,7 @@ MonoBehaviour:
       name: Services
       fullName: GameLoversEditor.Services
       resultStatus: 1
-      duration: 0.0379372
+      duration: 0.0461705
       messages: 
       output: 
       stacktrace: 
@@ -3395,7 +3346,7 @@ MonoBehaviour:
       name: Tests
       fullName: GameLoversEditor.Services.Tests
       resultStatus: 1
-      duration: 0.0339009
+      duration: 0.0452962
       messages: 
       output: 
       stacktrace: 
@@ -3411,7 +3362,7 @@ MonoBehaviour:
       name: CommandServiceTest
       fullName: GameLoversEditor.Services.Tests.CommandServiceTest
       resultStatus: 1
-      duration: 0.0105444
+      duration: 0.0097232
       messages: 
       output: 
       stacktrace: 
@@ -3427,7 +3378,7 @@ MonoBehaviour:
       name: ExecuteCommand_Successfully
       fullName: GameLoversEditor.Services.Tests.CommandServiceTest.ExecuteCommand_Successfully
       resultStatus: 1
-      duration: 0.0065045
+      duration: 0.0079938
       messages: 
       output: 
       stacktrace: 
@@ -3444,7 +3395,7 @@ MonoBehaviour:
       name: DataServiceTest
       fullName: GameLoversEditor.Services.Tests.DataServiceTest
       resultStatus: 1
-      duration: 0.002892
+      duration: 0.0041693
       messages: 
       output: 
       stacktrace: 
@@ -3460,7 +3411,7 @@ MonoBehaviour:
       name: AddData_Successfully
       fullName: GameLoversEditor.Services.Tests.DataServiceTest.AddData_Successfully
       resultStatus: 1
-      duration: 0.0008274
+      duration: 0.001201
       messages: 
       output: 
       stacktrace: 
@@ -3477,7 +3428,7 @@ MonoBehaviour:
       name: GetData_NotFound_ThrowsException
       fullName: GameLoversEditor.Services.Tests.DataServiceTest.GetData_NotFound_ThrowsException
       resultStatus: 1
-      duration: 0.0001484
+      duration: 0.0002363
       messages: 
       output: 
       stacktrace: 
@@ -3494,7 +3445,7 @@ MonoBehaviour:
       name: ReplaceData_Successfully
       fullName: GameLoversEditor.Services.Tests.DataServiceTest.ReplaceData_Successfully
       resultStatus: 1
-      duration: 0.0003037
+      duration: 0.0002765
       messages: 
       output: 
       stacktrace: 
@@ -3506,12 +3457,79 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1076
       parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.DataServiceTest][suite]
+    - id: 1100
+      uniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.InstallerTest][suite]
+      name: InstallerTest
+      fullName: GameLoversEditor.Services.Tests.InstallerTest
+      resultStatus: 1
+      duration: 0.0034308
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1130
+      parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests][suite]
+    - id: 1102
+      uniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/InstallerTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.InstallerTest.Bind_NotInterface_ThrowsException]
+      name: Bind_NotInterface_ThrowsException
+      fullName: GameLoversEditor.Services.Tests.InstallerTest.Bind_NotInterface_ThrowsException
+      resultStatus: 1
+      duration: 0.0004287
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1100
+      parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.InstallerTest][suite]
+    - id: 1101
+      uniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/InstallerTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.InstallerTest.Bind_Resolve_Successfully]
+      name: Bind_Resolve_Successfully
+      fullName: GameLoversEditor.Services.Tests.InstallerTest.Bind_Resolve_Successfully
+      resultStatus: 1
+      duration: 0.0002847
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1100
+      parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.InstallerTest][suite]
+    - id: 1103
+      uniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/InstallerTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.InstallerTest.Resolve_NotBinded_ThrowsException]
+      name: Resolve_NotBinded_ThrowsException
+      fullName: GameLoversEditor.Services.Tests.InstallerTest.Resolve_NotBinded_ThrowsException
+      resultStatus: 1
+      duration: 0.0001594
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1100
+      parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.InstallerTest][suite]
     - id: 1079
       uniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.MessageBrokerServiceTest][suite]
       name: MessageBrokerServiceTest
       fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest
       resultStatus: 1
-      duration: 0.0061978
+      duration: 0.0096174
       messages: 
       output: 
       stacktrace: 
@@ -3522,12 +3540,29 @@ MonoBehaviour:
       categories: []
       parentId: 1120
       parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests][suite]
+    - id: 1106
+      uniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/MessageBrokerServiceTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.MessageBrokerServiceTest.Publish_ChainSubscribe_Successfully]
+      name: Publish_ChainSubscribe_Successfully
+      fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest.Publish_ChainSubscribe_Successfully
+      resultStatus: 1
+      duration: 0.0011886
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1104
+      parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.MessageBrokerServiceTest][suite]
     - id: 1081
       uniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/MessageBrokerServiceTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.MessageBrokerServiceTest.Publish_WithoutSubscription_DoesNothing]
       name: Publish_WithoutSubscription_DoesNothing
       fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest.Publish_WithoutSubscription_DoesNothing
       resultStatus: 1
-      duration: 0.0013171
+      duration: 0.0006449
       messages: 
       output: 
       stacktrace: 
@@ -3539,12 +3574,29 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1079
       parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.MessageBrokerServiceTest][suite]
+    - id: 1106
+      uniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/MessageBrokerServiceTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.MessageBrokerServiceTest.Subscribe_MultipleSubscriptionSameType_ReplacePreviousSubscription]
+      name: Subscribe_MultipleSubscriptionSameType_ReplacePreviousSubscription
+      fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest.Subscribe_MultipleSubscriptionSameType_ReplacePreviousSubscription
+      resultStatus: 1
+      duration: 0.000798
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1104
+      parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.MessageBrokerServiceTest][suite]
     - id: 1080
       uniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/MessageBrokerServiceTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.MessageBrokerServiceTest.Subscribe_Publish_Successfully]
       name: Subscribe_Publish_Successfully
       fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest.Subscribe_Publish_Successfully
       resultStatus: 1
-      duration: 0.0005728
+      duration: 0.0002006
       messages: 
       output: 
       stacktrace: 
@@ -3561,7 +3613,7 @@ MonoBehaviour:
       name: Unsubscribe_Successfully
       fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest.Unsubscribe_Successfully
       resultStatus: 1
-      duration: 0.0003941
+      duration: 0.0003143
       messages: 
       output: 
       stacktrace: 
@@ -3578,7 +3630,7 @@ MonoBehaviour:
       name: Unsubscribe_WithoutSubscription_DoesNothing
       fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest.Unsubscribe_WithoutSubscription_DoesNothing
       resultStatus: 1
-      duration: 0.000713
+      duration: 0.0008596
       messages: 
       output: 
       stacktrace: 
@@ -3595,7 +3647,7 @@ MonoBehaviour:
       name: UnsubscribeAll_Successfully
       fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest.UnsubscribeAll_Successfully
       resultStatus: 1
-      duration: 0.0007144
+      duration: 0.0008112
       messages: 
       output: 
       stacktrace: 
@@ -3607,12 +3659,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1079
       parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.MessageBrokerServiceTest][suite]
-    - id: 1083
-      uniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/MessageBrokerServiceTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.MessageBrokerServiceTest.UnsubscribeWithAction_KeepsSubscriptionSameType_Successfully]
-      name: UnsubscribeWithAction_KeepsSubscriptionSameType_Successfully
-      fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest.UnsubscribeWithAction_KeepsSubscriptionSameType_Successfully
+    - id: 1110
+      uniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/MessageBrokerServiceTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.MessageBrokerServiceTest.UnsubscribeWithAction_MultipleSubscriptionSameType_RemoveAllScriptionsOfSameType]
+      name: UnsubscribeWithAction_MultipleSubscriptionSameType_RemoveAllScriptionsOfSameType
+      fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest.UnsubscribeWithAction_MultipleSubscriptionSameType_RemoveAllScriptionsOfSameType
       resultStatus: 1
-      duration: 0.0002048
+      duration: 0.0002207
       messages: 
       output: 
       stacktrace: 
@@ -3622,14 +3674,14 @@ MonoBehaviour:
       isSuite: 0
       categories:
       - Uncategorized
-      parentId: 1079
+      parentId: 1104
       parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.MessageBrokerServiceTest][suite]
-    - id: 1084
+    - id: 1111
       uniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/MessageBrokerServiceTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.MessageBrokerServiceTest.UnsubscribeWithoutAction_KeepsSubscriptionDifferentType_Successfully]
       name: UnsubscribeWithoutAction_KeepsSubscriptionDifferentType_Successfully
       fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest.UnsubscribeWithoutAction_KeepsSubscriptionDifferentType_Successfully
       resultStatus: 1
-      duration: 0.0002015
+      duration: 0.0002417
       messages: 
       output: 
       stacktrace: 
@@ -3639,14 +3691,14 @@ MonoBehaviour:
       isSuite: 0
       categories:
       - Uncategorized
-      parentId: 1079
+      parentId: 1104
       parentUniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.MessageBrokerServiceTest][suite]
     - id: 1087
       uniqueId: GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.ObjectPoolTest][suite]
       name: ObjectPoolTest
       fullName: GameLoversEditor.Services.Tests.ObjectPoolTest
       resultStatus: 1
-      duration: 0.0056684
+      duration: 0.0090437
       messages: 
       output: 
       stacktrace: 
@@ -3662,7 +3714,7 @@ MonoBehaviour:
       name: Clear_Successfully
       fullName: GameLoversEditor.Services.Tests.ObjectPoolTest.Clear_Successfully
       resultStatus: 1
-      duration: 0.0019236
+      duration: 0.002768
       messages: 
       output: 
       stacktrace: 
@@ -3679,7 +3731,7 @@ MonoBehaviour:
       name: Despawn_NotSpawnedObject_ReturnsFalse
       fullName: GameLoversEditor.Services.Tests.ObjectPoolTest.Despawn_NotSpawnedObject_ReturnsFalse
       resultStatus: 1
-      duration: 0.0003984
+      duration: 0.000613
       messages: 
       output: 
       stacktrace: 
@@ -3696,7 +3748,7 @@ MonoBehaviour:
       name: Despawn_Successfully
       fullName: GameLoversEditor.Services.Tests.ObjectPoolTest.Despawn_Successfully
       resultStatus: 1
-      duration: 0.0003993
+      duration: 0.0004957
       messages: 
       output: 
       stacktrace: 
@@ -3713,7 +3765,7 @@ MonoBehaviour:
       name: DespawnAll_Successfully
       fullName: GameLoversEditor.Services.Tests.ObjectPoolTest.DespawnAll_Successfully
       resultStatus: 1
-      duration: 0.0002422
+      duration: 0.0003147
       messages: 
       output: 
       stacktrace: 
@@ -3730,7 +3782,7 @@ MonoBehaviour:
       name: Spawn_Successfully
       fullName: GameLoversEditor.Services.Tests.ObjectPoolTest.Spawn_Successfully
       resultStatus: 1
-      duration: 0.0001475
+      duration: 0.0002081
       messages: 
       output: 
       stacktrace: 
@@ -3747,7 +3799,7 @@ MonoBehaviour:
       name: Spawn_WithData_Successfully
       fullName: GameLoversEditor.Services.Tests.ObjectPoolTest.Spawn_WithData_Successfully
       resultStatus: 1
-      duration: 0.0004254
+      duration: 0.000503
       messages: 
       output: 
       stacktrace: 
@@ -3764,7 +3816,7 @@ MonoBehaviour:
       name: Spawn_ZeroInitialSize_Successfully
       fullName: GameLoversEditor.Services.Tests.ObjectPoolTest.Spawn_ZeroInitialSize_Successfully
       resultStatus: 1
-      duration: 0.0002105
+      duration: 0.0002352
       messages: 
       output: 
       stacktrace: 
@@ -3781,7 +3833,7 @@ MonoBehaviour:
       name: TimeServiceTest
       fullName: GameLoversEditor.Services.Tests.TimeServiceTest
       resultStatus: 1
-      duration: 0.0042285
+      duration: 0.0068529
       messages: 
       output: 
       stacktrace: 
@@ -3797,7 +3849,7 @@ MonoBehaviour:
       name: AddTime_AllTimeTypes_Successfully
       fullName: GameLoversEditor.Services.Tests.TimeServiceTest.AddTime_AllTimeTypes_Successfully
       resultStatus: 1
-      duration: 0.0022284
+      duration: 0.002741
       messages: 
       output: 
       stacktrace: 
@@ -3814,7 +3866,7 @@ MonoBehaviour:
       name: DateTime_Convertions_Successfully
       fullName: GameLoversEditor.Services.Tests.TimeServiceTest.DateTime_Convertions_Successfully
       resultStatus: 1
-      duration: 0.0002101
+      duration: 0.000315
       messages: 
       output: 
       stacktrace: 
@@ -3831,7 +3883,7 @@ MonoBehaviour:
       name: UnityTime_Convertions_Successfully
       fullName: GameLoversEditor.Services.Tests.TimeServiceTest.UnityTime_Convertions_Successfully
       resultStatus: 1
-      duration: 0.0001666
+      duration: 0.000224
       messages: 
       output: 
       stacktrace: 
@@ -3848,7 +3900,7 @@ MonoBehaviour:
       name: UnixTime_Convertions_Successfully
       fullName: GameLoversEditor.Services.Tests.TimeServiceTest.UnixTime_Convertions_Successfully
       resultStatus: 1
-      duration: 0.0002025
+      duration: 0.0002141
       messages: 
       output: 
       stacktrace: 
@@ -3865,7 +3917,7 @@ MonoBehaviour:
       name: GameLovers.Statechart.Editor.Tests.dll
       fullName: C:/Users/migas/Desktop/Frameworks/Library/ScriptAssemblies/GameLovers.Statechart.Editor.Tests.dll
       resultStatus: 1
-      duration: 1.270874
+      duration: 1.318793
       messages: 
       output: 
       stacktrace: 
@@ -3881,7 +3933,7 @@ MonoBehaviour:
       name: GameLoversEditor
       fullName: GameLoversEditor
       resultStatus: 1
-      duration: 1.2690701
+      duration: 1.3172776
       messages: 
       output: 
       stacktrace: 
@@ -3897,7 +3949,7 @@ MonoBehaviour:
       name: StatechartMachine
       fullName: GameLoversEditor.StatechartMachine
       resultStatus: 1
-      duration: 1.2681932
+      duration: 1.3157823
       messages: 
       output: 
       stacktrace: 
@@ -3913,7 +3965,7 @@ MonoBehaviour:
       name: Tests
       fullName: GameLoversEditor.StatechartMachine.Tests
       resultStatus: 1
-      duration: 1.2547396
+      duration: 1.3149598
       messages: 
       output: 
       stacktrace: 
@@ -3929,7 +3981,7 @@ MonoBehaviour:
       name: StatechartChoiceTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest
       resultStatus: 1
-      duration: 0.0434634
+      duration: 0.0451596
       messages: 
       output: 
       stacktrace: 
@@ -3945,7 +3997,7 @@ MonoBehaviour:
       name: ChoiceState_MissingConditionTransition_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest.ChoiceState_MissingConditionTransition_ThrowsException
       resultStatus: 1
-      duration: 0.0066446
+      duration: 0.0074922
       messages: 
       output: 
       stacktrace: 
@@ -3962,7 +4014,7 @@ MonoBehaviour:
       name: ChoiceState_MissingTransitions_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest.ChoiceState_MissingTransitions_ThrowsException
       resultStatus: 1
-      duration: 0.0028158
+      duration: 0.0029279
       messages: 
       output: 
       stacktrace: 
@@ -3979,7 +4031,7 @@ MonoBehaviour:
       name: ChoiceState_MultipleTrueConditions_PicksFirstTransition
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest.ChoiceState_MultipleTrueConditions_PicksFirstTransition
       resultStatus: 1
-      duration: 0.0071276
+      duration: 0.0071495
       messages: 
       output: 
       stacktrace: 
@@ -3996,7 +4048,7 @@ MonoBehaviour:
       name: ChoiceState_OnlyConditionTransition_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest.ChoiceState_OnlyConditionTransition_ThrowsException
       resultStatus: 1
-      duration: 0.0039878
+      duration: 0.0047637
       messages: 
       output: 
       stacktrace: 
@@ -4013,7 +4065,7 @@ MonoBehaviour:
       name: ChoiceState_WithoutTarget_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest.ChoiceState_WithoutTarget_ThrowsException
       resultStatus: 1
-      duration: 0.0056494
+      duration: 0.0065722
       messages: 
       output: 
       stacktrace: 
@@ -4030,7 +4082,7 @@ MonoBehaviour:
       name: SimpleTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest.SimpleTest
       resultStatus: 1
-      duration: 0.0049951
+      duration: 0.0060968
       messages: 
       output: 
       stacktrace: 
@@ -4047,7 +4099,7 @@ MonoBehaviour:
       name: StateTransitionsLoop_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest.StateTransitionsLoop_ThrowsException
       resultStatus: 1
-      duration: 0.0057971
+      duration: 0.0058992
       messages: 
       output: 
       stacktrace: 
@@ -4064,7 +4116,7 @@ MonoBehaviour:
       name: StatechartLeaveTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest
       resultStatus: 1
-      duration: 0.0694463
+      duration: 0.0707384
       messages: 
       output: 
       stacktrace: 
@@ -4080,7 +4132,7 @@ MonoBehaviour:
       name: LeaveState_MissingConfiguration_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest.LeaveState_MissingConfiguration_ThrowsException
       resultStatus: 1
-      duration: 0.0032133
+      duration: 0.0037149
       messages: 
       output: 
       stacktrace: 
@@ -4097,7 +4149,7 @@ MonoBehaviour:
       name: LeaveState_MissingTarget_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest.LeaveState_MissingTarget_ThrowsException
       resultStatus: 1
-      duration: 0.0034537
+      duration: 0.0035918
       messages: 
       output: 
       stacktrace: 
@@ -4114,7 +4166,7 @@ MonoBehaviour:
       name: LeaveState_MultipleTransitions_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest.LeaveState_MultipleTransitions_ThrowsException
       resultStatus: 1
-      duration: 0.006978
+      duration: 0.0153869
       messages: 
       output: 
       stacktrace: 
@@ -4131,7 +4183,7 @@ MonoBehaviour:
       name: LeaveState_SameLayerTarget_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest.LeaveState_SameLayerTarget_ThrowsException
       resultStatus: 1
-      duration: 0.0033693
+      duration: 0.0036472
       messages: 
       output: 
       stacktrace: 
@@ -4148,7 +4200,7 @@ MonoBehaviour:
       name: LeaveState_WrongLayerTarget_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest.LeaveState_WrongLayerTarget_ThrowsException
       resultStatus: 1
-      duration: 0.0114505
+      duration: 0.0118075
       messages: 
       output: 
       stacktrace: 
@@ -4165,7 +4217,7 @@ MonoBehaviour:
       name: SimpleNestTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest.SimpleNestTest
       resultStatus: 1
-      duration: 0.0175357
+      duration: 0.0079261
       messages: 
       output: 
       stacktrace: 
@@ -4182,7 +4234,7 @@ MonoBehaviour:
       name: SimpleSplitTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest.SimpleSplitTest
       resultStatus: 1
-      duration: 0.0109586
+      duration: 0.0099725
       messages: 
       output: 
       stacktrace: 
@@ -4199,7 +4251,7 @@ MonoBehaviour:
       name: SplitState_OnlyLeaveInnerStates_LeaveFirstState
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest.SplitState_OnlyLeaveInnerStates_LeaveFirstState
       resultStatus: 1
-      duration: 0.0096473
+      duration: 0.0097167
       messages: 
       output: 
       stacktrace: 
@@ -4216,7 +4268,7 @@ MonoBehaviour:
       name: StatechartNestSplit_IntegrationTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest
       resultStatus: 1
-      duration: 0.2989277
+      duration: 0.326343
       messages: 
       output: 
       stacktrace: 
@@ -4232,7 +4284,7 @@ MonoBehaviour:
       name: NestedState_TaskWaitStateInner_EventTrigger_QueueEvent
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest.NestedState_TaskWaitStateInner_EventTrigger_QueueEvent
       resultStatus: 1
-      duration: 0.1047065
+      duration: 0.1021198
       messages: 
       output: 
       stacktrace: 
@@ -4249,7 +4301,7 @@ MonoBehaviour:
       name: NestedState_WaitStateInner_EventTrigger_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest.NestedState_WaitStateInner_EventTrigger_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0089261
+      duration: 0.0091452
       messages: 
       output: 
       stacktrace: 
@@ -4266,7 +4318,7 @@ MonoBehaviour:
       name: SplitState_LeaveTaskWaitStateInner_EventTrigger_QueueEvent_LeaveExitSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest.SplitState_LeaveTaskWaitStateInner_EventTrigger_QueueEvent_LeaveExitSuccess
       resultStatus: 1
-      duration: 0.0914816
+      duration: 0.0984431
       messages: 
       output: 
       stacktrace: 
@@ -4283,7 +4335,7 @@ MonoBehaviour:
       name: SplitState_LeaveWaitStateInner_EventTrigger_LeaveExitSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest.SplitState_LeaveWaitStateInner_EventTrigger_LeaveExitSuccess
       resultStatus: 1
-      duration: 0.0108085
+      duration: 0.0110421
       messages: 
       output: 
       stacktrace: 
@@ -4300,7 +4352,7 @@ MonoBehaviour:
       name: SplitState_TaskWaitStateInner_EventTrigger_QueueEvent_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest.SplitState_TaskWaitStateInner_EventTrigger_QueueEvent_CompleteSuccess
       resultStatus: 1
-      duration: 0.0598574
+      duration: 0.088565
       messages: 
       output: 
       stacktrace: 
@@ -4317,7 +4369,7 @@ MonoBehaviour:
       name: SplitState_WaitStateInner_EventTrigger_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest.SplitState_WaitStateInner_EventTrigger_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0204064
+      duration: 0.01083
       messages: 
       output: 
       stacktrace: 
@@ -4334,7 +4386,7 @@ MonoBehaviour:
       name: StatechartNestTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest
       resultStatus: 1
-      duration: 0.1577439
+      duration: 0.1638988
       messages: 
       output: 
       stacktrace: 
@@ -4350,7 +4402,7 @@ MonoBehaviour:
       name: MultipleNestedStates_EventTrigger__DisableExecuteExitFinal_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.MultipleNestedStates_EventTrigger__DisableExecuteExitFinal_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0129064
+      duration: 0.0209029
       messages: 
       output: 
       stacktrace: 
@@ -4367,7 +4419,7 @@ MonoBehaviour:
       name: MultipleNestedStates_EventTrigger_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.MultipleNestedStates_EventTrigger_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0113426
+      duration: 0.0107381
       messages: 
       output: 
       stacktrace: 
@@ -4384,7 +4436,7 @@ MonoBehaviour:
       name: MultipleNestedStates_InnerEventTrigger_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.MultipleNestedStates_InnerEventTrigger_CompleteSuccess
       resultStatus: 1
-      duration: 0.0116489
+      duration: 0.0106027
       messages: 
       output: 
       stacktrace: 
@@ -4401,7 +4453,7 @@ MonoBehaviour:
       name: MultipleNestedStates_InnerEventTrigger_DisableExecuteExitFinal_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.MultipleNestedStates_InnerEventTrigger_DisableExecuteExitFinal_CompleteSuccess
       resultStatus: 1
-      duration: 0.0110659
+      duration: 0.0105467
       messages: 
       output: 
       stacktrace: 
@@ -4418,7 +4470,7 @@ MonoBehaviour:
       name: NestedState_EventTrigger_DisableExecuteExit_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_EventTrigger_DisableExecuteExit_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0070296
+      duration: 0.0154019
       messages: 
       output: 
       stacktrace: 
@@ -4435,7 +4487,7 @@ MonoBehaviour:
       name: NestedState_EventTrigger_DisableExecuteExitFinal_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_EventTrigger_DisableExecuteExitFinal_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.016798
+      duration: 0.0067856
       messages: 
       output: 
       stacktrace: 
@@ -4452,7 +4504,7 @@ MonoBehaviour:
       name: NestedState_EventTrigger_DisableExecuteFinal_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_EventTrigger_DisableExecuteFinal_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0069003
+      duration: 0.0070133
       messages: 
       output: 
       stacktrace: 
@@ -4469,7 +4521,7 @@ MonoBehaviour:
       name: NestedState_EventTrigger_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_EventTrigger_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0067325
+      duration: 0.0067878
       messages: 
       output: 
       stacktrace: 
@@ -4486,7 +4538,7 @@ MonoBehaviour:
       name: NestedState_InnerEventTrigger_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_InnerEventTrigger_CompleteSuccess
       resultStatus: 1
-      duration: 0.006663
+      duration: 0.0066985
       messages: 
       output: 
       stacktrace: 
@@ -4503,7 +4555,7 @@ MonoBehaviour:
       name: NestedState_InnerEventTrigger_DisableExecuteExit_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_InnerEventTrigger_DisableExecuteExit_CompleteSuccess
       resultStatus: 1
-      duration: 0.0065892
+      duration: 0.0065392
       messages: 
       output: 
       stacktrace: 
@@ -4520,7 +4572,7 @@ MonoBehaviour:
       name: NestedState_InnerEventTrigger_DisableExecuteExitFinal_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_InnerEventTrigger_DisableExecuteExitFinal_CompleteSuccess
       resultStatus: 1
-      duration: 0.0067364
+      duration: 0.0066103
       messages: 
       output: 
       stacktrace: 
@@ -4537,7 +4589,7 @@ MonoBehaviour:
       name: NestedState_InnerEventTrigger_DisableExecuteFinal_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_InnerEventTrigger_DisableExecuteFinal_CompleteSuccess
       resultStatus: 1
-      duration: 0.0066918
+      duration: 0.0178698
       messages: 
       output: 
       stacktrace: 
@@ -4554,7 +4606,7 @@ MonoBehaviour:
       name: NestedState_InnerEventTrigger_RunResetRun_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_InnerEventTrigger_RunResetRun_CompleteSuccess
       resultStatus: 1
-      duration: 0.0075415
+      duration: 0.0067876
       messages: 
       output: 
       stacktrace: 
@@ -4571,7 +4623,7 @@ MonoBehaviour:
       name: NestedState_MissingConfiguration_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_MissingConfiguration_ThrowsException
       resultStatus: 1
-      duration: 0.0029469
+      duration: 0.0033788
       messages: 
       output: 
       stacktrace: 
@@ -4588,7 +4640,7 @@ MonoBehaviour:
       name: NestedState_TransitionsLoop_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_TransitionsLoop_ThrowsException
       resultStatus: 1
-      duration: 0.0067253
+      duration: 0.0070983
       messages: 
       output: 
       stacktrace: 
@@ -4605,7 +4657,7 @@ MonoBehaviour:
       name: NestedState_WithoutTarget_Successful
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.NestedState_WithoutTarget_Successful
       resultStatus: 1
-      duration: 0.0062048
+      duration: 0.0060614
       messages: 
       output: 
       stacktrace: 
@@ -4622,7 +4674,7 @@ MonoBehaviour:
       name: SimpleTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.SimpleTest
       resultStatus: 1
-      duration: 0.0180555
+      duration: 0.0067873
       messages: 
       output: 
       stacktrace: 
@@ -4639,7 +4691,7 @@ MonoBehaviour:
       name: StatechartSplitTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest
       resultStatus: 1
-      duration: 0.2456934
+      duration: 0.265351
       messages: 
       output: 
       stacktrace: 
@@ -4655,7 +4707,7 @@ MonoBehaviour:
       name: MultipleSplitedStates_EventTrigger__DisableExecuteExitFinal_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.MultipleSplitedStates_EventTrigger__DisableExecuteExitFinal_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0182333
+      duration: 0.0279371
       messages: 
       output: 
       stacktrace: 
@@ -4672,7 +4724,7 @@ MonoBehaviour:
       name: MultipleSplitedStates_EventTrigger_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.MultipleSplitedStates_EventTrigger_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.016945
+      duration: 0.0168667
       messages: 
       output: 
       stacktrace: 
@@ -4689,7 +4741,7 @@ MonoBehaviour:
       name: MultipleSplitedStates_InnerEventTrigger_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.MultipleSplitedStates_InnerEventTrigger_CompleteSuccess
       resultStatus: 1
-      duration: 0.0174411
+      duration: 0.0171884
       messages: 
       output: 
       stacktrace: 
@@ -4706,7 +4758,7 @@ MonoBehaviour:
       name: MultipleSplitedStates_InnerEventTrigger_DisableExecuteExitFinal_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.MultipleSplitedStates_InnerEventTrigger_DisableExecuteExitFinal_CompleteSuccess
       resultStatus: 1
-      duration: 0.0287968
+      duration: 0.025482
       messages: 
       output: 
       stacktrace: 
@@ -4723,7 +4775,7 @@ MonoBehaviour:
       name: SimpleTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SimpleTest
       resultStatus: 1
-      duration: 0.0099702
+      duration: 0.0094975
       messages: 
       output: 
       stacktrace: 
@@ -4740,7 +4792,7 @@ MonoBehaviour:
       name: SplitedState_EventTrigger_DisableExecuteExit_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_EventTrigger_DisableExecuteExit_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0096561
+      duration: 0.0097973
       messages: 
       output: 
       stacktrace: 
@@ -4757,7 +4809,7 @@ MonoBehaviour:
       name: SplitedState_EventTrigger_DisableExecuteExitFinal_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_EventTrigger_DisableExecuteExitFinal_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0095425
+      duration: 0.0093893
       messages: 
       output: 
       stacktrace: 
@@ -4774,7 +4826,7 @@ MonoBehaviour:
       name: SplitedState_EventTrigger_DisableExecuteFinal_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_EventTrigger_DisableExecuteFinal_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0098125
+      duration: 0.0208367
       messages: 
       output: 
       stacktrace: 
@@ -4791,7 +4843,7 @@ MonoBehaviour:
       name: SplitedState_EventTrigger_ForceCompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_EventTrigger_ForceCompleteSuccess
       resultStatus: 1
-      duration: 0.0094443
+      duration: 0.0097919
       messages: 
       output: 
       stacktrace: 
@@ -4808,7 +4860,7 @@ MonoBehaviour:
       name: SplitedState_InnerEventTrigger_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_InnerEventTrigger_CompleteSuccess
       resultStatus: 1
-      duration: 0.0094353
+      duration: 0.0097068
       messages: 
       output: 
       stacktrace: 
@@ -4825,7 +4877,7 @@ MonoBehaviour:
       name: SplitedState_InnerEventTrigger_DisableExecuteExit_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_InnerEventTrigger_DisableExecuteExit_CompleteSuccess
       resultStatus: 1
-      duration: 0.0205636
+      duration: 0.0098393
       messages: 
       output: 
       stacktrace: 
@@ -4842,7 +4894,7 @@ MonoBehaviour:
       name: SplitedState_InnerEventTrigger_DisableExecuteExitFinal_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_InnerEventTrigger_DisableExecuteExitFinal_CompleteSuccess
       resultStatus: 1
-      duration: 0.0100082
+      duration: 0.0185377
       messages: 
       output: 
       stacktrace: 
@@ -4859,7 +4911,7 @@ MonoBehaviour:
       name: SplitedState_InnerEventTrigger_DisableExecuteFinal_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_InnerEventTrigger_DisableExecuteFinal_CompleteSuccess
       resultStatus: 1
-      duration: 0.0100538
+      duration: 0.0098531
       messages: 
       output: 
       stacktrace: 
@@ -4876,7 +4928,7 @@ MonoBehaviour:
       name: SplitedState_InnerEventTrigger_HalfFinalized_OnHold
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_InnerEventTrigger_HalfFinalized_OnHold
       resultStatus: 1
-      duration: 0.0091213
+      duration: 0.009067
       messages: 
       output: 
       stacktrace: 
@@ -4893,7 +4945,7 @@ MonoBehaviour:
       name: SplitedState_InnerEventTrigger_RunResetRun_CompleteSuccess
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_InnerEventTrigger_RunResetRun_CompleteSuccess
       resultStatus: 1
-      duration: 0.0099576
+      duration: 0.0096723
       messages: 
       output: 
       stacktrace: 
@@ -4910,7 +4962,7 @@ MonoBehaviour:
       name: SplitedState_WithoutTarget_Successful
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitedState_WithoutTarget_Successful
       resultStatus: 1
-      duration: 0.0089943
+      duration: 0.009386
       messages: 
       output: 
       stacktrace: 
@@ -4927,7 +4979,7 @@ MonoBehaviour:
       name: SplitState_MissingConfiguration_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitState_MissingConfiguration_ThrowsException
       resultStatus: 1
-      duration: 0.0030662
+      duration: 0.0030278
       messages: 
       output: 
       stacktrace: 
@@ -4944,7 +4996,7 @@ MonoBehaviour:
       name: SplitState_SingleConfiguration_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitState_SingleConfiguration_ThrowsException
       resultStatus: 1
-      duration: 0.0069334
+      duration: 0.0184703
       messages: 
       output: 
       stacktrace: 
@@ -4961,7 +5013,7 @@ MonoBehaviour:
       name: SplitState_TransitionsLoop_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.SplitState_TransitionsLoop_ThrowsException
       resultStatus: 1
-      duration: 0.0217918
+      duration: 0.0105609
       messages: 
       output: 
       stacktrace: 
@@ -4978,7 +5030,7 @@ MonoBehaviour:
       name: StatechartStateTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartStateTest
       resultStatus: 1
-      duration: 0.0248062
+      duration: 0.0256163
       messages: 
       output: 
       stacktrace: 
@@ -4994,7 +5046,7 @@ MonoBehaviour:
       name: SimpleTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartStateTest.SimpleTest
       resultStatus: 1
-      duration: 0.003544
+      duration: 0.0035043
       messages: 
       output: 
       stacktrace: 
@@ -5011,7 +5063,7 @@ MonoBehaviour:
       name: State_PauseRunStatechart_Success
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartStateTest.State_PauseRunStatechart_Success
       resultStatus: 1
-      duration: 0.0031641
+      duration: 0.0032127
       messages: 
       output: 
       stacktrace: 
@@ -5028,7 +5080,7 @@ MonoBehaviour:
       name: State_ResetRunStatechart_Success
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartStateTest.State_ResetRunStatechart_Success
       resultStatus: 1
-      duration: 0.0034594
+      duration: 0.0037508
       messages: 
       output: 
       stacktrace: 
@@ -5045,7 +5097,7 @@ MonoBehaviour:
       name: State_TransitionWithoutTarget_Succeeds
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartStateTest.State_TransitionWithoutTarget_Succeeds
       resultStatus: 1
-      duration: 0.0032122
+      duration: 0.003397
       messages: 
       output: 
       stacktrace: 
@@ -5062,7 +5114,7 @@ MonoBehaviour:
       name: State_TriggerNotConfiguredEvent_NoEffect
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartStateTest.State_TriggerNotConfiguredEvent_NoEffect
       resultStatus: 1
-      duration: 0.0034093
+      duration: 0.0032705
       messages: 
       output: 
       stacktrace: 
@@ -5079,7 +5131,7 @@ MonoBehaviour:
       name: StateTransitionsLoop_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartStateTest.StateTransitionsLoop_ThrowsException
       resultStatus: 1
-      duration: 0.0037339
+      duration: 0.0034831
       messages: 
       output: 
       stacktrace: 
@@ -5096,7 +5148,7 @@ MonoBehaviour:
       name: StatechartTaskWaitTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest
       resultStatus: 1
-      duration: 0.1936393
+      duration: 0.2008795
       messages: 
       output: 
       stacktrace: 
@@ -5112,7 +5164,7 @@ MonoBehaviour:
       name: SimpleTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest.SimpleTest
       resultStatus: 1
-      duration: 0.0749563
+      duration: 0.0761676
       messages: 
       output: 
       stacktrace: 
@@ -5129,7 +5181,7 @@ MonoBehaviour:
       name: TaskWait_EventTrigger_DoesNothing
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest.TaskWait_EventTrigger_DoesNothing
       resultStatus: 1
-      duration: 0.100069
+      duration: 0.1002726
       messages: 
       output: 
       stacktrace: 
@@ -5146,7 +5198,7 @@ MonoBehaviour:
       name: TaskWait_MissingConfiguration_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest.TaskWait_MissingConfiguration_ThrowsException
       resultStatus: 1
-      duration: 0.0031961
+      duration: 0.0032319
       messages: 
       output: 
       stacktrace: 
@@ -5163,7 +5215,7 @@ MonoBehaviour:
       name: TaskWait_MissingTarget_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest.TaskWait_MissingTarget_ThrowsException
       resultStatus: 1
-      duration: 0.0036507
+      duration: 0.0039084
       messages: 
       output: 
       stacktrace: 
@@ -5180,7 +5232,7 @@ MonoBehaviour:
       name: TaskWait_TransitionsLoop_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest.TaskWait_TransitionsLoop_ThrowsException
       resultStatus: 1
-      duration: 0.0034279
+      duration: 0.0035107
       messages: 
       output: 
       stacktrace: 
@@ -5192,12 +5244,29 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1179
       parentUniqueId: GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest][suite]
+    - id: 1205
+      uniqueId: GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/StatechartTaskWaitTest/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest.UniTaskWait_EventTrigger_DoesNothing]
+      name: UniTaskWait_EventTrigger_DoesNothing
+      fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest.UniTaskWait_EventTrigger_DoesNothing
+      resultStatus: 1
+      duration: 0.0101195
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1202
+      parentUniqueId: GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest][suite]
     - id: 1185
       uniqueId: GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartTest][suite]
       name: StatechartTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest
       resultStatus: 1
-      duration: 0.0177577
+      duration: 0.0305653
       messages: 
       output: 
       stacktrace: 
@@ -5213,7 +5282,7 @@ MonoBehaviour:
       name: InitialState_MissingTransition_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest.InitialState_MissingTransition_ThrowsException
       resultStatus: 1
-      duration: 0.0018627
+      duration: 0.0020665
       messages: 
       output: 
       stacktrace: 
@@ -5230,7 +5299,7 @@ MonoBehaviour:
       name: InitialState_MultipleTransitions_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest.InitialState_MultipleTransitions_ThrowsException
       resultStatus: 1
-      duration: 0.0022264
+      duration: 0.0023354
       messages: 
       output: 
       stacktrace: 
@@ -5247,7 +5316,7 @@ MonoBehaviour:
       name: InitialState_StateTransitionsLoop_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest.InitialState_StateTransitionsLoop_ThrowsException
       resultStatus: 1
-      duration: 0.0021296
+      duration: 0.002165
       messages: 
       output: 
       stacktrace: 
@@ -5264,7 +5333,7 @@ MonoBehaviour:
       name: InitialState_TransitionWithoutTarget_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest.InitialState_TransitionWithoutTarget_ThrowsException
       resultStatus: 1
-      duration: 0.0020879
+      duration: 0.0020767
       messages: 
       output: 
       stacktrace: 
@@ -5281,7 +5350,7 @@ MonoBehaviour:
       name: MultipleFinalState_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest.MultipleFinalState_ThrowsException
       resultStatus: 1
-      duration: 0.0021527
+      duration: 0.0022305
       messages: 
       output: 
       stacktrace: 
@@ -5298,7 +5367,7 @@ MonoBehaviour:
       name: MultipleInitialStates_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest.MultipleInitialStates_ThrowsException
       resultStatus: 1
-      duration: 0.0021182
+      duration: 0.0022365
       messages: 
       output: 
       stacktrace: 
@@ -5315,7 +5384,7 @@ MonoBehaviour:
       name: NoInitialState_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest.NoInitialState_ThrowsException
       resultStatus: 1
-      duration: 0.0008747
+      duration: 0.0110086
       messages: 
       output: 
       stacktrace: 
@@ -5332,7 +5401,7 @@ MonoBehaviour:
       name: SimpleTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest.SimpleTest
       resultStatus: 1
-      duration: 0.0019252
+      duration: 0.0022518
       messages: 
       output: 
       stacktrace: 
@@ -5349,7 +5418,7 @@ MonoBehaviour:
       name: StatechartTransitionTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTransitionTest
       resultStatus: 1
-      duration: 0.0260074
+      duration: 0.0172496
       messages: 
       output: 
       stacktrace: 
@@ -5365,7 +5434,7 @@ MonoBehaviour:
       name: SimpleTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTransitionTest.SimpleTest
       resultStatus: 1
-      duration: 0.0036827
+      duration: 0.0041065
       messages: 
       output: 
       stacktrace: 
@@ -5382,7 +5451,7 @@ MonoBehaviour:
       name: TransitionState_TransitionsLoop_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTransitionTest.TransitionState_TransitionsLoop_ThrowsException
       resultStatus: 1
-      duration: 0.0138022
+      duration: 0.0036287
       messages: 
       output: 
       stacktrace: 
@@ -5399,7 +5468,7 @@ MonoBehaviour:
       name: TransitionState_TransitionWithoutTarget_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTransitionTest.TransitionState_TransitionWithoutTarget_ThrowsException
       resultStatus: 1
-      duration: 0.0037105
+      duration: 0.0034988
       messages: 
       output: 
       stacktrace: 
@@ -5416,7 +5485,7 @@ MonoBehaviour:
       name: TransitionState_TransitionWithoutTransition_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTransitionTest.TransitionState_TransitionWithoutTransition_ThrowsException
       resultStatus: 1
-      duration: 0.0028908
+      duration: 0.0029028
       messages: 
       output: 
       stacktrace: 
@@ -5433,7 +5502,7 @@ MonoBehaviour:
       name: StatechartWaitTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest
       resultStatus: 1
-      duration: 0.17443
+      duration: 0.1656778
       messages: 
       output: 
       stacktrace: 
@@ -5449,7 +5518,7 @@ MonoBehaviour:
       name: SimpleTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest.SimpleTest
       resultStatus: 1
-      duration: 0.0512648
+      duration: 0.0329962
       messages: 
       output: 
       stacktrace: 
@@ -5466,7 +5535,7 @@ MonoBehaviour:
       name: SplitActivity_CompleteBoth_Success
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest.SplitActivity_CompleteBoth_Success
       resultStatus: 1
-      duration: 0.0502169
+      duration: 0.049753
       messages: 
       output: 
       stacktrace: 
@@ -5483,7 +5552,7 @@ MonoBehaviour:
       name: SplitActivity_CompleteOnlyOneActivity_OnHold
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest.SplitActivity_CompleteOnlyOneActivity_OnHold
       resultStatus: 1
-      duration: 0.0521857
+      duration: 0.0494665
       messages: 
       output: 
       stacktrace: 
@@ -5500,7 +5569,7 @@ MonoBehaviour:
       name: WaitState_EventTrigger_ForceCompleted
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest.WaitState_EventTrigger_ForceCompleted
       resultStatus: 1
-      duration: 0.0042573
+      duration: 0.0042355
       messages: 
       output: 
       stacktrace: 
@@ -5517,7 +5586,7 @@ MonoBehaviour:
       name: WaitState_EventTriggerWithoutTarget_OnlyEvokesOnTransition
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest.WaitState_EventTriggerWithoutTarget_OnlyEvokesOnTransition
       resultStatus: 1
-      duration: 0.0038223
+      duration: 0.013257
       messages: 
       output: 
       stacktrace: 
@@ -5534,7 +5603,7 @@ MonoBehaviour:
       name: WaitState_MissingConfiguration_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest.WaitState_MissingConfiguration_ThrowsException
       resultStatus: 1
-      duration: 0.0028849
+      duration: 0.0030983
       messages: 
       output: 
       stacktrace: 
@@ -5551,7 +5620,7 @@ MonoBehaviour:
       name: WaitState_MissingTarget_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest.WaitState_MissingTarget_ThrowsException
       resultStatus: 1
-      duration: 0.0031711
+      duration: 0.0037727
       messages: 
       output: 
       stacktrace: 
@@ -5568,7 +5637,7 @@ MonoBehaviour:
       name: WaitState_TransitionsLoop_ThrowsException
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest.WaitState_TransitionsLoop_ThrowsException
       resultStatus: 1
-      duration: 0.0038216
+      duration: 0.0039931
       messages: 
       output: 
       stacktrace: 
@@ -5585,7 +5654,7 @@ MonoBehaviour:
       name: Unity.Addressables.Editor.Tests.DocExampleCode.dll
       fullName: C:/Users/migas/Desktop/Frameworks/Library/ScriptAssemblies/Unity.Addressables.Editor.Tests.DocExampleCode.dll
       resultStatus: 1
-      duration: 0.009501
+      duration: 0.0049384
       messages: 
       output: 
       stacktrace: 
@@ -5601,7 +5670,7 @@ MonoBehaviour:
       name: AddressableAssets
       fullName: AddressableAssets
       resultStatus: 1
-      duration: 0.0082887
+      duration: 0.0034026
       messages: 
       output: 
       stacktrace: 
@@ -5617,7 +5686,7 @@ MonoBehaviour:
       name: DocExampleCode
       fullName: AddressableAssets.DocExampleCode
       resultStatus: 1
-      duration: 0.0079422
+      duration: 0.0026311
       messages: 
       output: 
       stacktrace: 
@@ -5633,7 +5702,7 @@ MonoBehaviour:
       name: TestStub
       fullName: AddressableAssets.DocExampleCode.TestStub
       resultStatus: 1
-      duration: 0.0041329
+      duration: 0.0018524
       messages: 
       output: 
       stacktrace: 
@@ -5649,7 +5718,7 @@ MonoBehaviour:
       name: RequiredTest
       fullName: AddressableAssets.DocExampleCode.TestStub.RequiredTest
       resultStatus: 1
-      duration: 0.0000575
+      duration: 0.0000914
       messages: 
       output: 
       stacktrace: 
@@ -5661,13 +5730,13 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1252
       parentUniqueId: Unity.Addressables.Editor.Tests.DocExampleCode.dll/AddressableAssets/DocExampleCode/[Unity.Addressables.Editor.Tests.DocExampleCode][AddressableAssets.DocExampleCode.TestStub][suite]
-    m_ResultText: ConvertCsv_MissMatchColumnsCount_FillsWithDefaultData (0.000s)
+    m_ResultText: CsvParserTest (0.036s)
     m_ResultStacktrace: 
     m_TestListState:
-      scrollPos: {x: 0, y: 4}
-      m_SelectedIDs: 38a62dd5
-      m_LastClickedID: -718428616
-      m_ExpandedIDs: 1c70e488f30b0d9fcf11cfa22b2601a639f899a6b0d704b0227506ba369cf6bb94430ecabb460bccec2883cf5cf4f9cfbf4cc7d1cd0187d9c9c379dd1ce508deaf606de198e2d1eced00aaeed99876f1490f47f5a2d253fa141f8bfcc7860c01ebfa26014fa0c901f78e400911c38510aa41c71492cc3017e1f771188f6fc819e8bb8a2e27f2f42ed6b2813d3c882e442f86f84606ee90476bbb8e4a95cb3f54e87efb570806cc5bafaf105fbfe7d860db04e466109510694880277062fb2c73ffffff7f
+      scrollPos: {x: 0, y: 146}
+      m_SelectedIDs: ebfa2601
+      m_LastClickedID: 19331819
+      m_ExpandedIDs: 1c70e488cf11cfa22b2601a639f899a6b0d704b0227506ba369cf6bb94430ecabb460bccec2883cf5cf4f9cfbf4cc7d1cd0187d9c9c379dd1ce508de752464e198e2d1eced00aaeed99876f1490f47f5a2d253fa141f8bfcc7860c01ebfa26014fa0c901f78e400911c38510aa41c71492cc3017e1f771188f6fc819d6b2813d3c882e442f86f84606ee90476bbb8e4a95cb3f54e87efb570806cc5bbfe7d860db04e466109510694880277062fb2c73ffffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -5693,7 +5762,7 @@ MonoBehaviour:
       selectedCategoryMask: 0
       availableCategories:
       - Uncategorized
---- !u!114 &18
+--- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5714,9 +5783,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1441
+    x: 1377
     y: 73
-    width: 478
+    width: 542
     height: 918
   m_SerializedDataModeController:
     m_DataMode: 0

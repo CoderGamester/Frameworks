@@ -1,1 +1,1 @@
-{"Commit":"4f9d824d","BranchName":"develop","BuildType":"dev","BuildNumber":"0"}
+{"Commit":"06fc7119","BranchName":"gitbutler/workspace","BuildType":"dev","BuildNumber":"0"}
