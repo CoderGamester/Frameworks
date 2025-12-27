@@ -59,5 +59,6 @@
   "dotnet.defaultSolution": "Frameworks.sln",
   "search.include": {
     "Library/PackedCache": true
-  }
+  },
+  "git.showCursorWorktrees": true
 }

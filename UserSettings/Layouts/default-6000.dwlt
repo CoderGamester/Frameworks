@@ -15,9 +15,9 @@ MonoBehaviour:
   m_PixelRect:
     serializedVersion: 2
     x: 0
-    y: 43
-    width: 1920
-    height: 989
+    y: 61
+    width: 1512
+    height: 834
   m_ShowMode: 4
   m_Title: Console
   m_RootView: {fileID: 2}
@@ -44,8 +44,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1920
-    height: 989
+    width: 1512
+    height: 834
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
@@ -62,18 +62,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12011, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
+  m_Name: MainToolbarWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1920
+    width: 1512
     height: 36
-  m_MinSize: {x: 0, y: 0}
-  m_MaxSize: {x: 0, y: 0}
-  m_LastLoadedLayoutName: 
+  m_MinSize: {x: 50, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 12}
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -90,8 +90,8 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 969
-    width: 1920
+    y: 814
+    width: 1512
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -114,12 +114,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 36
-    width: 1920
-    height: 933
-  m_MinSize: {x: 300, y: 100}
+    width: 1512
+    height: 778
+  m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 46
+  controlID: 62
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -140,12 +140,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1360
-    height: 933
-  m_MinSize: {x: 200, y: 100}
+    width: 1291
+    height: 778
+  m_MinSize: {x: 200, y: 112}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 47
+  controlID: 63
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -166,12 +166,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1360
-    height: 619
-  m_MinSize: {x: 200, y: 50}
+    width: 1291
+    height: 473
+  m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 38
+  controlID: 64
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -190,13 +190,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 321
-    height: 619
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 15}
+    width: 303
+    height: 473
+  m_MinSize: {x: 201, y: 226}
+  m_MaxSize: {x: 4001, y: 4026}
+  m_ActualView: {fileID: 17}
   m_Panes:
-  - {fileID: 15}
+  - {fileID: 17}
   m_Selected: 0
   m_LastSelected: 0
 --- !u!114 &9
@@ -214,18 +214,18 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 321
+    x: 303
     y: 0
-    width: 1039
-    height: 619
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 16}
+    width: 988
+    height: 473
+  m_MinSize: {x: 202, y: 226}
+  m_MaxSize: {x: 4002, y: 4026}
+  m_ActualView: {fileID: 18}
   m_Panes:
-  - {fileID: 16}
-  - {fileID: 17}
+  - {fileID: 18}
+  - {fileID: 19}
   m_Selected: 0
-  m_LastSelected: 2
+  m_LastSelected: 1
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -242,18 +242,18 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 619
-    width: 1360
-    height: 314
+    y: 473
+    width: 1291
+    height: 305
   m_MinSize: {x: 101, y: 126}
   m_MaxSize: {x: 4001, y: 4026}
-  m_ActualView: {fileID: 18}
+  m_ActualView: {fileID: 20}
   m_Panes:
-  - {fileID: 14}
-  - {fileID: 18}
-  - {fileID: 13}
+  - {fileID: 16}
+  - {fileID: 20}
+  - {fileID: 15}
   m_Selected: 1
-  m_LastSelected: 0
+  m_LastSelected: 2
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -264,23 +264,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: McpUnityEditorWindow
+  m_Name: InspectorWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1360
+    x: 1291
     y: 0
-    width: 560
-    height: 933
-  m_MinSize: {x: 601, y: 426}
+    width: 221
+    height: 778
+  m_MinSize: {x: 276, y: 76}
   m_MaxSize: {x: 4001, y: 4026}
-  m_ActualView: {fileID: 12}
+  m_ActualView: {fileID: 21}
   m_Panes:
-  - {fileID: 19}
-  - {fileID: 12}
-  m_Selected: 1
-  m_LastSelected: 0
+  - {fileID: 21}
+  - {fileID: 14}
+  - {fileID: 13}
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -290,22 +291,274 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b37b7af2843115b4592e82f0a4445d47, type: 3}
+  m_Script: {fileID: 13987, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 600, y: 400}
+  m_EditorClassIdentifier: UnityEditor.dll::UnityEditor.MainToolbarWindow
+  m_MinSize: {x: 50, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: MCP Unity
+    m_Text: UnityEditor.MainToolbarWindow
     m_Image: {fileID: 0}
     m_Tooltip: 
-    m_TextWithWhitespace: "MCP Unity\u200B"
+    m_TextWithWhitespace: "UnityEditor.MainToolbarWindow\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1360
-    y: 79
-    width: 559
-    height: 907
+    x: 0
+    y: 0
+    width: 1512
+    height: 36
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData:
+    - dockPosition: 0
+      containerId: overlay-toolbar__top
+      displayed: 1
+      id: Services/Account
+      index: 0
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    - dockPosition: 0
+      containerId: overlay-toolbar__top
+      displayed: 1
+      id: Editor Controls/Store
+      index: 1
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    - dockPosition: 0
+      containerId: overlay-toolbar__top
+      displayed: 0
+      id: Unsupported User Elements
+      index: 2
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    - dockPosition: 0
+      containerId: overlay-toolbar__top
+      displayed: 1
+      id: Package Management/Package Manager
+      index: 3
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    - dockPosition: 0
+      containerId: overlay-toolbar__top
+      displayed: 1
+      id: Services/Collab
+      index: 4
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    - dockPosition: 0
+      containerId: overlay-toolbar__top
+      displayed: 1
+      id: Services/AI
+      index: 5
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    - dockPosition: 1
+      containerId: overlay-toolbar__top
+      displayed: 1
+      id: Services/Toolbar Help
+      index: 0
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    - dockPosition: 1
+      containerId: overlay-toolbar__top
+      displayed: 0
+      id: Editor Utility/Quality
+      index: 1
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    - dockPosition: 1
+      containerId: overlay-toolbar__top
+      displayed: 1
+      id: Editor Controls/Layout
+      index: 2
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    - dockPosition: 1
+      containerId: overlay-toolbar__top
+      displayed: 1
+      id: Editor Controls/Search
+      index: 3
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    - dockPosition: 1
+      containerId: overlay-toolbar__top
+      displayed: 1
+      id: Editor Controls/Modes
+      index: 4
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    - dockPosition: 1
+      containerId: overlay-toolbar__top
+      displayed: 1
+      id: Editor Controls/Undo
+      index: 5
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    - dockPosition: 1
+      containerId: overlay-toolbar__top
+      displayed: 1
+      id: Multiplayer/Multiplayer Role
+      index: 6
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    - dockPosition: 1
+      containerId: overlay-toolbar__top
+      displayed: 1
+      id: Services/Cloud
+      index: 7
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    - dockPosition: 2
+      containerId: overlay-toolbar__top
+      displayed: 1
+      id: Play Mode Controls
+      index: 0
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    m_ContainerData:
+    - containerId: overlay-toolbar__top
+      scrollOffset: 0
+    - containerId: Floating
+      scrollOffset: 0
+    m_DynamicPanelContainerData: []
+    m_OverlaysVisible: 1
+    m_DynamicPanelBehavior: 0
+--- !u!114 &13
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3734672197a24f76b95678cc3b75d6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 350, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: UI Service Hierarchy
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+    m_TextWithWhitespace: "UI Service Hierarchy\u200B"
+  m_Pos:
+    serializedVersion: 2
+    x: -827
+    y: -1016
+    width: 826
+    height: 1330
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -316,8 +569,48 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_ContainerData: []
+    m_DynamicPanelContainerData: []
     m_OverlaysVisible: 1
---- !u!114 &13
+    m_DynamicPanelBehavior: 0
+--- !u!114 &14
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1997986c632194915931f1948be974f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 500, y: 300}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: UI Analytics
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+    m_TextWithWhitespace: "UI Analytics\u200B"
+  m_Pos:
+    serializedVersion: 2
+    x: -827
+    y: -1016
+    width: 826
+    height: 1330
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_ContainerData: []
+    m_DynamicPanelContainerData: []
+    m_OverlaysVisible: 1
+    m_DynamicPanelBehavior: 0
+--- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -339,10 +632,10 @@ MonoBehaviour:
     m_TextWithWhitespace: "Test Runner\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 698
-    width: 1359
-    height: 288
+    x: -2560
+    y: -192
+    width: 1730
+    height: 506
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -353,14 +646,16 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_ContainerData: []
+    m_DynamicPanelContainerData: []
     m_OverlaysVisible: 1
+    m_DynamicPanelBehavior: 0
   m_Spl:
-    ID: 117
+    ID: 89
     splitterInitialOffset: 192
     currentActiveSplitter: -1
     realSizes:
-    - 146
-    - 72
+    - 292
+    - 144
     relativeSizes:
     - 0.66972476
     - 0.33027524
@@ -370,7 +665,7 @@ MonoBehaviour:
     maxSizes:
     - 0
     - 0
-    lastTotalSize: 218
+    lastTotalSize: 436
     splitSize: 6
     xOffset: 0
     m_Version: 1
@@ -380,9 +675,9 @@ MonoBehaviour:
     oldSplitSize: 0
   m_TestTypeToolbarIndex: 0
   m_TestListGUIs:
-  - m_Window: {fileID: 13}
+  - m_Window: {fileID: 15}
     runProgress:
-      RunGuid: e66d6e59-4f18-4ae1-935d-a36d7c2637a3
+      RunGuid: d8f893ff-1c31-4bec-be4a-b9ad2c2888d7
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0
@@ -394,7 +689,8 @@ MonoBehaviour:
           assemblyNames: []
         filters:
         - testMode: 1
-          testNames: []
+          testNames:
+          - GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.Rebind_KeepsObservers
           groupNames: []
           categoryNames: []
           assemblyNames: []
@@ -409,7 +705,7 @@ MonoBehaviour:
           disableNestedEnumeratorBugfix: 0
         randomOrderSeed: 0
       HasFinished: 1
-      Progress: 1.000002
+      Progress: 0.9999999
       CurrentStepName: Unlock Reload Assemblies
       CurrentStageName: 
     m_NewResultList:
@@ -418,7 +714,7 @@ MonoBehaviour:
       name: Frameworks
       fullName: Frameworks
       resultStatus: 1
-      duration: 1.721673
+      duration: 1.878913
       messages: 
       output: 
       stacktrace: 
@@ -429,12 +725,12 @@ MonoBehaviour:
       categories: []
       parentId: 
       parentUniqueId: 
-    - id: 1073
+    - id: 1083
       uniqueId: '[GameLovers.DataExtensions.Editor.Tests.dll][suite]'
       name: GameLovers.DataExtensions.Editor.Tests.dll
-      fullName: C:/Users/migas/Desktop/Frameworks/Library/ScriptAssemblies/GameLovers.DataExtensions.Editor.Tests.dll
+      fullName: /Users/ext-miguel.tomas/Desktop/Frameworks/Library/ScriptAssemblies/GameLovers.DataExtensions.Editor.Tests.dll
       resultStatus: 1
-      duration: 0.0057537
+      duration: 0.1629938
       messages: 
       output: 
       stacktrace: 
@@ -445,12 +741,12 @@ MonoBehaviour:
       categories: []
       parentId: 1000
       parentUniqueId: '[Frameworks][suite]'
-    - id: 1074
+    - id: 1084
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/[GameLoversEditor][suite]'
       name: GameLoversEditor
       fullName: GameLoversEditor
       resultStatus: 1
-      duration: 0.0057537
+      duration: 0.1629938
       messages: 
       output: 
       stacktrace: 
@@ -459,14 +755,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1073
+      parentId: 1083
       parentUniqueId: '[GameLovers.DataExtensions.Editor.Tests.dll][suite]'
-    - id: 1075
+    - id: 1085
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/[DataExtensions][suite]'
       name: DataExtensions
       fullName: GameLoversEditor.DataExtensions
       resultStatus: 1
-      duration: 0.0057537
+      duration: 0.1629938
       messages: 
       output: 
       stacktrace: 
@@ -475,14 +771,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1074
+      parentId: 1084
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/[GameLoversEditor][suite]'
-    - id: 1076
+    - id: 1086
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests][suite]'
       name: Tests
       fullName: GameLoversEditor.DataExtensions.Tests
       resultStatus: 1
-      duration: 0.0057537
+      duration: 0.1629938
       messages: 
       output: 
       stacktrace: 
@@ -491,14 +787,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1075
+      parentId: 1085
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/[DataExtensions][suite]'
     - id: 1002
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.EnumSelectorTest][suite]'
       name: EnumSelectorTest
       fullName: GameLoversEditor.DataExtensions.Tests.EnumSelectorTest
       resultStatus: 1
-      duration: 0.0001524
+      duration: 0.0065021003
       messages: 
       output: 
       stacktrace: 
@@ -507,14 +803,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1076
+      parentId: 1086
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests][suite]'
     - id: 1026
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/EnumSelectorTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.EnumSelectorTest.ValueCheck]'
       name: ValueCheck
       fullName: GameLoversEditor.DataExtensions.Tests.EnumSelectorTest.ValueCheck
       resultStatus: 1
-      duration: 0.0000943
+      duration: 0.0063828
       messages: 
       output: 
       stacktrace: 
@@ -531,7 +827,7 @@ MonoBehaviour:
       name: ValueSetCheck
       fullName: GameLoversEditor.DataExtensions.Tests.EnumSelectorTest.ValueSetCheck
       resultStatus: 1
-      duration: 0.0000581
+      duration: 0.0001193
       messages: 
       output: 
       stacktrace: 
@@ -548,7 +844,7 @@ MonoBehaviour:
       name: floatPTests
       fullName: GameLoversEditor.DataExtensions.Tests.floatPTests
       resultStatus: 1
-      duration: 0.0002782
+      duration: 0.0014928
       messages: 
       output: 
       stacktrace: 
@@ -557,14 +853,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1076
+      parentId: 1086
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests][suite]'
     - id: 1031
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/floatPTests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.floatPTests.Addition]'
       name: Addition
       fullName: GameLoversEditor.DataExtensions.Tests.floatPTests.Addition
       resultStatus: 1
-      duration: 0.0000605
+      duration: 0.0005645
       messages: 
       output: 
       stacktrace: 
@@ -581,7 +877,7 @@ MonoBehaviour:
       name: Equality
       fullName: GameLoversEditor.DataExtensions.Tests.floatPTests.Equality
       resultStatus: 1
-      duration: 0.0000437
+      duration: 0.0003723
       messages: 
       output: 
       stacktrace: 
@@ -598,7 +894,7 @@ MonoBehaviour:
       name: Multiplication
       fullName: GameLoversEditor.DataExtensions.Tests.floatPTests.Multiplication
       resultStatus: 1
-      duration: 0.000086
+      duration: 0.0003883
       messages: 
       output: 
       stacktrace: 
@@ -615,7 +911,7 @@ MonoBehaviour:
       name: Representation
       fullName: GameLoversEditor.DataExtensions.Tests.floatPTests.Representation
       resultStatus: 1
-      duration: 0.000088
+      duration: 0.0001677
       messages: 
       output: 
       stacktrace: 
@@ -627,12 +923,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1028
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.floatPTests][suite]'
-    - id: 1015
+    - id: 1018
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest][suite]'
       name: ObservableDictionaryTest
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest
       resultStatus: 1
-      duration: 0.0016065
+      duration: 0.090372205
       messages: 
       output: 
       stacktrace: 
@@ -641,14 +937,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1076
+      parentId: 1086
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests][suite]'
     - id: 1045
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableDictionaryTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Add_AddsKeyValuePair_WhenKeyDoesNotExist]'
       name: Add_AddsKeyValuePair_WhenKeyDoesNotExist
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Add_AddsKeyValuePair_WhenKeyDoesNotExist
       resultStatus: 1
-      duration: 0.0001307
+      duration: 0.0359364
       messages: 
       output: 
       stacktrace: 
@@ -665,7 +961,7 @@ MonoBehaviour:
       name: Add_ThrowsException_WhenKeyAlreadyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Add_ThrowsException_WhenKeyAlreadyExists
       resultStatus: 1
-      duration: 0.0001132
+      duration: 0.0011686
       messages: 
       output: 
       stacktrace: 
@@ -682,7 +978,7 @@ MonoBehaviour:
       name: Clear_RemovesAllKeyValuePairs
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Clear_RemovesAllKeyValuePairs
       resultStatus: 1
-      duration: 0.0000818
+      duration: 0.0004821
       messages: 
       output: 
       stacktrace: 
@@ -699,7 +995,7 @@ MonoBehaviour:
       name: ContainsKey_ReturnsFalse_WhenKeyDoesNotExist
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.ContainsKey_ReturnsFalse_WhenKeyDoesNotExist
       resultStatus: 1
-      duration: 0.0000699
+      duration: 0.0001182
       messages: 
       output: 
       stacktrace: 
@@ -716,7 +1012,7 @@ MonoBehaviour:
       name: ContainsKey_ReturnsTrue_WhenKeyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.ContainsKey_ReturnsTrue_WhenKeyExists
       resultStatus: 1
-      duration: 0.0000691
+      duration: 0.0000521
       messages: 
       output: 
       stacktrace: 
@@ -733,7 +1029,7 @@ MonoBehaviour:
       name: Indexer_ReturnsValue_WhenKeyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Indexer_ReturnsValue_WhenKeyExists
       resultStatus: 1
-      duration: 0.0000788
+      duration: 0.0000529
       messages: 
       output: 
       stacktrace: 
@@ -750,7 +1046,7 @@ MonoBehaviour:
       name: Indexer_SetsValue_WhenKeyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Indexer_SetsValue_WhenKeyExists
       resultStatus: 1
-      duration: 0.0000693
+      duration: 0.000124
       messages: 
       output: 
       stacktrace: 
@@ -767,7 +1063,7 @@ MonoBehaviour:
       name: InvokeObserve_MissingKey_ThrowsException
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.InvokeObserve_MissingKey_ThrowsException
       resultStatus: 1
-      duration: 0.000096
+      duration: 0.0004544
       messages: 
       output: 
       stacktrace: 
@@ -784,7 +1080,7 @@ MonoBehaviour:
       name: InvokeObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.InvokeObserveCheck
       resultStatus: 1
-      duration: 0.0001786
+      duration: 0.004539
       messages: 
       output: 
       stacktrace: 
@@ -801,7 +1097,7 @@ MonoBehaviour:
       name: InvokeUpdate_MissingKey_ThrowsException
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.InvokeUpdate_MissingKey_ThrowsException
       resultStatus: 1
-      duration: 0.0000685
+      duration: 0.0000799
       messages: 
       output: 
       stacktrace: 
@@ -818,7 +1114,7 @@ MonoBehaviour:
       name: InvokeUpdate_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.InvokeUpdate_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0000424
+      duration: 0.0001126
       messages: 
       output: 
       stacktrace: 
@@ -835,7 +1131,7 @@ MonoBehaviour:
       name: InvokeUpdateCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.InvokeUpdateCheck
       resultStatus: 1
-      duration: 0.0000604
+      duration: 0.0001406
       messages: 
       output: 
       stacktrace: 
@@ -852,7 +1148,7 @@ MonoBehaviour:
       name: ObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.ObserveCheck
       resultStatus: 1
-      duration: 0.0000637
+      duration: 0.0003204
       messages: 
       output: 
       stacktrace: 
@@ -864,12 +1160,29 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1038
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest][suite]'
+    - id: 1043
+      uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableDictionaryTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.RebindCheck_BaseClass]'
+      name: RebindCheck_BaseClass
+      fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.RebindCheck_BaseClass
+      resultStatus: 1
+      duration: 0.045324
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1018
+      parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest][suite]'
     - id: 1047
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableDictionaryTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Remove_RemovesKeyValuePair_WhenKeyExists]'
       name: Remove_RemovesKeyValuePair_WhenKeyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Remove_RemovesKeyValuePair_WhenKeyExists
       resultStatus: 1
-      duration: 0.0000335
+      duration: 0.0000628
       messages: 
       output: 
       stacktrace: 
@@ -886,7 +1199,7 @@ MonoBehaviour:
       name: Remove_ReturnsFalse_WhenKeyDoesNotExist
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.Remove_ReturnsFalse_WhenKeyDoesNotExist
       resultStatus: 1
-      duration: 0.0000269
+      duration: 0.0000398
       messages: 
       output: 
       stacktrace: 
@@ -903,7 +1216,7 @@ MonoBehaviour:
       name: StopObserve_KeyCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObserve_KeyCheck
       resultStatus: 1
-      duration: 0.000038
+      duration: 0.0001844
       messages: 
       output: 
       stacktrace: 
@@ -920,7 +1233,7 @@ MonoBehaviour:
       name: StopObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObserveCheck
       resultStatus: 1
-      duration: 0.0000535
+      duration: 0.000203
       messages: 
       output: 
       stacktrace: 
@@ -937,7 +1250,7 @@ MonoBehaviour:
       name: StopObservingAll_Everything_Check
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObservingAll_Everything_Check
       resultStatus: 1
-      duration: 0.0000418
+      duration: 0.0001676
       messages: 
       output: 
       stacktrace: 
@@ -954,7 +1267,7 @@ MonoBehaviour:
       name: StopObservingAll_MultipleCalls_Check
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObservingAll_MultipleCalls_Check
       resultStatus: 1
-      duration: 0.0000399
+      duration: 0.0000874
       messages: 
       output: 
       stacktrace: 
@@ -971,7 +1284,7 @@ MonoBehaviour:
       name: StopObservingAll_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObservingAll_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.000096
+      duration: 0.0000639
       messages: 
       output: 
       stacktrace: 
@@ -988,7 +1301,7 @@ MonoBehaviour:
       name: StopObservingAllCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.StopObservingAllCheck
       resultStatus: 1
-      duration: 0.0000485
+      duration: 0.0000715
       messages: 
       output: 
       stacktrace: 
@@ -1005,7 +1318,7 @@ MonoBehaviour:
       name: TryGetValue_ReturnsFalse_WhenKeyDoesNotExist
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.TryGetValue_ReturnsFalse_WhenKeyDoesNotExist
       resultStatus: 1
-      duration: 0.0000289
+      duration: 0.0000531
       messages: 
       output: 
       stacktrace: 
@@ -1022,7 +1335,7 @@ MonoBehaviour:
       name: TryGetValue_ReturnsTrue_WhenKeyExists
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.TryGetValue_ReturnsTrue_WhenKeyExists
       resultStatus: 1
-      duration: 0.0000435
+      duration: 0.0000503
       messages: 
       output: 
       stacktrace: 
@@ -1039,7 +1352,7 @@ MonoBehaviour:
       name: ValueSetCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest.ValueSetCheck
       resultStatus: 1
-      duration: 0.0000336
+      duration: 0.0004832
       messages: 
       output: 
       stacktrace: 
@@ -1051,12 +1364,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1038
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableDictionaryTest][suite]'
-    - id: 1040
+    - id: 1044
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableFieldTest][suite]'
       name: ObservableFieldTest
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest
       resultStatus: 1
-      duration: 0.0007103
+      duration: 0.0021339
       messages: 
       output: 
       stacktrace: 
@@ -1065,14 +1378,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1076
+      parentId: 1086
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests][suite]'
     - id: 1068
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableFieldTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.InvokeCheck]'
       name: InvokeCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.InvokeCheck
       resultStatus: 1
-      duration: 0.000202
+      duration: 0.0008309
       messages: 
       output: 
       stacktrace: 
@@ -1089,7 +1402,7 @@ MonoBehaviour:
       name: InvokeCheck_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.InvokeCheck_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0000472
+      duration: 0.0000719
       messages: 
       output: 
       stacktrace: 
@@ -1106,7 +1419,7 @@ MonoBehaviour:
       name: InvokeObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.InvokeObserveCheck
       resultStatus: 1
-      duration: 0.0000589
+      duration: 0.0000818
       messages: 
       output: 
       stacktrace: 
@@ -1123,7 +1436,7 @@ MonoBehaviour:
       name: ObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.ObserveCheck
       resultStatus: 1
-      duration: 0.0000545
+      duration: 0.0001936
       messages: 
       output: 
       stacktrace: 
@@ -1135,12 +1448,63 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1063
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableFieldTest][suite]'
+    - id: 1057
+      uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableFieldTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.RebindCheck]'
+      name: RebindCheck
+      fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.RebindCheck
+      resultStatus: 1
+      duration: 0.0002056
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1044
+      parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableFieldTest][suite]'
+    - id: 1059
+      uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableFieldTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.RebindCheck_BaseClass]'
+      name: RebindCheck_BaseClass
+      fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.RebindCheck_BaseClass
+      resultStatus: 1
+      duration: 0.0000716
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1044
+      parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableFieldTest][suite]'
+    - id: 1058
+      uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableFieldTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.RebindCheck_KeepsObservers]'
+      name: RebindCheck_KeepsObservers
+      fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.RebindCheck_KeepsObservers
+      resultStatus: 1
+      duration: 0.0001034
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1044
+      parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableFieldTest][suite]'
     - id: 1071
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableFieldTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObserve_NotObserving_DoesNothing]'
       name: StopObserve_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObserve_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0000704
+      duration: 0.0000993
       messages: 
       output: 
       stacktrace: 
@@ -1157,7 +1521,7 @@ MonoBehaviour:
       name: StopObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObserveCheck
       resultStatus: 1
-      duration: 0.0000414
+      duration: 0.0000804
       messages: 
       output: 
       stacktrace: 
@@ -1174,7 +1538,7 @@ MonoBehaviour:
       name: StopObservingAll_Everything_Check
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObservingAll_Everything_Check
       resultStatus: 1
-      duration: 0.0000491
+      duration: 0.0000914
       messages: 
       output: 
       stacktrace: 
@@ -1191,7 +1555,7 @@ MonoBehaviour:
       name: StopObservingAll_MultipleCalls_Check
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObservingAll_MultipleCalls_Check
       resultStatus: 1
-      duration: 0.0000362
+      duration: 0.0000798
       messages: 
       output: 
       stacktrace: 
@@ -1208,7 +1572,7 @@ MonoBehaviour:
       name: StopObservingAll_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObservingAll_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0000347
+      duration: 0.0000565
       messages: 
       output: 
       stacktrace: 
@@ -1225,7 +1589,7 @@ MonoBehaviour:
       name: StopObservingAllCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.StopObservingAllCheck
       resultStatus: 1
-      duration: 0.0000335
+      duration: 0.0000617
       messages: 
       output: 
       stacktrace: 
@@ -1242,7 +1606,7 @@ MonoBehaviour:
       name: ValueCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.ValueCheck
       resultStatus: 1
-      duration: 0.0000326
+      duration: 0.0000423
       messages: 
       output: 
       stacktrace: 
@@ -1259,7 +1623,7 @@ MonoBehaviour:
       name: ValueSetCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableFieldTest.ValueSetCheck
       resultStatus: 1
-      duration: 0.0000498
+      duration: 0.0000637
       messages: 
       output: 
       stacktrace: 
@@ -1271,12 +1635,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1063
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableFieldTest][suite]'
-    - id: 1053
+    - id: 1060
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableListTest][suite]'
       name: ObservableListTest
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest
       resultStatus: 1
-      duration: 0.000959
+      duration: 0.0041744
       messages: 
       output: 
       stacktrace: 
@@ -1285,14 +1649,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1076
+      parentId: 1086
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests][suite]'
     - id: 1077
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableListTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableListTest.AddValue_AddsValueToList]'
       name: AddValue_AddsValueToList
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.AddValue_AddsValueToList
       resultStatus: 1
-      duration: 0.0001122
+      duration: 0.0026172
       messages: 
       output: 
       stacktrace: 
@@ -1309,7 +1673,7 @@ MonoBehaviour:
       name: InvokeCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.InvokeCheck
       resultStatus: 1
-      duration: 0.0001419
+      duration: 0.0003014
       messages: 
       output: 
       stacktrace: 
@@ -1326,7 +1690,7 @@ MonoBehaviour:
       name: InvokeCheck_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.InvokeCheck_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0000735
+      duration: 0.0000713
       messages: 
       output: 
       stacktrace: 
@@ -1343,7 +1707,7 @@ MonoBehaviour:
       name: InvokeObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.InvokeObserveCheck
       resultStatus: 1
-      duration: 0.0000751
+      duration: 0.0001093
       messages: 
       output: 
       stacktrace: 
@@ -1360,7 +1724,7 @@ MonoBehaviour:
       name: ObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.ObserveCheck
       resultStatus: 1
-      duration: 0.0001051
+      duration: 0.0002424
       messages: 
       output: 
       stacktrace: 
@@ -1372,12 +1736,29 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1076
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableListTest][suite]'
+    - id: 1073
+      uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableListTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableListTest.RebindCheck_BaseClass]'
+      name: RebindCheck_BaseClass
+      fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.RebindCheck_BaseClass
+      resultStatus: 1
+      duration: 0.0001958
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1060
+      parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableListTest][suite]'
     - id: 1078
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableListTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableListTest.SetValue_UpdatesValue]'
       name: SetValue_UpdatesValue
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.SetValue_UpdatesValue
       resultStatus: 1
-      duration: 0.0000652
+      duration: 0.0000703
       messages: 
       output: 
       stacktrace: 
@@ -1394,7 +1775,7 @@ MonoBehaviour:
       name: StopObserve_WhenCalledOnce_RemovesOnlyOneObserverInstance
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObserve_WhenCalledOnce_RemovesOnlyOneObserverInstance
       resultStatus: 1
-      duration: 0.0000859
+      duration: 0.0001681
       messages: 
       output: 
       stacktrace: 
@@ -1411,7 +1792,7 @@ MonoBehaviour:
       name: StopObserveCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObserveCheck
       resultStatus: 1
-      duration: 0.0000592
+      duration: 0.0000809
       messages: 
       output: 
       stacktrace: 
@@ -1428,7 +1809,7 @@ MonoBehaviour:
       name: StopObservingAll_Everything_Check
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObservingAll_Everything_Check
       resultStatus: 1
-      duration: 0.000071
+      duration: 0.0000952
       messages: 
       output: 
       stacktrace: 
@@ -1445,7 +1826,7 @@ MonoBehaviour:
       name: StopObservingAll_MultipleCalls_StopsAll
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObservingAll_MultipleCalls_StopsAll
       resultStatus: 1
-      duration: 0.0000566
+      duration: 0.0000834
       messages: 
       output: 
       stacktrace: 
@@ -1462,7 +1843,7 @@ MonoBehaviour:
       name: StopObservingAll_NotObserving_DoesNothing
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObservingAll_NotObserving_DoesNothing
       resultStatus: 1
-      duration: 0.0000526
+      duration: 0.0000696
       messages: 
       output: 
       stacktrace: 
@@ -1479,7 +1860,7 @@ MonoBehaviour:
       name: StopObservingAllCheck
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableListTest.StopObservingAllCheck
       resultStatus: 1
-      duration: 0.0000607
+      duration: 0.0000695
       messages: 
       output: 
       stacktrace: 
@@ -1491,12 +1872,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1076
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableListTest][suite]'
-    - id: 1066
+    - id: 1074
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest][suite]'
       name: ObservableResolverDictionaryTest
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest
       resultStatus: 1
-      duration: 0.0014467
+      duration: 0.0555506
       messages: 
       output: 
       stacktrace: 
@@ -1505,14 +1886,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1076
+      parentId: 1086
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests][suite]'
     - id: 1092
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableResolverDictionaryTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.AddOrigin_AddsValueToOriginDictionary]'
       name: AddOrigin_AddsValueToOriginDictionary
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.AddOrigin_AddsValueToOriginDictionary
       resultStatus: 1
-      duration: 0.0002824
+      duration: 0.004148
       messages: 
       output: 
       stacktrace: 
@@ -1529,7 +1910,7 @@ MonoBehaviour:
       name: ClearOrigin_ClearsOriginDictionary
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.ClearOrigin_ClearsOriginDictionary
       resultStatus: 1
-      duration: 0.0002094
+      duration: 0.0001661
       messages: 
       output: 
       stacktrace: 
@@ -1541,12 +1922,46 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1089
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest][suite]'
+    - id: 1081
+      uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableResolverDictionaryTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.Rebind_ChangesOriginDictionary]'
+      name: Rebind_ChangesOriginDictionary
+      fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.Rebind_ChangesOriginDictionary
+      resultStatus: 1
+      duration: 0.0004299
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1074
+      parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest][suite]'
+    - id: 1082
+      uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableResolverDictionaryTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.Rebind_KeepsObservers]'
+      name: Rebind_KeepsObservers
+      fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.Rebind_KeepsObservers
+      resultStatus: 1
+      duration: 0.0496668
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1074
+      parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest][suite]'
     - id: 1094
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableResolverDictionaryTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.RemoveOrigin_RemovesValueFromOriginDictionary]'
       name: RemoveOrigin_RemovesValueFromOriginDictionary
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.RemoveOrigin_RemovesValueFromOriginDictionary
       resultStatus: 1
-      duration: 0.0002812
+      duration: 0.0004506
       messages: 
       output: 
       stacktrace: 
@@ -1563,7 +1978,7 @@ MonoBehaviour:
       name: TryGetOriginValue_KeyDoesNotExist_ReturnsFalseAndOutDefault
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.TryGetOriginValue_KeyDoesNotExist_ReturnsFalseAndOutDefault
       resultStatus: 1
-      duration: 0.0002153
+      duration: 0.0001785
       messages: 
       output: 
       stacktrace: 
@@ -1580,7 +1995,7 @@ MonoBehaviour:
       name: TryGetOriginValue_KeyExists_ReturnsTrueAndOutValue
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.TryGetOriginValue_KeyExists_ReturnsTrueAndOutValue
       resultStatus: 1
-      duration: 0.0002007
+      duration: 0.0000832
       messages: 
       output: 
       stacktrace: 
@@ -1597,7 +2012,7 @@ MonoBehaviour:
       name: UpdateOrigin_UpdatesValueInOriginDictionary
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.UpdateOrigin_UpdatesValueInOriginDictionary
       resultStatus: 1
-      duration: 0.0002577
+      duration: 0.0004275
       messages: 
       output: 
       stacktrace: 
@@ -1614,7 +2029,7 @@ MonoBehaviour:
       name: ObservableResolverListTest
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest
       resultStatus: 1
-      duration: 0.00060060003
+      duration: 0.0027678
       messages: 
       output: 
       stacktrace: 
@@ -1623,14 +2038,14 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1076
+      parentId: 1086
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests][suite]'
     - id: 1034
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableResolverListTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.AddOrigin_AddsValueToOriginList]'
       name: AddOrigin_AddsValueToOriginList
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.AddOrigin_AddsValueToOriginList
       resultStatus: 1
-      duration: 0.0001972
+      duration: 0.0014924
       messages: 
       output: 
       stacktrace: 
@@ -1647,7 +2062,7 @@ MonoBehaviour:
       name: ClearOrigin_ClearsOriginList
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.ClearOrigin_ClearsOriginList
       resultStatus: 1
-      duration: 0.0001169
+      duration: 0.000206
       messages: 
       output: 
       stacktrace: 
@@ -1659,12 +2074,63 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1033
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest][suite]'
+    - id: 1015
+      uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableResolverListTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.Rebind_ChangesOriginList]'
+      name: Rebind_ChangesOriginList
+      fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.Rebind_ChangesOriginList
+      resultStatus: 1
+      duration: 0.0004381
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1010
+      parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest][suite]'
+    - id: 1017
+      uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableResolverListTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.Rebind_ChangesResolvers]'
+      name: Rebind_ChangesResolvers
+      fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.Rebind_ChangesResolvers
+      resultStatus: 1
+      duration: 0.000162
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1010
+      parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest][suite]'
+    - id: 1016
+      uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableResolverListTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.Rebind_KeepsObservers]'
+      name: Rebind_KeepsObservers
+      fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.Rebind_KeepsObservers
+      resultStatus: 1
+      duration: 0.0001382
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1010
+      parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest][suite]'
     - id: 1036
       uniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/ObservableResolverListTest/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.RemoveOrigin_RemovesValueFromOriginList]'
       name: RemoveOrigin_RemovesValueFromOriginList
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.RemoveOrigin_RemovesValueFromOriginList
       resultStatus: 1
-      duration: 0.0001424
+      duration: 0.0001982
       messages: 
       output: 
       stacktrace: 
@@ -1681,7 +2147,7 @@ MonoBehaviour:
       name: UpdateOrigin_UpdatesOriginList
       fullName: GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest.UpdateOrigin_UpdatesOriginList
       resultStatus: 1
-      duration: 0.0001441
+      duration: 0.0001329
       messages: 
       output: 
       stacktrace: 
@@ -1693,10 +2159,10 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1033
       parentUniqueId: 'GameLovers.DataExtensions.Editor.Tests.dll/GameLoversEditor/DataExtensions/Tests/[GameLovers.DataExtensions.Editor.Tests][GameLoversEditor.DataExtensions.Tests.ObservableResolverListTest][suite]'
-    - id: 1091
+    - id: 1101
       uniqueId: '[GameLovers.GoogleSheetImporter.Editor.Tests.dll][suite]'
       name: GameLovers.GoogleSheetImporter.Editor.Tests.dll
-      fullName: C:/Users/migas/Desktop/Frameworks/Library/ScriptAssemblies/GameLovers.GoogleSheetImporter.Editor.Tests.dll
+      fullName: /Users/ext-miguel.tomas/Desktop/Frameworks/Library/ScriptAssemblies/GameLovers.GoogleSheetImporter.Editor.Tests.dll
       resultStatus: 1
       duration: 0.0011495
       messages: 
@@ -1709,7 +2175,7 @@ MonoBehaviour:
       categories: []
       parentId: 1000
       parentUniqueId: '[Frameworks][suite]'
-    - id: 1092
+    - id: 1102
       uniqueId: 'GameLovers.GoogleSheetImporter.Editor.Tests.dll/[GameLoversEditor][suite]'
       name: GameLoversEditor
       fullName: GameLoversEditor
@@ -1723,9 +2189,9 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1091
+      parentId: 1101
       parentUniqueId: '[GameLovers.GoogleSheetImporter.Editor.Tests.dll][suite]'
-    - id: 1093
+    - id: 1103
       uniqueId: 'GameLovers.GoogleSheetImporter.Editor.Tests.dll/GameLoversEditor/[GoogleSheetImporter][suite]'
       name: GoogleSheetImporter
       fullName: GameLoversEditor.GoogleSheetImporter
@@ -1739,9 +2205,9 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1092
+      parentId: 1102
       parentUniqueId: 'GameLovers.GoogleSheetImporter.Editor.Tests.dll/[GameLoversEditor][suite]'
-    - id: 1094
+    - id: 1104
       uniqueId: 'GameLovers.GoogleSheetImporter.Editor.Tests.dll/GameLoversEditor/GoogleSheetImporter/[GameLovers.GoogleSheetImporter.Editor.Tests][GameLoversEditor.GoogleSheetImporter.Tests][suite]'
       name: Tests
       fullName: GameLoversEditor.GoogleSheetImporter.Tests
@@ -1755,9 +2221,9 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1093
+      parentId: 1103
       parentUniqueId: 'GameLovers.GoogleSheetImporter.Editor.Tests.dll/GameLoversEditor/[GoogleSheetImporter][suite]'
-    - id: 1077
+    - id: 1087
       uniqueId: 'GameLovers.GoogleSheetImporter.Editor.Tests.dll/GameLoversEditor/GoogleSheetImporter/Tests/[GameLovers.GoogleSheetImporter.Editor.Tests][GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest][suite]'
       name: CsvParserTest
       fullName: GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest
@@ -1771,7 +2237,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1094
+      parentId: 1104
       parentUniqueId: 'GameLovers.GoogleSheetImporter.Editor.Tests.dll/GameLoversEditor/GoogleSheetImporter/[GameLovers.GoogleSheetImporter.Editor.Tests][GameLoversEditor.GoogleSheetImporter.Tests][suite]'
     - id: 1108
       uniqueId: 'GameLovers.GoogleSheetImporter.Editor.Tests.dll/GameLoversEditor/GoogleSheetImporter/Tests/CsvParserTest/[GameLovers.GoogleSheetImporter.Editor.Tests][GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest.ArrayParse_Successfully]'
@@ -1994,10 +2460,10 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1100
       parentUniqueId: 'GameLovers.GoogleSheetImporter.Editor.Tests.dll/GameLoversEditor/GoogleSheetImporter/Tests/[GameLovers.GoogleSheetImporter.Editor.Tests][GameLoversEditor.GoogleSheetImporter.Tests.CsvParserTest][suite]'
-    - id: 1128
+    - id: 1138
       uniqueId: '[GameLovers.Services.Editor.Tests.dll][suite]'
       name: GameLovers.Services.Editor.Tests.dll
-      fullName: C:/Users/migas/Desktop/Frameworks/Library/ScriptAssemblies/GameLovers.Services.Editor.Tests.dll
+      fullName: /Users/ext-miguel.tomas/Desktop/Frameworks/Library/ScriptAssemblies/GameLovers.Services.Editor.Tests.dll
       resultStatus: 1
       duration: 0.0035231
       messages: 
@@ -2010,7 +2476,7 @@ MonoBehaviour:
       categories: []
       parentId: 1000
       parentUniqueId: '[Frameworks][suite]'
-    - id: 1129
+    - id: 1139
       uniqueId: 'GameLovers.Services.Editor.Tests.dll/[GameLoversEditor][suite]'
       name: GameLoversEditor
       fullName: GameLoversEditor
@@ -2024,9 +2490,9 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1128
+      parentId: 1138
       parentUniqueId: '[GameLovers.Services.Editor.Tests.dll][suite]'
-    - id: 1130
+    - id: 1140
       uniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/[Services][suite]'
       name: Services
       fullName: GameLoversEditor.Services
@@ -2040,9 +2506,9 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1129
+      parentId: 1139
       parentUniqueId: 'GameLovers.Services.Editor.Tests.dll/[GameLoversEditor][suite]'
-    - id: 1131
+    - id: 1141
       uniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests][suite]'
       name: Tests
       fullName: GameLoversEditor.Services.Tests
@@ -2056,9 +2522,9 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1130
+      parentId: 1140
       parentUniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/[Services][suite]'
-    - id: 1095
+    - id: 1105
       uniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.CommandServiceTest][suite]'
       name: CommandServiceTest
       fullName: GameLoversEditor.Services.Tests.CommandServiceTest
@@ -2072,7 +2538,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1131
+      parentId: 1141
       parentUniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests][suite]'
     - id: 1119
       uniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/CommandServiceTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.CommandServiceTest.ExecuteCommand_Successfully]'
@@ -2091,7 +2557,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1118
       parentUniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.CommandServiceTest][suite]'
-    - id: 1097
+    - id: 1107
       uniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.DataServiceTest][suite]'
       name: DataServiceTest
       fullName: GameLoversEditor.Services.Tests.DataServiceTest
@@ -2105,7 +2571,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1131
+      parentId: 1141
       parentUniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests][suite]'
     - id: 1121
       uniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/DataServiceTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.DataServiceTest.AddData_Successfully]'
@@ -2158,7 +2624,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1120
       parentUniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.DataServiceTest][suite]'
-    - id: 1101
+    - id: 1111
       uniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.InstallerTest][suite]'
       name: InstallerTest
       fullName: GameLoversEditor.Services.Tests.InstallerTest
@@ -2172,7 +2638,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1131
+      parentId: 1141
       parentUniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests][suite]'
     - id: 1126
       uniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/InstallerTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.InstallerTest.Bind_NotInterface_ThrowsException]'
@@ -2225,7 +2691,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1124
       parentUniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.InstallerTest][suite]'
-    - id: 1105
+    - id: 1115
       uniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.MessageBrokerServiceTest][suite]'
       name: MessageBrokerServiceTest
       fullName: GameLoversEditor.Services.Tests.MessageBrokerServiceTest
@@ -2239,7 +2705,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1131
+      parentId: 1141
       parentUniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests][suite]'
     - id: 1131
       uniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/MessageBrokerServiceTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.MessageBrokerServiceTest.Publish_ChainSubscribe_Successfully]'
@@ -2394,7 +2860,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1128
       parentUniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.MessageBrokerServiceTest][suite]'
-    - id: 1115
+    - id: 1125
       uniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.ObjectPoolTest][suite]'
       name: ObjectPoolTest
       fullName: GameLoversEditor.Services.Tests.ObjectPoolTest
@@ -2408,7 +2874,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1131
+      parentId: 1141
       parentUniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests][suite]'
     - id: 1145
       uniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/ObjectPoolTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.ObjectPoolTest.Clear_Successfully]'
@@ -2529,7 +2995,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1138
       parentUniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.ObjectPoolTest][suite]'
-    - id: 1123
+    - id: 1133
       uniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.TimeServiceTest][suite]'
       name: TimeServiceTest
       fullName: GameLoversEditor.Services.Tests.TimeServiceTest
@@ -2543,7 +3009,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1131
+      parentId: 1141
       parentUniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests][suite]'
     - id: 1150
       uniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/TimeServiceTest/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.TimeServiceTest.AddTime_AllTimeTypes_Successfully]'
@@ -2613,10 +3079,10 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1146
       parentUniqueId: 'GameLovers.Services.Editor.Tests.dll/GameLoversEditor/Services/Tests/[GameLovers.Services.Editor.Tests][GameLoversEditor.Services.Tests.TimeServiceTest][suite]'
-    - id: 1231
+    - id: 1241
       uniqueId: '[GameLovers.Statechart.Editor.Tests.dll][suite]'
       name: GameLovers.Statechart.Editor.Tests.dll
-      fullName: C:/Users/migas/Desktop/Frameworks/Library/ScriptAssemblies/GameLovers.Statechart.Editor.Tests.dll
+      fullName: /Users/ext-miguel.tomas/Desktop/Frameworks/Library/ScriptAssemblies/GameLovers.Statechart.Editor.Tests.dll
       resultStatus: 1
       duration: 1.7110943
       messages: 
@@ -2629,7 +3095,7 @@ MonoBehaviour:
       categories: []
       parentId: 1000
       parentUniqueId: '[Frameworks][suite]'
-    - id: 1232
+    - id: 1242
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/[GameLoversEditor][suite]'
       name: GameLoversEditor
       fullName: GameLoversEditor
@@ -2643,9 +3109,9 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1231
+      parentId: 1241
       parentUniqueId: '[GameLovers.Statechart.Editor.Tests.dll][suite]'
-    - id: 1233
+    - id: 1243
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/[StatechartMachine][suite]'
       name: StatechartMachine
       fullName: GameLoversEditor.StatechartMachine
@@ -2659,9 +3125,9 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1232
+      parentId: 1242
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/[GameLoversEditor][suite]'
-    - id: 1234
+    - id: 1244
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests][suite]'
       name: Tests
       fullName: GameLoversEditor.StatechartMachine.Tests
@@ -2675,9 +3141,9 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1233
+      parentId: 1243
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/[StatechartMachine][suite]'
-    - id: 1132
+    - id: 1142
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest][suite]'
       name: StatechartChoiceTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest
@@ -2691,7 +3157,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1234
+      parentId: 1244
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests][suite]'
     - id: 1159
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/StatechartChoiceTest/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest.ChoiceState_MissingConditionTransition_ThrowsException]'
@@ -2812,7 +3278,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1155
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartChoiceTest][suite]'
-    - id: 1140
+    - id: 1150
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest][suite]'
       name: StatechartLeaveTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest
@@ -2826,7 +3292,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1234
+      parentId: 1244
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests][suite]'
     - id: 1167
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/StatechartLeaveTest/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest.LeaveState_MissingConfiguration_ThrowsException]'
@@ -2964,7 +3430,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1163
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartLeaveTest][suite]'
-    - id: 1149
+    - id: 1159
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest][suite]'
       name: StatechartNestSplit_IntegrationTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest
@@ -2978,7 +3444,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1234
+      parentId: 1244
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests][suite]'
     - id: 1174
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/StatechartNestSplit_IntegrationTest/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest.NestedState_TaskWaitStateInner_EventTrigger_QueueEvent]'
@@ -3082,7 +3548,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1172
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartNestSplit_IntegrationTest][suite]'
-    - id: 1156
+    - id: 1166
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartNestTest][suite]'
       name: StatechartNestTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartNestTest
@@ -3096,7 +3562,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1234
+      parentId: 1244
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests][suite]'
     - id: 1194
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/StatechartNestTest/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartNestTest.MultipleNestedStates_EventTrigger__DisableExecuteExitFinal_ForceCompleteSuccess]'
@@ -3387,7 +3853,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1179
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartNestTest][suite]'
-    - id: 1174
+    - id: 1184
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest][suite]'
       name: StatechartSplitTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest
@@ -3401,7 +3867,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1234
+      parentId: 1244
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests][suite]'
     - id: 1213
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/StatechartSplitTest/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest.MultipleSplitedStates_EventTrigger__DisableExecuteExitFinal_ForceCompleteSuccess]'
@@ -3726,7 +4192,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1197
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartSplitTest][suite]'
-    - id: 1194
+    - id: 1204
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartStateTest][suite]'
       name: StatechartStateTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartStateTest
@@ -3740,7 +4206,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1234
+      parentId: 1244
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests][suite]'
     - id: 1218
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/StatechartStateTest/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartStateTest.SimpleTest]'
@@ -3844,7 +4310,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1217
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartStateTest][suite]'
-    - id: 1201
+    - id: 1211
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest][suite]'
       name: StatechartTaskWaitTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest
@@ -3858,7 +4324,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1234
+      parentId: 1244
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests][suite]'
     - id: 1225
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/StatechartTaskWaitTest/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest.SimpleTest]'
@@ -3962,7 +4428,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1224
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartTaskWaitTest][suite]'
-    - id: 1208
+    - id: 1218
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartTest][suite]'
       name: StatechartTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTest
@@ -3976,7 +4442,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1234
+      parentId: 1244
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests][suite]'
     - id: 1233
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/StatechartTest/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartTest.InitialState_MissingTransition_ThrowsException]'
@@ -4114,7 +4580,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1231
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartTest][suite]'
-    - id: 1217
+    - id: 1227
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartTransitionTest][suite]'
       name: StatechartTransitionTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartTransitionTest
@@ -4128,7 +4594,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1234
+      parentId: 1244
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests][suite]'
     - id: 1241
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/StatechartTransitionTest/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartTransitionTest.SimpleTest]'
@@ -4198,7 +4664,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1240
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartTransitionTest][suite]'
-    - id: 1222
+    - id: 1232
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest][suite]'
       name: StatechartWaitTest
       fullName: GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest
@@ -4212,7 +4678,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1234
+      parentId: 1244
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests][suite]'
     - id: 1246
       uniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/StatechartWaitTest/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest.SimpleTest]'
@@ -4350,10 +4816,10 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1245
       parentUniqueId: 'GameLovers.Statechart.Editor.Tests.dll/GameLoversEditor/StatechartMachine/Tests/[GameLovers.Statechart.Editor.Tests][GameLoversEditor.StatechartMachine.Tests.StatechartWaitTest][suite]'
-    - id: 1239
+    - id: 1248
       uniqueId: '[Unity.Addressables.DocExampleCode.Editor.Tests.dll][suite]'
       name: Unity.Addressables.DocExampleCode.Editor.Tests.dll
-      fullName: C:/Users/migas/Desktop/Frameworks/Library/ScriptAssemblies/Unity.Addressables.DocExampleCode.Editor.Tests.dll
+      fullName: /Users/ext-miguel.tomas/Desktop/Frameworks/Library/ScriptAssemblies/Unity.Addressables.DocExampleCode.Editor.Tests.dll
       resultStatus: 1
       duration: 0.0001524
       messages: 
@@ -4366,7 +4832,7 @@ MonoBehaviour:
       categories: []
       parentId: 1000
       parentUniqueId: '[Frameworks][suite]'
-    - id: 1240
+    - id: 1249
       uniqueId: 'Unity.Addressables.DocExampleCode.Editor.Tests.dll/[AddressableAssets][suite]'
       name: AddressableAssets
       fullName: AddressableAssets
@@ -4380,9 +4846,9 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1239
+      parentId: 1248
       parentUniqueId: '[Unity.Addressables.DocExampleCode.Editor.Tests.dll][suite]'
-    - id: 1241
+    - id: 1250
       uniqueId: 'Unity.Addressables.DocExampleCode.Editor.Tests.dll/AddressableAssets/[Unity.Addressables.DocExampleCode.Editor.Tests][AddressableAssets.DocExampleCode][suite]'
       name: DocExampleCode
       fullName: AddressableAssets.DocExampleCode
@@ -4396,9 +4862,9 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1240
+      parentId: 1249
       parentUniqueId: 'Unity.Addressables.DocExampleCode.Editor.Tests.dll/[AddressableAssets][suite]'
-    - id: 1237
+    - id: 1246
       uniqueId: 'Unity.Addressables.DocExampleCode.Editor.Tests.dll/AddressableAssets/DocExampleCode/[Unity.Addressables.DocExampleCode.Editor.Tests][AddressableAssets.DocExampleCode.TestStub][suite]'
       name: TestStub
       fullName: AddressableAssets.DocExampleCode.TestStub
@@ -4412,7 +4878,7 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1241
+      parentId: 1250
       parentUniqueId: 'Unity.Addressables.DocExampleCode.Editor.Tests.dll/AddressableAssets/[Unity.Addressables.DocExampleCode.Editor.Tests][AddressableAssets.DocExampleCode][suite]'
     - id: 1261
       uniqueId: 'Unity.Addressables.DocExampleCode.Editor.Tests.dll/AddressableAssets/DocExampleCode/TestStub/[Unity.Addressables.DocExampleCode.Editor.Tests][AddressableAssets.DocExampleCode.TestStub.RequiredTest]'
@@ -4431,13 +4897,13 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1260
       parentUniqueId: 'Unity.Addressables.DocExampleCode.Editor.Tests.dll/AddressableAssets/DocExampleCode/[Unity.Addressables.DocExampleCode.Editor.Tests][AddressableAssets.DocExampleCode.TestStub][suite]'
-    m_ResultText: GameLovers.DataExtensions.Editor.Tests.dll (64 tests) (0.006s)
+    m_ResultText: ObserveCheck (0.000s)
     m_ResultStacktrace: 
     m_TestListState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: bf4cc7d1
-      m_LastClickedID: -775467841
-      m_ExpandedIDs: 752464e1ffffff7f
+      scrollPos: {x: 0, y: 216}
+      m_SelectedIDs: e982fd76
+      m_LastClickedID: 1996325609
+      m_ExpandedIDs: bf4cc7d1c9c379dd752464e198e2d1ecaa41c714afaf105fdb04e466ffffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -4465,9 +4931,9 @@ MonoBehaviour:
       availableCategories:
       - Uncategorized
     m_SelectedOption: 0
-  - m_Window: {fileID: 13}
+  - m_Window: {fileID: 15}
     runProgress:
-      RunGuid: e66d6e59-4f18-4ae1-935d-a36d7c2637a3
+      RunGuid: d8f893ff-1c31-4bec-be4a-b9ad2c2888d7
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0
@@ -4479,7 +4945,8 @@ MonoBehaviour:
           assemblyNames: []
         filters:
         - testMode: 1
-          testNames: []
+          testNames:
+          - GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.Rebind_KeepsObservers
           groupNames: []
           categoryNames: []
           assemblyNames: []
@@ -4494,7 +4961,7 @@ MonoBehaviour:
           disableNestedEnumeratorBugfix: 0
         randomOrderSeed: 0
       HasFinished: 1
-      Progress: 1.000002
+      Progress: 0.9999999
       CurrentStepName: Unlock Reload Assemblies
       CurrentStageName: 
     m_NewResultList:
@@ -4880,7 +5347,7 @@ MonoBehaviour:
     m_SelectedOption: 0
   - m_Window: {fileID: 0}
     runProgress:
-      RunGuid: e66d6e59-4f18-4ae1-935d-a36d7c2637a3
+      RunGuid: d8f893ff-1c31-4bec-be4a-b9ad2c2888d7
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0
@@ -4892,7 +5359,8 @@ MonoBehaviour:
           assemblyNames: []
         filters:
         - testMode: 1
-          testNames: []
+          testNames:
+          - GameLoversEditor.DataExtensions.Tests.ObservableResolverDictionaryTest.Rebind_KeepsObservers
           groupNames: []
           categoryNames: []
           assemblyNames: []
@@ -4907,7 +5375,7 @@ MonoBehaviour:
           disableNestedEnumeratorBugfix: 0
         randomOrderSeed: 0
       HasFinished: 1
-      Progress: 1.000002
+      Progress: 0.9999999
       CurrentStepName: Unlock Reload Assemblies
       CurrentStageName: 
     m_NewResultList: []
@@ -4944,7 +5412,7 @@ MonoBehaviour:
       selectedCategories: []
       availableCategories: []
     m_SelectedOption: 0
---- !u!114 &14
+--- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4960,16 +5428,16 @@ MonoBehaviour:
   m_MaxSize: {x: 10000, y: 10000}
   m_TitleContent:
     m_Text: Project
-    m_Image: {fileID: -5467254957812901981, guid: 0000000000000000d000000000000000,
+    m_Image: {fileID: -5179483145760003458, guid: 0000000000000000d000000000000000,
       type: 0}
     m_Tooltip: 
     m_TextWithWhitespace: "Project\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 698
-    width: 1359
-    height: 288
+    x: -2560
+    y: -609.5
+    width: 1731
+    height: 923.5
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -4980,19 +5448,21 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_ContainerData: []
+    m_DynamicPanelContainerData: []
     m_OverlaysVisible: 1
+    m_DynamicPanelBehavior: 0
   m_SearchFilter:
     m_NameFilter: 
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
     m_ReferencingInstanceIDs: 
-    m_SceneHandles: 
+    m_SceneHandles: []
     m_ShowAllHits: 0
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Packages/com.gamelovers.dataextensions/Tests/Editor
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -5002,16 +5472,24 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Packages/com.gamelovers.dataextensions/Tests/Editor
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\migas\Desktop\Frameworks
+  m_LastProjectPath: /Users/ext-miguel.tomas/Desktop/Frameworks
   m_LockTracker:
     m_IsLocked: 0
+  m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 40710000
-    m_LastClickedID: 28992
-    m_ExpandedIDs: 000000000c7100000e71000010710000127100001471000016710000187100001a7100001c7100001e71000020710000227100002471000026710000287100002a7100002e7100003271000034710000367100003a7100003c7100003e71000040710000ba71000000ca9a3bffffff7f
+    m_SelectedIDs: []
+    m_LastClickedID:
+      m_Data: 0
+    m_ExpandedIDs:
+    - m_Data: 0
+    - m_Data: 31810
+    - m_Data: 31812
+    - m_Data: 31814
+    - m_Data: 31816
+    - m_Data: 31818
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -5022,7 +5500,8 @@ MonoBehaviour:
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData:
+        m_Data: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 11
@@ -5038,9 +5517,16 @@ MonoBehaviour:
       m_ResourceFile: 
   m_AssetTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: 000000000c7100000e71000010710000127100001471000016710000187100001a7100001c7100001e71000020710000227100002471000026710000287100002a7100002c7100002e71000030710000327100003471000036710000387100003a7100003c7100003e71000040710000
+    m_SelectedIDs: []
+    m_LastClickedID:
+      m_Data: 0
+    m_ExpandedIDs:
+    - m_Data: 0
+    - m_Data: 31810
+    - m_Data: 31812
+    - m_Data: 31814
+    - m_Data: 31816
+    - m_Data: 31818
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -5051,7 +5537,8 @@ MonoBehaviour:
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData:
+        m_Data: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 11
@@ -5066,10 +5553,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: d414ffff
-    m_LastClickedInstanceID: -60204
-    m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000f87700007477000092930000be7d0000d8940000aac80000fe760000cc680000d40100006269000088680000f0680000d8730000
+    m_SelectedInstanceIDs: []
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 0
+    m_ExpandedInstanceIDs: []
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -5080,7 +5567,8 @@ MonoBehaviour:
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData:
+        m_Data: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 11
@@ -5098,7 +5586,7 @@ MonoBehaviour:
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
---- !u!114 &15
+--- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5114,16 +5602,16 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Hierarchy
-    m_Image: {fileID: 7966133145522015247, guid: 0000000000000000d000000000000000,
+    m_Image: {fileID: -3734745235275155857, guid: 0000000000000000d000000000000000,
       type: 0}
     m_Tooltip: 
     m_TextWithWhitespace: "Hierarchy\u200B"
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 79
-    width: 320
-    height: 593
+    y: 24
+    width: 302
+    height: 447
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -5134,13 +5622,16 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_ContainerData: []
+    m_DynamicPanelContainerData: []
     m_OverlaysVisible: 1
+    m_DynamicPanelBehavior: 0
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: d414ffff
-      m_LastClickedID: 0
-      m_ExpandedIDs: d4faffff
+      m_SelectedIDs: []
+      m_LastClickedID:
+        m_Data: 0
+      m_ExpandedIDs: []
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -5151,7 +5642,8 @@ MonoBehaviour:
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData:
+          m_Data: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 11
@@ -5165,7 +5657,7 @@ MonoBehaviour:
       m_IsLocked: 0
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: 4c969a2b90040154d917609493e03593
---- !u!114 &16
+--- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5181,16 +5673,16 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Scene
-    m_Image: {fileID: 2593428753322112591, guid: 0000000000000000d000000000000000,
+    m_Image: {fileID: 8634526014445323508, guid: 0000000000000000d000000000000000,
       type: 0}
     m_Tooltip: 
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 321
-    y: 79
-    width: 1037
-    height: 593
+    x: 304
+    y: 24
+    width: 986
+    height: 447
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -5204,8 +5696,8 @@ MonoBehaviour:
       containerId: overlay-toolbar__top
       displayed: 1
       id: Tool Settings
-      index: 0
-      contents: '{"m_Layout":1,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":-24.0,"y":-24.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":3,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      index: 1
+      contents: '{"m_Layout":1,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":-24.0,"y":-24.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":3,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: -24, y: -24}
@@ -5218,8 +5710,8 @@ MonoBehaviour:
       containerId: overlay-toolbar__top
       displayed: 1
       id: unity-grid-and-snap-toolbar
-      index: 1
-      contents: '{"m_Layout":1,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":-141.0,"y":149.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":1,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      index: 2
+      contents: '{"m_Layout":1,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":-141.0,"y":149.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":1,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: -141, y: 149}
@@ -5233,7 +5725,7 @@ MonoBehaviour:
       displayed: 1
       id: unity-scene-view-toolbar
       index: 0
-      contents: '{"m_Layout":1,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":25.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":1,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":25.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 24, y: 25}
@@ -5247,7 +5739,7 @@ MonoBehaviour:
       displayed: 0
       id: unity-search-toolbar
       index: 1
-      contents: '{"m_Layout":1,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":-24.0,"y":0.0},"m_FloatingSnapCorner":1,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":1,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":-24.0,"y":0.0},"m_FloatingSnapCorner":1,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
@@ -5261,7 +5753,7 @@ MonoBehaviour:
       displayed: 1
       id: unity-transform-toolbar
       index: 0
-      contents: '{"m_Layout":2,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":25.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":2,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":25.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 24, y: 25}
@@ -5289,7 +5781,7 @@ MonoBehaviour:
       displayed: 1
       id: Orientation
       index: 0
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":67.5,"y":86.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":67.5,"y":86.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 67.5, y: 86}
@@ -5303,7 +5795,7 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Light Settings
       index: 0
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
@@ -5331,7 +5823,7 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Cloth Constraints
       index: 1
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
@@ -5345,7 +5837,7 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Cloth Collisions
       index: 2
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
@@ -5401,7 +5893,7 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Occlusion Culling
       index: 3
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
@@ -5415,7 +5907,7 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Physics Debugger
       index: 4
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
@@ -5429,7 +5921,7 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Scene Visibility
       index: 5
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
@@ -5443,7 +5935,7 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Particles
       index: 6
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":25.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":25.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 24, y: 25}
@@ -5513,7 +6005,7 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/TrailRenderer
       index: 7
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":48.0,"y":48.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":48.0,"y":48.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 48, y: 48}
@@ -5526,8 +6018,8 @@ MonoBehaviour:
       containerId: overlay-toolbar__top
       displayed: 0
       id: Brush Attributes
-      index: 2
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":48.0,"y":48.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      index: 3
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":48.0,"y":48.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 48, y: 48}
@@ -5541,7 +6033,7 @@ MonoBehaviour:
       displayed: 0
       id: Terrain Tools
       index: 0
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":48.0,"y":48.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":48.0,"y":48.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 48, y: 48}
@@ -5555,7 +6047,7 @@ MonoBehaviour:
       displayed: 0
       id: Brush Masks
       index: 1
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":48.0,"y":48.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":48.0,"y":48.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 48, y: 48}
@@ -5653,7 +6145,7 @@ MonoBehaviour:
       displayed: 1
       id: unity-scene-view-camera-mode-toolbar
       index: 2
-      contents: '{"m_Layout":1,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":1,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 24, y: 0}
@@ -5667,7 +6159,7 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Lighting Visualization Colors
       index: 0
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
@@ -5681,7 +6173,7 @@ MonoBehaviour:
       displayed: 0
       id: SceneView/CamerasOverlay
       index: 8
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
@@ -5695,7 +6187,7 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/PBR Validation Settings
       index: 9
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
@@ -5709,13 +6201,27 @@ MonoBehaviour:
       displayed: 1
       id: Overlays/OverlayMenu
       index: 1
-      contents: '{"m_Layout":1,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":1,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 24, y: 0}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       layout: 1
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    - dockPosition: 0
+      containerId: overlay-toolbar__top
+      displayed: 0
+      id: unity-tool-contexts-toolbar
+      index: 0
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 4
       size: {x: 0, y: 0}
       sizeOverridden: 0
     m_ContainerData:
@@ -5733,7 +6239,23 @@ MonoBehaviour:
       scrollOffset: 0
     - containerId: Floating
       scrollOffset: 0
+    - containerId: overlay-dynamic-panel--left
+      scrollOffset: 0
+    - containerId: overlay-dynamic-panel--right
+      scrollOffset: 0
+    m_DynamicPanelContainerData:
+    - containerId: overlay-dynamic-panel--left
+      width: 56
+      saveData:
+        state: 0
+        overlayData: []
+    - containerId: overlay-dynamic-panel--right
+      width: 56
+      saveData:
+        state: 0
+        overlayData: []
     m_OverlaysVisible: 1
+    m_DynamicPanelBehavior: 0
   m_WindowGUID: cc27987af1a868c49b0894db9c0f5429
   m_Gizmos: 1
   m_OverrideSceneCullingMask: 6917529027641081856
@@ -5820,7 +6342,7 @@ MonoBehaviour:
   m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_LastSceneViewOrtho: 0
   m_Viewpoint:
-    m_SceneView: {fileID: 16}
+    m_SceneView: {fileID: 18}
     m_CameraOverscanSettings:
       m_Opacity: 50
       m_Scale: 1
@@ -5830,10 +6352,10 @@ MonoBehaviour:
   m_LastLockedObject: {fileID: 0}
   m_LastDebugDrawMode:
     drawMode: 35
-    name: 
-    section: 
+    name: Contributors / Receivers
+    section: Lighting
   m_ViewIsLockedToObject: 0
---- !u!114 &17
+--- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5849,16 +6371,16 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Game
-    m_Image: {fileID: -6423792434712278376, guid: 0000000000000000d000000000000000,
+    m_Image: {fileID: 4621777727084837110, guid: 0000000000000000d000000000000000,
       type: 0}
     m_Tooltip: 
     m_TextWithWhitespace: "Game\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 354
-    y: 73
-    width: 1112
-    height: 554
+    x: 242
+    y: 98
+    width: 779
+    height: 487
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -5869,7 +6391,9 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_ContainerData: []
+    m_DynamicPanelContainerData: []
     m_OverlaysVisible: 1
+    m_DynamicPanelBehavior: 0
   m_SerializedViewNames:
   - UnityEditor.DeviceSimulation.SimulatorWindow
   m_SerializedViewValues:
@@ -5878,7 +6402,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 1112, y: 533}
+  m_TargetSize: {x: 779, y: 466}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -5893,10 +6417,10 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -556
-    m_HBaseRangeMax: 556
-    m_VBaseRangeMin: -266.5
-    m_VBaseRangeMax: 266.5
+    m_HBaseRangeMin: -194.75
+    m_HBaseRangeMax: 194.75
+    m_VBaseRangeMin: -116.5
+    m_VBaseRangeMax: 116.5
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -5914,30 +6438,30 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 1112
-      height: 533
-    m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 556, y: 266.5}
+      width: 779
+      height: 466
+    m_Scale: {x: 2, y: 2}
+    m_Translation: {x: 389.5, y: 233}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -556
-      y: -266.5
-      width: 1112
-      height: 533
+      x: -194.75
+      y: -116.5
+      width: 389.5
+      height: 233
     m_MinimalGUI: 1
-  m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 1112, y: 554}
+  m_defaultScale: 2
+  m_LastWindowPixelSize: {x: 1558, y: 974}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
   m_XRRenderMode: 0
   m_RenderTexture: {fileID: 0}
   m_showToolbar: 1
---- !u!114 &18
+--- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5953,16 +6477,16 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Console
-    m_Image: {fileID: -4327648978806127646, guid: 0000000000000000d000000000000000,
+    m_Image: {fileID: -4950941429401207979, guid: 0000000000000000d000000000000000,
       type: 0}
     m_Tooltip: 
     m_TextWithWhitespace: "Console\u200B"
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 698
-    width: 1359
-    height: 288
+    y: 497
+    width: 1290
+    height: 279
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -5973,8 +6497,10 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_ContainerData: []
+    m_DynamicPanelContainerData: []
     m_OverlaysVisible: 1
---- !u!114 &19
+    m_DynamicPanelBehavior: 0
+--- !u!114 &21
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5990,16 +6516,16 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Inspector
-    m_Image: {fileID: -2667387946076563598, guid: 0000000000000000d000000000000000,
+    m_Image: {fileID: -440750813802333266, guid: 0000000000000000d000000000000000,
       type: 0}
     m_Tooltip: 
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1360
-    y: 79
-    width: 559
-    height: 907
+    x: 1292
+    y: 24
+    width: 220
+    height: 752
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -6010,7 +6536,9 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_ContainerData: []
+    m_DynamicPanelContainerData: []
     m_OverlaysVisible: 1
+    m_DynamicPanelBehavior: 0
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:

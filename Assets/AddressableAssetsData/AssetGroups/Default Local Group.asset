@@ -13,12 +13,35 @@ MonoBehaviour:
   m_Name: Default Local Group
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
-  m_Data:
-    m_SerializedData: []
   m_GUID: b5ee5976a5cc89c47b868514e5f88018
   m_SerializeEntries:
+  - m_GUID: 0369e0398454643309a16896b02f579c
+    m_Address: Assets/Canvas.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 46834e66aeeb01041b9ece834fb13e1a
     m_Address: Addressables
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 76747cdc86c2d498d8ff93cf30ad691c
+    m_Address: Assets/Canvas 2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d875ac1127f014280ad4d046abed8021
+    m_Address: Assets/Canvas 3.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d9a8d38eb38064ac0914773e679769cd
+    m_Address: Assets/Canvas 4.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f67db6a3f424c418483c7c0a9330074f
+    m_Address: Assets/Canvas 1.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
