@@ -1,1 +1,0 @@
-{"Commit":"8da2d7bc","BranchName":"develop","BuildType":"dev","BuildNumber":"0"}
