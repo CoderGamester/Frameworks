@@ -1,1 +1,1 @@
-{"CommitHash":"b4bfa6da","BranchName":"develop","BuildType":"dev","BuildNumber":"0"}
+{"CommitHash":"edc51ee0","BranchName":"develop","BuildType":"dev","BuildNumber":"0"}

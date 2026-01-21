@@ -15,8 +15,16 @@ Most packages live under `Packages/` and are included as **git submodules** (see
 
 ## 3. Repo structure
 - `Assets/`: Unity project assets used for development/testing.
+  - `Assets/Samples/`: **imported package samples** (preferred place to work when validating/changing sample content in this host project).
 - `Packages/`: Embedded UPM packages (mostly submodules).
 - `ProjectSettings/`, `UserSettings/`: Unity configuration.
+
+## 4. Samples workflow (priority order)
+When a task references a sample scene/script:
+- **1) Work in `Assets/Samples/` first** (this is what the Unity project actually uses when samples are imported).
+- **2) If it’s not in `Assets/Samples/`**, locate the source sample in the package’s `Samples~/` folder:
+  - `Packages/<package-name>/Samples~/...` (for embedded/submodule packages in this repo)
+  - `Library/PackageCache/<package-name>@<version>/Samples~/...` (for external Unity packages)
 
 ## 4. Submodules workflow (important)
 If a package folder under `Packages/` is empty, initialize submodules:

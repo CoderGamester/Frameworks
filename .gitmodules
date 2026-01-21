@@ -1,6 +1,6 @@
 [submodule "Packages/com.gamelovers.services"]
 	path = Packages/com.gamelovers.services
-	url = https://CoderGamester@github.com/CoderGamester/Services.git
+	url = https://CoderGamester@github.com/CoderGamester/Unity-Services.git
 [submodule "Packages/com.gamelovers.statechart"]
 	path = Packages/com.gamelovers.statechart
 	url = https://CoderGamester@github.com/CoderGamester/Statechart-HFSM.git
