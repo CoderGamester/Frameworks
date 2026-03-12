@@ -46,6 +46,10 @@ Some packages include their own `AGENTS.md`. When present, **that file is the so
 
 Examples:
 - `Packages/com.gamelovers.uiservice/AGENTS.md`
+- `Packages/com.gamelovers.services/AGENTS.md`
+
+When a package has a subdirectory with its own distinct conventions (e.g., `Tests/`, `Editor/`), a sub-folder `AGENTS.md` may exist there. The parent `AGENTS.md` will contain a **MUST-read pointer** of the form:
+> Before reading, editing, or creating any file in `<X>/`, you **MUST** read [`<X>/AGENTS.md`](<X>/AGENTS.md) first.
 
 ## 6. Documentation policy
 - Root `README.md` documents **this host repository** and links out to packages.
