@@ -12,6 +12,8 @@ Most packages live under `Packages/` and are included as **git submodules** (see
   - Runtime code must not reference `UnityEditor`
   - Editor tooling must stay under `Editor/` and Editor assemblies
 - **External APIs**: when investigating third-party sources (Unity packages, UniTask, Addressables), prefer local UPM cache under `Library/PackageCache/` when available.
+- **Package README accuracy**: when updating or auditing a package `README.md`, always verify every code example directly against the `Runtime/` source files before writing. Fabricated or stale examples are a known risk.
+- **Dependency drift**: when a package's `package.json` dependency changes, cross-check both `README.md` and `AGENTS.md` for stale references to the old package name or version.
 
 ## 3. Repo structure
 - `Assets/`: Unity project assets used for development/testing.

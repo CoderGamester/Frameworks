@@ -6,7 +6,6 @@
     "com.boxqkrtm.ide.cursor": "https://github.com/boxqkrtm/com.unity.ide.cursor.git",
     "com.coplaydev.unity-mcp": "https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity",
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
-    "com.gamelovers.mcp-unity": "file:/Users/ext-miguel.tomas/Desktop/mcp-unity",
     "com.unity.addressables": "2.8.1",
     "com.unity.editorcoroutines": "1.0.1",
     "com.unity.ext.nunit": "2.0.5",
