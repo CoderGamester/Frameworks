@@ -25,16 +25,6 @@
       "dependencies": {},
       "hash": "ec9204d381eb406a8f6e68fd67429a96ca6c5322"
     },
-    "com.gamelovers.assetsimporter": {
-      "version": "file:com.gamelovers.assetsimporter",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.unity.addressables": "1.21.20",
-        "com.gamelovers.gamedata": "1.0.0",
-        "com.cysharp.unitask": "2.5.10"
-      }
-    },
     "com.gamelovers.configsprovider": {
       "version": "file:com.gamelovers.configsprovider",
       "depth": 0,

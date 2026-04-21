@@ -16,6 +16,3 @@
 [submodule "Packages/com.gamelovers.gamedata"]
 	path = Packages/com.gamelovers.gamedata
 	url = https://CoderGamester@github.com/CoderGamester/Unity-GameData.git
-[submodule "Packages/com.gamelovers.assetsimporter"]
-	path = Packages/com.gamelovers.assetsimporter
-	url = https://CoderGamester@github.com/CoderGamester/Unity-AssetsImporter.git

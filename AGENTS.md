@@ -15,6 +15,9 @@ Most packages live under `Packages/` and are included as **git submodules** (see
 - **Package README accuracy**: when updating or auditing a package `README.md`, always verify every code example directly against the `Runtime/` source files before writing. Fabricated or stale examples are a known risk.
 - **Dependency drift**: when a package's `package.json` dependency changes, cross-check both `README.md` and `AGENTS.md` for stale references to the old package name or version.
 - **Package samples**: for code-centric UPM packages (no scene hierarchy, no custom inspectors), inline README code examples are sufficient; a `Samples~/` directory adds maintenance burden without proportional value unless the setup requires a running scene.
+- **Editor namespace collision**: Editor scripts placed in a sub-namespace ending with `.Editor` (e.g., `GameLovers.X.Editor`) MUST qualify the Unity base class as `UnityEditor.Editor`. A bare `Editor` resolves to the enclosing namespace's own `.Editor` child (a namespace), not the Unity type, producing `CS0118: 'Editor' is a namespace but is used like a type`.
+- **Unity `.meta` files in git**: when moving or renaming `.cs` files, `git mv` both the `.cs` and `.cs.meta` together to preserve GUIDs. Newly created files/folders (via `mkdir`, code-gen, etc.) will not have `.meta` files until Unity opens the project — commit those `.meta` files in a follow-up pass after the editor regenerates them.
+- **Squashing with `git reset --soft`**: before running `git reset --soft <base>`, always `git add -A` any working-tree changes. `--soft` preserves the index as-is and does NOT fold in unstaged edits — a squash done without this step will silently drop working-tree-only changes. Verify via `git diff --cached --stat` before the commit.
 
 ## 3. Repo structure
 - `Assets/`: Unity project assets used for development/testing.
