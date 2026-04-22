@@ -12,7 +12,7 @@ Most packages live under `Packages/` and are included as **git submodules** (see
   - Runtime code must not reference `UnityEditor`
   - Editor tooling must stay under `Editor/` and Editor assemblies
 - **External APIs**: when investigating third-party sources (Unity packages, UniTask, Addressables), prefer local UPM cache under `Library/PackageCache/` when available.
-- **Package README accuracy**: when updating or auditing a package `README.md`, always verify every code example directly against the `Runtime/` source files before writing. Fabricated or stale examples are a known risk.
+- **Package README accuracy**: when updating or auditing a package `README.md`, always verify every code example, component name, feature claim, and file-tree reference directly against the package's own `AGENTS.md` §2/§3 and the actual `Runtime/` source files before writing. Fabricated or stale examples are a known risk; a recurring drift pattern is README-level marketing copy (types or subsystems that no longer exist in source) outpacing AGENTS/Runtime reality — e.g. the `mobileservices` README once marketed `PointerInputManager` / `Controls/` / "Input System Integration" while the source uses `EnhancedTouch` only.
 - **Dependency drift**: when a package's `package.json` dependency changes, cross-check both `README.md` and `AGENTS.md` for stale references to the old package name or version.
 - **Package samples**: for code-centric UPM packages (no scene hierarchy, no custom inspectors), inline README code examples are sufficient; a `Samples~/` directory adds maintenance burden without proportional value unless the setup requires a running scene.
 - **Editor namespace collision**: Editor scripts placed in a sub-namespace ending with `.Editor` (e.g., `GameLovers.X.Editor`) MUST qualify the Unity base class as `UnityEditor.Editor`. A bare `Editor` resolves to the enclosing namespace's own `.Editor` child (a namespace), not the Unity type, producing `CS0118: 'Editor' is a namespace but is used like a type`.
@@ -29,11 +29,11 @@ Most packages live under `Packages/` and are included as **git submodules** (see
 ## 4. Samples workflow (priority order)
 When a task references a sample scene/script:
 - **1) Work in `Assets/Samples/` first** (this is what the Unity project actually uses when samples are imported).
-- **2) If it’s not in `Assets/Samples/`**, locate the source sample in the package’s `Samples~/` folder:
+- **2) If it's not in `Assets/Samples/`**, locate the source sample in the package's `Samples~/` folder:
   - `Packages/<package-name>/Samples~/...` (for embedded/submodule packages in this repo)
   - `Library/PackageCache/<package-name>@<version>/Samples~/...` (for external Unity packages)
 
-## 4. Submodules workflow (important)
+## 5. Submodules workflow (important)
 If a package folder under `Packages/` is empty, initialize submodules:
 
 ```bash
@@ -42,21 +42,45 @@ git submodule update --init --recursive
 
 When editing a package, treat it like its own repo:
 - Make changes inside `Packages/<package-name>/`
-- Update that package’s `README.md` / `CHANGELOG.md` when behavior or API changes
+- Update that package's `README.md` / `CHANGELOG.md` when behavior or API changes
 - Prefer contributing upstream to the package repository
 
-## 5. Package-specific guides (source of truth)
+## 6. Package-specific guides (source of truth)
 Some packages include their own `AGENTS.md`. When present, **that file is the source of truth** for that package.
 
-Examples:
-- `Packages/com.gamelovers.uiservice/AGENTS.md`
+Packages with `AGENTS.md`:
 - `Packages/com.gamelovers.services/AGENTS.md`
+- `Packages/com.gamelovers.uiservice/AGENTS.md`
+- `Packages/com.gamelovers.gamedata/AGENTS.md`
+- `Packages/com.gamelovers.mobileservices/AGENTS.md`
 
 When a package has a subdirectory with its own distinct conventions (e.g., `Tests/`, `Editor/`), a sub-folder `AGENTS.md` may exist there. The parent `AGENTS.md` will contain a **MUST-read pointer** of the form:
 > Before reading, editing, or creating any file in `<X>/`, you **MUST** read [`<X>/AGENTS.md`](<X>/AGENTS.md) first.
 
-## 6. Documentation policy
+## 7. Documentation policy
 - Root `README.md` documents **this host repository** and links out to packages.
 - Package-level `README.md` documents the **package** (install, usage, API, samples).
+- Package-level `AGENTS.md` is the **contributor/agent guide** for that package (architecture, gotchas, workflows).
+- **README size threshold**: when a trimmed package `README.md` would exceed ~350 lines, move deep API reference into a sibling `docs/` folder (flat `.md` files + a `docs/README.md` index). The README itself should stay lean: Why / Install / Quick Start / Services-at-a-Glance / Samples / Related docs / Contributing / Support / License. Reference implementations: `Packages/com.gamelovers.uiservice/docs/` and `Packages/com.gamelovers.services/docs/`.
 
+## 8. Claude Code convention
+Every package with an `AGENTS.md` also has a `CLAUDE.md` at the package root. `CLAUDE.md` is a thin wrapper that imports `AGENTS.md` via Claude Code's native `@AGENTS.md` syntax — it contains no duplicated content.
 
+When creating a new package with an `AGENTS.md`, also create a matching `CLAUDE.md` following this template:
+
+```markdown
+# Claude Code Guide — <package-display-name>
+
+This package's contributor/agent guide lives in `AGENTS.md`.
+Claude Code will automatically import it below.
+
+@AGENTS.md
+
+## Claude-Specific Notes
+
+- Treat `AGENTS.md` as the source of truth.
+- If anything in this file appears to conflict with `AGENTS.md`, prefer `AGENTS.md`.
+- For user-facing usage, see `README.md`.
+```
+
+Also create a matching `CLAUDE.md.meta` Unity asset meta file (copy the `TextScriptImporter` pattern from any existing `AGENTS.md.meta`, with a fresh GUID).
