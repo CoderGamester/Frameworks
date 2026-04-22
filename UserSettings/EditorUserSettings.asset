@@ -35,6 +35,9 @@ EditorUserSettings:
     RecentlyUsedSceneGuid-9:
       value: 53070d0201055e5f5c0a5b7016225a44414f4f282d7e7734282d496bb4b4303b
       flags: 0
+    Trace.SinkConfigs:
+      value: 181377090b53005c1e4c563952365119020e56292326353f212c5f69f9a2103de4e623e5f3163a2a3c0ead664629002dfc484549d50a1e0e1601ef0714ec52490a8715c60a8a455ec51612cb8f009da1f3dfd8feddf9d5ddddcab2e0fdfee9baafe5b7eeafb5e18ce882ffa989cbcbc1f2c3adc1e1e48b9deb829d918ac1dbdeffdf89d3ea8ec2def4afe2d7f3c2ba
+      flags: 0
     vcSharedLogLevel:
       value: 0d5e400f0650
       flags: 0
