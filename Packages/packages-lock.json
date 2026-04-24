@@ -16,18 +16,6 @@
       "dependencies": {},
       "hash": "ec9204d381eb406a8f6e68fd67429a96ca6c5322"
     },
-    "com.gamelovers.configsprovider": {
-      "version": "file:com.gamelovers.configsprovider",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
-    "com.gamelovers.dataextensions": {
-      "version": "file:com.gamelovers.dataextensions",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
     "com.gamelovers.gamedata": {
       "version": "file:com.gamelovers.gamedata",
       "depth": 0,
@@ -47,14 +35,6 @@
         "com.gamelovers.gamedata": "1.0.0"
       }
     },
-    "com.gamelovers.inputextension": {
-      "version": "file:com.gamelovers.inputextensions",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.unity.inputsystem": "1.0.0-preview.4"
-      }
-    },
     "com.gamelovers.mobileservices": {
       "version": "file:com.gamelovers.mobileservices",
       "depth": 0,
@@ -62,20 +42,6 @@
       "dependencies": {
         "com.unity.mobile.notifications": "2.3.0",
         "com.unity.inputsystem": "1.11.0"
-      }
-    },
-    "com.gamelovers.nativeui": {
-      "version": "file:com.gamelovers.nativeui",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
-    "com.gamelovers.notificationservice": {
-      "version": "file:com.gamelovers.notificationservice",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.unity.mobile.notifications": "1.3.0"
       }
     },
     "com.gamelovers.services": {
