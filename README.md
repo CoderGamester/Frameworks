@@ -16,14 +16,15 @@ Packages are referenced as submodules:
 | Package | Purpose | Links |
 | --- | --- | --- |
 | `com.gamelovers.uiservice` | UI orchestration service (presenters, layers, sets, Addressables loading, optional analytics, editor tooling) | [Repo](https://github.com/CoderGamester/com.gamelovers.uiservice) · [README](Packages/com.gamelovers.uiservice/README.md) |
-| `com.gamelovers.assetsimporter` | Asset import tooling | [Repo](https://github.com/CoderGamester/Unity-AssetsImporter) |
+| `com.gamelovers.services` | Foundation services (DI-lite, messaging, ticking, coroutines, pooling, persistence, RNG, time, commands, versioning, asset loading) | [Repo](https://github.com/CoderGamester/Services) · [README](Packages/com.gamelovers.services/README.md) |
+| `com.gamelovers.gamedata` | Game data utilities (configs provider, observables, deterministic floatP, JSON serialization, editor tools) | [Repo](https://github.com/CoderGamester/com.gamelovers.gamedata) · [README](Packages/com.gamelovers.gamedata/README.md) |
+| `com.gamelovers.mobileservices` | Mobile platform services (native UI, notifications, gesture detection) | [Repo](https://github.com/CoderGamester/com.gamelovers.mobileservices) · [README](Packages/com.gamelovers.mobileservices/README.md) |
 | `com.gamelovers.configsprovider` | Configs provider utilities | [Repo](https://github.com/CoderGamester/Unity-ConfigsProvider) |
 | `com.gamelovers.dataextensions` | Data type extensions utilities | [Repo](https://github.com/CoderGamester/Unity-DataTypeExtensions) |
 | `com.gamelovers.googlesheetimporter` | Google Sheets importer | [Repo](https://github.com/CoderGamester/Unity-GoogleSheet-Importer) |
 | `com.gamelovers.inputextensions` | Input utilities/extensions | [Repo](https://github.com/CoderGamester/com.gamelovers.inputextensions) |
 | `com.gamelovers.nativeui` | Native UI helpers | [Repo](https://github.com/CoderGamester/com.gamelovers.nativeui) |
 | `com.gamelovers.notificationservice` | Notification service utilities | [Repo](https://github.com/CoderGamester/com.gamelovers.notificationservice) |
-| `com.gamelovers.services` | General services utilities | [Repo](https://github.com/CoderGamester/Services) |
 | `com.gamelovers.statechart` | Statechart / HFSM utilities | [Repo](https://github.com/CoderGamester/Statechart-HFSM) |
 
 Tip: if a package folder is empty on first clone, you likely forgot to fetch submodules.

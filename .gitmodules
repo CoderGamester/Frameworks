@@ -1,30 +1,18 @@
-[submodule "Packages/com.gamelovers.inputextensions"]
-	path = Packages/com.gamelovers.inputextensions
-	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.inputextensions.git
 [submodule "Packages/com.gamelovers.services"]
 	path = Packages/com.gamelovers.services
-	url = https://github.com/CoderGamester/Services.git
+	url = https://CoderGamester@github.com/CoderGamester/Unity-Services.git
 [submodule "Packages/com.gamelovers.statechart"]
 	path = Packages/com.gamelovers.statechart
-	url = https://github.com/CoderGamester/Statechart-HFSM.git
+	url = https://CoderGamester@github.com/CoderGamester/Statechart-HFSM.git
 [submodule "Packages/com.gamelovers.uiservice"]
 	path = Packages/com.gamelovers.uiservice
-	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.uiservice.git
+	url = https://CoderGamester@github.com/CoderGamester/Unity-UiService.git
 [submodule "Packages/com.gamelovers.googlesheetimporter"]
 	path = Packages/com.gamelovers.googlesheetimporter
-	url = https://github.com/CoderGamester/Unity-GoogleSheet-Importer.git
-[submodule "Packages/com.gamelovers.notificationservice"]
-	path = Packages/com.gamelovers.notificationservice
-	url = https://github.com/CoderGamester/com.gamelovers.notificationservice
-[submodule "Packages/com.gamelovers.nativeui"]
-	path = Packages/com.gamelovers.nativeui
-	url = https://github.com/CoderGamester/com.gamelovers.nativeui.git
-[submodule "Packages/com.gamelovers.dataextensions"]
-	path = Packages/com.gamelovers.dataextensions
-	url = https://github.com/CoderGamester/Unity-DataTypeExtensions.git
-[submodule "Packages/com.gamelovers.assetsimporter"]
-	path = Packages/com.gamelovers.assetsimporter
-	url = https://github.com/CoderGamester/Unity-AssetsImporter.git
-[submodule "Packages/com.gamelovers.configsprovider"]
-	path = Packages/com.gamelovers.configsprovider
-	url = https://github.com/CoderGamester/Unity-ConfigsProvider.git
+	url = https://CoderGamester@github.com/CoderGamester/Unity-GoogleSheet-Importer.git
+[submodule "Packages/com.gamelovers.mobileservices"]
+	path = Packages/com.gamelovers.mobileservices
+	url = https://CoderGamester@github.com/CoderGamester/Unity-MobileServices.git
+[submodule "Packages/com.gamelovers.gamedata"]
+	path = Packages/com.gamelovers.gamedata
+	url = https://CoderGamester@github.com/CoderGamester/Unity-GameData.git

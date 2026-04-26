@@ -1,0 +1,17 @@
+{
+  "enabled": false,
+  "path": "",
+  "mcpServers": {
+    "~example (prefix server name with ~ to hide)": {
+      "type": "stdio",
+      "command": "your-mcp-server-command",
+      "args": [
+        "--your-arg",
+        "value"
+      ],
+      "env": {
+        "EXAMPLE_VAR": "example_value"
+      }
+    }
+  }
+}

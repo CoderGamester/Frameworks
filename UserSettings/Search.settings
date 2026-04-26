@@ -56,6 +56,26 @@ providers = {
 		priority = 210
 		defaultAction = null
 	}
+	presets_provider = {
+		active = false
+		priority = -10
+		defaultAction = null
+	}
+	"unity.ai.pattern.search" = {
+		active = true
+		priority = 80
+		defaultAction = null
+	}
+	"unity.ai.file.search" = {
+		active = true
+		priority = 85
+		defaultAction = null
+	}
+	asset_knowledge = {
+		active = true
+		priority = 99999
+		defaultAction = null
+	}
 }
 objectSelectors = {
 }
