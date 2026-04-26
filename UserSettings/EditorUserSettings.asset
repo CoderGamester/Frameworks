@@ -6,34 +6,34 @@ EditorUserSettings:
   serializedVersion: 4
   m_ConfigSettings:
     RecentlyUsedSceneGuid-0:
-      value: 0057515757075a08595a5977467508474e4f41737c7827312f2b1e30e6e4666f
-      flags: 0
-    RecentlyUsedSceneGuid-1:
-      value: 065702045006585a0b5b0f754977074615161a2b2d2e7f3128784f60b3e5616b
-      flags: 0
-    RecentlyUsedSceneGuid-2:
       value: 0600525404060b0f0e5b087440740f48464e482b7c2a76337d2d4d36b2e6656c
       flags: 0
-    RecentlyUsedSceneGuid-3:
+    RecentlyUsedSceneGuid-1:
       value: 00500350040d5d0e5f5c5e7249775d48154e4c7c757d7f662c2b1b65b6e46068
       flags: 0
-    RecentlyUsedSceneGuid-4:
+    RecentlyUsedSceneGuid-2:
       value: 0008050554045e0f0f56557644770e49154f4e297f2c22672b7f1e61b0e16c6e
       flags: 0
-    RecentlyUsedSceneGuid-5:
+    RecentlyUsedSceneGuid-3:
       value: 5700500456060d580908597340775e444e4e40727c7970637d7e4a66e3e3643d
       flags: 0
-    RecentlyUsedSceneGuid-6:
+    RecentlyUsedSceneGuid-4:
       value: 540707515d03505e5b0f582145770d47124e40287d7974647c701f65bbb36c3d
       flags: 0
-    RecentlyUsedSceneGuid-7:
+    RecentlyUsedSceneGuid-5:
       value: 5108055f0406510d5a0d547143775b13104f412e7c7b70667a78456ab7b4676d
       flags: 0
-    RecentlyUsedSceneGuid-8:
+    RecentlyUsedSceneGuid-6:
       value: 015752565150580e5f58542447770f46444f4b7e797a7135742c4830e7b7356e
       flags: 0
-    RecentlyUsedSceneGuid-9:
+    RecentlyUsedSceneGuid-7:
       value: 53070d0201055e5f5c0a5b7016225a44414f4f282d7e7734282d496bb4b4303b
+      flags: 0
+    RecentlyUsedSceneGuid-8:
+      value: 54540c530106080a0e5d0e7344770d42174f1a792f7c2265287f1b64b2b86469
+      flags: 0
+    RecentlyUsedSceneGuid-9:
+      value: 50570c0554515b5e590c592344745c48144e1c7b297a27632f7d1e66e6b6646d
       flags: 0
     Trace.SinkConfigs:
       value: 181377090b53005c1e4c563952365119020e56292326353f212c5f69f9a2103de4e623e5f3163a2a3c0ead664629002dfc484549d50a1e0e1601ef0714ec52490a8715c60a8a455ec51612cb8f009da1f3dfd8feddf9d5ddddcab2e0fdfee9baafe5b7eeafb5e18ce882ffa989cbcbc1f2c3adc1e1e48b9deb829d918ac1dbdeffdf89d3ea8ec2def4afe2d7f3c2ba
