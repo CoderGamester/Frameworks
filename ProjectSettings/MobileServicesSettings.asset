@@ -46,18 +46,22 @@ MonoBehaviour:
     - LocaleCode: en
       UsageDescription: 
   _capabilities:
-    PushNotifications: 0
+    PushNotifications: 1
     BackgroundAudio: 0
-    AppTracking: 0
-    AssociatedDomains: 0
+    AppTracking: 1
+    AssociatedDomains: 1
     AssociatedDomainList: []
   _androidManifest:
-    ReadMediaImages: 0
-    PostNotifications: 0
-    RecordAudio: 0
-    Camera: 0
-    AccessFineLocation: 0
+    ReadMediaImages: 1
+    PostNotifications: 1
+    RecordAudio: 1
+    Camera: 1
+    AccessFineLocation: 1
     IncludeShareQueriesBlock: 0
   _allowPlaceholderUsageDescriptions: 0
-  _scanPopulatedCapabilities: 0
+  _scanPopulatedCapabilities: 1
   _enableRuntimeSimulatorOverlay: 0
+  _includePlayReviewDependency: 1
+  _playReviewDependencyCoordinate: com.google.android.play:review:2.0.2
+  _disableBuildPostProcessing: 0
+  _buildCallbackOrder: 0
