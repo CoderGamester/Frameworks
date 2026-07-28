@@ -73,6 +73,9 @@ Packages with `AGENTS.md`:
 When a package has a subdirectory with its own distinct conventions (e.g., `Tests/`, `Editor/`), a sub-folder `AGENTS.md` may exist there. The parent `AGENTS.md` will contain a **MUST-read pointer** of the form:
 > Before reading, editing, or creating any file in `<X>/`, you **MUST** read [`<X>/AGENTS.md`](<X>/AGENTS.md) first.
 
+## 6.5. CHANGELOG dialect
+All packages follow [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) with `## [X.Y.Z] - YYYY-MM-DD` section headings. Sub-heading style has drifted across the family (some packages use canonical `### Added`/`### Changed`/`### Fixed`, others bold-label `**New**:`/`**Changed**:`/`**Fixed**:`, one uses bold-label with no trailing colon). The canonical style going forward, used by the majority of packages, is **bold-label with a trailing colon**: `**New**:`, `**Changed**:`, `**Fixed**:`, `**Docs**:`. Use it for every new CHANGELOG section in every package; do not retroactively rewrite historical sections just to converge the dialect — that's cosmetic churn with no functional value.
+
 ## 7. Documentation policy
 - Root `README.md` documents **this host repository** and links out to packages.
 - Package-level `README.md` documents the **package** (install, usage, API, samples).
