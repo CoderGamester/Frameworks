@@ -1,12 +1,12 @@
 [submodule "Packages/com.gamelovers.services"]
 	path = Packages/com.gamelovers.services
-	url = https://CoderGamester@github.com/CoderGamester/Unity-Services.git
+	url = https://CoderGamester@github.com/CoderGamester/Services.git
 [submodule "Packages/com.gamelovers.statechart"]
 	path = Packages/com.gamelovers.statechart
 	url = https://CoderGamester@github.com/CoderGamester/Statechart-HFSM.git
 [submodule "Packages/com.gamelovers.uiservice"]
 	path = Packages/com.gamelovers.uiservice
-	url = https://CoderGamester@github.com/CoderGamester/Unity-UiService.git
+	url = https://CoderGamester@github.com/CoderGamester/com.gamelovers.uiservice.git
 [submodule "Packages/com.gamelovers.googlesheetimporter"]
 	path = Packages/com.gamelovers.googlesheetimporter
 	url = https://CoderGamester@github.com/CoderGamester/Unity-GoogleSheet-Importer.git
