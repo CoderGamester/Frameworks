@@ -67,6 +67,8 @@ Packages with `AGENTS.md`:
 - `Packages/com.gamelovers.uiservice/AGENTS.md`
 - `Packages/com.gamelovers.gamedata/AGENTS.md`
 - `Packages/com.gamelovers.mobileservices/AGENTS.md`
+- `Packages/com.gamelovers.googlesheetimporter/AGENTS.md`
+- `Packages/com.gamelovers.statechart/AGENTS.md`
 
 When a package has a subdirectory with its own distinct conventions (e.g., `Tests/`, `Editor/`), a sub-folder `AGENTS.md` may exist there. The parent `AGENTS.md` will contain a **MUST-read pointer** of the form:
 > Before reading, editing, or creating any file in `<X>/`, you **MUST** read [`<X>/AGENTS.md`](<X>/AGENTS.md) first.
