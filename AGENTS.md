@@ -7,6 +7,7 @@ Most packages live under `Packages/` and are included as **git submodules** (see
 
 ## 2. Key rules / standards
 - **Unity**: 6000.0+
+- **Render pipeline**: this host project is **URP-only**. The pipeline of record is `Assets/Settings/URP-Mobile.asset` (+ `URP-Mobile_Renderer.asset`), assigned in `GraphicsSettings.defaultRenderPipeline` and all 6 `QualitySettings` levels; color space is Linear. Only `com.gamelovers.uiservice` declares a hard `com.unity.render-pipelines.universal` dependency — its `Runtime/Rendering/` presenter features (camera stacking, render-texture targets, backdrop blur) genuinely need URP types. `com.gamelovers.gamedata`, `com.gamelovers.services`, `com.gamelovers.statechart`, `com.gamelovers.googlesheetimporter`, and `com.gamelovers.mobileservices` are **deliberately** pipeline-neutral (verified: zero rendering API references in any of them) and stay installable in BiRP/HDRP projects — do not add a URP dependency to any of them without the same justification `uiservice` has. Consumers who import a `uiservice` sample into a BiRP/HDRP project will see a missing-script warning on the sample scene's Main Camera (`UniversalAdditionalCameraData`); this is expected and accepted.
 - **C#**: C# 9.0 syntax; **explicit namespaces** (no global usings)
 - **Assembly boundaries**:
   - Runtime code must not reference `UnityEditor`
