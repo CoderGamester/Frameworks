@@ -1,8 +1,15 @@
 name: Sync assigned items to project
 
 # Adds every open issue and PR assigned to CoderGamester to user project 4.
+#
 # Logs are public (this repo is public), so this workflow deliberately prints
 # only counts -- never issue URLs or titles, which may come from private repos.
+#
+# Everything addresses the project by node ID rather than via `gh project
+# --owner`. The CLI's owner flag has to resolve the login to a user or an org,
+# which needs read:org on top of everything else; without it the CLI fails with
+# "unknown owner type". Node IDs skip that lookup, so the token only needs
+# `repo` (to see private repos in search) and `project`.
 
 on:
   schedule:
@@ -21,7 +28,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PROJECT_SYNC_TOKEN }}
           OWNER: CoderGamester
-          PROJECT: '4'
+          PROJECT_ID: PVT_kwHOAF3iKs4Be1kq
         run: |
           set -euo pipefail
 
@@ -30,31 +37,44 @@ jobs:
             exit 1
           fi
 
-          # Everything open and assigned to me, anywhere the token can see.
+          # Node IDs of everything open and assigned to me, anywhere the token
+          # can see. addProjectV2ItemById takes these directly.
           gh search issues \
             --assignee "$OWNER" \
             --state open \
             --include-prs \
             --limit 200 \
-            --json url --jq '.[].url' | sort -u > assigned.txt
+            --json id --jq '.[].id' | sort -u > want.txt
 
           # What the project already tracks, so we only add the difference.
-          gh project item-list "$PROJECT" --owner "$OWNER" \
-            --format json --limit 500 \
-            --jq '.items[].content.url // empty' | sort -u > existing.txt
+          gh api graphql --paginate -F pid="$PROJECT_ID" -f query='
+            query($pid: ID!, $endCursor: String) {
+              node(id: $pid) {
+                ... on ProjectV2 {
+                  items(first: 100, after: $endCursor) {
+                    pageInfo { hasNextPage endCursor }
+                    nodes { content { ... on Issue { id } ... on PullRequest { id } } }
+                  }
+                }
+              }
+            }' --jq '.data.node.items.nodes[].content.id // empty' | sort -u > have.txt
 
-          comm -23 assigned.txt existing.txt > to_add.txt
+          comm -23 want.txt have.txt > to_add.txt
 
-          echo "assigned=$(wc -l < assigned.txt | tr -d ' ')" \
-               "tracked=$(wc -l < existing.txt | tr -d ' ')" \
+          echo "assigned=$(wc -l < want.txt | tr -d ' ')" \
+               "tracked=$(wc -l < have.txt | tr -d ' ')" \
                "to_add=$(wc -l < to_add.txt | tr -d ' ')"
 
           added=0
           failed=0
-          while read -r url; do
-            [ -n "$url" ] || continue
-            # Output suppressed on purpose: it echoes the item URL.
-            if gh project item-add "$PROJECT" --owner "$OWNER" --url "$url" >/dev/null 2>&1; then
+          while read -r cid; do
+            [ -n "$cid" ] || continue
+            if gh api graphql -F pid="$PROJECT_ID" -F cid="$cid" -f query='
+              mutation($pid: ID!, $cid: ID!) {
+                addProjectV2ItemById(input: {projectId: $pid, contentId: $cid}) {
+                  item { id }
+                }
+              }' >/dev/null 2>&1; then
               added=$((added + 1))
             else
               failed=$((failed + 1))
