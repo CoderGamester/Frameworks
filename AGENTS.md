@@ -76,6 +76,42 @@ When a package has a subdirectory with its own distinct conventions (e.g., `Test
 ## 6.5. CHANGELOG dialect
 All packages follow [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) with `## [X.Y.Z] - YYYY-MM-DD` section headings. Sub-heading style has drifted across the family (some packages use canonical `### Added`/`### Changed`/`### Fixed`, others bold-label `**New**:`/`**Changed**:`/`**Fixed**:`, one uses bold-label with no trailing colon). The canonical style going forward, used by the majority of packages, is **bold-label with a trailing colon**: `**New**:`, `**Changed**:`, `**Fixed**:`, `**Docs**:`. Use it for every new CHANGELOG section in every package; do not retroactively rewrite historical sections just to converge the dialect — that's cosmetic churn with no functional value.
 
+## 6.6. Code style & documentation
+Mirrored from the `demons` project guide (`~/Desktop/demons/AGENTS.md` §"Code style & documentation") so both codebases read the same. That file is upstream — if the two ever disagree, it wins.
+
+### General C# rules
+- **No `goto`**; use guard clauses and early returns over nested `if`/`else`.
+- **Prefer deletion over speculative code.** Remove dead fields, callbacks, config, branches, and abstractions; add code only for a current requirement or an enforced invariant. An interface with exactly one implementation and no plausible second is speculative.
+- **Prefer generic, reusable helpers over caller-purpose-named ones.** Name shared utilities by what they do, not by the first feature that needed them.
+- **Private fields use `_camelCase`** — never `m_*` (reserved for Unity's own serialized YAML names, which we don't control) and never `s_*` for statics; a private static field is still `_camelCase`.
+- **Private methods use `PascalCase`**, never an `_underscore` prefix — that prefix is for fields only.
+- **Private const strings** are plain `PascalCase`; never `c_` or `SCREAMING_SNAKE_CASE`.
+- **`nameof(T)` over string literals** for type-name-derived paths (`Resources.Load`, `AssetDatabase.LoadAssetAtPath`, Addressables keys, log prefixes). A standalone `private const string FooPath = "Foo"` next to a type-derived load is the smell.
+- **C# 9 syntax**: no file-scoped namespaces, no global usings, explicit namespaces.
+
+### Code comments
+- **Comments are for non-obvious rationale** — trade-offs, invariants, ordering requirements not enforced by the type system, workarounds for external bugs. Never narrate the obvious (`// Increment the counter`).
+- **Never explain the change you are making.** Diff context belongs in the commit message; a comment describes the code's permanent state, not how it got there. Wrong: `// An earlier version cached this, which leaked a handler.` Right: `// Resolved twice per open, so it needs no caching.`
+- **One sentence usually suffices.** Multi-paragraph rationale is a smell — split the function, rename for self-documentation, or move it to `docs/` behind a one-line pointer.
+- **Prefer rewriting unclear code over commenting it.**
+
+### XML documentation rules
+- **Document only `public` / `protected` / `internal` types (class, struct, interface, enum) and members (methods, properties).**
+- **Never document**: constructors, fields of any kind (const, static, serialized, public, private), private members, generated code.
+- **Properties** collapse to a single line: `/// <summary>Current zoom magnitude.</summary>`.
+- **Methods and types** always use the multi-line block form, even when the text would fit on one line.
+- **Enum values** use `//` inline on the same line as the declaration — never `/// <summary>` above.
+- **`<remarks>`** only for non-obvious behaviour, invariants, or "why". Describe durable behaviour, not the current call graph.
+- **Do not write** `<param>`, `<returns>`, `<typeparam>`, or `<exception>` unless explicitly asked. (`<paramref>` inside a summary is fine.)
+- **`/// <inheritdoc />`** when implementing an interface member or overriding a documented base member; on a *type* that implements an already-documented interface it collapses to a single line.
+
+### Member ordering inside a type
+Omit sections that don't apply, but keep this sequence: **public inner types → const fields → static fields → `[SerializeField]` fields → public fields → private fields → properties → constructor → Unity `MonoBehaviour` methods → methods by access**.
+
+Methods by access, strictly: **public static → public override → public abstract → public → internal → protected → private**.
+
+**`internal` is never interleaved with `private`.** An `internal` test-only helper lives in the contiguous `internal` block above the private methods, even when its only caller is two lines away — co-locating it hides which symbols are testable across assembly boundaries. When adding a member, place it by **kind then access**, never next to the related method.
+
 ## 7. Documentation policy
 - Root `README.md` documents **this host repository** and links out to packages.
 - Package-level `README.md` documents the **package** (install, usage, API, samples).
