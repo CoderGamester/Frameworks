@@ -1,6 +1,7 @@
 name: Sync assigned items to project
 
-# Adds every open issue and PR assigned to CoderGamester to user project 4.
+# Adds every open issue and PR assigned to CoderGamester to user project 4, and
+# stamps each one with a Kind of Issue or Pull request.
 #
 # Logs are public (this repo is public), so this workflow deliberately prints
 # only counts -- never issue URLs or titles, which may come from private repos.
@@ -23,12 +24,15 @@ permissions: {}
 jobs:
   sync:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.PROJECT_SYNC_TOKEN }}
+      OWNER: CoderGamester
+      PROJECT_ID: PVT_kwHOAF3iKs4Be1kq
+      KIND_FIELD_ID: PVTSSF_lAHOAF3iKs4Be1kqzhZNKKk
+      KIND_OPT_ISSUE: '936b2bd2'
+      KIND_OPT_PR: da72b982
     steps:
       - name: Add assigned issues and PRs to project 4
-        env:
-          GH_TOKEN: ${{ secrets.PROJECT_SYNC_TOKEN }}
-          OWNER: CoderGamester
-          PROJECT_ID: PVT_kwHOAF3iKs4Be1kq
         run: |
           set -euo pipefail
 
@@ -82,4 +86,56 @@ jobs:
           done < to_add.txt
 
           echo "added=$added failed=$failed"
+          [ "$failed" -eq 0 ]
+
+      - name: Stamp Kind on any item missing it
+        run: |
+          set -euo pipefail
+
+          # Reconcile rather than set-on-add, so a failed write on an earlier
+          # run gets picked up on the next one.
+          gh api graphql --paginate -F pid="$PROJECT_ID" -f query='
+            query($pid: ID!, $endCursor: String) {
+              node(id: $pid) {
+                ... on ProjectV2 {
+                  items(first: 100, after: $endCursor) {
+                    pageInfo { hasNextPage endCursor }
+                    nodes {
+                      id type
+                      kind: fieldValueByName(name: "Kind") {
+                        ... on ProjectV2ItemFieldSingleSelectValue { name }
+                      }
+                    }
+                  }
+                }
+              }
+            }' --jq '.data.node.items.nodes[] | select(.kind == null) | "\(.id) \(.type)"' > missing.txt
+
+          echo "missing_kind=$(wc -l < missing.txt | tr -d ' ')"
+
+          stamped=0
+          failed=0
+          while read -r iid itype; do
+            [ -n "$iid" ] || continue
+            case "$itype" in
+              ISSUE)        opt="$KIND_OPT_ISSUE" ;;
+              PULL_REQUEST) opt="$KIND_OPT_PR" ;;
+              # Draft issues and redacted items have no Kind to infer.
+              *)            continue ;;
+            esac
+            if gh api graphql -F pid="$PROJECT_ID" -F iid="$iid" \
+                 -F fid="$KIND_FIELD_ID" -F opt="$opt" -f query='
+              mutation($pid: ID!, $iid: ID!, $fid: ID!, $opt: String!) {
+                updateProjectV2ItemFieldValue(input: {
+                  projectId: $pid, itemId: $iid, fieldId: $fid,
+                  value: {singleSelectOptionId: $opt}
+                }) { projectV2Item { id } }
+              }' >/dev/null 2>&1; then
+              stamped=$((stamped + 1))
+            else
+              failed=$((failed + 1))
+            fi
+          done < missing.txt
+
+          echo "stamped=$stamped failed=$failed"
           [ "$failed" -eq 0 ]
