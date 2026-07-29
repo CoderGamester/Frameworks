@@ -59,6 +59,15 @@ UserSettings/Layouts/default-6000.dwlt
 Assets/Configs/Resources/version-data.txt
 
 ============
+Package Manager sample imports -- never commit these
+============
+# Package Manager extracts Samples~/<Sample> here on import. The canonical source is
+# Packages/<pkg>/Samples~/, so anything committed from here is a duplicate that then has
+# to be kept in sync by hand. Import freely to test; the copy stays local.
+Assets/Samples/
+Assets/Samples.meta
+
+============
 Tests audit history (unity-tests-audit skill -- local developer state, never committed)
 ============
 .audit-history.md
