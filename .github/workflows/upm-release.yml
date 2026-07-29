@@ -1,0 +1,153 @@
+# Post-merge release automation for the GameLovers UPM packages.
+#
+# STATUS: created but DISABLED on purpose (`gh workflow disable upm-release.yml`).
+# Re-enable with: gh workflow enable upm-release.yml --repo CoderGamester/Frameworks
+#
+# WHY IT LIVES IN THE HOST REPO, NOT IN EACH PACKAGE REPO
+# `scripts/release.py` resolves packages via the host layout (Packages/<folder> as
+# submodules) and derives its phase from git + the GitHub API. Running it here means
+# one copy of the gate logic instead of six. It also avoids two concrete problems
+# with per-package workflows:
+#   1. `.github/` IS PACKED INTO THE PUBLISHED TARBALL -- verified: the published
+#      googlesheetimporter 0.7.2 asset contains `package/.github/workflows/openai.yml`.
+#      A per-package workflow would ship to every consumer unless each package also
+#      gains an `.npmignore` excluding `.github/` (none has one today).
+#   2. Adding a workflow commit to a package's `develop` invalidates an already-packed
+#      tarball (G4/G32b), and adding it to `master` makes master carry unique content,
+#      which G5 refuses.
+# To add real `on: push` triggers per package later, install this per repo AND add
+# `.npmignore` with `.github/` in the same commit, after any in-flight release lands.
+#
+# TRIGGERS
+# `workflow_dispatch` so a release can be driven deliberately, and
+# `repository_dispatch` so a package repo can notify the host after a PR merge:
+#   gh api repos/CoderGamester/Frameworks/dispatches \
+#     -f event_type=upm-release -F client_payload[package]=statechart
+#
+# TOKEN REQUIREMENTS
+# GITHUB_TOKEN is scoped to this repo only, so it cannot tag or release the package
+# repos. Set a `RELEASE_PAT` secret in the `release` environment: a fine-grained PAT
+# with Contents:write on the six package repos, owned by CoderGamester so releases
+# carry the right authorship. Without it the run stops at `status`/`pack`.
+#
+# PACKING TIER
+# Tier 1 (attested to org 129325) needs the standalone `upm` CLI, which is not on
+# GitHub-hosted runners and has no public installer URL we rely on. On a self-hosted
+# macOS runner it is picked up automatically from ~/.upm/bin/upm. On hosted runners
+# the script falls back to `npm pack` (tier 3), which produces a DEGRADED artifact:
+# no attestation and no `repository` provenance block. Prefer self-hosted for
+# anything you intend to publish.
+
+name: upm-release
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: "Package folder under Packages/ (e.g. statechart, or com.gamelovers.statechart)"
+        required: true
+        type: string
+      phase:
+        description: "How far to go"
+        required: true
+        default: status
+        type: choice
+        options: [status, pack, tag, publish, full]
+      allow_removals:
+        description: "Acknowledge files removed vs the previous release (G24)"
+        required: false
+        default: false
+        type: boolean
+  repository_dispatch:
+    types: [upm-release]
+
+permissions:
+  contents: read
+
+concurrency:
+  # One release per package at a time. Mirrors release.py's per-package advisory
+  # lock; the host commit is additionally serialised by the bump-host job.
+  group: upm-release-${{ github.event.inputs.package || github.event.client_payload.package }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: release
+    env:
+      PACKAGE: ${{ github.event.inputs.package || github.event.client_payload.package }}
+      PHASE: ${{ github.event.inputs.phase || 'status' }}
+      UPM_SERVICE_ACCOUNT_KEY_ID: ${{ secrets.UPM_SERVICE_ACCOUNT_KEY_ID }}
+      UPM_SERVICE_ACCOUNT_KEY_SECRET: ${{ secrets.UPM_SERVICE_ACCOUNT_KEY_SECRET }}
+      GH_TOKEN: ${{ secrets.RELEASE_PAT }}
+      RELEASE_ALLOW_REMOVALS: ${{ github.event.inputs.allow_removals == 'true' && '1' || '' }}
+
+    steps:
+      - name: Check out host repo with submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Assert a release token is present
+        run: |
+          if [ -z "${GH_TOKEN}" ]; then
+            echo "::error::RELEASE_PAT is not set in the 'release' environment." \
+                 "GITHUB_TOKEN cannot tag or release the package repos."
+            exit 1
+          fi
+
+      - name: Pin the commit identity
+        run: |
+          git config --global user.name  'CoderGamester'
+          git config --global user.email 'game.gamester@gmail.com'
+
+      - name: Report packing tier
+        run: |
+          if command -v upm >/dev/null 2>&1 || [ -x "$HOME/.upm/bin/upm" ]; then
+            echo "upm CLI available -- tier 1 attested packing possible"
+          else
+            echo "::warning::No upm CLI on this runner. Packing will fall back to" \
+                 "npm pack (tier 3): NO attestation and NO repository provenance" \
+                 "block. Use a self-hosted macOS runner for publishable artifacts."
+          fi
+
+      - name: Status
+        id: status
+        run: |
+          python3 .claude/skills/unity-package-release/scripts/release.py status "$PACKAGE"
+
+      - name: Pack and verify
+        if: ${{ env.PHASE != 'status' }}
+        run: |
+          python3 .claude/skills/unity-package-release/scripts/release.py pack "$PACKAGE"
+
+      - name: Tag the merge commit
+        if: ${{ env.PHASE == 'tag' || env.PHASE == 'publish' || env.PHASE == 'full' }}
+        run: |
+          python3 .claude/skills/unity-package-release/scripts/release.py tag "$PACKAGE"
+
+      - name: Publish the release
+        if: ${{ env.PHASE == 'publish' || env.PHASE == 'full' }}
+        run: |
+          python3 .claude/skills/unity-package-release/scripts/release.py publish "$PACKAGE"
+
+      - name: Bump the host submodule pointer
+        if: ${{ env.PHASE == 'full' }}
+        run: |
+          python3 .claude/skills/unity-package-release/scripts/release.py bump-host "$PACKAGE"
+
+      - name: Upload pack artifacts for inspection
+        if: ${{ always() && env.PHASE != 'status' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: pack-${{ env.PACKAGE }}
+          path: ~/Library/Caches/GameLovers/upm-release/pack/**
+          if-no-files-found: ignore
+          retention-days: 7

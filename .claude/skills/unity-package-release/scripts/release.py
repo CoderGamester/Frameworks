@@ -526,6 +526,20 @@ def unity_editor() -> pathlib.Path | None:
 
 
 def upm_cli() -> pathlib.Path | None:
+    """Locate a `upm` CLI for tier-1 attested packing.
+
+    Prefer the STANDALONE distribution (`~/.upm/bin/upm`, or anything on PATH):
+    it ships independently of the editor, tracks a newer version (9.31.1 vs the
+    6000.5.5f1 editor's 9.26.1), needs no license, and is a short-lived process
+    with no project lock -- which is what makes parallel packing safe. Fall back
+    to the copy bundled inside the editor.
+    """
+    standalone = pathlib.Path.home() / ".upm/bin/upm"
+    if standalone.is_file():
+        return standalone
+    if found := shutil.which("upm"):
+        return pathlib.Path(found)
+
     editor = unity_editor()
     if not editor:
         return None
@@ -580,19 +594,35 @@ def _pack_upm(pkg: Package, out: pathlib.Path) -> pathlib.Path:
             "UPM_SERVICE_ACCOUNT_KEY_ID / _SECRET not set (needed to attest as "
             f"org {UNITY_ORG_ID})"
         )
-    note(f"tier 1: upm pack --organization-id {UNITY_ORG_ID}")
-    output = run([
-        str(cli), "pack", str(pkg.path),
-        "--destination", str(out),
-        "--organization-id", UNITY_ORG_ID,
-    ])
-    # The CLI reports credential failures on stdout while still exiting 0, so the
-    # return code alone is not a success signal. Verified: dummy creds print
-    # "Invalid service account credentials provided." with rc=0 and no tarball.
+    note(f"tier 1: upm pack --organization-id {UNITY_ORG_ID} ({cli})")
+    # Do NOT let run() raise on a non-zero exit: this CLI puts the useful diagnosis
+    # on stdout, and the exit code is inconsistent between builds (the editor-bundled
+    # 9.26.1 exits 0 on bad credentials; the standalone 9.31.1 exits 1). Inspect the
+    # output either way, so the failure is actionable rather than a bare rc.
+    proc = subprocess.run(
+        [str(cli), "pack", str(pkg.path),
+         "--destination", str(out), "--organization-id", UNITY_ORG_ID],
+        capture_output=True, text=True,
+    )
+    output = f"{proc.stdout}\n{proc.stderr}".strip()
     lowered = output.lower()
-    for marker in ("invalid service account", "credentials are missing", "credentials provided"):
+    for marker in (
+        "invalid service account",
+        "credentials are missing",
+        "credentials provided",
+        "does not have permission to sign",
+        "failed to pack",
+    ):
         if marker in lowered:
-            raise Fail(f"upm pack rejected the service-account credentials: {output.strip()}")
+            hint = ""
+            if "permission to sign" in lowered:
+                hint = (
+                    f"\n  The credentials authenticate but the service account lacks a "
+                    f"package-signing role in org {UNITY_ORG_ID}. Grant it in Unity Cloud "
+                    f"-> Tropa Elite -> Service Accounts -> the account -> add an org role "
+                    f"with package management rights."
+                )
+            raise Fail(f"upm pack refused: {output.strip()}{hint}")
     return _sole_tarball(out)
 
 
