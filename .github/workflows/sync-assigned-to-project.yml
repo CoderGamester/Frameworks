@@ -1,0 +1,65 @@
+name: Sync assigned items to project
+
+# Adds every open issue and PR assigned to CoderGamester to user project 4.
+# Logs are public (this repo is public), so this workflow deliberately prints
+# only counts -- never issue URLs or titles, which may come from private repos.
+
+on:
+  schedule:
+    # Every 3 hours, offset off the hour to dodge scheduler congestion.
+    - cron: '17 */3 * * *'
+  workflow_dispatch:
+
+# Nothing here needs the default token; keep it powerless.
+permissions: {}
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add assigned issues and PRs to project 4
+        env:
+          GH_TOKEN: ${{ secrets.PROJECT_SYNC_TOKEN }}
+          OWNER: CoderGamester
+          PROJECT: '4'
+        run: |
+          set -euo pipefail
+
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "::error::PROJECT_SYNC_TOKEN secret is not set" >&2
+            exit 1
+          fi
+
+          # Everything open and assigned to me, anywhere the token can see.
+          gh search issues \
+            --assignee "$OWNER" \
+            --state open \
+            --include-prs \
+            --limit 200 \
+            --json url --jq '.[].url' | sort -u > assigned.txt
+
+          # What the project already tracks, so we only add the difference.
+          gh project item-list "$PROJECT" --owner "$OWNER" \
+            --format json --limit 500 \
+            --jq '.items[].content.url // empty' | sort -u > existing.txt
+
+          comm -23 assigned.txt existing.txt > to_add.txt
+
+          echo "assigned=$(wc -l < assigned.txt | tr -d ' ')" \
+               "tracked=$(wc -l < existing.txt | tr -d ' ')" \
+               "to_add=$(wc -l < to_add.txt | tr -d ' ')"
+
+          added=0
+          failed=0
+          while read -r url; do
+            [ -n "$url" ] || continue
+            # Output suppressed on purpose: it echoes the item URL.
+            if gh project item-add "$PROJECT" --owner "$OWNER" --url "$url" >/dev/null 2>&1; then
+              added=$((added + 1))
+            else
+              failed=$((failed + 1))
+            fi
+          done < to_add.txt
+
+          echo "added=$added failed=$failed"
+          [ "$failed" -eq 0 ]
