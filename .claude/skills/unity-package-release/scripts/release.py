@@ -1354,7 +1354,32 @@ def cmd_pack(args) -> int:
     pkg = Package(args.package)
     with Lock(pkg.folder):
         f = facts(pkg)
-        head = f["develop_tip"]
+
+        # The tarball is built from the WORKING TREE, not from a git ref, so a dirty
+        # or untracked file ships to consumers and is unreproducible from git. This
+        # is not merely preflight's G3: packing must enforce it independently, because
+        # `pack` is reachable without `preflight`. Caught in the wild -- 7 untracked
+        # WIP files under uiservice Samples~/UrpRendering/ were packed into a tarball.
+        if f["dirty"]:
+            raise Fail(
+                f"G3: {len(f['dirty'].splitlines())} uncommitted/untracked path(s) in "
+                f"{pkg.folder}. The tarball is built from the working tree, so this "
+                f"content would ship to consumers without existing in git.\n"
+                f"{f['dirty']}\n"
+                f"  Commit it, stash it, or remove it -- there is deliberately no override."
+            )
+
+        # Local HEAD is what gets packed; assert it matches what is pushed, so the
+        # artifact corresponds to a commit others can actually fetch.
+        local_head = git(pkg.path, "rev-parse", "HEAD")
+        if local_head != f["develop_tip"]:
+            raise Fail(
+                f"G4: HEAD {local_head[:9]} != origin/{WORK_BRANCH} "
+                f"{f['develop_tip'][:9]}. Push or pull before packing, or the tarball's "
+                f"repository.revision will point at a commit that is not on the remote."
+            )
+
+        head = local_head
         before_pkg, before_host = f["dirty"], run(["git", "-C", str(pkg.host), "status", "--porcelain"])
 
         tgz, tier = pack(pkg, args.tier)
