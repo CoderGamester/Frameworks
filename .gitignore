@@ -81,3 +81,7 @@ mono_crash.*.json
 
 # Unity Test Runner output dropped at repo root
 TestResults_*.xml
+
+# test-all.sh comparison artifacts
+.test-all/
+TestResults_*.xml

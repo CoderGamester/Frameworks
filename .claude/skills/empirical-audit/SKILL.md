@@ -15,6 +15,9 @@ an empty region. Only an experiment separates these.
 
 ## The core loop
 
+0. **Read the artifact first.** If something already failed, get its actual output —
+   names, messages, counts — before theorising. A cause proposed ahead of the evidence is
+   a guess, and a plausible one will absorb the whole investigation.
 1. **State the hypothesis** — name the specific behaviour and the file + symbol that
    implements it.
 2. **Design a perturbation** that should change an observable. One change at a time.
@@ -72,6 +75,37 @@ Every clause below exists because its absence produced a wrong answer:
   wrong site.
 - **Assert byte-identical restoration** of every touched file at the end.
 - **Subtract the baseline's failures** so a pre-existing red is never counted as a hit.
+- **Record which environment produced each result, and re-run where the observable can
+  differ.** A perturbation's effect is only established in the environment you ran it in.
+  For Unity that means batchmode and the Editor are separate runs: batchmode never
+  instantiates the URP renderer, so anything branching on renderer/pipeline state takes a
+  different path there. A suite that is green in one and red in the other is not flaky —
+  it is environment-coupled, which is a finding in itself.
+
+## Probe before you assign
+
+For a fixture of any size, do **not** guess a perturbation per observation and verify them
+one at a time. Guessing scales badly and produces confident wrong records.
+
+Instead run a **probe pass**: pick a handful of candidate perturbations covering the
+seams the fixture plausibly exercises, apply each, and record the *full set* of
+observations it changes. That yields a matrix — candidate × affected observations — and
+the assignment falls out of it:
+
+- an observation changed by exactly one candidate has an isolated perturbation; take it
+- a candidate that changes many observations pins none of them individually; use it only
+  where nothing sharper exists, and say so
+- an observation **no** candidate changes is a result, not a gap in your imagination —
+  it is double-covered, redundant with a sibling, or asserting something the code does not
+  own. Classify it before acting.
+
+Worked instance: seven candidates over a 17-test fixture produced a clean 2×2 separation
+for six tests, isolated one, exposed one double-guarded validation, and showed six tests
+that no candidate could tell apart — the flags they claimed to vary were unreachable on
+their path. Per-test guessing would have recorded six plausible, false claims.
+
+Run the probe with a deliberately non-matching observation name so the harness reports the
+whole changed set rather than short-circuiting on a match.
 
 ## Isolating a shared cause
 
