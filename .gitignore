@@ -72,3 +72,9 @@ Tests audit history (unity-tests-audit skill -- local developer state, never com
 ============
 .audit-history.md
 **/.audit-history.md
+
+# Unity Code Coverage output (generated, ~40MB)
+CodeCoverage/
+
+# Unity/Mono crash dumps
+mono_crash.*.json
