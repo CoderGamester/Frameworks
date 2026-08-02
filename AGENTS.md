@@ -121,6 +121,8 @@ Methods by access, strictly: **public static → public override → public abst
 ## 8. Claude Code convention
 Every package with an `AGENTS.md` also has a `CLAUDE.md` at the package root. `CLAUDE.md` is a thin wrapper that imports `AGENTS.md` via Claude Code's native `@AGENTS.md` syntax — it contains no duplicated content.
 
+**This applies at every level, not just the package root.** A subfolder `AGENTS.md` (§6) gets a sibling `CLAUDE.md` wrapper too — a bare subfolder `AGENTS.md` is only found if its MUST-read pointer is followed, whereas a nested `CLAUDE.md` is auto-imported by Claude Code the moment work touches that directory. As of 2026-07-31 every package's `Tests/AGENTS.md` has a matching `Tests/CLAUDE.md`; keep that pairing whenever a new subfolder guide is added anywhere in the tree.
+
 When creating a new package with an `AGENTS.md`, also create a matching `CLAUDE.md` following this template:
 
 ```markdown
@@ -136,6 +138,23 @@ Claude Code will automatically import it below.
 - Treat `AGENTS.md` as the source of truth.
 - If anything in this file appears to conflict with `AGENTS.md`, prefer `AGENTS.md`.
 - For user-facing usage, see `README.md`.
+```
+
+For a subfolder guide, retarget the last two lines at the parent instead of the package root:
+
+```markdown
+# Claude Code Guide — <package-display-name> <Subfolder>
+
+This folder's conventions live in `AGENTS.md`.
+Claude Code will automatically import it below.
+
+@AGENTS.md
+
+## Claude-Specific Notes
+
+- Treat `AGENTS.md` as the source of truth.
+- If anything in this file appears to conflict with `AGENTS.md`, prefer `AGENTS.md`.
+- For package-level architecture, see `../AGENTS.md`.
 ```
 
 Also create a matching `CLAUDE.md.meta` Unity asset meta file (copy the `TextScriptImporter` pattern from any existing `AGENTS.md.meta`, with a fresh GUID).
