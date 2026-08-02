@@ -27,4 +27,11 @@ for MODE in EditMode PlayMode; do
     -enableCodeCoverage -debugCodeOptimization \
     -coverageResultsPath "$OUT" -coverageOptions "$OPTS"
 done
+echo
+python3 "$(dirname "$0")/coverage-summary.py"
+echo
 echo "report: file://$OUT/Report/index.html"
+
+# Sanity check after any change to this script: GameLovers.GameData.MathfloatP must
+# report ~1002 coverable lines. If it reports ~637, -debugCodeOptimization was lost
+# and Unity compiled Release, which silently shrinks the denominator by ~40%.
