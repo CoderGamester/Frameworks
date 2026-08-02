@@ -16,7 +16,7 @@ All mechanics live in `scripts/`. **Run those scripts; do not reimplement their 
 - Resuming a release after merging the PR — even in a brand-new session
 - "Audit the published releases" / checking artifacts for wrong-org attestations
 
-Do NOT trigger for: bumping a version or writing a CHANGELOG section without publishing (that's ordinary editing — see the **Pre-publication versioning** rule in root `AGENTS.md` §2), or for host-repo-only changes.
+Do NOT trigger for: bumping a version or writing a CHANGELOG section without publishing (that's ordinary editing — see the **Pre-publication versioning** rule in root `AGENTS.md` §2.7), or for host-repo-only changes.
 
 ## Preconditions and Hard Rules
 
@@ -166,5 +166,5 @@ Read-only. Downloads each release asset, verifies the PKCS#7 attestation payload
 
 - Scripts: `scripts/release.py`, `scripts/changelog.py`, `scripts/UpmPack.cs`
 - CHANGELOG dialect: root `AGENTS.md` §6.5 — canonical is `**New**:` / `**Changed**:` / `**Fixed**:` / `**Docs**:`
-- Pre-publication versioning: root `AGENTS.md` §2 — do not open a new `## [X.Y.Z]` section until actually cutting a release
+- Pre-publication versioning: root `AGENTS.md` §2.7 — do not open a new `## [X.Y.Z]` section until actually cutting a release
 - Submodule workflow: root `AGENTS.md` §5

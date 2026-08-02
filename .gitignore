@@ -78,3 +78,6 @@ CodeCoverage/
 
 # Unity/Mono crash dumps
 mono_crash.*.json
+
+# Unity Test Runner output dropped at repo root
+TestResults_*.xml
