@@ -16,7 +16,10 @@ for rel, blocks in spec.items():
         if len(ms) != 1:
             print(f"  !! {rel} :: {name}: {len(ms)} matches"); continue
         m = ms[0]; ind = m.group("ind")
-        if "// ADMIT:" in t[max(0,m.start()-400):m.start("sig")]:
+        # Only scan THIS test's own attribute block (between [Test] and the signature).
+        # A fixed character lookback reaches into the PREVIOUS test's comment and reports a
+        # false "already annotated", silently skipping tests that have none of their own.
+        if "// ADMIT:" in t[m.start("mid"):m.start("sig")]:
             print(f"  -- {rel} :: {name}: already annotated"); continue
         cmt = "\n".join(ind + l for l in blk.strip("\n").split("\n"))
         head = t[m.start():m.start("mid")]        # the [Test] line

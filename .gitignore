@@ -85,3 +85,7 @@ TestResults_*.xml
 # test-all.sh comparison artifacts
 .test-all/
 TestResults_*.xml
+
+# PlayMode test-runner scratch scene
+Assets/InitTestScene*.unity
+Assets/InitTestScene*.unity.meta
