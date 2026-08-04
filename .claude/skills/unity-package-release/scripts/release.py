@@ -1484,6 +1484,70 @@ def cmd_preflight(args) -> int:
     return 0
 
 
+def cmd_preflight_pr(args) -> int:
+    """Package-local gates only, for a CI check on a develop->master PR.
+
+    Runs against a standalone checkout with no host repo, no submodules, no
+    GitHub token and no network: everything here is decidable from the package
+    directory plus the base ref. That keeps it usable as a required status check
+    on a fork or a bare clone. The remote-state gates (G0-G6, G12-G14) belong to
+    the local `preflight`, which runs before packing.
+    """
+    path = pathlib.Path(args.path).resolve()
+    manifest_file = path / "package.json"
+    if not manifest_file.is_file():
+        raise Fail(f"no package.json at {path}")
+
+    manifest = json.loads(manifest_file.read_text(encoding="utf-8-sig"))
+    pkg_id, version = manifest.get("name"), manifest.get("version")
+    changelog_file = path / "CHANGELOG.md"
+    print(f"preflight-pr: {pkg_id} {version}  (base {args.base})")
+
+    if not SEMVER_RE.match(version or ""):
+        raise Fail(
+            f"G7: version {version!r} is not bare X.Y.Z. Every historical tag is bare "
+            f"SemVer -- no v-prefix, no prerelease suffix."
+        )
+    ok(f"G7  version {version} is bare SemVer")
+
+    if not changelog_file.is_file():
+        raise Fail(f"G8: no CHANGELOG.md at {path}")
+
+    # G8/G9/D1-D7: exists, unique, first, semver-max, non-empty, clean boundary.
+    section = changelog.section_for(changelog_file, version, require_newest=True)
+    ok(f"G8  package.json {version} == CHANGELOG heading at line {section['line']}")
+    ok("G9  CHANGELOG section is the newest and the highest")
+
+    if dt.date.fromisoformat(section["date"]) > dt.date.today():
+        raise Fail(f"G10: CHANGELOG date {section['date']} for {version} is in the future.")
+    ok(f"G10 CHANGELOG date {section['date']} is sane")
+
+    base_manifest = run(["git", "-C", str(path), "show", f"{args.base}:package.json"], check=False)
+    if base_manifest:
+        base_version = json.loads(base_manifest).get("version")
+        if changelog.semver(base_version) and changelog.semver(version) <= changelog.semver(base_version):
+            raise Fail(
+                f"G11: version {version} does not advance past {args.base}'s {base_version}."
+            )
+        ok(f"G11 {version} advances past {args.base}'s {base_version}")
+
+        changed = run(
+            ["git", "-C", str(path), "diff", "--name-only", f"{args.base}...HEAD"], check=False
+        ).splitlines()
+        missing = [n for n in ("package.json", "CHANGELOG.md") if n not in changed]
+        if missing:
+            raise Fail(
+                f"G15: this PR does not touch {missing}. A release PR must bump the "
+                f"version and add a CHANGELOG section."
+            )
+        ok("G15 diff touches package.json and CHANGELOG.md")
+    else:
+        warn(f"G11/G15 skipped: could not read {args.base}:package.json")
+
+    print(f"\npreflight-pr PASSED for {pkg_id} {version}")
+    return 0
+
+
 def cmd_pack(args) -> int:
     pkg = Package(args.package)
     with Lock(pkg.folder):
@@ -1591,6 +1655,46 @@ def cmd_publish(args) -> int:
     return 0
 
 
+def cmd_install_preflight(args) -> int:
+    """Copy the release-preflight workflow into a package repo and commit it.
+
+    Safe to ship: verified that upm 9.31.1 excludes `.github/` from the packed
+    tarball even when it is not gitignored, so no `.npmignore` is needed.
+    """
+    template = pathlib.Path(__file__).resolve().parent.parent / "workflows/release-preflight.yml"
+    body = template.read_text()
+
+    for name in args.packages or ALL_PACKAGES:
+        pkg = Package(name)
+        dest = pkg.path / ".github/workflows/release-preflight.yml"
+
+        if dest.is_file() and dest.read_text() == body:
+            note(f"{pkg.folder}: already up to date")
+            continue
+
+        dirty = git(pkg.path, "status", "--porcelain")
+        if dirty:
+            warn(f"{pkg.folder}: skipping, working tree is dirty\n{dirty}")
+            continue
+
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(body)
+
+        env = dict(os.environ)
+        env["GIT_COMMITTER_NAME"] = env["GIT_AUTHOR_NAME"] = GIT_NAME
+        env["GIT_COMMITTER_EMAIL"] = env["GIT_AUTHOR_EMAIL"] = GIT_EMAIL
+        run(["git", "-C", str(pkg.path), "add", "--", ".github/workflows/release-preflight.yml"])
+        run(
+            ["git", "-C", str(pkg.path), "commit", "-m",
+             "ci: add release-preflight check for develop->master PRs"],
+            env=env,
+        )
+        if not args.no_push:
+            run(["git", "-C", str(pkg.path), "push", "origin", WORK_BRANCH])
+        ok(f"{pkg.folder}: installed{'' if args.no_push else ' and pushed'}")
+    return 0
+
+
 def cmd_bump_host(args) -> int:
     bump_host(args.packages or ALL_PACKAGES)
     return 0
@@ -1609,6 +1713,10 @@ def main(argv: list[str]) -> int:
     p = sub.add_parser("notes-status"); p.add_argument("package"); p.set_defaults(fn=cmd_notes_status)
     p = sub.add_parser("sync-pr-body"); p.add_argument("package"); p.set_defaults(fn=cmd_sync_pr_body)
     p = sub.add_parser("preflight"); p.add_argument("package"); p.add_argument("--tests", action="store_true"); p.set_defaults(fn=cmd_preflight)
+    p = sub.add_parser("preflight-pr")
+    p.add_argument("--path", default=".", help="package directory (standalone checkout)")
+    p.add_argument("--base", default="origin/master", help="base ref of the PR")
+    p.set_defaults(fn=cmd_preflight_pr)
     p = sub.add_parser("pack"); p.add_argument("package"); p.add_argument("--tier", type=int, choices=[1, 2, 3]); p.set_defaults(fn=cmd_pack)
     p = sub.add_parser("verify-tarball")
     p.add_argument("tarball"); p.add_argument("id"); p.add_argument("version")
@@ -1617,6 +1725,10 @@ def main(argv: list[str]) -> int:
     p = sub.add_parser("open-pr"); p.add_argument("package"); p.set_defaults(fn=cmd_open_pr)
     p = sub.add_parser("tag"); p.add_argument("package"); p.set_defaults(fn=cmd_tag)
     p = sub.add_parser("publish"); p.add_argument("package"); p.set_defaults(fn=cmd_publish)
+    p = sub.add_parser("install-preflight")
+    p.add_argument("packages", nargs="*")
+    p.add_argument("--no-push", action="store_true")
+    p.set_defaults(fn=cmd_install_preflight)
     p = sub.add_parser("bump-host"); p.add_argument("packages", nargs="*"); p.set_defaults(fn=cmd_bump_host)
     p = sub.add_parser("audit"); p.add_argument("packages", nargs="*"); p.add_argument("--limit", type=int); p.set_defaults(fn=cmd_audit)
 
