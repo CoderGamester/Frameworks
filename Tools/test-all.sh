@@ -28,10 +28,17 @@ OUT=".test-all"
 EDITOR_RESULTS="$HOME/Library/Application Support/Game Lovers/Frameworks/TestResults.xml"
 mkdir -p "$OUT"
 
-# Identity of the code a run measured: host HEAD plus every submodule HEAD. Distinct
-# start-times prove two runs happened; they do NOT prove both ran the same code, and a
-# comparison straddling a code change misleads exactly as much as comparing a run with itself.
-code_id() { { git rev-parse HEAD; git submodule status --recursive; } 2>/dev/null | shasum | cut -c1-12; }
+# Identity of the code a run measured. Distinct start-times prove two runs happened; they do
+# NOT prove both ran the same code, and a comparison straddling a code change misleads exactly
+# as much as comparing a run with itself.
+#
+# Digests CONTENT, not commits. An earlier version hashed HEAD plus submodule HEADs, which made
+# the gate fire whenever the halves were committed between runs even though every compiled byte
+# was identical - a false positive, which trains people to ignore the gate.
+code_id() {
+  { find Packages Assets -type f \( -name '*.cs' -o -name '*.asmdef' \) ! -path '*/Samples~/*' -print0 2>/dev/null \
+      | sort -z | xargs -0 shasum 2>/dev/null; } | shasum | cut -c1-12
+}
 
 # AssetImportWorker children match the same path as the interactive Editor and can outlive
 # it, so "is the Editor up" must exclude them or a stale worker reads as a running Editor.
