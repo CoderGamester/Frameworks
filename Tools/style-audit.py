@@ -249,6 +249,12 @@ def parse(path, rel):
         body = strip_attrs(body_raw)
         if not body:
             return
+        # `public List<T> Foo { get; } = new();` flushes twice: once at the accessor brace (the real
+        # property) and again at the initializer tail, which starts at the `=`. The tail carries the
+        # same preceding doc lines, so without this it emits a phantom unnamed private field and
+        # reports the property's doc as rule B.
+        if body.lstrip().startswith("="):
+            return
         doclines = []
         k = ln - 1
         while k in docs:
@@ -510,7 +516,10 @@ def ordering(decls):
         seen_private = None
         for d in ms:
             if d.access == "private":
-                if d.name not in UNITY_MESSAGES:
+                # `[DllImport] private static extern` P/Invoke declarations sit with the interop surface
+                # at the top of the type, not in the private-methods block, so they cannot strand a
+                # later `internal` member either.
+                if d.name not in UNITY_MESSAGES and not re.search(r'\bextern\b', d.raw):
                     seen_private = d.line
             elif d.access == "internal" and seen_private is not None:
                 gated.append((path, d.line, f"{owner}.{d.name} internal after private@{seen_private}"))
