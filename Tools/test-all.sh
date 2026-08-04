@@ -12,9 +12,13 @@
 #   editor half    -> Unity Editor must be OPEN (driven via unity-mcp Unity_RunCommand)
 #
 # Usage:
-#   Tools/test-all.sh batch     # batchmode EditMode + PlayMode        (Editor closed)
-#   Tools/test-all.sh editor    # print the snippet for the Editor half (Editor open)
-#   Tools/test-all.sh compare   # compare the two recorded results
+#   Tools/test-all.sh batch        # batchmode EditMode + PlayMode        (Editor closed)
+#   Tools/test-all.sh editor       # print the snippet for the Editor half (Editor open)
+#   Tools/test-all.sh editor-save  # snapshot the Editor result — run it BEFORE the batch half
+#   Tools/test-all.sh compare      # compare the two recorded results
+#
+# Order matters: both halves write the same persistentDataPath/TestResults.xml, so the
+# Editor result must be snapshotted before batchmode overwrites it.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
@@ -85,15 +89,38 @@ internal class CommandScript : IRunCommand
 
 It writes to:
   ~/Library/Application Support/Game Lovers/Frameworks/TestResults.xml
-Then: Tools/test-all.sh compare
+
+Then, BEFORE closing the Editor or starting the batch half:
+  Tools/test-all.sh editor-save
 SNIPPET
+  ;;
+
+editor-save)
+  # Snapshot the Editor half immediately. Batchmode writes the SAME persistentDataPath
+  # file, so deferring this to `compare` silently yields the batch run twice and a
+  # green "BOTH ENVIRONMENTS" that compared one environment with itself.
+  [ -f "$EDITOR_RESULTS" ] || { echo "ERROR: no Editor results at $EDITOR_RESULTS" >&2; exit 1; }
+  cp "$EDITOR_RESULTS" "$OUT/editor-PlayMode.xml"
+  summarise "$OUT/editor-PlayMode.xml" "editor-PlayMode(saved)"
   ;;
 
 compare)
   rc=0
   summarise "$OUT/batch-PlayMode.xml" "batch-PlayMode" || rc=1
-  cp "$EDITOR_RESULTS" "$OUT/editor-PlayMode.xml" 2>/dev/null || true
+  # Deliberately NOT copying from $EDITOR_RESULTS here — see editor-save.
   summarise "$OUT/editor-PlayMode.xml" "editor-PlayMode" || rc=1
+  python3 - "$OUT/batch-PlayMode.xml" "$OUT/editor-PlayMode.xml" <<'PY' || rc=1
+import sys, xml.etree.ElementTree as ET, pathlib
+def stamp(p):
+    p = pathlib.Path(p)
+    return ET.parse(p).getroot().get("start-time") if p.exists() else None
+b, e = stamp(sys.argv[1]), stamp(sys.argv[2])
+if b and e and b == e:
+    print(f"    ERROR: both files report start-time {b} — this is ONE run compared with")
+    print( "    itself, not two environments. Re-run the Editor half and `editor-save`.")
+    sys.exit(1)
+print(f"    distinct runs: batch={b} editor={e}")
+PY
   echo
   if [ $rc -eq 0 ]; then
     echo "BOTH ENVIRONMENTS GREEN"
@@ -104,5 +131,5 @@ compare)
   exit $rc
   ;;
 
-*) echo "usage: $0 {batch|editor|compare}" >&2; exit 2 ;;
+*) echo "usage: $0 {batch|editor|editor-save|compare}" >&2; exit 2 ;;
 esac
