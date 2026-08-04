@@ -21,6 +21,8 @@ exactly what the published release bodies do. The real hazards are structural:
 Usage:
     changelog.py section [--any] <CHANGELOG.md> <version>  # print the section body
     changelog.py prev-tag <version> <tag>...               # resolve the compare base
+    changelog.py validate-pending <CHANGELOG.md> <version> <date> [--baseline FILE]
+    changelog.py rewrite-pending <CHANGELOG.md> <version> <date> <BODY.md>
 
 `section` asserts the version is the file's newest section (gates G8/G9). Pass
 `--any` to read a historical section instead, as `audit` and `reattest` must.
@@ -36,6 +38,18 @@ import sys
 # no code fences anywhere in any of the six files, so no false positives.
 HEADING = re.compile(r"^##\s+\[(?P<ver>[^\]\s]+)\]\s*-\s*(?P<date>\d{4}-\d{2}-\d{2})\s*$")
 RULE = re.compile(r"^\s*(?:-{3,}|\*{3,}|_{3,})\s*$")  # markdown thematic break
+UNRELEASED = re.compile(r"^##\s+\[Unreleased\]\s*$", re.MULTILINE | re.IGNORECASE)
+RAW_HEADING = re.compile(
+    r"^##\s+\[(?P<ver>[^\]\s]+)\]\s*-\s*(?P<date>\d{4}-\d{2}-\d{2})\s*\r?$",
+    re.MULTILINE,
+)
+RAW_UNRELEASED = re.compile(r"^##\s+\[Unreleased\]\s*\r?$", re.MULTILINE | re.IGNORECASE)
+CANONICAL_LABEL = re.compile(r"^\*\*(?:New|Changed|Fixed|Removed|Migration|Docs)\*\*:$")
+LABEL_LIKE = re.compile(r"^(?:###\s+\S.*|\*\*[^*]+\*\*:?)$")
+
+
+class ChangelogError(ValueError):
+    """A pending changelog violates the release-note contract."""
 
 
 def read(path: str | pathlib.Path) -> str:
@@ -168,6 +182,130 @@ def release_body(section: dict, repo: str, version: str, prev: str | None) -> st
     return body
 
 
+def _historical_suffix_bytes(raw: bytes, pending_version: str) -> str:
+    """Return published history, whether or not the baseline has the pending entry."""
+    if raw.startswith(b"\xef\xbb\xbf"):
+        raw = raw[3:]
+    text = raw.decode("utf-8")
+    headings = list(RAW_HEADING.finditer(text))
+    if not headings:
+        return ""
+    first_historical = 1 if headings[0]["ver"] == pending_version else 0
+    return text[headings[first_historical].start() :] if len(headings) > first_historical else ""
+
+
+def _historical_suffix(path: str | pathlib.Path, pending_version: str) -> str:
+    return _historical_suffix_bytes(pathlib.Path(path).read_bytes(), pending_version)
+
+
+def validate_pending(
+    path: str | pathlib.Path,
+    version: str,
+    expected_date: str | None = None,
+    baseline: str | pathlib.Path | None = None,
+    baseline_bytes: bytes | None = None,
+) -> dict:
+    """Validate the editable release entry without rewriting historical entries."""
+    text = read(path)
+    if UNRELEASED.search(text):
+        raise ChangelogError(
+            "pending changelog still contains an Unreleased heading; merge it into "
+            f"the [{version}] release entry"
+        )
+
+    secs = sections(path)
+    hits = [section for section in secs if section["version"] == version]
+    if len(hits) != 1:
+        raise ChangelogError(
+            f"expected exactly one [{version}] release entry, found {len(hits)}"
+        )
+    section = hits[0]
+    if not secs or secs[0]["version"] != version:
+        raise ChangelogError(f"[{version}] must be the first versioned release entry")
+    ranked = sorted(
+        (candidate for candidate in secs if semver(candidate["version"])),
+        key=lambda candidate: semver(candidate["version"]),
+        reverse=True,
+    )
+    if ranked and ranked[0]["version"] != version:
+        raise ChangelogError(
+            f"[{version}] is not the highest version; found [{ranked[0]['version']}]"
+        )
+    if expected_date and section["date"] != expected_date:
+        raise ChangelogError(
+            f"[{version}] is dated {section['date']}; expected {expected_date}"
+        )
+    if not section["body"].strip():
+        raise ChangelogError(f"[{version}] has an empty release body")
+
+    labels = [line.strip() for line in section["body"].splitlines() if LABEL_LIKE.match(line.strip())]
+    invalid = [label for label in labels if not CANONICAL_LABEL.match(label)]
+    if invalid or not labels:
+        detail = ", ".join(invalid) if invalid else "none found"
+        raise ChangelogError(
+            "pending entries must use canonical labels "
+            "(**New**:, **Changed**:, **Fixed**:, **Removed**:, **Migration**:, **Docs**:); "
+            f"invalid labels: {detail}"
+        )
+
+    if baseline is not None and baseline_bytes is not None:
+        raise ChangelogError("provide baseline or baseline_bytes, not both")
+    expected_history = None
+    if baseline is not None:
+        expected_history = _historical_suffix(baseline, version)
+    elif baseline_bytes is not None:
+        expected_history = _historical_suffix_bytes(baseline_bytes, version)
+    if expected_history is not None and _historical_suffix(path, version) != expected_history:
+        raise ChangelogError("historical release entries differ from the baseline")
+    return section
+
+
+def rewrite_pending(
+    path: str | pathlib.Path,
+    version: str,
+    date: str,
+    body: str,
+) -> None:
+    """Replace only Unreleased/current-version prose, preserving file byte conventions."""
+    target = pathlib.Path(path)
+    raw = target.read_bytes()
+    bom = b"\xef\xbb\xbf" if raw.startswith(b"\xef\xbb\xbf") else b""
+    payload = raw[len(bom) :]
+    text = payload.decode("utf-8")
+    newline = "\r\n" if b"\r\n" in payload else "\n"
+    ended_with_newline = text.endswith(("\n", "\r"))
+
+    headings = list(RAW_HEADING.finditer(text))
+    targets = [match for match in headings if match["ver"] == version]
+    if len(targets) != 1:
+        raise ChangelogError(
+            f"rewrite requires exactly one existing [{version}] entry, found {len(targets)}"
+        )
+    target_heading = targets[0]
+    if headings[0] != target_heading:
+        raise ChangelogError(f"[{version}] must be the first versioned entry before rewriting")
+
+    unreleased = [match for match in RAW_UNRELEASED.finditer(text) if match.start() < target_heading.start()]
+    if len(unreleased) > 1:
+        raise ChangelogError("multiple Unreleased headings found")
+    start = unreleased[0].start() if unreleased else target_heading.start()
+    following = next((match for match in headings if match.start() > target_heading.start()), None)
+    suffix = text[following.start() :] if following else ""
+    prefix = text[:start]
+
+    normalized_body = body.replace("\r\n", "\n").replace("\r", "\n").strip("\n")
+    if not normalized_body.strip():
+        raise ChangelogError("replacement body is empty")
+    normalized_body = normalized_body.replace("\n", newline)
+    pending = f"## [{version}] - {date}{newline}{newline}{normalized_body}"
+    if suffix:
+        pending += newline + newline
+    elif ended_with_newline:
+        pending += newline
+
+    target.write_bytes(bom + (prefix + pending + suffix).encode("utf-8"))
+
+
 def die(message: str) -> None:
     print(f"FATAL {message}", file=sys.stderr)
     sys.exit(1)
@@ -192,6 +330,45 @@ def main(argv: list[str]) -> int:
             die("usage: changelog.py prev-tag <version> <tag>...")
         result = prev_tag(argv[3:], argv[2])
         print(result if result else "")
+        return 0
+
+    if command == "validate-pending":
+        args = argv[2:]
+        baseline = None
+        if "--baseline" in args:
+            index = args.index("--baseline")
+            if index + 1 >= len(args):
+                die("--baseline requires a file")
+            baseline = args[index + 1]
+            del args[index : index + 2]
+        if len(args) != 3:
+            die(
+                "usage: changelog.py validate-pending <CHANGELOG.md> <version> "
+                "<YYYY-MM-DD> [--baseline FILE]"
+            )
+        try:
+            section = validate_pending(args[0], args[1], args[2], baseline=baseline)
+        except ChangelogError as exc:
+            die(str(exc))
+        print(
+            f"VALID [{section['version']}] {section['date']} at line {section['line']}; "
+            f"historical baseline={'checked' if baseline else 'not supplied'}"
+        )
+        return 0
+
+    if command == "rewrite-pending":
+        if len(argv) != 6:
+            die(
+                "usage: changelog.py rewrite-pending <CHANGELOG.md> <version> "
+                "<YYYY-MM-DD> <BODY.md>"
+            )
+        try:
+            body = pathlib.Path(argv[5]).read_text(encoding="utf-8-sig")
+            rewrite_pending(argv[2], argv[3], argv[4], body)
+            section = validate_pending(argv[2], argv[3], argv[4])
+        except ChangelogError as exc:
+            die(str(exc))
+        print(f"REWROTE [{section['version']}] {section['date']} at line {section['line']}")
         return 0
 
     die(f"unknown subcommand '{command}'")

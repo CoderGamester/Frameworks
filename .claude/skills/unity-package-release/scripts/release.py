@@ -7,6 +7,8 @@ correctly hours later in a different session. Parallelism is one agent per
 package -- see SKILL.md for the orchestration and the two barriers.
 
     release.py status <pkg> [--json]        derive the facts and resolve the phase
+    release.py notes-status <pkg>           compare open PR body with pending notes
+    release.py sync-pr-body <pkg>           update and verify an existing PR body
     release.py preflight <pkg>              gates G0-G16, no mutation
     release.py pack <pkg> [--tier N]        produce and verify the tarball
     release.py verify-tarball <tgz> <id> <version> [--tier N] [--head-sha SHA]
@@ -142,6 +144,26 @@ def git(pkg_path: pathlib.Path, *args: str, check: bool = True) -> str:
     return run(["git", "-C", str(pkg_path), *args], check=check)
 
 
+def git_bytes(pkg_path: pathlib.Path, *args: str) -> bytes:
+    """Run git without universal-newline conversion when byte identity matters."""
+    command = ["git", "-C", str(pkg_path), *args]
+    proc = subprocess.run(command, capture_output=True)
+    if proc.returncode != 0:
+        raise Fail(
+            f"command failed ({proc.returncode}): {' '.join(command)}\n"
+            f"  stderr: {proc.stderr.decode(errors='replace').strip()}"
+        )
+    return proc.stdout
+
+
+def notes_match(actual: str, expected: str) -> bool:
+    """Compare notes exactly after GitHub's newline transport normalization."""
+    def canonical(value: str) -> str:
+        return value.replace("\r\n", "\n").replace("\r", "\n").rstrip("\n")
+
+    return canonical(actual) == canonical(expected)
+
+
 # --------------------------------------------------------------------------- #
 # Package resolution
 # --------------------------------------------------------------------------- #
@@ -238,7 +260,7 @@ def facts(pkg: Package) -> dict:
             [
                 "pr", "list", "--repo", pkg.repo, "--state", "all",
                 "--head", WORK_BRANCH, "--base", RELEASE_BRANCH, "--limit", "30",
-                "--json", "number,state,mergedAt,mergeCommit,headRefOid,url,title",
+                "--json", "number,state,mergedAt,mergeCommit,headRefOid,url,title,body",
             ]
         )
         or "[]"
@@ -257,6 +279,9 @@ def facts(pkg: Package) -> dict:
 
     open_pr = next((p for p in prs if p["state"] == "OPEN"), None)
     merged_prs = [p for p in prs if p.get("mergedAt")]
+    expected_notes = changelog.section_for(
+        pkg.changelog, pkg.version, require_newest=True
+    )["body"]
 
     return {
         "package": pkg.folder,
@@ -268,6 +293,9 @@ def facts(pkg: Package) -> dict:
         "tag_sha": tag_sha,
         "tags": tags,
         "open_pr": open_pr,
+        "pr_notes_current": (
+            notes_match(open_pr.get("body") or "", expected_notes) if open_pr else None
+        ),
         "merged_prs": merged_prs,
         "closed_unmerged": [p for p in prs if p["state"] == "CLOSED" and not p.get("mergedAt")],
         "release": release,
@@ -315,6 +343,11 @@ def resolve_phase(pkg: Package, f: dict) -> tuple[str, str]:
     if f["master_version"] == pkg.version:
         return "P3_TAG", f"{RELEASE_BRANCH} already carries {pkg.version}; tag the merge commit"
     if f["open_pr"]:
+        if not f["pr_notes_current"]:
+            return (
+                "P2_SYNC_NOTES",
+                f"PR #{f['open_pr']['number']} body differs from the [{pkg.version}] changelog entry",
+            )
         return "P2_AWAIT_MERGE", f"PR #{f['open_pr']['number']} open: {f['open_pr']['url']}"
     if f["closed_unmerged"]:
         nums = ", ".join(f"#{p['number']}" for p in f["closed_unmerged"])
@@ -450,16 +483,22 @@ def preflight(pkg: Package, f: dict, run_tests: bool = False) -> None:
         )
     ok(f"G7  version {v} is bare SemVer")
 
-    # G8/G9/G10: delegated to changelog.py, which asserts the section exists, is
-    # unique, is the file's first AND highest section, and is non-empty.
-    section = changelog.section_for(pkg.changelog, v, require_newest=True)
+    # G8/G9/G10: the pending entry must be unique, newest, canonical, free of an
+    # Unreleased split, and dated for the day it is actually being released.
+    try:
+        section = changelog.validate_pending(
+            pkg.changelog,
+            v,
+            expected_date=dt.date.today().isoformat(),
+            baseline_bytes=git_bytes(
+                pkg.path, "show", f"origin/{RELEASE_BRANCH}:CHANGELOG.md"
+            ),
+        )
+    except changelog.ChangelogError as exc:
+        raise Fail(f"G8-G10: {exc}") from exc
     ok(f"G8  package.json {v} == CHANGELOG heading at line {section['line']}")
-    ok("G9  CHANGELOG section is the newest and highest")
-
-    date = dt.date.fromisoformat(section["date"])
-    if date > dt.date.today():
-        raise Fail(f"G10: CHANGELOG date {section['date']} for {v} is in the future.")
-    ok(f"G10 CHANGELOG date {section['date']} is sane")
+    ok("G9  pending CHANGELOG is canonical; published history is byte-identical")
+    ok(f"G10 CHANGELOG date {section['date']} is today's release date")
 
     master_v = f["master_version"]
     if master_v and changelog.semver(master_v) and changelog.semver(v) <= changelog.semver(master_v):
@@ -1103,7 +1142,17 @@ def open_pr(pkg: Package, f: dict) -> str:
     footer. Do not embellish it; the body is reused as the release notes.
     """
     assert_identity()
-    section = changelog.section_for(pkg.changelog, pkg.version, require_newest=True)
+    try:
+        section = changelog.validate_pending(
+            pkg.changelog,
+            pkg.version,
+            expected_date=dt.date.today().isoformat(),
+            baseline_bytes=git_bytes(
+                pkg.path, "show", f"origin/{RELEASE_BRANCH}:CHANGELOG.md"
+            ),
+        )
+    except changelog.ChangelogError as exc:
+        raise Fail(f"refusing to open a PR with invalid release notes: {exc}") from exc
 
     notes = pkg.pack_dir / "pr-body.md"
     notes.parent.mkdir(parents=True, exist_ok=True)
@@ -1136,6 +1185,67 @@ def open_pr(pkg: Package, f: dict) -> str:
     else:
         ok(f"PR #{number} assigned to {GH_ACCOUNT}")
     return url
+
+
+def sync_pr_body(pkg: Package, f: dict) -> str:
+    """Replace an existing release PR body and prove it matches the changelog."""
+    pr = f["open_pr"]
+    if not pr:
+        raise Fail(f"no open {WORK_BRANCH}->{RELEASE_BRANCH} PR exists for {pkg.repo}")
+    if f["dirty"]:
+        raise Fail(
+            "refusing to sync notes from an uncommitted package working tree; "
+            "commit and push the CHANGELOG first"
+        )
+    local_head = git(pkg.path, "rev-parse", "HEAD")
+    if local_head != f["develop_tip"] or pr.get("headRefOid") != f["develop_tip"]:
+        raise Fail(
+            f"release notes must describe the pushed PR head: local={local_head[:9]}, "
+            f"origin/{WORK_BRANCH}={f['develop_tip'][:9]}, "
+            f"PR={str(pr.get('headRefOid') or '<none>')[:9]}"
+        )
+
+    try:
+        section = changelog.validate_pending(
+            pkg.changelog,
+            pkg.version,
+            expected_date=dt.date.today().isoformat(),
+            baseline_bytes=git_bytes(
+                pkg.path, "show", f"origin/{RELEASE_BRANCH}:CHANGELOG.md"
+            ),
+        )
+    except changelog.ChangelogError as exc:
+        raise Fail(f"refusing to sync invalid release notes: {exc}") from exc
+    notes = pkg.pack_dir / "pr-body.md"
+    notes.parent.mkdir(parents=True, exist_ok=True)
+    notes.write_text(f"{section['body']}\n", encoding="utf-8")
+
+    assert_identity()
+    gh([
+        "pr", "edit", str(pr["number"]), "--repo", pkg.repo,
+        "--body-file", str(notes),
+    ])
+    reread = json.loads(
+        gh([
+            "pr", "view", str(pr["number"]), "--repo", pkg.repo,
+            "--json", "body,headRefOid,url",
+        ])
+    )
+    if reread.get("headRefOid") != f["develop_tip"]:
+        raise Fail(
+            f"PR #{pr['number']} moved while its body was being updated; "
+            "re-run status before continuing"
+        )
+    if not notes_match(reread.get("body") or "", section["body"]):
+        raise Fail(
+            f"PR #{pr['number']} body still differs from the [{pkg.version}] changelog "
+            "after GitHub reported success"
+        )
+    ok(
+        f"PR #{pr['number']} body exactly matches [{pkg.version}] at "
+        f"origin/{WORK_BRANCH} {f['develop_tip'][:9]}"
+    )
+    return reread.get("url") or pr["url"]
 
 
 def bump_host(names: list[str]) -> None:
@@ -1337,9 +1447,33 @@ def cmd_status(args) -> int:
     if f["release"]:
         print(f"assets    {[a['name'] for a in (f['release'].get('assets') or [])]}")
     print(f"open PR   {f['open_pr']['url'] if f['open_pr'] else '(none)'}")
+    if f["open_pr"]:
+        print(f"PR notes  {'current' if f['pr_notes_current'] else 'STALE'}")
     print(f"tarball   {'present' if f['tarball_present'] else 'absent'}  {pkg.tarball}")
     print(f"host ptr  {'current' if f['pointer_current'] else 'STALE'}")
     print(f"\nPHASE     {phase}\n          {why}")
+    return 0
+
+
+def cmd_notes_status(args) -> int:
+    pkg = Package(args.package)
+    f = facts(pkg)
+    if not f["open_pr"]:
+        print(f"NO_OPEN_PR {pkg.repo} {WORK_BRANCH}->{RELEASE_BRANCH}")
+        return 0
+    state = "CURRENT" if f["pr_notes_current"] else "STALE"
+    print(
+        f"{state} PR #{f['open_pr']['number']} body vs "
+        f"CHANGELOG [{pkg.version}] at origin/{WORK_BRANCH} {f['develop_tip'][:9]}"
+    )
+    return 0 if f["pr_notes_current"] else 1
+
+
+def cmd_sync_pr_body(args) -> int:
+    pkg = Package(args.package)
+    with Lock(pkg.folder):
+        url = sync_pr_body(pkg, facts(pkg))
+    print(f"\nPR notes synchronized and verified: {url}")
     return 0
 
 
@@ -1472,6 +1606,8 @@ def main(argv: list[str]) -> int:
     sub = parser.add_subparsers(dest="cmd", required=True)
 
     p = sub.add_parser("status"); p.add_argument("package"); p.add_argument("--json", action="store_true"); p.set_defaults(fn=cmd_status)
+    p = sub.add_parser("notes-status"); p.add_argument("package"); p.set_defaults(fn=cmd_notes_status)
+    p = sub.add_parser("sync-pr-body"); p.add_argument("package"); p.set_defaults(fn=cmd_sync_pr_body)
     p = sub.add_parser("preflight"); p.add_argument("package"); p.add_argument("--tests", action="store_true"); p.set_defaults(fn=cmd_preflight)
     p = sub.add_parser("pack"); p.add_argument("package"); p.add_argument("--tier", type=int, choices=[1, 2, 3]); p.set_defaults(fn=cmd_pack)
     p = sub.add_parser("verify-tarball")

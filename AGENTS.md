@@ -127,6 +127,18 @@ When a package has a subdirectory with its own distinct conventions (e.g., `Test
 ## 6.5. CHANGELOG dialect
 All packages follow [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) with `## [X.Y.Z] - YYYY-MM-DD` section headings. Sub-heading style has drifted across the family (some packages use canonical `### Added`/`### Changed`/`### Fixed`, others bold-label `**New**:`/`**Changed**:`/`**Fixed**:`, one uses bold-label with no trailing colon). The canonical style going forward, used by the majority of packages, is **bold-label with a trailing colon**: `**New**:`, `**Changed**:`, `**Fixed**:`, `**Docs**:`. Use it for every new CHANGELOG section in every package; do not retroactively rewrite historical sections just to converge the dialect — that's cosmetic churn with no functional value.
 
+The pending entry is the consumer-facing release record, not a commit summary:
+
+- **Consumer-facing does not mean generic.** Give each independently useful capability or observable change its own concise bullet. Preserve public type and feature names when they help a Unity consumer understand, adopt, or migrate the change.
+- **Initial, major, and consolidation releases need a feature inventory.** Under `**New**:`, use one labeled bullet per public subsystem rather than blending distinct subsystems into an umbrella sentence. Group implementation details that support the same outcome, not unrelated public capabilities.
+- **Make impact explicit.** Breaking changes, removals, migrations, supported replacements, Unity/platform/render-pipeline baselines, required dependencies, sample-compilation changes, and observable runtime fixes must not be hidden inside generic prose.
+- **Keep contributor mechanics out.** Omit individual test cases and counts, audit terminology, contributor files, CI cleanup, XML-comment mechanics, private helpers, internal refactors, and test-only seams. Automated coverage may receive one generic confidence bullet when it is a material release benefit. Documentation belongs only when it materially changes what consumers can successfully use.
+- **Reconstruct from complete evidence.** Inventory `origin/master...origin/develop` across public API, runtime behavior, dependencies, compatibility, samples, migrations, and consumer docs. The current changelog and commit subjects are draft evidence and may omit or over-compress changes.
+- **Edit only the pending region.** Merge `Unreleased` into the existing unpublished version, preserve every historical release byte-for-byte, and retain the file's BOM, CRLF/LF, and EOF convention. Date the entry for intended publication and recheck the date if release is delayed.
+- **Synchronize release surfaces.** After committing and pushing a changelog change, update the existing package release PR body from that entry and re-read it to prove exact equality. An empty host-repository PR list says nothing: package PRs live in their submodule repositories. Require local `HEAD`, `origin/develop`, and the PR head SHA to match; never open a duplicate PR when the matching `develop` → `master` PR already exists.
+
+Use the `unity-package-release` skill for changelog preparation, structural validation, PR-body synchronization, and publication. Its bounded changelog writer preserves historical bytes and its release driver enforces the package-repository identity and PR-head checks.
+
 ## 6.6. Code style & documentation
 
 ### General C# rules
