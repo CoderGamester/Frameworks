@@ -13,7 +13,8 @@
 #
 # Usage:
 #   Tools/test-all.sh batch        # batchmode EditMode + PlayMode        (Editor closed)
-#   Tools/test-all.sh editor       # print the snippet for the Editor half (Editor open)
+#   Tools/test-all.sh editor-open  # launch the Editor and wait until the MCP bridge answers
+#   Tools/test-all.sh editor       # editor-open + clear stale results + print the run snippet
 #   Tools/test-all.sh editor-save  # snapshot the Editor result — run it BEFORE the batch half
 #   Tools/test-all.sh compare      # compare the two recorded results
 #
@@ -26,6 +27,41 @@ UNITY="${UNITY_BIN:-$HOME/.unity/bin/unity}"
 OUT=".test-all"
 EDITOR_RESULTS="$HOME/Library/Application Support/Game Lovers/Frameworks/TestResults.xml"
 mkdir -p "$OUT"
+
+# AssetImportWorker children match the same path as the interactive Editor and can outlive
+# it, so "is the Editor up" must exclude them or a stale worker reads as a running Editor.
+editor_pid() {
+  pgrep -lf "Unity.app/Contents/MacOS/Unity" 2>/dev/null \
+    | grep -v -- "-batchMode" | grep -v "AssetImportWorker" | awk 'NR==1{print $1}'
+}
+
+# Launch the Editor and block until it is actually ready to serve Unity_RunCommand.
+# An MCP timeout is indistinguishable from "not running" while the Editor is still
+# starting, so readiness has to be observed, not assumed.
+open_editor() {
+  if [ -n "$(editor_pid)" ]; then echo "editor already running (pid $(editor_pid))"; return 0; fi
+  local ver app
+  ver=$(sed -n 's/^m_EditorVersion: //p' ProjectSettings/ProjectVersion.txt)
+  app="/Applications/Unity/Hub/Editor/$ver/Unity.app/Contents/MacOS/Unity"
+  [ -x "$app" ] || { echo "ERROR: no editor at $app (project wants $ver)" >&2; exit 1; }
+  echo "==> launching Unity $ver"
+  nohup "$app" -projectPath "$PWD" >/dev/null 2>&1 &
+  for _ in $(seq 1 90); do
+    [ -n "$(editor_pid)" ] && [ -f Temp/UnityLockfile ] && break
+    sleep 2
+  done
+  [ -n "$(editor_pid)" ] || { echo "ERROR: editor did not start" >&2; exit 1; }
+  # Then wait for the import/compile pipeline to go quiet — the bridge answers only after.
+  local prev="" stable=0 cur
+  for _ in $(seq 1 150); do
+    cur="$(ls Library/ScriptAssemblies/*.dll 2>/dev/null | wc -l)$(stat -f %m Temp/UnityLockfile 2>/dev/null)"
+    if [ "$cur" = "$prev" ]; then stable=$((stable+1)); else stable=0; fi
+    prev="$cur"
+    [ $stable -ge 6 ] && { echo "editor quiescent (pid $(editor_pid))"; return 0; }
+    sleep 3
+  done
+  echo "WARNING: editor still churning after ~7min; try Unity_RunCommand anyway" >&2
+}
 
 wait_for_unity() {
   # A finishing batchmode run lingers after its results file is written; launching into
@@ -69,9 +105,20 @@ batch)
   exit $rc
   ;;
 
+editor-open)
+  open_editor
+  ;;
+
 editor)
+  open_editor
+  echo
+  # Absence must be an error rather than a stale read, so clear it before the run.
+  rm -f "$EDITOR_RESULTS"
+  echo "cleared $EDITOR_RESULTS — any result read after this came from the new run"
+  echo
   cat <<'SNIPPET'
-Open the Unity Editor, then run this through unity-mcp Unity_RunCommand:
+Now run this through unity-mcp Unity_RunCommand (one top-level class, no nested
+types, no NUnit types — the tool's rewriter breaks both):
 
 using UnityEngine;
 using UnityEditor;
@@ -131,5 +178,5 @@ PY
   exit $rc
   ;;
 
-*) echo "usage: $0 {batch|editor|editor-save|compare}" >&2; exit 2 ;;
+*) echo "usage: $0 {batch|editor-open|editor|editor-save|compare}" >&2; exit 2 ;;
 esac

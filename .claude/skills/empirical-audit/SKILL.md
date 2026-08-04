@@ -81,6 +81,22 @@ Every clause below exists because its absence produced a wrong answer:
   instantiates the URP renderer, so anything branching on renderer/pipeline state takes a
   different path there. A suite that is green in one and red in the other is not flaky —
   it is environment-coupled, which is a finding in itself.
+- **Make every comparison print the identity of what it compared.** A harness that reports
+  "pass" or "both agree" over unnamed inputs is unfalsifiable, and the failure is silent:
+  the tool reads a different input than its label claims and reports success over it.
+  Recorded instance: a both-environments gate printed `BOTH ENVIRONMENTS GREEN` having
+  compared one run with itself, because the two environments wrote the same results path
+  and the gate re-read that path after the second had overwritten the first. Snapshot each
+  input under its own name at the moment it is produced, and have the gate emit the
+  identifiers (timestamps, run ids) it actually compared. That emitted line is the
+  evidence; the verdict is not.
+- **A finding is closed by re-deriving its claim, not by reading the commit that fixed
+  it.** Re-check every symbol and fixture the finding names against current source. A
+  partial fix and a complete one produce the same green suite and the same confident commit
+  message, so the commit cannot be evidence for its own completeness. Recorded instance: a
+  fix that genuinely stopped fixtures inheriting process-wide static state did so for two
+  of the three fixtures its finding named; the third passed only because its siblings
+  happened to restore the static in their `finally` blocks.
 
 ## Probe before you assign
 
