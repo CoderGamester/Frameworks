@@ -70,12 +70,15 @@ open_editor() {
 
 wait_for_unity() {
   # A finishing batchmode run lingers after its results file is written; launching into
-  # that window aborts with a misleading "another Unity instance is running".
+  # that window aborts with a misleading "another Unity instance is running". Waits on
+  # editor_pid, not a raw pgrep, so a stale AssetImportWorker does not read as an Editor
+  # and block the batch half for the full timeout.
   for _ in $(seq 1 60); do
-    pgrep -f "Unity.app/Contents/MacOS/Unity" >/dev/null || return 0
+    [ -z "$(editor_pid)" ] && return 0
     sleep 2
   done
-  echo "ERROR: a Unity process is still running. Close the Editor for the batch half." >&2
+  echo "ERROR: an interactive Unity Editor is still running (pid $(editor_pid))." >&2
+  echo "Close it for the batch half — the two halves share the project lock." >&2
   exit 1
 }
 

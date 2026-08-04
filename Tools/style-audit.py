@@ -474,6 +474,26 @@ def evaluate(decls):
     return out, counted
 
 
+# §6.6's member order gives Unity's message methods their own slot BEFORE "methods by access",
+# so a private Unity callback does not open the private block and cannot strand a later
+# `internal` member. Without this, OnDestroy / Update / OnEnable false-positive rule N.
+UNITY_MESSAGES = {
+    "Awake", "Start", "Update", "LateUpdate", "FixedUpdate", "OnEnable", "OnDisable",
+    "OnDestroy", "OnGUI", "OnValidate", "Reset", "OnApplicationFocus", "OnApplicationPause",
+    "OnApplicationQuit", "OnBecameVisible", "OnBecameInvisible", "OnTransformParentChanged",
+    "OnBeforeTransformParentChanged", "OnRectTransformDimensionsChange", "OnCanvasGroupChanged",
+    "OnDidApplyAnimationProperties", "OnTriggerEnter", "OnTriggerExit", "OnTriggerStay",
+    "OnCollisionEnter", "OnCollisionExit", "OnCollisionStay", "OnMouseDown", "OnMouseUp",
+    "OnMouseEnter", "OnMouseExit", "OnMouseOver", "OnMouseDrag", "OnMouseUpAsButton",
+    "OnDrawGizmos", "OnDrawGizmosSelected", "OnPreRender", "OnPostRender", "OnPreCull",
+    "OnRenderObject", "OnWillRenderObject", "OnRenderImage", "OnAnimatorMove", "OnAnimatorIK",
+    "OnParticleCollision", "OnParticleTrigger", "OnAudioFilterRead", "OnJointBreak",
+    "OnControllerColliderHit", "OnLevelWasLoaded", "OnPlayerConnected", "OnServerInitialized",
+    "CreateGUI", "CreateInspectorGUI", "CreatePropertyGUI", "OnInspectorGUI", "OnSceneGUI",
+    "OnPreprocessBuild", "OnPostprocessBuild", "OnAfterDeserialize", "OnBeforeSerialize",
+}
+
+
 def ordering(decls):
     """Rule N (gated) plus an advisory access-order report."""
     groups = collections.defaultdict(list)
@@ -490,7 +510,8 @@ def ordering(decls):
         seen_private = None
         for d in ms:
             if d.access == "private":
-                seen_private = d.line
+                if d.name not in UNITY_MESSAGES:
+                    seen_private = d.line
             elif d.access == "internal" and seen_private is not None:
                 gated.append((path, d.line, f"{owner}.{d.name} internal after private@{seen_private}"))
         worst, wname, wline = -1, None, None
