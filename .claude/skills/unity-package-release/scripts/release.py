@@ -1750,13 +1750,25 @@ def cmd_install_preflight(args) -> int:
         pkg = Package(name)
         dest = pkg.path / ".github/workflows/release-preflight.yml"
 
-        if dest.is_file() and dest.read_text() == body:
+        # Compare against HEAD, not the disk. A run that wrote the file but failed
+        # before committing would otherwise look "already up to date" and be skipped
+        # forever, leaving the change uncommitted. (Observed: the add without -f
+        # failed after the write.)
+        committed = git(
+            pkg.path, "show", f"HEAD:.github/workflows/release-preflight.yml", check=False
+        )
+        if committed and committed.rstrip("\n") == body.rstrip("\n") and dest.is_file():
             note(f"{pkg.folder}: already up to date")
             continue
 
-        dirty = git(pkg.path, "status", "--porcelain")
+        # Ignore the workflow's own path when judging cleanliness: a previous partial
+        # run may have left exactly that file modified, and refusing would deadlock.
+        dirty = [
+            line for line in git(pkg.path, "status", "--porcelain").splitlines()
+            if ".github/workflows/release-preflight.yml" not in line
+        ]
         if dirty:
-            warn(f"{pkg.folder}: skipping, working tree is dirty\n{dirty}")
+            warn(f"{pkg.folder}: skipping, working tree is dirty\n" + "\n".join(dirty))
             continue
 
         dest.parent.mkdir(parents=True, exist_ok=True)
@@ -1765,7 +1777,14 @@ def cmd_install_preflight(args) -> int:
         env = dict(os.environ)
         env["GIT_COMMITTER_NAME"] = env["GIT_AUTHOR_NAME"] = GIT_NAME
         env["GIT_COMMITTER_EMAIL"] = env["GIT_AUTHOR_EMAIL"] = GIT_EMAIL
-        run(["git", "-C", str(pkg.path), "add", "--", ".github/workflows/release-preflight.yml"])
+        # -f is required and correct: each package lists `.github/` in .gitignore so
+        # Unity's packer keeps it out of the tarball, but the file must stay TRACKED
+        # for the workflow to exist on GitHub. .gitignore cannot untrack an existing
+        # path, so this only silences git's "explicitly named an ignored path" guard.
+        run([
+            "git", "-C", str(pkg.path), "add", "-f", "--",
+            ".github/workflows/release-preflight.yml",
+        ])
         run(
             ["git", "-C", str(pkg.path), "commit", "-m",
              "ci: add release-preflight check for develop->master PRs"],
