@@ -81,7 +81,7 @@ private static void EnsureInputModuleOnEventSystem()
     if (go.GetComponent<UnityEngine.InputSystem.UI.InputSystemUIInputModule>() != null) return;
     var legacy = go.GetComponent<UnityEngine.EventSystems.StandaloneInputModule>();
     if (legacy != null) DestroyImmediate(legacy);
-    go.AddComponent<UnityEngine.InputSystem.UI.InputSystemUIInputModule>();
+    go.AddComponent<UnityEngine.InputSystem.UI.InputSystemUIInputModule>().AssignDefaultActions();
 #else
     if (go.GetComponent<UnityEngine.EventSystems.StandaloneInputModule>() == null)
         go.AddComponent<UnityEngine.EventSystems.StandaloneInputModule>();
@@ -90,6 +90,8 @@ private static void EnsureInputModuleOnEventSystem()
 ```
 
 Use `DestroyImmediate` (not `Destroy`) so the swap happens before `EventSystem.Update` first ticks the legacy module — otherwise one frame of `Input.mousePosition` exception fires before the swap takes effect.
+
+**`AssignDefaultActions()` is mandatory, not optional polish.** `AddComponent<InputSystemUIInputModule>()` leaves the module's `actionsAsset` unassigned, and an unassigned module **processes no input at all** — silently, with nothing logged and `Button.interactable` still reporting `true`. Every button in the sample renders, looks live, and does nothing on click. The Inspector-added path auto-assigns defaults, which is why this only bites samples that add the module at runtime. Live regression: `uiservice/Samples~/UrpRendering` and `services/Samples~/ServicesPlayground` both shipped with dead buttons under Active Input Handling = "Input System Package (New)"; fixed 2026-07-30 by adding this call. Diagnose by checking `activeInputHandler` in `ProjectSettings.asset` (`1` = New only) and `EventSystem.currentInputModule`.
 
 ### Step 3 — Auto-scroll for log panes that preserves user drag
 
@@ -169,16 +171,20 @@ Each menu item does FIVE things in order:
 
    Don't add a `BaseInputModule` to the EventSystem here — the driver's `EnsureInputModuleOnEventSystem` adds the right one at runtime.
 
-### Step 5 — Halt for user, then validate
+### Step 5 — Run and SEE it yourself, do not hand off
 
-Hand off:
-> Run **Tools / <TeamName> / [DEV] Generate <Sample>UI Prefab**. Confirm two log lines: prefab generated + scene rewired. Open the scene, press Play, exercise a few buttons.
+Do NOT hand the validation to the user. With the Unity MCP available (`com.unity.ai.assistant`), run the whole loop yourself — see the `unity-play-verify` skill for the mechanics. In short: `Unity_ManageMenuItem` executes the generator, `Unity_ManageEditor` enters play mode, `Unity_RunCommand` invokes `button.onClick.Invoke()`, `ScreenCapture.CaptureScreenshot` writes a PNG, and you read the PNG back.
 
-Wait for the user's confirmation. If they report errors, iterate on the driver and/or editor utility.
+**Two traps that make a hand-off actively misleading, both observed on 2026-07-30:**
+
+- **Editing the generator on disk does not recompile it.** Invoking the menu item straight after a `Write` runs the STALE assembly and produces confidently wrong assets, twice in a row with no error. Always `AssetDatabase.ImportAsset(<generator path>, ForceUpdate)` + `CompilationPipeline.RequestScriptCompilation()`, confirm `IsCompiling == false`, THEN execute the menu item. Verify by grepping the regenerated prefab YAML for a field only the new code writes.
+- **A generated sample can look plausible and be broken.** The first `UrpRendering` pass had: buttons at content width with overflowing labels, a default-white opaque `Image` on the ScrollRect viewport hiding the log text, fixed `LayoutElement.minHeight`s clamping wrapped text so title/body/button overlapped, and a presenter that rendered an entirely empty frame. Every one of those needed a screenshot to find; none produced a console message.
+
+Only involve the user for a judgement call a capture cannot settle (does this blur look *good*), never for "does it work".
 
 ### Step 6 — Cleanup after validation
 
-When the user confirms both samples work:
+When the samples are confirmed working:
 - `Delete Assets/Editor/Tools/Generate<Sample>Prefabs.cs` and its `.meta`.
 - Remove `Assets/Editor/Tools/` directory and its `.meta` (likely empty after deletion).
 - Remove `Assets/Editor/` directory and its `.meta` if it became empty too.
@@ -433,6 +439,24 @@ If the package's main `Editor/` assembly adds a sample-specific affordance (e.g.
 ### Track B: never overwrite user mappings to other assets
 
 The `RunSetup` pipeline's row-wiring stage MUST respect existing user mappings. When a `Pair.Value.m_AssetGUID` is non-empty AND differs from the canonical asset's GUID, skip the row — the user has wired their own asset to that ID and the automation must not clobber it. Test: if a user replaces `Hero.png` with their own `MyHero.png` and re-maps the row by hand, then drops a fresh `Hero.png` back into the content folder, the row should stay pointing at `MyHero.png`. The automation only fills empty rows or refreshes rows that already point at the canonical asset's current GUID.
+
+### A camera cannot be a child of the Canvas it renders
+
+For a `Screen Space - Camera` canvas, Unity **drives the canvas's own transform** from its `worldCamera` — position, rotation and scale, every frame. Parent that camera under the canvas and it inherits the driven transform, lands exactly on the canvas plane, and sees nothing behind its near plane. The sample renders a completely empty frame with no warning. Measured instance (2026-07-30): canvas and camera both at `(941.5, 450, 0)` with the camera inheriting the canvas's `0.19` scale.
+
+This bites samples specifically because the natural authoring is "add the overlay Camera as a child of the presenter prefab" — and for a Canvas-rooted presenter prefab, a child of the presenter *is* a child of the canvas. Either author the camera outside the canvas hierarchy, or have the feature re-parent it out at init and take ownership of destroying it (what `UiCameraStackFeature.DetachCameraFromCanvas` does).
+
+### A stacked URP overlay camera must be `enabled`
+
+`UniversalRenderPipeline.RenderCameraStack` contains `if (!overlayCamera.isActiveAndEnabled) continue;`. A disabled camera can sit in `UniversalAdditionalCameraData.cameraStack` and render nothing. Do not "disable it and let the stack drive it" — that is not how URP works. Enable it when inserting, disable it when removing.
+
+Corollary for tests: asserting `cameraStack.Contains(camera)` proves membership, not rendering. Assert `camera.enabled` and `camera.isActiveAndEnabled` too, or the test stays green while the sample shows an empty screen.
+
+### `Samples~` never compiles, so its asmdefs are unverified
+
+Unity ignores tilde folders entirely, so sample `.asmdef` files and scripts are not compiled by any normal editor open or batchmode run. Reference lists are therefore unverified by default, and asmdef references are **not transitive** — a sample reaching a type through the package still needs its own direct reference.
+
+Verify by copying the sample into `Assets/` (a scratch path, or the real Package Manager import), building, then removing it. That caught a missing `GameLovers.GameData` reference (`CS0012` on `floatP`) in `ServicesPlayground` that reading the reference list had passed over. Checking that each referenced assembly *name* exists is not sufficient — the missing one was a name that was simply absent.
 
 ### URP vs Built-in render pipeline material color
 
