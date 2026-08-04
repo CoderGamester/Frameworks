@@ -861,6 +861,27 @@ def verify_tarball(
     elif personal:
         warn(f"G27 tar entries carry a personal owner name {sorted(personal)} (not normalised)")
 
+    # G28 -- no unresolved git-lfs pointers. A checkout done without `git lfs pull`
+    # leaves ~130-byte pointer stubs on disk, and the packer copies them verbatim:
+    # consumers then get a 129-byte "audio file". Caught in the wild -- uiservice
+    # 1.3.0 packed 5 pointers (2 sample .wav, 3 doc images) where the published
+    # 1.2.1 had shipped real content, so it was a silent REGRESSION, not a
+    # long-standing gap. Fix with `git lfs fetch origin <branch> && git lfs checkout`.
+    with tarfile.open(tgz, "r:gz") as tf:
+        pointers = []
+        for member in tf.getmembers():
+            if not member.isfile() or member.size > 200:
+                continue
+            fh = tf.extractfile(member)
+            if fh and fh.read(40).startswith(b"version https://git-lfs"):
+                pointers.append(member.name.removeprefix("package/"))
+    if pointers:
+        problems.append(
+            f"G28 LFS POINTERS: {len(pointers)} file(s) are unresolved git-lfs stubs "
+            f"rather than real content: {pointers[:5]}. Run `git lfs fetch origin "
+            f"<branch> && git lfs checkout` in the package, then repack."
+        )
+
     # G26 -- attestation identity.
     attestation = read_attestation(tgz)
     if attestation:
