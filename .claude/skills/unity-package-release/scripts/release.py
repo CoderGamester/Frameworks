@@ -1523,26 +1523,43 @@ def cmd_preflight_pr(args) -> int:
     ok(f"G10 CHANGELOG date {section['date']} is sane")
 
     base_manifest = run(["git", "-C", str(path), "show", f"{args.base}:package.json"], check=False)
-    if base_manifest:
-        base_version = json.loads(base_manifest).get("version")
-        if changelog.semver(base_version) and changelog.semver(version) <= changelog.semver(base_version):
-            raise Fail(
-                f"G11: version {version} does not advance past {args.base}'s {base_version}."
-            )
-        ok(f"G11 {version} advances past {args.base}'s {base_version}")
-
-        changed = run(
-            ["git", "-C", str(path), "diff", "--name-only", f"{args.base}...HEAD"], check=False
-        ).splitlines()
-        missing = [n for n in ("package.json", "CHANGELOG.md") if n not in changed]
-        if missing:
-            raise Fail(
-                f"G15: this PR does not touch {missing}. A release PR must bump the "
-                f"version and add a CHANGELOG section."
-            )
-        ok("G15 diff touches package.json and CHANGELOG.md")
-    else:
+    if not base_manifest:
         warn(f"G11/G15 skipped: could not read {args.base}:package.json")
+        print(f"\npreflight-pr PASSED for {pkg_id} {version}")
+        return 0
+
+    base_version = json.loads(base_manifest).get("version")
+    changed = run(
+        ["git", "-C", str(path), "diff", "--name-only", f"{args.base}...HEAD"], check=False
+    ).splitlines()
+
+    # Not every develop->master PR is a release. A CI- or docs-only PR leaves the
+    # version untouched, and holding it to the release gates would fail it for the
+    # wrong reason. Verify the invariants that still apply instead, so this stays
+    # usable as a required status check on ANY PR into master.
+    if version == base_version:
+        note(f"not a release PR: version stays at {version}")
+        if "CHANGELOG.md" in changed:
+            raise Fail(
+                f"G15: this PR edits CHANGELOG.md but does not bump the version "
+                f"(still {version}). Either bump it, or drop the CHANGELOG edit -- a "
+                f"published section must not change after the fact."
+            )
+        ok("G15 CHANGELOG.md untouched, consistent with an unchanged version")
+        print(f"\npreflight-pr PASSED for {pkg_id} {version} (non-release PR)")
+        return 0
+
+    if changelog.semver(base_version) and changelog.semver(version) < changelog.semver(base_version):
+        raise Fail(f"G11: version {version} goes BACKWARDS from {args.base}'s {base_version}.")
+    ok(f"G11 {version} advances past {args.base}'s {base_version}")
+
+    missing = [n for n in ("package.json", "CHANGELOG.md") if n not in changed]
+    if missing:
+        raise Fail(
+            f"G15: this PR bumps the version but does not touch {missing}. A release "
+            f"PR must bump the version and add a CHANGELOG section."
+        )
+    ok("G15 diff touches package.json and CHANGELOG.md")
 
     print(f"\npreflight-pr PASSED for {pkg_id} {version}")
     return 0
