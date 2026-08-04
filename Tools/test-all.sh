@@ -28,6 +28,11 @@ OUT=".test-all"
 EDITOR_RESULTS="$HOME/Library/Application Support/Game Lovers/Frameworks/TestResults.xml"
 mkdir -p "$OUT"
 
+# Identity of the code a run measured: host HEAD plus every submodule HEAD. Distinct
+# start-times prove two runs happened; they do NOT prove both ran the same code, and a
+# comparison straddling a code change misleads exactly as much as comparing a run with itself.
+code_id() { { git rev-parse HEAD; git submodule status --recursive; } 2>/dev/null | shasum | cut -c1-12; }
+
 # AssetImportWorker children match the same path as the interactive Editor and can outlive
 # it, so "is the Editor up" must exclude them or a stale worker reads as a running Editor.
 editor_pid() {
@@ -100,6 +105,7 @@ batch)
     wait_for_unity
     # Project path "." must be explicit; the wrapper otherwise eats the next flag.
     "$UNITY" test . --mode "$MODE" --output "$OUT/batch-${MODE}.xml" || true
+    code_id > "$OUT/batch-${MODE}.codeid"
     summarise "$OUT/batch-${MODE}.xml" "batch-${MODE}" || rc=1
   done
   exit $rc
@@ -148,6 +154,7 @@ editor-save)
   # green "BOTH ENVIRONMENTS" that compared one environment with itself.
   [ -f "$EDITOR_RESULTS" ] || { echo "ERROR: no Editor results at $EDITOR_RESULTS" >&2; exit 1; }
   cp "$EDITOR_RESULTS" "$OUT/editor-PlayMode.xml"
+  code_id > "$OUT/editor-PlayMode.codeid"
   summarise "$OUT/editor-PlayMode.xml" "editor-PlayMode(saved)"
   ;;
 
@@ -168,6 +175,21 @@ if b and e and b == e:
     sys.exit(1)
 print(f"    distinct runs: batch={b} editor={e}")
 PY
+  bid=$(cat "$OUT/batch-PlayMode.codeid" 2>/dev/null || echo "?")
+  eid=$(cat "$OUT/editor-PlayMode.codeid" 2>/dev/null || echo "?")
+  if [ "$bid" = "?" ] || [ "$eid" = "?" ]; then
+    # Fail closed: an unprovable claim must not pass. See root AGENTS.md 2.2, "a verifier's
+    # own PASS is not evidence".
+    echo "    ERROR: a code id is missing (batch=$bid editor=$eid), so same-code cannot be"
+    echo "    proven. Re-run the half that lacks one; do not read the verdict below."
+    rc=1
+  elif [ "$bid" != "$eid" ]; then
+    echo "    ERROR: the halves measured DIFFERENT code (batch=$bid editor=$eid)."
+    echo "    Distinct start-times only prove two runs happened. Re-run the stale half."
+    rc=1
+  else
+    echo "    same code: $bid"
+  fi
   echo
   if [ $rc -eq 0 ]; then
     echo "BOTH ENVIRONMENTS GREEN"
