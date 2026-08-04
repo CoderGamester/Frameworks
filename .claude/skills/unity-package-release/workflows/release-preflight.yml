@@ -47,10 +47,16 @@ jobs:
   preflight:
     runs-on: ubuntu-latest
     steps:
+      # `lfs: true` is load-bearing, not a nicety. The default (false) leaves every
+      # LFS-tracked file as a ~130-byte pointer stub, which would make G28 fail on
+      # every PR. With it on, G28 becomes a genuine check that the LFS objects are
+      # FETCHABLE from the remote — the exact failure that hit uiservice, where the
+      # working tree held stubs while the published 1.2.1 had real content.
       - name: Check out the package
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          lfs: true
           persist-credentials: false
 
       # The gate logic is shared rather than vendored into six repos, so there is

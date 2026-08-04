@@ -76,6 +76,35 @@ class Fail(Exception):
     """A gate refused. The message is the user-facing explanation."""
 
 
+# A git-lfs pointer is a tiny text stub. A checkout done without `git lfs pull`
+# leaves these on disk and the packer copies them verbatim, so a consumer gets a
+# 129-byte "audio file". Shared by G28 (tarball) and preflight-pr (working tree)
+# so the two can never drift apart.
+LFS_POINTER_MAGIC = b"version https://git-lfs"
+LFS_POINTER_MAX_BYTES = 200
+
+
+def is_lfs_pointer(head: bytes) -> bool:
+    return head.startswith(LFS_POINTER_MAGIC)
+
+
+def lfs_pointers_in_tree(root: pathlib.Path) -> list[str]:
+    """Unresolved lfs stubs under `root`, as paths relative to it."""
+    found = []
+    for path in root.rglob("*"):
+        if not path.is_file() or ".git" in path.parts:
+            continue
+        try:
+            if path.stat().st_size > LFS_POINTER_MAX_BYTES:
+                continue
+            with path.open("rb") as fh:
+                if is_lfs_pointer(fh.read(len(LFS_POINTER_MAGIC))):
+                    found.append(str(path.relative_to(root)))
+        except OSError:
+            continue
+    return sorted(found)
+
+
 # --------------------------------------------------------------------------- #
 # Process helpers
 # --------------------------------------------------------------------------- #
@@ -870,10 +899,10 @@ def verify_tarball(
     with tarfile.open(tgz, "r:gz") as tf:
         pointers = []
         for member in tf.getmembers():
-            if not member.isfile() or member.size > 200:
+            if not member.isfile() or member.size > LFS_POINTER_MAX_BYTES:
                 continue
             fh = tf.extractfile(member)
-            if fh and fh.read(40).startswith(b"version https://git-lfs"):
+            if fh and is_lfs_pointer(fh.read(len(LFS_POINTER_MAGIC))):
                 pointers.append(member.name.removeprefix("package/"))
     if pointers:
         problems.append(
@@ -1542,6 +1571,21 @@ def cmd_preflight_pr(args) -> int:
     if dt.date.fromisoformat(section["date"]) > dt.date.today():
         raise Fail(f"G10: CHANGELOG date {section['date']} for {version} is in the future.")
     ok(f"G10 CHANGELOG date {section['date']} is sane")
+
+    # G28 -- the same check the tarball gets, but against the checkout, so CI fails
+    # the PR instead of the packer failing later. In CI this is only meaningful when
+    # the workflow checks out with `lfs: true`; it then doubles as proof that the
+    # objects are actually FETCHABLE from the remote, which is the failure mode that
+    # bit uiservice (published 1.2.1 had real content, the working tree had stubs).
+    pointers = lfs_pointers_in_tree(path)
+    if pointers:
+        raise Fail(
+            f"G28: {len(pointers)} unresolved git-lfs pointer(s) in the checkout: "
+            f"{pointers[:5]}. These would be packed verbatim, shipping ~130-byte stubs "
+            f"instead of real content. In CI, check out with `lfs: true`; locally run "
+            f"`git lfs fetch origin <branch> && git lfs checkout`."
+        )
+    ok("G28 no unresolved git-lfs pointers")
 
     base_manifest = run(["git", "-C", str(path), "show", f"{args.base}:package.json"], check=False)
     if not base_manifest:
