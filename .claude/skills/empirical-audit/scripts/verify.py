@@ -27,10 +27,13 @@ def run(mode, filt, out):
 
 def sel(rows, test, fixture):
     """Rows for this mutation's target: methodname match + optional fixture suffix match."""
-    hits = [r for r in rows if r[1] == test and (not fixture or r[0].split('.')[-1] == fixture)]
+    # Accept a short OR fully-qualified fixture. Requiring the short form silently produced
+    # NOT-FOUND for every row in a spec that used fully-qualified names -- indistinguishable
+    # from "the test does not exist".
+    def fx(r): return not fixture or r[0] == fixture or r[0].split('.')[-1] == fixture.split('.')[-1]
+    hits = [r for r in rows if r[1] == test and fx(r)]
     if not hits:  # parameterized fallback: NUnit may only give name="Method(args)"
-        hits = [r for r in rows if (r[2] == test or r[2].startswith(test + "("))
-                and (not fixture or r[0].split('.')[-1] == fixture)]
+        hits = [r for r in rows if (r[2] == test or r[2].startswith(test + "(")) and fx(r)]
     return hits
 
 def ident(r): return f"{r[0].split('.')[-1]}.{r[2]}"
