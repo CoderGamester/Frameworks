@@ -35,12 +35,20 @@ declaration in a Runtime/ assembly whose every enclosing type is also public or
 protected. Editor/ assemblies are tooling and `internal` is not a consumer surface,
 so both may use the compact single-line form and neither may carry <param> tags.
 
-Accessibility is EFFECTIVE, not declared: interface members carry no modifier and
-default to public, so a member of an `internal` interface reports as `public` yet is
-unreachable outside the assembly. Rules K and M therefore test the narrowest of the
-member's own access and all its enclosing types' — without this, every member of
-`IHapticsBackend` / `IGameNotificationsPlatform` / `ITransitionInternal` would be
-misjudged as consumer-facing API.
+Accessibility is EFFECTIVE, not declared, for EVERY rule: it is the narrowest of a
+member's own access and all its enclosing types'. Two consequences that bite:
+interface members carry no modifier and default to public, so a member of an
+`internal` interface reports as `public` yet is unreachable outside the assembly
+(`IHapticsBackend`, `IGameNotificationsPlatform`, `ITransitionInternal`); and a
+`public` or `override` member of a PRIVATE nested type is unreachable outside that
+type, so §6.6 treats it as private — it must not be documented at all, and demanding
+a doc on it would be wrong (`CoroutineService.AsyncCoroutine`,
+`ServicesScaffolders.ScriptNameEditAction`).
+
+A `//` comment sitting between a `///` block and its declaration does NOT detach the
+documentation in C#, so the doc walk-back steps over plain comment lines as well as
+attributes. Without that, anything carrying a `// ReSharper disable once ...` line
+under its summary reads as undocumented.
 
 KNOWN LIMITATIONS (affect displayed names, not counts)
   * A method whose return type is generic renders its name as the type
@@ -96,7 +104,7 @@ RULE_TITLES = {
 def preprocess(text):
     """Return (stream, docs): a (char, line) stream with comments/strings neutralised,
     and {line: text} for every `///` line."""
-    stream, docs = [], {}
+    stream, docs, plain_comments = [], {}, set()
     line, i, n = 1, 0, len(text)
     while i < n:
         c = text[i]
@@ -112,6 +120,8 @@ def preprocess(text):
                 seg = text[i:j]
                 if seg.startswith("///"):
                     docs[line] = seg.strip()
+                else:
+                    plain_comments.add(line)
                 i = j
                 continue
             if text[i + 1] == "*":
@@ -162,7 +172,7 @@ def preprocess(text):
             continue
         stream.append((c, line))
         i += 1
-    return stream, docs
+    return stream, docs, plain_comments
 
 
 def strip_attrs(head):
@@ -223,7 +233,7 @@ class Decl:
 def parse(path, rel):
     with open(path, "r", encoding="utf-8-sig", errors="replace") as f:
         text = f.read()
-    stream, docs = preprocess(text)
+    stream, docs, plain_comments = preprocess(text)
     decls, stack = [], []
     depth = bdepth = 0
     head, head_line, arrow = "", None, -1
@@ -257,8 +267,9 @@ def parse(path, rel):
             return
         doclines = []
         k = ln - 1
-        while k in docs:
-            doclines.append(docs[k])
+        while k in docs or k in plain_comments:
+            if k in docs:
+                doclines.append(docs[k])
             k -= 1
         doclines.reverse()
 
@@ -451,11 +462,17 @@ def evaluate(decls):
             continue
         if d.access == "explicit-impl":
             continue
-        if d.access == "private":
+        # A `public` member of a `private` nested type is unreachable from outside that type, so §6.6
+        # treats it as private: it must NOT be documented, and demanding a doc on it is simply wrong.
+        # Every rule therefore keys off the narrowest of the member's own access and its enclosing
+        # types' — never the declared modifier alone.
+        eff = effective_access(d)
+        if eff == "private":
             if has_doc:
-                add("D", f" [{d.kind}]")
+                extra = f" [{d.kind}]" if d.access == "private" else f" [{d.kind}, {d.access} inside a private type]"
+                add("D", extra)
             continue
-        if d.access not in NEEDS_DOC:
+        if eff not in NEEDS_DOC:
             continue
         if not (d.kind in DOC_KINDS or d.kind.startswith("type:")):
             continue
