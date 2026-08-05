@@ -1740,8 +1740,8 @@ def cmd_publish(args) -> int:
 def cmd_install_preflight(args) -> int:
     """Copy the release-preflight workflow into a package repo and commit it.
 
-    Safe to ship: verified that upm 9.31.1 excludes `.github/` from the packed
-    tarball even when it is not gitignored, so no `.npmignore` is needed.
+    Each package intentionally tracks the workflow while listing `.github/` in
+    `.gitignore`, which Unity's packer uses to exclude CI files from the tarball.
     """
     template = pathlib.Path(__file__).resolve().parent.parent / "workflows/release-preflight.yml"
     body = template.read_text()
@@ -1785,11 +1785,12 @@ def cmd_install_preflight(args) -> int:
             "git", "-C", str(pkg.path), "add", "-f", "--",
             ".github/workflows/release-preflight.yml",
         ])
-        run(
-            ["git", "-C", str(pkg.path), "commit", "-m",
-             "ci: add release-preflight check for develop->master PRs"],
-            env=env,
+        subject = (
+            "ci: update release-preflight check"
+            if committed
+            else "ci: add release-preflight check for develop->master PRs"
         )
+        run(["git", "-C", str(pkg.path), "commit", "-m", subject], env=env)
         if not args.no_push:
             run(["git", "-C", str(pkg.path), "push", "origin", WORK_BRANCH])
         ok(f"{pkg.folder}: installed{'' if args.no_push else ' and pushed'}")

@@ -138,6 +138,13 @@ Every release PR is **assigned to `CoderGamester`** so it can't be lost track of
 
 Then **stop and tell the user**: give them the PR URL, and say the release completes only after they merge it — with a **merge commit**, not squash or rebase. Squash and rebase are both still enabled on all six repos, and a mis-click breaks the tag model (`G30` will catch it, but after the fact).
 
+The package's `release-preflight` workflow also observes the merged event and
+dispatches a `status` run to the host repository. This hand-off requires a
+fine-grained `FRAMEWORKS_DISPATCH_TOKEN` package secret with access to
+`CoderGamester/Frameworks`; when the secret is absent the workflow emits a
+warning and leaves the already-merged PR green. The host run remains read-only
+at this stage. Tagging and publishing still require the explicit phases below.
+
 ### Step 3 — Tag the merge commit (post-merge only)
 
 ```bash

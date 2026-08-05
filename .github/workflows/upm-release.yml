@@ -1,7 +1,8 @@
 # Post-merge release automation for the GameLovers UPM packages.
 #
-# STATUS: created but DISABLED on purpose (`gh workflow disable upm-release.yml`).
-# Re-enable with: gh workflow enable upm-release.yml --repo CoderGamester/Frameworks
+# STATUS: pending merge into the default branch. GitHub only registers workflow
+# files from the default branch, so this becomes available after the 0.6.0
+# develop -> master release PR lands.
 #
 # WHY IT LIVES IN THE HOST REPO, NOT IN EACH PACKAGE REPO
 # `scripts/release.py` resolves packages via the host layout (Packages/<folder> as
@@ -76,7 +77,7 @@ jobs:
     environment: release
     env:
       PACKAGE: ${{ github.event.inputs.package || github.event.client_payload.package }}
-      PHASE: ${{ github.event.inputs.phase || 'status' }}
+      PHASE: ${{ github.event.inputs.phase || github.event.client_payload.phase || 'status' }}
       UPM_SERVICE_ACCOUNT_KEY_ID: ${{ secrets.UPM_SERVICE_ACCOUNT_KEY_ID }}
       UPM_SERVICE_ACCOUNT_KEY_SECRET: ${{ secrets.UPM_SERVICE_ACCOUNT_KEY_SECRET }}
       GH_TOKEN: ${{ secrets.RELEASE_PAT }}
@@ -84,16 +85,20 @@ jobs:
 
     steps:
       - name: Check out host repo with submodules
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           submodules: recursive
           fetch-depth: 0
           persist-credentials: false
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
+
+      - name: Assert the release tooling checkout
+        run: |
+          test -f .claude/skills/unity-package-release/scripts/release.py
 
       - name: Assert a release token is present
         run: |
