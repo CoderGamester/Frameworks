@@ -24,6 +24,7 @@ internal static class MobileSamplesInputForUiVerifier
 	private static bool _completed;
 	private static int _screenshotFrame;
 	private static int _stableEditorTicks;
+	private static string _sceneBeforeInput;
 
 	private static string OutputDirectory => Environment.GetEnvironmentVariable(OutputEnvironmentVariable) ?? string.Empty;
 	private static string ReadyPath => Path.Combine(OutputDirectory, "ready.txt");
@@ -41,7 +42,7 @@ internal static class MobileSamplesInputForUiVerifier
 
 	private static void StartWhenReady()
 	{
-		var overviewScene = ResolveOverviewScenePath();
+		var overviewScene = ResolvePlayerScenePath();
 		if (EditorApplication.isCompiling || EditorApplication.isUpdating ||
 		    Type.GetType("GameLovers.MobileServices.Samples.MobileServicesPlayground.MobileServicesPlaygroundUI, GameLovers.MobileServices.Samples") == null ||
 		    string.IsNullOrEmpty(overviewScene))
@@ -59,7 +60,7 @@ internal static class MobileSamplesInputForUiVerifier
 		EditorApplication.EnterPlaymode();
 	}
 
-	private static string ResolveOverviewScenePath()
+	private static string ResolvePlayerScenePath()
 	{
 		var guids = AssetDatabase.FindAssets("t:MobileServicesSampleBuildCatalogAsset");
 		if (guids.Length != 1) return null;
@@ -67,18 +68,8 @@ internal static class MobileSamplesInputForUiVerifier
 		var catalog = AssetDatabase.LoadAssetAtPath<ScriptableObject>(catalogPath);
 		if (catalog == null) return null;
 		var serialized = new SerializedObject(catalog);
-		var entries = serialized.FindProperty("_entries");
-		if (entries == null || !entries.isArray) return null;
-		for (var i = 0; i < entries.arraySize; i++)
-		{
-			var entry = entries.GetArrayElementAtIndex(i);
-			var page = entry.FindPropertyRelative("_page");
-			var scene = entry.FindPropertyRelative("_scene");
-			if (page == null || scene == null || page.enumDisplayNames.Length <= page.enumValueIndex ||
-				!string.Equals(page.enumDisplayNames[page.enumValueIndex], "Overview", StringComparison.Ordinal)) continue;
-			return scene.objectReferenceValue == null ? null : AssetDatabase.GetAssetPath(scene.objectReferenceValue);
-		}
-		return null;
+		var scene = serialized.FindProperty("_playerScene");
+		return scene == null || scene.objectReferenceValue == null ? null : AssetDatabase.GetAssetPath(scene.objectReferenceValue);
 	}
 
 	private static void Tick()
@@ -99,10 +90,11 @@ internal static class MobileSamplesInputForUiVerifier
 		}
 
 		var title = FirstLabel(document.rootVisualElement);
-		if (!_readyWritten && SceneManager.GetActiveScene().name == "MobileServicesPlayground")
+		if (!_readyWritten && SceneManager.GetActiveScene().name == "MobileServicesSamples")
 		{
 			var buttons = document.rootVisualElement.Query<Button>().ToList();
-			var haptics = buttons.FirstOrDefault(button => button.text == "Haptics");
+			var haptics = document.rootVisualElement.Q<Button>("nav-haptics");
+			_sceneBeforeInput = SceneManager.GetActiveScene().name;
 			WriteLines(ReadyPath, new[]
 			{
 				"editor=" + Application.unityVersion,
@@ -117,9 +109,12 @@ internal static class MobileSamplesInputForUiVerifier
 			_readyWritten = true;
 		}
 
-		if (SceneManager.GetActiveScene().name != "HapticsPalette")
+		var hapticsPage = document.rootVisualElement.Q<VisualElement>("page-haptics");
+		var hapticsButton = document.rootVisualElement.Q<Button>("nav-haptics");
+		var hapticsSelected = hapticsButton != null && hapticsButton.ClassListContains("is-selected");
+		if (!hapticsSelected || hapticsPage == null || hapticsPage.resolvedStyle.display == DisplayStyle.None)
 		{
-			FailIfTimedOut("Foreground input did not navigate to HapticsPalette.");
+			FailIfTimedOut("Foreground input did not select the Haptics page in the resident shell.");
 			return;
 		}
 
@@ -136,13 +131,16 @@ internal static class MobileSamplesInputForUiVerifier
 		var screenshotBytes = new FileInfo(ScreenshotPath).Length;
 		var eventSystems = EventSystemCount();
 		var provider = InputProviderName();
-		var passed = _readyWritten && title == "Haptics Palette" && eventSystems == 0 &&
+		var sceneAfterInput = SceneManager.GetActiveScene().name;
+		var passed = _readyWritten && title == "Haptics Palette" && sceneAfterInput == _sceneBeforeInput && eventSystems == 0 &&
 		             provider == "UnityEngine.InputSystem.Plugins.InputForUI.InputSystemProvider" && screenshotBytes > 0;
 		WriteLines(ReportPath, new[]
 		{
 			"editor=" + Application.unityVersion,
-			"interaction=foreground-mouse-click",
-			"finalScene=" + SceneManager.GetActiveScene().name,
+			"interaction=foreground-mouse-click-resident-tab",
+			"sceneBeforeInput=" + _sceneBeforeInput,
+			"sceneAfterInput=" + sceneAfterInput,
+			"selectedTab=" + (hapticsSelected ? "Haptics" : "missing"),
 			"title=" + title,
 			"inputProvider=" + provider,
 			"eventSystems=" + eventSystems,

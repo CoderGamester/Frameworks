@@ -55,44 +55,111 @@ static_check() {
 
   while IFS= read -r scene; do
     scenes+=("$scene")
-  done < <(find "$SAMPLE_ROOT" -mindepth 2 -maxdepth 2 -type f -name '*.unity' -print | sort)
-  if [[ "${#scenes[@]}" != "4" ]]; then
-    echo "ERROR: expected exactly four authored sample scenes from the imported bundle, found ${#scenes[@]}" >&2
+  done < <(find "$SAMPLE_ROOT" -mindepth 1 -maxdepth 2 -type f -name '*.unity' -print | sort)
+  if [[ "${#scenes[@]}" != "5" ]]; then
+    echo "ERROR: expected one canonical player scene plus four direct-open wrappers, found ${#scenes[@]}" >&2
     failures=1
   fi
 
   for scene in "${scenes[@]}"; do
     sample_dir=$(dirname "$scene")
     sample=$(basename "$sample_dir")
-    rg -F -q "$sample" "$SAMPLE_ROOT/Shared/MobileServicesSamplePage.cs" || {
-      echo "ERROR: bundled page catalog is missing the scene page for $sample" >&2
-      failures=1
-    }
-
-    panel_settings=$(find "$SAMPLE_ROOT/$sample" -maxdepth 1 -name '* Panel Settings.asset' -print)
-    panel_settings_count=$(printf '%s\n' "$panel_settings" | sed '/^$/d' | wc -l | tr -d ' ')
-    if [[ "$panel_settings_count" != "1" ]]; then
-      echo "ERROR: expected one PanelSettings asset for $sample, found $panel_settings_count" >&2
-      failures=1
+    if [[ "$scene" == "$SAMPLE_ROOT/MobileServicesSamples.unity" ]]; then
       continue
     fi
-    theme="$SAMPLE_ROOT/$sample/UnityDefaultRuntimeTheme.tss"
-    [[ -f "$theme" && -f "$theme.meta" ]] || {
-      echo "ERROR: missing self-contained runtime theme for $sample" >&2
-      failures=1
-      continue
-    }
-    theme_guid=$(sed -n 's/^guid: //p' "$theme.meta")
-    if [[ -z "$theme_guid" ]] || ! rg -F -q "guid: $theme_guid" "$panel_settings"; then
-      echo "ERROR: $sample PanelSettings does not reference its runtime theme" >&2
+    if [[ "$sample" != "MobileServicesPlayground" && "$sample" != "HapticsPalette" && "$sample" != "NotificationsScheduler" && "$sample" != "DeepLinkRouter" ]]; then
+      echo "ERROR: unexpected wrapper scene directory $sample" >&2
       failures=1
     fi
-    rg -F -q 'unity-theme://default' "$theme" || {
-      echo "ERROR: $sample runtime theme does not import Unity default controls" >&2
+  done
+
+  canonical_scene="$SAMPLE_ROOT/MobileServicesSamples.unity"
+  [[ -f "$canonical_scene" && -f "$canonical_scene.meta" ]] || {
+    echo "ERROR: missing canonical MobileServicesSamples.unity player scene" >&2
+    failures=1
+  }
+  [[ -f "$SAMPLE_ROOT/Shared/MobileServicesSampleShell.uxml" && -f "$SAMPLE_ROOT/Shared/MobileServicesSampleShell.uss" ]] || {
+    echo "ERROR: missing resident shell UXML/USS" >&2
+    failures=1
+  }
+  [[ -f "$SAMPLE_ROOT/Shared/MobileServicesSampleApp.prefab" && -f "$SAMPLE_ROOT/Shared/MobileServicesSampleApp.prefab.meta" ]] || {
+    echo "ERROR: missing shared sample app prefab" >&2
+    failures=1
+  }
+  if [[ $(rg -F -c 'm_SourcePrefab: {fileID: 100100000, guid: 6d9b56d6e8e9479e8b1d44bbd9a77211, type: 3}' "$SAMPLE_ROOT" --glob '*.unity' | awk -F: '{sum += $2} END {print sum + 0}') != "5" ]]; then
+    echo "ERROR: canonical scene and wrappers must all instantiate the shared app prefab" >&2
+    failures=1
+  fi
+  for attribute in 'mode="Vertical"' 'touch-scroll-type="Elastic"' 'scroll-deceleration-rate="0.135"' 'elasticity="0.1"'; do
+    if [[ $(rg -F -o "$attribute" "$SAMPLE_ROOT/Shared/MobileServicesSampleShell.uxml" | wc -l | tr -d ' ') != "4" ]]; then
+      echo "ERROR: shell must author $attribute on all four page ScrollViews" >&2
+      failures=1
+    fi
+  done
+  if rg -n 'MobileServicesSampleScrollController|PotentiallySwiped|sample-button--pressed|CapturePointer|ReleasePointer|StopPropagation' \
+    "$SAMPLE_ROOT/Shared/MobileServicesSampleNavigation.cs" "$SAMPLE_ROOT/Shared/MobileServicesSampleNavigation.uss"; then
+    echo "ERROR: legacy touch gesture scroll/click arbitration remains in shared sample code" >&2
+    failures=1
+  fi
+  if rg -n 'SceneManager|LoadScene' "$SAMPLE_ROOT/Shared/MobileServicesSampleNavigation.cs"; then
+    echo "ERROR: tab navigation must not load or replace Unity scenes" >&2
+    failures=1
+  fi
+  rg -F -q 'MobileServicesSampleMouseScrollController.Attach' "$SAMPLE_ROOT/Shared/MobileServicesSampleNavigation.cs" || {
+    echo "ERROR: shared navigation does not attach the mouse-only scroll manipulator" >&2
+    failures=1
+  }
+  rg -F -q 'name="sample-navigation"' "$SAMPLE_ROOT/Shared/MobileServicesSampleShell.uxml" || {
+    echo "ERROR: resident shell does not own the adaptive navigation" >&2
+    failures=1
+  }
+  if ! awk '/name="sample-navigation-items"/{nav=NR} /<\/ui:ScrollView>/{last=NR} END {if (!nav || !last || nav <= last) exit 1}' "$SAMPLE_ROOT/Shared/MobileServicesSampleShell.uxml"; then
+    echo "ERROR: adaptive navigation must be outside the page ScrollViews" >&2
+    failures=1
+  fi
+  rg -F -q 'EnableInClassList("sample-landscape", isLandscape)' "$SAMPLE_ROOT/Shared/MobileServicesSampleNavigation.cs" || {
+    echo "ERROR: resident shell does not react to landscape panel geometry" >&2
+    failures=1
+  }
+  rg -F -q 'SetLandscape(isLandscape, isShortLandscape)' "$SAMPLE_ROOT/Shared/MobileServicesSampleNavigation.cs" || {
+    echo "ERROR: safe-area layout is not updated when navigation placement changes" >&2
+    failures=1
+  }
+  rg -F -q 'safeArea = ResolveSafeArea(safeArea)' "$SAMPLE_ROOT/Shared/MobileServicesSampleSafeAreaLayout.cs" || {
+    echo "ERROR: adaptive layout does not reject stale pre-rotation safe-area geometry" >&2
+    failures=1
+  }
+  for rule in '.sample-landscape .sample-shell { flex-direction: row-reverse; }' \
+    '.sample-landscape .sample-navigation-items { flex-direction: column;' \
+    '.sample-landscape .sample-navigation-indicator { position: absolute;' \
+    '.sample-short-landscape .sample-navigation { width: 110px;'; do
+    rg -F -q "$rule" "$SAMPLE_ROOT/Shared/MobileServicesSampleShell.uss" || {
+      echo "ERROR: adaptive navigation is missing USS rule: $rule" >&2
       failures=1
     }
-
+  done
+  if rg -n 'sample-rtl|right-to-left|RightToLeft|ReadingDirection' \
+    "$SAMPLE_ROOT/Shared/MobileServicesSampleNavigation.cs" \
+    "$SAMPLE_ROOT/Shared/MobileServicesSampleSafeAreaLayout.cs" \
+    "$SAMPLE_ROOT/Shared/MobileServicesSampleShell.uss" \
+    "$SAMPLE_ROOT/Shared/MobileServicesSampleShell.uxml"; then
+    echo "ERROR: the sample must expose only the left-to-right leading rail" >&2
+    failures=1
+  fi
+  panel_settings=$(find "$SAMPLE_ROOT" -maxdepth 2 -name '* Panel Settings.asset' -print)
+  panel_settings_count=$(printf '%s\n' "$panel_settings" | sed '/^$/d' | wc -l | tr -d ' ')
+  if [[ "$panel_settings_count" -lt "1" ]]; then
+    echo "ERROR: missing shared PanelSettings asset" >&2
+    failures=1
+  fi
+  theme=$(find "$SAMPLE_ROOT" -maxdepth 3 -name 'UnityDefaultRuntimeTheme.tss' -print | head -n 1)
+  [[ -n "$theme" && -f "$theme.meta" ]] || {
+    echo "ERROR: missing runtime theme for the resident shell" >&2
+    failures=1
+  }
+  for sample in MobileServicesPlayground HapticsPalette NotificationsScheduler DeepLinkRouter; do
     sample_uss="$SAMPLE_ROOT/$sample/$sample.uss"
+    sample_ui="$SAMPLE_ROOT/$sample/${sample}UI.cs"
     for selector in '.sample-button:hover' '.sample-button:active' '.sample-button:focus' '.sample-button:disabled' \
       '.sample-primary-action:hover' '.sample-primary-action:active' '.sample-primary-action:focus' '.sample-primary-action:disabled'; do
       rg -F -q "$selector" "$sample_uss" || {
@@ -100,38 +167,10 @@ static_check() {
         failures=1
       }
     done
-
-    sample_ui="$SAMPLE_ROOT/$sample/${sample}UI.cs"
-    rg -F -q 'RegisterCallback<ClickEvent>' "$sample_ui" || {
-      echo "ERROR: $sample does not bind committed click haptics" >&2
-      failures=1
-    }
-    rg -F -q 'HapticPreset.Selection' "$sample_ui" || {
-      echo "ERROR: $sample click feedback does not use the Selection preset" >&2
-      failures=1
-    }
-    rg -F -q 'SampleStatusFormatter.Format' "$sample_ui" || {
-      echo "ERROR: $sample does not use the shared Field: Value status formatter" >&2
-      failures=1
-    }
-    rg -F -q 'name="sample-navigation"' "$SAMPLE_ROOT/$sample/$sample.uxml" || {
-      echo "ERROR: $sample does not host the shared bottom navigation" >&2
-      failures=1
-    }
+    rg -F -q 'RegisterCallback<ClickEvent>' "$sample_ui" || { echo "ERROR: $sample does not bind committed click haptics" >&2; failures=1; }
+    rg -F -q 'HapticPreset.Selection' "$sample_ui" || { echo "ERROR: $sample click feedback does not use the Selection preset" >&2; failures=1; }
+    rg -F -q 'SampleStatusFormatter.Format' "$sample_ui" || { echo "ERROR: $sample does not use the shared Field: Value status formatter" >&2; failures=1; }
   done
-
-  if ! rg -F -q 'MobileServicesSampleScrollController.Attach(root.Q<ScrollView>(), root, host, _gestureController)' "$SAMPLE_ROOT/Shared/MobileServicesSampleNavigation.cs"; then
-    echo "ERROR: shared sample navigation does not attach the root scroll controller" >&2
-    failures=1
-  fi
-  if ! rg -F -q '_gestureController.PotentiallySwiped += OnPotentiallySwiped' "$SAMPLE_ROOT/Shared/MobileServicesSampleNavigation.cs"; then
-    echo "ERROR: shared sample navigation is missing the touch gesture scroll fallback" >&2
-    failures=1
-  fi
-  if ! rg -F -q '.sample-button--pressed' "$SAMPLE_ROOT/Shared/MobileServicesSampleNavigation.uss"; then
-    echo "ERROR: shared sample navigation is missing deterministic pressed-state styling" >&2
-    failures=1
-  fi
 
   if rg -n '<ui:Toggle[^>]+name="enabled"' "$SAMPLE_ROOT/HapticsPalette" --glob '*.uxml'; then
     echo "ERROR: HapticsPalette must keep click haptics enabled without a toggle" >&2
@@ -324,17 +363,16 @@ for version in "${EDITORS[@]}"; do
     continue
   fi
   if ! awk -F '\t' '
-    NR == 1 { if ($0 != "mobile-services-sample-catalog-v1") exit 10; next }
+    NR == 1 { if ($0 != "mobile-services-sample-player-scene-v1") exit 10; next }
     NF != 3 || $1 == "" || $2 == "" || $3 !~ /^[0-9a-fA-F]{32}$/ { exit 11 }
-    { pages[$1]++; paths[$2]++; guids[$3]++; count++ }
+    { paths[$2]++; guids[$3]++; count++ }
     END {
-      if (count != 4) exit 12
-      for (key in pages) if (pages[key] != 1) exit 13
-      for (key in paths) if (paths[key] != 1) exit 14
-      for (key in guids) if (guids[key] != 1) exit 15
+      if (count != 1) exit 12
+      for (key in paths) if (paths[key] != 1) exit 13
+      for (key in guids) if (guids[key] != 1) exit 14
     }
   ' "$catalog_artifact"; then
-    echo "BLOCKED $version: catalog identity artifact is malformed or does not contain four unique page/path/GUID rows: $catalog_artifact" >&2
+    echo "BLOCKED $version: catalog identity artifact is malformed or does not contain one canonical player row: $catalog_artifact" >&2
     blocked=$((blocked + 1))
     continue
   fi
@@ -344,7 +382,7 @@ for version in "${EDITORS[@]}"; do
     blocked=$((blocked + 1))
     continue
   fi
-  echo "$version: imported-sample=compiled catalog=4-unique-page-path-guid-rows ugui=absent log=$artifact lock=$lock_artifact catalog-artifact=$catalog_artifact"
+  echo "$version: imported-sample=compiled catalog=one-canonical-player-scene ugui=absent log=$artifact lock=$lock_artifact catalog-artifact=$catalog_artifact"
   verified=$((verified + 1))
 done
 
