@@ -22,6 +22,12 @@ none of which produced a console message.
 batchmode requirement, and it means the project lock blocks `unity test` while you work. Plan to do
 all visual verification first, then close the Editor and run the suites.
 
+Resolve the Editor by project path, not by macOS bundle identifier or window title alone. Multiple
+Unity projects and editor versions can be open under the same application identity. Match the
+process command line to the project's `Temp/UnityLockfile` before focusing, driving, quitting, or
+terminating an Editor. Never disturb an Editor owned by another project; use an isolated host when
+the intended window cannot be targeted safely.
+
 ## The loop
 
 ### 1. Confirm the Editor is idle
@@ -88,14 +94,32 @@ it) will be absent from the image. You would photograph the exact absence you ar
 `CaptureScreenshot` completes at end of frame, so request it in one `Unity_RunCommand` and read the
 file afterwards, not in the same call.
 
+UI Toolkit overlays can be absent from a framebuffer screenshot even when a populated visual tree
+exists. If the capture contains only the camera clear colour, capture the actual Game view through
+the Editor or use a target-device screenshot. Do not treat UI-tree geometry as a substitute for the
+missing pixels.
+
 ### 6. Read the image and judge it
 
 Read the PNG directly. Compare against a baseline capture of the same scene with the feature off —
 "is this blurred" is far easier as a two-image comparison than in the absolute.
 
+A non-empty PNG is not visual evidence by itself. Reject a capture that is uniform or nearly
+uniform, missing expected task-specific landmarks, stale, from the wrong scene/tab/orientation, or
+showing an Editor panel instead of the target Game view. Byte size, valid dimensions, pixel variance,
+and a harness-reported `PASS` are supporting checks; direct image inspection or an independent
+landmark check is still required. A high-entropy image of the wrong window is also a failure.
+
+Persistent UI shells keep hidden pages in the same visual tree. Query the selected visible page root
+before reading titles, bounds, or controls; a global `Query<Label>().First()` can return a valid label
+from an inactive page. Confirm the page and relevant ancestors are displayed and exactly one
+destination is selected.
+
 For mobile UI, capture at least one notched iOS and Android profile where available. Check portrait and landscape when the layout claims to support both. A screenshot proves appearance only; pair it with real click and drag observations for interactive work.
 
 Store the observation in a run-specific artifact set that names the editor, code identity, scene, interaction driver, and output byte counts. Do not replace an earlier result in place or silently reuse a file from another editor/run.
+Require the behavior artifact itself to state `PASS`; the existence of the report or screenshot is
+never a pass condition. Preserve invalid visual attempts under their original run identity.
 
 ### 7. Check the console separately
 

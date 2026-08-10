@@ -70,6 +70,19 @@ Capture representative notched iOS and Android profiles. Check:
 - Buttons in the same semantic group share visual styling.
 - Content remains reachable in portrait and landscape when both are supported.
 
+## Persistent and cached views
+
+Do not query a cached shell globally when attributing visible state. Hidden page roots remain valid
+visual elements and can be returned before the active page.
+
+- Resolve the selected destination and its page root first.
+- Confirm the page and relevant ancestors are displayed.
+- Query titles, controls, status text, and bounds only within that visible root.
+- Require exactly one selected destination.
+- Record the active scene before and after navigation when tabs promise resident view switching.
+
+`root.Query<Label>().First()` is not evidence of the visible title in a cached shell.
+
 ## Completion report
 
 State:
