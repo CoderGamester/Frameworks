@@ -220,6 +220,7 @@ class Package:
         self.id: str = manifest["name"]
         self.version: str = manifest["version"]
         self.changelog = path / "CHANGELOG.md"
+        self.source_path = path
         self._repo: str | None = None
 
     @property
@@ -238,6 +239,11 @@ class Package:
         if self._repo is None:
             self._repo = gh(["api", f"repos/{self.origin_slug}", "-q", ".full_name"])
         return self._repo
+
+    # Directory the packer reads. Normally the submodule itself; `pack --ref`
+    # repoints it at a detached worktree so a post-merge repack can reproduce the
+    # exact commit that was merged, even after develop has moved on.
+    source_path: pathlib.Path
 
     @property
     def pack_dir(self) -> pathlib.Path:
@@ -668,7 +674,7 @@ def _pack_upm(pkg: Package, out: pathlib.Path) -> pathlib.Path:
     # 9.26.1 exits 0 on bad credentials; the standalone 9.31.1 exits 1). Inspect the
     # output either way, so the failure is actionable rather than a bare rc.
     proc = subprocess.run(
-        [str(cli), "pack", str(pkg.path),
+        [str(cli), "pack", str(pkg.source_path),
          "--destination", str(out), "--organization-id", UNITY_ORG_ID],
         capture_output=True, text=True,
     )
@@ -712,7 +718,7 @@ def _pack_unity(pkg: Package, out: pathlib.Path) -> pathlib.Path:
             "-projectPath", str(PACKER_PROJECT),
             "-logFile", str(log),
             "-executeMethod", "UpmPack.Run",
-            "-packageFolder", str(pkg.path),
+            "-packageFolder", str(pkg.source_path),
             "-outDir", str(out),
             "-resultFile", str(result),
             "-timeoutSeconds", "300",
@@ -739,7 +745,7 @@ def _pack_unity(pkg: Package, out: pathlib.Path) -> pathlib.Path:
 
 def _pack_npm(pkg: Package, out: pathlib.Path) -> pathlib.Path:
     note("tier 3: npm pack (DEGRADED -- no attestation, no repository block)")
-    run(["npm", "pack", "--pack-destination", str(out)], cwd=pkg.path)
+    run(["npm", "pack", "--pack-destination", str(out)], cwd=pkg.source_path)
     return _sole_tarball(out)
 
 
@@ -1630,10 +1636,61 @@ def cmd_preflight_pr(args) -> int:
     return 0
 
 
+def pack_from_ref(pkg: Package, ref: str) -> str:
+    """Point the packer at a detached worktree of `ref`. Returns its resolved sha.
+
+    Needed after a merge when develop has already moved on: the artifact must
+    reproduce the commit that was actually merged (G32b), not the branch tip. A
+    worktree leaves the real working tree untouched, so G25 still holds.
+    """
+    resolved = git(pkg.path, "rev-parse", f"{ref}^{{commit}}")
+    wt = CACHE / "worktrees" / pkg.folder
+
+    git(pkg.path, "worktree", "prune")
+    if wt.exists():
+        git(pkg.path, "worktree", "remove", "--force", str(wt), check=False)
+        shutil.rmtree(wt, ignore_errors=True)
+    wt.parent.mkdir(parents=True, exist_ok=True)
+    git(pkg.path, "worktree", "add", "--detach", str(wt), resolved)
+
+    # A worktree checkout does not always smudge LFS content; G28 would then fail
+    # on pointer stubs that are merely un-materialised rather than missing.
+    git(wt, "lfs", "checkout", check=False)
+
+    pkg.source_path = wt
+    note(f"packing from detached worktree at {resolved[:9]}")
+    return resolved
+
+
 def cmd_pack(args) -> int:
     pkg = Package(args.package)
     with Lock(pkg.folder):
         f = facts(pkg)
+
+        if args.ref:
+            head = pack_from_ref(pkg, args.ref)
+            before_pkg = f["dirty"]
+            before_host = run(["git", "-C", str(pkg.host), "status", "--porcelain"])
+            try:
+                tgz, tier = pack(pkg, args.tier)
+                ok(f"packed via tier {tier}: {tgz.name}")
+                info = verify_tarball(tgz, pkg.id, pkg.version, tier=tier, head_sha=head)
+                ok(f"G20-G28 passed: {info['files']} files, sha256:{info['sha256'][:16]}...")
+                if info["attestation"]:
+                    att = info["attestation"]
+                    ok(f"G26 attested as org {att.get('ownerOrgId')} ({att.get('ownerOrgName')})")
+                diff_previous(pkg, tgz, changelog.prev_tag(f["tags"], pkg.version))
+            finally:
+                git(pkg.path, "worktree", "remove", "--force", str(pkg.source_path), check=False)
+                shutil.rmtree(pkg.source_path, ignore_errors=True)
+                git(pkg.path, "worktree", "prune")
+            after_pkg = git(pkg.path, "status", "--porcelain")
+            after_host = run(["git", "-C", str(pkg.host), "status", "--porcelain"])
+            if after_pkg != before_pkg or after_host != before_host:
+                raise Fail("G25: packing from a worktree changed a working tree")
+            ok("G25 no working-tree side effects")
+            print(f"\ntarball: {tgz}")
+            return 0
 
         # The tarball is built from the WORKING TREE, not from a git ref, so a dirty
         # or untracked file ships to consumers and is unreproducible from git. This
@@ -1819,7 +1876,12 @@ def main(argv: list[str]) -> int:
     p.add_argument("--path", default=".", help="package directory (standalone checkout)")
     p.add_argument("--base", default="origin/master", help="base ref of the PR")
     p.set_defaults(fn=cmd_preflight_pr)
-    p = sub.add_parser("pack"); p.add_argument("package"); p.add_argument("--tier", type=int, choices=[1, 2, 3]); p.set_defaults(fn=cmd_pack)
+    p = sub.add_parser("pack")
+    p.add_argument("package")
+    p.add_argument("--tier", type=int, choices=[1, 2, 3])
+    p.add_argument("--ref", help="pack a specific commit via a detached worktree "
+                                 "(post-merge repack when develop has moved on)")
+    p.set_defaults(fn=cmd_pack)
     p = sub.add_parser("verify-tarball")
     p.add_argument("tarball"); p.add_argument("id"); p.add_argument("version")
     p.add_argument("--tier", type=int, choices=[1, 2, 3]); p.add_argument("--head-sha")
