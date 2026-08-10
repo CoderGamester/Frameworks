@@ -7,7 +7,7 @@ description: Use when preparing or validating a changelog, opening or refreshing
 
 Prepares and releases one UPM package from `Packages/` to its own GitHub repo, reproducing the established release shape. Changelog preparation belongs to this skill because the pending entry becomes both the release PR body and the published release notes. The workflow **halts for the user to merge the PR** — the agent never promotes `develop` → `master`.
 
-All mechanics live in `scripts/`. **Run those scripts; do not reimplement their checks in prose or ad-hoc shell.** They encode 38 verification gates derived from real defects in this repo's release history, and a paraphrase will miss them.
+All mechanics live in `scripts/`. **Run those scripts; do not reimplement their checks in prose or ad-hoc shell.** Every gate they encode came from a real defect in this repo's release history — a wrong tarball on a published release, a work-identity org signed into a public artifact, uncommitted files shipped to consumers, git-lfs stubs masquerading as audio — and a paraphrase will miss them.
 
 ## When to Use
 
@@ -112,8 +112,19 @@ release.py sync-pr-body <package>
 
 ```bash
 release.py preflight <package>          # gates G0-G16, no mutation
-release.py pack <package>               # tier 1 -> 2 -> 3, then gates G20-G27
+release.py pack <package>               # tier 1 -> 2 -> 3, then gates G20-G28
+release.py pack <package> --ref <sha>   # pack a specific commit (post-merge repack)
 ```
+
+`pack` refuses a dirty or untracked working tree and an unpushed `HEAD`, with no
+override: the tarball is built from the **working tree**, not from a git ref, so
+anything uncommitted ships to consumers unreproducibly. Caught in the wild — 7
+untracked WIP files under `uiservice Samples~/UrpRendering/` were packed into a
+tarball that had already passed verification.
+
+Use `--ref` when `develop` has moved on after a merge: it packs from a detached
+worktree at that commit, so the artifact reproduces exactly what was merged and
+`G32b` holds. The real working tree is untouched, so `G25` still applies.
 
 `pack` tries tiers in order and reports which it used:
 
@@ -172,6 +183,37 @@ release.py bump-host <package>...        # omit args for all six
 
 Verifies each release is genuinely good, stages only `Packages/<pkg>` and `.architecture-log.md`, writes **one** `.architecture-log.md` entry, makes **one** commit (`chore: bump submodule pointers (...)`), and pushes host `develop`.
 
+## The PR gate
+
+Each package repo carries `.github/workflows/release-preflight.yml`, installed and
+kept in sync by:
+
+```bash
+release.py install-preflight [<package>...]   # idempotent; --no-push to stage only
+```
+
+It runs on every `pull_request` into `master`, checks out the package with
+`lfs: true` plus the shared tooling from `Frameworks`, and runs:
+
+```bash
+release.py preflight-pr --path . --base origin/master
+```
+
+That is the package-local subset — `G7`, `G8`/`G9`, `G10`, `G11`, `G15`, `G28` —
+so it needs no token, no submodules and no network, and works on a bare clone.
+Remote-state gates (`G0`-`G6`, `G12`-`G14`) and the tarball chain (`G20`-`G28`)
+stay local.
+
+**It exists because a human review gate is impossible here.** GitHub returns
+`HTTP 422 "Review cannot be requested from pull request author"`, so a solo repo
+cannot have a reviewer on its own PR. A required status check is the substitute;
+the PR is assigned to `CoderGamester` purely as a tracking marker.
+
+**Not every `develop → master` PR is a release.** When the version matches the
+base, `preflight-pr` treats it as a non-release PR: it skips `G11`/`G15` and
+instead asserts `CHANGELOG.md` is untouched, since a published section must not
+be edited after the fact.
+
 ## Parallel Releases
 
 For several packages at once, fan out **one agent per package** — max 6, and never parallelize *within* a package.
@@ -203,7 +245,37 @@ Read-only. Downloads each release asset, verifies the PKCS#7 attestation payload
 
 **Why this exists:** the published `statechart 0.9.4` attestation carries `ownerOrgName: "miguel-cartier-supercell-com"`, a work-identity-derived Unity org, inside a public OSS artifact. `G26` prevents recurrence; the audit sizes the historical damage.
 
-**Repairing history is NOT part of this skill.** Tarballs are not byte-reproducible (real tar mtimes, plus the local username as tar owner), so replacing a historical asset is a *re-publication* that breaks anyone who pinned a digest. Present the audit table and let the user decide. If they want a specific release fixed, re-pack from `git rev-list --parents -n1 <tag>` field 3 (the develop-side parent that was originally packed) and get explicit per-release approval before touching the asset.
+### Re-attesting a published release
+
+```bash
+release.py reattest <package> <tag>          # dry run: repack + diff, no mutation
+release.py reattest <package> <tag> --yes    # replace the published asset
+```
+
+Rebuilds a published tarball so it is attested to the right org. Packs from the
+tag's develop-side parent — the commit the original was packed from — so
+`repository.revision` and the file list are preserved; only the org, tar mtimes
+and tar owner change.
+
+**This is a re-publication, not a repair.** Tarballs are not byte-reproducible,
+so anyone who pinned the old `sha256` sees a new digest. Always dry-run first,
+show the user the diff, and get per-release approval before `--yes`.
+
+`reattest` **refuses when the repack would lose a file** versus the published
+asset. That guard has already prevented two bad replacements:
+
+- `services 2.0.1` ships `VersionServicesSyncLoadTest.cs.meta` that was **never
+  committed** — the original was packed from a tree with an uncommitted file.
+  Dropping a `.meta` makes Unity reassign the asset's GUID on import. No clean
+  fix exists; leave it.
+- `statechart 0.9.4` had a **case-only mismatch in git** (`GameLovers.StateChart…
+  .meta` against the lowercase `Statechart` asmdef). The published tarball had
+  the correctly-paired lowercase names because the original packing machine held
+  them lowercase on disk — macOS never renames on a case-only change. Fixing
+  `develop` does **not** fix this, because the repack reads the *tag's* commit;
+  it required applying the same case correction inside the historical worktree.
+
+Backfill outcome: 8 leaking releases → 1 (`services 2.0.1`).
 
 ## Common Pitfalls
 
@@ -213,12 +285,15 @@ Read-only. Downloads each release asset, verifies the PKCS#7 attestation payload
 - **A stale `.tgz` in the pack dir** → this is exactly how `Unity-Services 2.0.2` shipped `com.gamelovers.services-2.0.1.tgz`. `G20` refuses on any sibling tarball; `pack` empties the dir first.
 - **Reusing a tarball across versions.** `G22` reads the version from *inside* the tarball. Never hand-upload an asset.
 - **`--notes "$(...)"`** mangles backticks and `$` in changelog text. The scripts use `--notes-file`.
-- **Two CLIs that report failure while exiting 0.** `gh pr edit --add-reviewer <author>` silently no-ops, and `upm pack` prints `Invalid service account credentials provided.` with `rc=0` and no tarball. Both are guarded by verifying the *artifact*, not the exit code — apply that habit to any new CLI call.
+- **CLIs that report failure while exiting 0.** `gh pr edit --add-reviewer <author>` silently no-ops (HTTP 422 underneath). `upm pack` prints `Invalid service account credentials provided.` with `rc=0` in the editor-bundled build but `rc=1` in the standalone one, with the real diagnosis on stdout either way. Guard by verifying the *artifact*, never the exit code — and make any comparison prove its inputs were non-empty, since a probe that produced no tarball at all will happily report "0 matches" for whatever you were looking for.
 - **Historical CHANGELOG dialect drift is not a problem** — leave it byte-identical. Pending entries use the canonical bold-label dialect. `changelog.py` preserves BOM, CRLF/LF, history, and EOF conventions; hand-rolled whole-file rewrites do not.
 - **A clean host PR list is not package evidence.** Release PRs live in six separate submodule repositories. `status` resolves the canonical repo from each package remote.
 - **Pushing notes is not enough.** Require local `HEAD`, `origin/develop`, and the PR head SHA to agree, then re-read the body; a successful CLI exit alone does not prove the right PR was updated.
 - **`.attestation.p7m` in a file-list diff** is a packer artifact, not package content. `G24` excludes it; `G26` checks it separately.
 - **Unity `.meta` pollution.** The packer project lives in `~/Library/Caches`, outside any repo, precisely so a pack can't create `.meta` files in the host tree. `G25` asserts both working trees are unchanged after packing.
+- **`.github/` IS packed into the tarball.** The published `googlesheetimporter 0.7.2` asset still contains `package/.github/workflows/openai.yml`. Each package therefore lists `.github/` in its `.gitignore`, which the packer uses as its pack-ignore list; git keeps tracking the file, so `git add` needs `-f`. **Do not verify this on a copy with `.git` removed** — the packer behaves differently without a repo and will wrongly report `.github` as excluded. An earlier claim in this file was wrong for exactly that reason.
+- **Unresolved git-lfs pointers.** A checkout without `git lfs pull` leaves ~130-byte stubs that the packer copies verbatim, so a consumer gets a 129-byte "audio file". `G28` refuses them in both the tarball and the PR checkout; the CI workflow uses `lfs: true` so the check also proves the objects are fetchable from the remote. `uiservice` shipped this way once — published 1.2.1 had real content, so it was a silent regression, not a long-standing gap.
+- **Case-only filename drift is invisible on macOS.** `statechart` tracked two `.meta` files with a capital `C` while their assets were lowercase; the case-insensitive filesystem hid it entirely, and it only surfaced during a repack. Renaming requires two steps (`git mv X tmp && git mv tmp x`) — a direct case-only `git mv` is a silent no-op. Check with a case-insensitive duplicate scan over `git ls-files`, not by looking at the working tree.
 
 ## Done When
 
@@ -228,10 +303,12 @@ Read-only. Downloads each release asset, verifies the PKCS#7 attestation payload
 - The host `develop` carries the submodule pointer bump and one `.architecture-log.md` entry, and is pushed.
 - The pending changelog passes `validate-pending`, and any open PR body exactly matches that entry.
 - The tier used was reported to the user, and any `G23`/`G27` degradation warnings were surfaced rather than swallowed.
+- The published asset contains no git-lfs stubs (`G28`) and no `.github/` directory.
 
 ## Reference
 
 - Scripts: `scripts/release.py`, `scripts/changelog.py`, `scripts/UpmPack.cs`
+- Workflows: `workflows/release-preflight.yml` (per package, installed by `install-preflight`), `../../../.github/workflows/upm-release.yml` (host, dispatch-driven)
 - CHANGELOG dialect: root `AGENTS.md` §6.5 — canonical is `**New**:` / `**Changed**:` / `**Fixed**:` / `**Docs**:`
 - Pre-publication versioning: root `AGENTS.md` §2.7 — do not open a new `## [X.Y.Z]` section until actually cutting a release
 - Submodule workflow: root `AGENTS.md` §5
