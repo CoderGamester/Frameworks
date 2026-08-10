@@ -628,9 +628,9 @@ def have_service_account() -> bool:
     )
 
 
-def pack(pkg: Package, tier: int | None = None) -> tuple[pathlib.Path, int]:
+def pack(pkg: Package, tier: int | None = None, out: pathlib.Path | None = None) -> tuple[pathlib.Path, int]:
     """Produce the tarball. Returns (path, tier_used)."""
-    out = pkg.pack_dir
+    out = out or pkg.pack_dir
     # G20 depends on this: a stale sibling tarball from a previous version is the
     # root cause of the published 2.0.2/2.0.1 mismatch.
     if out.exists():
@@ -1854,6 +1854,96 @@ def cmd_install_preflight(args) -> int:
     return 0
 
 
+def cmd_reattest(args) -> int:
+    """Rebuild a PUBLISHED release's tarball so it is attested to the right org.
+
+    This REPLACES a published asset. It is not a byte-identical repair: tar mtimes
+    and the tar owner name come from the packing machine, so anyone who pinned the
+    old sha256 will see a different digest. Faithfulness is maximised by packing
+    from the same commit the original was packed from -- the tag's develop-side
+    parent -- and the result is diffed against the published artifact before
+    anything is replaced.
+    """
+    pkg = Package(args.package)
+    tag = args.tag
+
+    if tag not in pkg.remote_tags():
+        raise Fail(f"tag {tag} does not exist on {pkg.repo}")
+
+    parts = git(pkg.path, "rev-list", "--parents", "-n1", tag).split()
+    source_ref = parts[2] if len(parts) == 3 else parts[0]
+
+    work = CACHE / "reattest" / pkg.folder / tag
+    shutil.rmtree(work, ignore_errors=True)
+    (work / "old").mkdir(parents=True)
+
+    gh(["release", "download", tag, "--repo", pkg.repo, "--pattern", "*.tgz",
+        "--dir", str(work / "old")], check=False)
+    old = sorted((work / "old").glob("*.tgz"))
+    if not old:
+        raise Fail(f"release {tag} has no .tgz asset to replace")
+    old_tgz = old[0]
+    old_att = read_attestation(old_tgz)
+    with tarfile.open(old_tgz, "r:gz") as tf:
+        old_names = {n.removeprefix("package/") for n in tf.getnames()} - {".attestation.p7m"}
+        fh = tf.extractfile("package/package.json")
+        old_rev = ((json.loads(fh.read()).get("repository") or {}).get("revision")) if fh else None
+
+    print(f"  published : {old_tgz.name}  org={(old_att or {}).get('ownerOrgName', '-')}  rev={(old_rev or '-')[:9]}")
+
+    resolved = pack_from_ref(pkg, source_ref)
+    try:
+        manifest = json.loads((pkg.source_path / "package.json").read_text(encoding="utf-8-sig"))
+        if manifest.get("version") != tag:
+            raise Fail(
+                f"the commit for {tag} declares version {manifest.get('version')!r}; "
+                f"refusing to re-attest a mismatched source."
+            )
+        tgz, tier = pack(pkg, 1, out=work / "new")
+        info = verify_tarball(tgz, pkg.id, tag, tier=1, head_sha=resolved)
+        att = info["attestation"] or {}
+        ok(f"repacked {tgz.name}: org={att.get('ownerOrgName')} ({att.get('ownerOrgId')})")
+
+        with tarfile.open(tgz, "r:gz") as tf:
+            new_names = {n.removeprefix("package/") for n in tf.getnames()} - {".attestation.p7m"}
+
+        # Faithfulness report -- the operator sees exactly what changes.
+        if old_rev and info["revision"] != old_rev:
+            warn(f"revision differs: published {old_rev[:9]} -> new {(info['revision'] or '-')[:9]}")
+        else:
+            ok(f"revision preserved: {(info['revision'] or '-')[:9]}")
+        removed, added = sorted(old_names - new_names), sorted(new_names - old_names)
+        if removed:
+            raise Fail(f"repack LOSES {len(removed)} file(s) vs the published asset: {removed[:8]}")
+        if added:
+            warn(f"repack adds {len(added)} file(s) vs the published asset: {added[:8]}")
+        else:
+            ok(f"file list identical to the published asset ({len(new_names)} entries)")
+
+        if not args.yes:
+            note("dry run -- pass --yes to replace the published asset")
+            return 0
+
+        assert_identity()
+        gh(["release", "delete-asset", tag, old_tgz.name, "--repo", pkg.repo, "--yes"])
+        gh(["release", "upload", tag, str(tgz), "--repo", pkg.repo])
+
+        rel = json.loads(gh(["release", "view", tag, "--repo", pkg.repo, "--json", "assets"]))
+        names = [a["name"] for a in rel.get("assets") or []]
+        want = f"{pkg.id}-{tag}.tgz"
+        if names != [want]:
+            raise Fail(f"after replacement the release has assets {names}, expected ['{want}']")
+        got = (rel["assets"][0].get("digest") or "").removeprefix("sha256:")
+        if got and got != info["sha256"]:
+            raise Fail(f"digest mismatch after upload: {got[:16]} != {info['sha256'][:16]}")
+        ok(f"replaced: {want} sha256:{info['sha256'][:16]}...")
+        return 0
+    finally:
+        git(pkg.path, "worktree", "remove", "--force", str(pkg.source_path), check=False)
+        shutil.rmtree(pkg.source_path, ignore_errors=True)
+        git(pkg.path, "worktree", "prune")
+
+
 def cmd_bump_host(args) -> int:
     bump_host(args.packages or ALL_PACKAGES)
     return 0
@@ -1893,6 +1983,11 @@ def main(argv: list[str]) -> int:
     p.add_argument("packages", nargs="*")
     p.add_argument("--no-push", action="store_true")
     p.set_defaults(fn=cmd_install_preflight)
+    p = sub.add_parser("reattest")
+    p.add_argument("package")
+    p.add_argument("tag")
+    p.add_argument("--yes", action="store_true", help="actually replace the published asset")
+    p.set_defaults(fn=cmd_reattest)
     p = sub.add_parser("bump-host"); p.add_argument("packages", nargs="*"); p.set_defaults(fn=cmd_bump_host)
     p = sub.add_parser("audit"); p.add_argument("packages", nargs="*"); p.add_argument("--limit", type=int); p.set_defaults(fn=cmd_audit)
 
