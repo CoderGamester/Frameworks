@@ -1,6 +1,6 @@
 ---
 name: unity-play-verify
-description: Verify Unity runtime behaviour by driving the running Editor and LOOKING at the result, instead of inferring it from a green test run. Use when a change has visible output — rendering, renderer features, UI layout, camera setup, shaders, animation — or when tests pass but you have not seen the thing work. Drives play mode over the Unity MCP, invokes UI, captures the Game view, and reads the image back. NOT for pure logic changes a unit test settles, and not a substitute for running the test suites.
+description: Verify visible and interactive Unity behavior by driving the running Editor and observing the result instead of inferring it from compilation or tests. Use for rendering, cameras, UI layout, UI Toolkit/uGUI controls, scrolling, pointer input, shaders, animation, Device Simulator behavior, or any change whose success must be seen or interacted with. Drives play mode through Unity MCP or an explicit UI-control fallback, captures the Game view, and distinguishes handler invocation from real user input. Not for pure logic changes a unit test settles and not a substitute for the test suites.
 ---
 
 # Unity play-mode verification
@@ -13,18 +13,6 @@ past 284 passing PlayMode tests, because the tests asserted the camera was in UR
 skips stacked cameras that are disabled. One screenshot found it. Three more bugs — dead buttons, an
 opaque white panel over the log text, and text overlapping its own button — surfaced in the same pass,
 none of which produced a console message.
-
-## When to use
-
-Use when the change has visible output and you have not seen it:
-
-- renderer features, render passes, shaders, post-processing
-- camera setup: stacking, culling masks, render modes, targets
-- UI layout, prefab-generated UI, canvas render modes
-- anything where "it works" means "it looks right"
-
-Do NOT use for logic a unit test settles, and never as a replacement for the suites — see
-`AGENTS.md` §2.5. This verifies *behaviour*; the suites guard *regression*.
 
 ## Prerequisite
 
@@ -66,19 +54,24 @@ Unity_ManageScene  { Action: "Load", Name: "<Scene>", Path: "<folder>" }
 Unity_ManageEditor { Action: "Play", WaitForCompletion: true }
 ```
 
-### 4. Drive the UI
+### 4. Drive the UI at the correct evidence level
 
-There is no click tool. Invoke the handler directly:
+For UI input, read [references/ui-interaction.md](references/ui-interaction.md) and run its interaction matrix.
+
+For Unity 6 UI Toolkit samples that rely on InputForUI, also read [references/inputforui.md](references/inputforui.md). Prove provider identity, absence of a sample-owned uGUI EventSystem, a real foreground pointer action, and an observable result; structural UI queries or a synthetic injector that emitted zero pointer events are failures, not partial passes.
+
+Prefer a Unity MCP pointer/click/drag surface when available. If the current Unity MCP does not expose real pointer input, use the approved local computer-use capability against the Game or Device Simulator view. Record which path was used.
+
+Direct handler invocation is a lower evidence level:
 
 ```csharp
 foreach (var b in Object.FindObjectsByType<Button>(FindObjectsSortMode.None))
     if (b.gameObject.name == "MyButton") b.onClick.Invoke();
 ```
 
-This bypasses raycasting and the input module, so it does not prove the button is *clickable* — only
-that its handler works. To check input actually reaches UI, assert
-`EventSystem.current.currentInputModule` is present and, on New-Input-only projects, that the module
-has actions assigned (see `unity-package-sample-builder` Step 2).
+This bypasses raycasting, UI Toolkit propagation, pointer capture, the input module, and click eligibility. It proves only that the mapped handler works. Do not report a control as clickable unless a real pointer interaction reached it. When no real-input tool is available, report that limitation explicitly.
+
+For uGUI, also confirm `EventSystem.current.currentInputModule` exists and New-Input-only modules have actions assigned. For UI Toolkit, inspect the pointer event/capture lifecycle described in the interaction reference.
 
 ### 5. Capture — and use the right capture
 
@@ -99,6 +92,10 @@ file afterwards, not in the same call.
 
 Read the PNG directly. Compare against a baseline capture of the same scene with the feature off —
 "is this blurred" is far easier as a two-image comparison than in the absolute.
+
+For mobile UI, capture at least one notched iOS and Android profile where available. Check portrait and landscape when the layout claims to support both. A screenshot proves appearance only; pair it with real click and drag observations for interactive work.
+
+Store the observation in a run-specific artifact set that names the editor, code identity, scene, interaction driver, and output byte counts. Do not replace an earlier result in place or silently reuse a file from another editor/run.
 
 ### 7. Check the console separately
 

@@ -1,13 +1,13 @@
 ---
 name: code-standards-audit
-description: Audit the whole repo against the mechanical code-style and XML-documentation rules in root AGENTS.md §6.6, using Tools/style-audit.py as the engine. Validates the checker before trusting its counts, separates rule defects from real code drift, then remediates mechanical-first and prose-second. Use when asked to audit, enforce, or fix coding standards / doc-comment compliance across packages, or when a standards rule looks like it may be wrong. NOT for README/AGENTS prose (use package-docs-audit), NOT for test coverage (use project-tests-audit).
+description: Audit either the whole repository or the exact changed-script set against mechanical code-style, XML-documentation, naming, member-order, assembly-boundary, and shell-tool rules. Use Tools/style-audit.py only after validating its polarity and attribution. Use when asked to audit, enforce, or fix coding standards/doc-comment compliance, to normalize all changed scripts including untracked tests/samples/tools, or when a standards rule looks wrong. NOT for README/AGENTS prose (use package-docs-audit) or test coverage.
 ---
 
 # Code standards audit
 
-Repo-wide enforcement of the mechanical rules in root `AGENTS.md` §6.6 — XML documentation,
-enum-value comments, member ordering. `Tools/style-audit.py` is the engine; this skill is the
-procedure around it.
+Repository-wide or change-scoped enforcement of the mechanical rules in root `AGENTS.md` §6.6 —
+XML documentation, enum-value comments, member ordering, and adjacent script conventions.
+`Tools/style-audit.py` is the engine for its supported rules; this skill is the procedure around it.
 
 The engine already exists and already passes. Most runs are therefore small: measure, act on a
 handful of findings, re-verify. The long phases below matter when the count comes back large.
@@ -22,6 +22,13 @@ handful of findings, re-verify. The long phases below matter when the count come
 
 ## Phase 0 — Measure
 
+Choose scope first:
+
+- **Repository audit:** use the existing whole-corpus commands below.
+- **Changed-script audit:** record the exact union of tracked changed and untracked `*.cs` and `*.sh` files before editing. Never substitute the current diff after fixes for the original authorized scope.
+
+For a changed-script audit, derive and retain an inventory such as `.test-all/changed-scripts.txt`. Include submodule changes from inside each affected package; the parent repository cannot enumerate files within a submodule. Exclude deleted files from style remediation but retain them for documentation stale-symbol searches.
+
 ```bash
 python3 Tools/style-audit.py                    # gate; nonzero exit on violations
 python3 Tools/style-audit.py --list H G          # every finding for specific rules
@@ -29,7 +36,15 @@ python3 Tools/style-audit.py --json out.json     # machine-readable
 python3 Tools/style-audit.py --advisory          # member-ordering report (NOT gated, noisy)
 ```
 
-Never estimate a number that will be acted on (§2.2). If it returns `PASS`, stop — you are done.
+Never estimate a number that will be acted on (§2.2). For a repository audit, a validated PASS ends
+the mechanical gate. For a changed-script audit, continue with the exempt-area and shell checks
+below even when the global gate passes.
+
+`Tools/style-audit.py` gates Runtime and Editor XML rules and intentionally exempts `Tests/` and `Samples~/`. A changed-script request still requires direct checks across those exempt files for private naming, member order, closure renames, comments, namespaces, assembly boundaries, and test conventions. A global style PASS does not settle that scope.
+
+Summary layout is the exception to the XML exemption: rule L applies in Runtime, Editor, Tests, Samples, and imported Assets. A single sentence may span several physical lines; use the inline form only when the complete indented line fits within 120 columns, with tabs expanded to four columns. Once block form is used, wrapping remains a readability judgment rather than a mechanical width gate because XML references can be indivisible.
+
+For changed shell tools, run `bash -n` and ShellCheck when installed. Treat verification scripts and Unity verifier sources as production-quality tooling: they must follow project style, compile without avoidable warnings on every supported editor, and print the identity and non-empty size of artifacts they validate.
 
 `Tests/` and `Samples~/` are exempt by design and counted for visibility only; steer by the
 `gated` column.
@@ -154,7 +169,8 @@ ordering race) and delete the rest.
 
 Order by consumer value: public API first, editor tooling later, math/value types last. Per §6.6,
 public consumer-facing API takes the multi-line block form; `internal`, editor-only and sample
-members may use a single-line `<summary>`.
+members keep one sentence but use the inline form only when the complete line fits within 120
+columns.
 
 **Write what the signature cannot say.** A summary restating the member name is worse than none.
 The ones that earned their place in the recorded run:

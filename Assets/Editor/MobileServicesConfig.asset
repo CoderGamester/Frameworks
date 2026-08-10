@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06d8a745067df4358a53ff32c9456ef7, type: 3}
+  m_Name: MobileServicesConfig
+  m_EditorClassIdentifier: GameLovers.MobileServices.Editor::GameLovers.MobileServices.Editor.Settings.MobileServicesConfig
+  _permissionDescriptions: []
+  _attUsageDescription:
+    Entries:
+    - LocaleCode: en
+      UsageDescription: 
+  _capabilities:
+    PushNotifications: 0
+    AppTracking: 0
+    AssociatedDomains: 0
+    AssociatedDomainList: []
+  _androidManifest:
+    ReadMediaImages: 0
+    PostNotifications: 0
+    Vibrate: 0
+    RecordAudio: 0
+    Camera: 0
+    AccessFineLocation: 0
+    IncludeShareQueriesBlock: 0
+  _includePlayReviewDependency: 1
+  _playReviewDependencyCoordinate: com.google.android.play:review:2.0.2
+  _manageNativeBuildManually: 0

@@ -821,7 +821,7 @@ PlayerSettings:
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
     Android: APP_UI_EDITOR_ONLY
-    Standalone: APP_UI_EDITOR_ONLY;SENTIS_ANALYTICS_ENABLED
+    Standalone: APP_UI_EDITOR_ONLY
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

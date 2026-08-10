@@ -19,14 +19,16 @@ WHAT IS GATED (a violation; exit 1)
     I  public/protected/internal event with no doc
     J  a doc block with <remarks> but no <summary>
     K  <param>/<returns>/<typeparam>/<exception> outside public consumer-facing API
+    L  an inline <summary>...</summary> line wider than 120 columns
     M  single-line <summary> on a method/type that IS public consumer-facing API
     N  an `internal` method declared after a `private` one in the same type
 
 NOT GATED, BY DESIGN
-    Properties/events/fields may use either the single-line or the block form
-    (§6.6 says "a single line when the content fits"), so form is not checked for
-    them. `Tests/` and `Samples~/` are exempt outright and are counted for
-    visibility only. Member ORDERING beyond rule N is advisory (--advisory): the
+    Properties/events/fields may use either the single-line or the block form. An
+    inline summary must fit within 120 columns; block-content wrapping remains a
+    readability judgment because XML references can be indivisible. Rule L applies in every area;
+    other XML rules exempt `Tests/`, `Samples~/`, and imported `Assets/` and count
+    them for visibility only. Member ORDERING beyond rule N is advisory (--advisory): the
     check does not model §6.6's "Unity MonoBehaviour methods" slot, so CreateGUI /
     Dispose / OnValidate false-positive. Rule N alone is exact and is gated.
 
@@ -68,7 +70,7 @@ import os
 import re
 import sys
 
-RULESET_VERSION = "AGENTS.md §6.6 as of 2026-08-04"
+RULESET_VERSION = "AGENTS.md §6.6 as of 2026-08-10"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCAN_ROOTS = ("Packages", "Assets")
 EXEMPT_AREAS = ("Tests", "Samples~", "Assets")
@@ -95,6 +97,7 @@ RULE_TITLES = {
     "I": "event missing doc",
     "J": "<remarks> without <summary>",
     "K": "<param>/<returns>/etc. outside public consumer API",
+    "L": "inline summary exceeds 120 columns",
     "M": "single-line <summary> on public consumer-facing method/type",
     "N": "internal method declared after a private one",
 }
@@ -227,12 +230,14 @@ def access_of(head, owner_kind):
 
 class Decl:
     __slots__ = ("kind", "name", "access", "line", "path", "doc", "owner", "owner_kind", "raw",
-                 "enclosing")
+                 "enclosing", "doc_metrics")
 
 
 def parse(path, rel):
     with open(path, "r", encoding="utf-8-sig", errors="replace") as f:
         text = f.read()
+    source_widths = {line: len(value.expandtabs(4))
+                     for line, value in enumerate(text.splitlines(), start=1)}
     stream, docs, plain_comments = preprocess(text)
     decls, stack = [], []
     depth = bdepth = 0
@@ -242,6 +247,13 @@ def parse(path, rel):
         d = Decl()
         d.kind, d.name, d.access, d.line, d.path = kind, name, acc, ln, rel
         d.doc, d.owner, d.owner_kind, d.raw = doclines, owner, owner_kind, body[:200]
+        metrics = []
+        k = ln - 1
+        while k in docs or k in plain_comments:
+            if k in docs:
+                metrics.append((k, source_widths.get(k, len(docs[k]))))
+            k -= 1
+        d.doc_metrics = tuple(reversed(metrics))
         # Effective accessibility is bounded by every enclosing type: a `public` member of an
         # `internal` interface is not reachable outside the assembly, so it is not consumer API.
         d.enclosing = tuple(e.get("access", "public") for e in stack if e["kind"] in TYPE_KINDS)
@@ -443,10 +455,14 @@ def evaluate(decls):
         label = f"{(d.owner + '.') if d.owner else ''}{d.name}"
         loc = (d.path, d.line, label)
 
-        def add(rule, extra=""):
+        def add(rule, extra="", source_line=None):
             counted[(rule, sub)] += 1
-            if not exempt:
-                out[rule].append((d.path, d.line, label + extra))
+            if not exempt or rule == "L":
+                out[rule].append((d.path, source_line or d.line, label + extra))
+
+        for docline, (source_line, width) in zip(d.doc, d.doc_metrics):
+            if "<summary>" in docline and "</summary>" in docline and width > 120:
+                add("L", f" [{width} columns]", source_line)
 
         if d.kind == "enumvalue":
             if has_doc:
@@ -584,7 +600,7 @@ def main():
     # §2.2: a verifier must name what it inspected, not just return a verdict.
     print(f"style-audit — ruleset: {RULESET_VERSION}")
     print(f"scanned: {len(files)} .cs files under {'/, '.join(SCAN_ROOTS)}/  ->  {len(decls)} declarations")
-    print(f"gated areas: Runtime, Editor    exempt (counted only): {', '.join(EXEMPT_AREAS)}")
+    print(f"gated areas: Runtime, Editor; rule L also gates {', '.join(EXEMPT_AREAS)}")
     print()
 
     total = sum(len(v) for v in out.values())
@@ -592,7 +608,8 @@ def main():
     print("-" * 78)
     for rule in sorted(RULE_TITLES):
         g = len(out.get(rule, []))
-        ex = sum(n for (r, sub), n in counted.items() if r == rule and sub in EXEMPT_AREAS)
+        ex = 0 if rule == "L" else sum(
+            n for (r, sub), n in counted.items() if r == rule and sub in EXEMPT_AREAS)
         if g or ex:
             print(f"{rule:5} {g:6d} {ex:7d}  {RULE_TITLES[rule]}")
     print("-" * 78)

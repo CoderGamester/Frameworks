@@ -30,6 +30,7 @@ Do NOT trigger for host-repo-only changes unrelated to a package release.
 - **The agent never touches the host repo** except through `release.py bump-host`, which is serialized and runs once at the end.
 - **The package repository is the PR source of truth.** An empty host-repository PR list says nothing about package releases; query each submodule's canonical remote.
 - **Only the pending changelog region may change.** Historical release bytes, BOM, line endings, and EOF convention are invariants.
+- **Sample and native-build changes require the sample-builder gate.** If the release diff touches `Samples~`, sample scene/build preparation, temporary sample configuration, or package-owned native generation, run `unity-package-sample-builder` and retain its applicable imported-artifact, identity, cleanup, and idempotence evidence before packing.
 - Tags are **bare SemVer, no `v` prefix**; annotated with an **empty message**; on the **2-parent merge commit**.
 
 ## Workflow

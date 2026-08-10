@@ -9,6 +9,9 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
+	"last_search.66F56946" = ""
+	"OpenInspectorPreview.66F56946" = "0"
+	"currentGroup.66F56946" = "all"
 }
 providers = {
 	asset = {
@@ -74,6 +77,11 @@ providers = {
 	asset_knowledge = {
 		active = true
 		priority = 99999
+		defaultAction = null
+	}
+	lightmaps = {
+		active = true
+		priority = 100
 		defaultAction = null
 	}
 }

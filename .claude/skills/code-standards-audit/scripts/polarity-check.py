@@ -106,6 +106,14 @@ namespace Fx {
     }
 }""", "<param> on an internal member, which is not consumer-facing API"),
 
+    ("L", """
+namespace Fx {
+    internal class C {
+        /// <summary>This deliberately oversized inline summary proves the checker measures the complete indented physical source line instead of only counting the XML content after trimming.</summary>
+        internal void M() { }
+    }
+}""", "an inline summary whose complete physical line exceeds 120 columns"),
+
     ("M", """
 namespace Fx {
     /// <summary>
@@ -155,6 +163,26 @@ namespace Fx {
 
 # ------------------------------------------------------- must-be-silent (synthetic)
 MUST_BE_SILENT_SYNTHETIC = [
+    ("L", """
+namespace Fx {
+    internal class C {
+        /// <summary>
+        /// This intentionally long block-summary content line proves rule L targets collapsed inline layout instead of mass-firing on established XML prose and indivisible references.
+        /// </summary>
+        internal void M() { }
+    }
+}""", "an already-multiline summary is not treated as a collapsed inline-layout violation"),
+
+    ("L", """
+namespace Fx {
+    internal class C {
+        /// <summary>
+        /// A single sentence may wrap across short physical lines.
+        /// </summary>
+        internal void M() { }
+    }
+}""", "a multi-line single-sentence summary whose physical lines fit within 120 columns"),
+
     ("H", """
 namespace Fx {
     /// <summary>
@@ -294,9 +322,9 @@ def main():
         report(not hits, f"[{rule}] {path_frag} {member_frag}".rstrip(),
                f"{why}; hits: {hits[:2] or 'none'}")
 
-    leaks = [x[0] for v in findings.values() for x in v
+    leaks = [x[0] for rule, v in findings.items() if rule != "L" for x in v
              if "/Tests/" in x[0] or "Samples~" in x[0]]
-    report(not leaks, "exempt-area scoping (Tests/ and Samples~/ never gated)",
+    report(not leaks, "exempt-area scoping (all but cross-area summary-width rule L)",
            f"{len(leaks)} leak(s), e.g. {leaks[:2]}")
 
     total = sum(len(v) for v in findings.values())

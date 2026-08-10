@@ -23,10 +23,12 @@
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
-UNITY="${UNITY_BIN:-$HOME/.unity/bin/unity}"
+PROJECT_UNITY_VERSION=$(sed -n 's/^m_EditorVersion: //p' ProjectSettings/ProjectVersion.txt)
+UNITY="${UNITY_BIN:-/Applications/Unity/Hub/Editor/$PROJECT_UNITY_VERSION/Unity.app/Contents/MacOS/Unity}"
 OUT=".test-all"
+BATCH_RESULTS_DIR="Library/GameLovers/TestResults"
 EDITOR_RESULTS="$HOME/Library/Application Support/Game Lovers/Frameworks/TestResults.xml"
-mkdir -p "$OUT"
+mkdir -p "$OUT" "$BATCH_RESULTS_DIR"
 
 # Identity of the code a run measured. Distinct start-times prove two runs happened; they do
 # NOT prove both ran the same code, and a comparison straddling a code change misleads exactly
@@ -111,12 +113,29 @@ case "${1:-batch}" in
 batch)
   rc=0
   for MODE in EditMode PlayMode; do
+    artifact="$OUT/batch-${MODE}.xml"
+    artifact_log="$OUT/batch-${MODE}.log"
+    code_artifact="$OUT/batch-${MODE}.codeid"
+    run_artifact="$BATCH_RESULTS_DIR/batch-${MODE}.xml"
+    run_log="$BATCH_RESULTS_DIR/batch-${MODE}.log"
     echo "==> batchmode $MODE"
     wait_for_unity
-    # Project path "." must be explicit; the wrapper otherwise eats the next flag.
-    "$UNITY" test . --mode "$MODE" --output "$OUT/batch-${MODE}.xml" || true
-    code_id > "$OUT/batch-${MODE}.codeid"
-    summarise "$OUT/batch-${MODE}.xml" "batch-${MODE}" || rc=1
+    # A failed Unity invocation can leave a prior green artifact in place. Remove both
+    # outputs first and refuse to summarise unless this invocation recreated the XML.
+    # Unity rejects hidden directory names such as `.test-all` for -testResults, so the
+    # Editor writes under Library first and the fresh artifact is snapshotted afterwards.
+    rm -f "$artifact" "$artifact_log" "$code_artifact" "$run_artifact" "$run_log"
+    "$UNITY" -batchmode -runTests -projectPath "$PWD" -testPlatform "$MODE" \
+      -testResults "$PWD/$run_artifact" -logFile "$PWD/$run_log" || true
+    if [ ! -s "$run_artifact" ]; then
+      echo "batch-${MODE}: MISSING fresh result ($run_artifact)" >&2
+      rc=1
+      continue
+    fi
+    mv "$run_artifact" "$artifact"
+    if [ -f "$run_log" ]; then mv "$run_log" "$artifact_log"; fi
+    code_id > "$code_artifact"
+    summarise "$artifact" "batch-${MODE}" || rc=1
   done
   exit $rc
   ;;
