@@ -14,8 +14,8 @@ name: Sync assigned items to project
 
 on:
   schedule:
-    # Every 3 hours, offset off the hour to dodge scheduler congestion.
-    - cron: '17 */3 * * *'
+    # Once daily at 00:17 UTC, offset off the hour to dodge scheduler congestion.
+    - cron: '17 0 * * *'
   workflow_dispatch:
 
 # Nothing here needs the default token; keep it powerless.
