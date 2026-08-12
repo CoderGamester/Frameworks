@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unity Package Sample Builder"
+  short_description: "Build UPM samples with safe native ownership"
+  default_prompt: "Use $unity-package-sample-builder to design and verify a removable UPM sample, including scene identity, build preparation, and optional native requirements."

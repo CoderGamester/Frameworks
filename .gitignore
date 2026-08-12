@@ -54,14 +54,38 @@ Repository
 Assets/Plugins/Editor/JetBrains
 Logs
 UserSettings/Layouts/default-2023.dwlt
-.bmad-*
-.windsurf/
 .personal-memory.md
 UserSettings/Layouts/default-6000.dwlt
 Assets/Configs/Resources/version-data.txt
+
+============
+Package Manager sample imports -- never commit these
+============
+# Package Manager extracts Samples~/<Sample> here on import. The canonical source is
+# Packages/<pkg>/Samples~/, so anything committed from here is a duplicate that then has
+# to be kept in sync by hand. Import freely to test; the copy stays local.
+Assets/Samples/
+Assets/Samples.meta
 
 ============
 Tests audit history (unity-tests-audit skill -- local developer state, never committed)
 ============
 .audit-history.md
 **/.audit-history.md
+
+# Unity Code Coverage output (generated, ~40MB)
+CodeCoverage/
+
+# Unity/Mono crash dumps
+mono_crash.*.json
+
+# Unity Test Runner output dropped at repo root
+TestResults_*.xml
+
+# test-all.sh comparison artifacts
+.test-all/
+TestResults_*.xml
+
+# PlayMode test-runner scratch scene
+Assets/InitTestScene*.unity
+Assets/InitTestScene*.unity.meta
