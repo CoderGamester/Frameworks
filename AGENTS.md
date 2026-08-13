@@ -23,6 +23,7 @@ This repository is a Unity 6 host used to develop and validate GameLovers UPM pa
 ## Safe repository workflow
 
 - Preserve unrelated working-tree changes. Inspect status before editing and stage explicit paths only; never use `git add .` or `git add -A` during ordinary work.
+- If `gh auth status` or an identity probe fails inside a restricted sandbox, retry with network permission before asking the user to reauthenticate. Classify a successful retry as a connectivity false negative, and never print credentials while diagnosing it.
 - Treat each package submodule as its own repository. Before its first edit, verify that `HEAD` is attached to the intended branch and has the expected upstream.
 - Do not use `git checkout --`, `git restore`, or `git reset` for mutation experiments in a dirty file. Save the exact patch first or use an isolated worktree so other edits cannot be lost.
 - Serialize Git mutations across submodules and inspect partial success before continuing.
@@ -136,7 +137,15 @@ Order methods by access as: public static, public override, public abstract, pub
 - New changelog sections use `**New**:`, `**Changed**:`, `**Fixed**:`, and `**Docs**:` labels. Preserve historical sections and file formatting.
 - Release notes describe consumer-visible outcomes, compatibility, dependencies, and migrations—not internal refactors, individual tests, or audit mechanics.
 
+### Package release workflow
+
+- Use the repository-owned `unity-package-release` skill for package preparation, release PRs, tags, publishing, and host pointer bumps. Start or resume with `release.py status <package>`; do not reimplement its gates with ad-hoc commands.
+- Use `release.py prepare` for the bounded `package.json`/CHANGELOG mutation and `release.py open-pr` as the only release-PR creation path. The PR title is `Release X.Y.Z`; its body is the pending CHANGELOG body verbatim.
+- After opening the PR, halt for the user to create a merge commit. After merge, use `release.py complete`; it recreates missing artifacts from the merged develop-side source, tags, publishes, and performs the guarded host bump.
+- A request to commit and push does not authorize creating a PR unless the user also asks for one. Repository release rules take precedence over generic publication workflows.
+
 ## Guide maintenance
 
 - Keep rules stable, scoped, and actionable. Move architecture inventories to package docs and keep dated test/coverage evidence in existing test artifacts rather than `AGENTS.md`.
+- Brevity is subordinate to behavioral completeness. Never remove an entire correctness, code-style, documentation, verification, or release rule family merely to meet a size target.
 - A new nested `AGENTS.md` also needs the existing sibling `CLAUDE.md` wrapper pattern and Unity `.meta` files where applicable.

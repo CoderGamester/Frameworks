@@ -63,7 +63,7 @@ on:
     types: [upm-release]
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   # One release per package at a time. Mirrors release.py's per-package advisory
@@ -87,9 +87,18 @@ jobs:
       - name: Check out host repo with submodules
         uses: actions/checkout@v7
         with:
+          ref: develop
           submodules: recursive
           fetch-depth: 0
-          persist-credentials: false
+
+      - name: Attach the package source branch
+        run: |
+          case "$PACKAGE" in
+            com.gamelovers.*) folder="$PACKAGE" ;;
+            *) folder="com.gamelovers.$PACKAGE" ;;
+          esac
+          git -C "Packages/$folder" fetch origin develop --quiet
+          git -C "Packages/$folder" checkout -B develop origin/develop
 
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -129,24 +138,28 @@ jobs:
           python3 .claude/skills/unity-package-release/scripts/release.py status "$PACKAGE"
 
       - name: Pack and verify
-        if: ${{ env.PHASE != 'status' }}
+        if: ${{ env.PHASE != 'status' && env.PHASE != 'full' }}
         run: |
           python3 .claude/skills/unity-package-release/scripts/release.py pack "$PACKAGE"
 
       - name: Tag the merge commit
-        if: ${{ env.PHASE == 'tag' || env.PHASE == 'publish' || env.PHASE == 'full' }}
+        if: ${{ env.PHASE == 'tag' || env.PHASE == 'publish' }}
         run: |
           python3 .claude/skills/unity-package-release/scripts/release.py tag "$PACKAGE"
 
       - name: Publish the release
-        if: ${{ env.PHASE == 'publish' || env.PHASE == 'full' }}
+        if: ${{ env.PHASE == 'publish' }}
         run: |
           python3 .claude/skills/unity-package-release/scripts/release.py publish "$PACKAGE"
 
-      - name: Bump the host submodule pointer
+      - name: Complete the post-merge release
         if: ${{ env.PHASE == 'full' }}
         run: |
-          python3 .claude/skills/unity-package-release/scripts/release.py bump-host "$PACKAGE"
+          args=(complete "$PACKAGE")
+          if [ -n "$RELEASE_ALLOW_REMOVALS" ]; then
+            args+=(--allow-removals)
+          fi
+          python3 .claude/skills/unity-package-release/scripts/release.py "${args[@]}"
 
       - name: Upload pack artifacts for inspection
         if: ${{ always() && env.PHASE != 'status' }}

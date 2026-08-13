@@ -17,6 +17,18 @@ SHARED_PATTERN = re.compile(
     r"<!-- BEGIN SHARED TEST RULES -->.*?<!-- END SHARED TEST RULES -->",
     re.DOTALL,
 )
+ROOT_REQUIRED_HEADINGS = (
+    "## Scope and precedence",
+    "## Safe repository workflow",
+    "## Unity and verification",
+    "## Implementation rules",
+    "### Code comments",
+    "### XML documentation",
+    "### Member ordering",
+    "## Releases",
+    "### Package release workflow",
+    "## Guide maintenance",
+)
 
 
 def GuideFiles() -> list[Path]:
@@ -70,7 +82,58 @@ def CheckCompanions(path: Path, errors: list[str]) -> None:
             errors.append(f"{relative}: missing companion {name}")
 
 
-def Main() -> int:
+def MissingRootSections(text: str) -> list[str]:
+    lines = set(text.splitlines())
+    return [heading for heading in ROOT_REQUIRED_HEADINGS if heading not in lines]
+
+
+def EmptyRootSections(text: str) -> list[str]:
+    lines = text.splitlines()
+    empty: list[str] = []
+    for heading in ROOT_REQUIRED_HEADINGS:
+        if heading not in lines:
+            continue
+        start = lines.index(heading)
+        level = len(heading) - len(heading.lstrip("#"))
+        body = []
+        for line in lines[start + 1:]:
+            match = re.match(r"^(#{1,6})\s+", line)
+            if match and len(match.group(1)) <= level:
+                break
+            if line.strip() and not match:
+                body.append(line)
+        if not body:
+            empty.append(heading)
+    return empty
+
+
+def SelfTest() -> int:
+    complete = "\n".join(f"{heading}\n- Enforced rule." for heading in ROOT_REQUIRED_HEADINGS)
+    if MissingRootSections(complete) or EmptyRootSections(complete):
+        print("SELF-TEST FAILED: complete fixture was rejected")
+        return 1
+    incomplete = complete.replace("### XML documentation\n- Enforced rule.\n", "")
+    if MissingRootSections(incomplete) != ["### XML documentation"]:
+        print("SELF-TEST FAILED: missing XML-documentation family was not detected")
+        return 1
+    empty = complete.replace(
+        "### XML documentation\n- Enforced rule.",
+        "### XML documentation",
+    )
+    if "### XML documentation" not in EmptyRootSections(empty):
+        print("SELF-TEST FAILED: empty XML-documentation family was not detected")
+        return 1
+    print("SELF-TEST PASSED: accepts complete root and rejects a missing rule family")
+    return 0
+
+
+def Main(argv: list[str]) -> int:
+    if argv[1:] == ["--self-test"]:
+        return SelfTest()
+    if argv[1:]:
+        print(f"Usage: {argv[0]} [--self-test]", file=sys.stderr)
+        return 2
+
     guides = GuideFiles()
     errors: list[str] = []
     warnings: list[str] = []
@@ -95,6 +158,11 @@ def Main() -> int:
 
         CheckLinks(path, text, errors)
         CheckCompanions(path, errors)
+        if relative == Path("AGENTS.md"):
+            for heading in MissingRootSections(text):
+                errors.append(f"AGENTS.md: missing required rule-family heading {heading}")
+            for heading in EmptyRootSections(text):
+                errors.append(f"AGENTS.md: empty required rule-family heading {heading}")
 
         if path.parent.name == "Tests":
             match = SHARED_PATTERN.search(text)
@@ -124,4 +192,4 @@ def Main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(Main())
+    sys.exit(Main(sys.argv))

@@ -182,6 +182,33 @@ def release_body(section: dict, repo: str, version: str, prev: str | None) -> st
     return body
 
 
+def unreleased_body(path: str | pathlib.Path) -> str:
+    """Return the single Unreleased body, normalized to LF for bounded promotion."""
+    lines = read(path).split("\n")
+    indices = [index for index, line in enumerate(lines) if re.match(
+        r"^##\s+\[Unreleased\]\s*$", line, re.IGNORECASE
+    )]
+    if len(indices) != 1:
+        raise ChangelogError(
+            f"expected exactly one Unreleased heading, found {len(indices)}"
+        )
+
+    start = indices[0] + 1
+    end = next(
+        (index for index in range(start, len(lines)) if re.match(r"^##\s+\[", lines[index])),
+        len(lines),
+    )
+    body = lines[start:end]
+    while body and not body[0].strip():
+        body.pop(0)
+    while body and (not body[-1].strip() or RULE.match(body[-1])):
+        body.pop()
+    result = "\n".join(body)
+    if not result.strip():
+        raise ChangelogError("Unreleased section has an empty body")
+    return result
+
+
 def _historical_suffix_bytes(raw: bytes, pending_version: str) -> str:
     """Return published history, whether or not the baseline has the pending entry."""
     if raw.startswith(b"\xef\xbb\xbf"):
@@ -277,19 +304,35 @@ def rewrite_pending(
 
     headings = list(RAW_HEADING.finditer(text))
     targets = [match for match in headings if match["ver"] == version]
-    if len(targets) != 1:
-        raise ChangelogError(
-            f"rewrite requires exactly one existing [{version}] entry, found {len(targets)}"
-        )
-    target_heading = targets[0]
-    if headings[0] != target_heading:
-        raise ChangelogError(f"[{version}] must be the first versioned entry before rewriting")
+    if len(targets) > 1:
+        raise ChangelogError(f"rewrite found duplicate [{version}] entries")
 
-    unreleased = [match for match in RAW_UNRELEASED.finditer(text) if match.start() < target_heading.start()]
-    if len(unreleased) > 1:
-        raise ChangelogError("multiple Unreleased headings found")
-    start = unreleased[0].start() if unreleased else target_heading.start()
-    following = next((match for match in headings if match.start() > target_heading.start()), None)
+    if targets:
+        target_heading = targets[0]
+        if headings[0] != target_heading:
+            raise ChangelogError(f"[{version}] must be the first versioned entry before rewriting")
+        unreleased = [
+            match for match in RAW_UNRELEASED.finditer(text)
+            if match.start() < target_heading.start()
+        ]
+        if len(unreleased) > 1:
+            raise ChangelogError("multiple Unreleased headings found")
+        start = unreleased[0].start() if unreleased else target_heading.start()
+        following = next(
+            (match for match in headings if match.start() > target_heading.start()),
+            None,
+        )
+    else:
+        unreleased = list(RAW_UNRELEASED.finditer(text))
+        if len(unreleased) != 1:
+            raise ChangelogError(
+                f"rewrite requires one Unreleased heading when [{version}] does not exist; "
+                f"found {len(unreleased)}"
+            )
+        if headings and unreleased[0].start() > headings[0].start():
+            raise ChangelogError("Unreleased must precede all versioned entries")
+        start = unreleased[0].start()
+        following = headings[0] if headings else None
     suffix = text[following.start() :] if following else ""
     prefix = text[:start]
 

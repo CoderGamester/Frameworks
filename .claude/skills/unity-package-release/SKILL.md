@@ -27,7 +27,7 @@ Do NOT trigger for host-repo-only changes unrelated to a package release.
 - **NEVER publish an unverified release.** Always draft → verify digest → publish.
 - **Commit/tag identity MUST be `CoderGamester <game.gamester@gmail.com>`.** The scripts set this explicitly.
 - **Every `gh` call MUST carry the CoderGamester token.** The machine's *active* `gh` account is a different one; the scripts inject `GH_TOKEN` per invocation and re-assert identity before every write. Never call bare `gh` for a write.
-- **The agent never touches the host repo** except through `release.py bump-host`, which is serialized and runs once at the end.
+- **The agent never touches the host repo** except through `release.py bump-host` (directly or through `complete`), which is serialized and runs once at the end.
 - **The package repository is the PR source of truth.** An empty host-repository PR list says nothing about package releases; query each submodule's canonical remote.
 - **Only the pending changelog region may change.** Historical release bytes, BOM, line endings, and EOF convention are invariants.
 - **Sample and native-build changes require the sample-builder gate.** If the release diff touches `Samples~`, sample scene/build preparation, temporary sample configuration, or package-owned native generation, run `unity-package-sample-builder` and retain its applicable imported-artifact, identity, cleanup, and idempotence evidence before packing.
@@ -79,11 +79,11 @@ The editorial contract:
 - Combine private implementation details that support one outcome. Omit test names/counts, audit terminology, contributor files, CI cleanup, XML-comment mechanics, private helpers, and internal refactors.
 - Mention automated coverage at most once, generically, and only when it materially improves confidence. Mention documentation only when it changes what consumers can successfully adopt.
 
-Use the bounded writer when an `Unreleased` and target-version entry must be merged. Author only the replacement body in a temporary Markdown file, then run:
+After completing the editorial inventory, use the bounded preparation command. It updates only `package.json` and the pending CHANGELOG region, preserves published bytes and file conventions, and promotes a single `Unreleased` body when the target entry does not yet exist:
 
 ```bash
-python3 .claude/skills/unity-package-release/scripts/changelog.py \
-  rewrite-pending Packages/<package>/CHANGELOG.md <version> <YYYY-MM-DD> <BODY.md>
+release.py prepare <package> <version> <YYYY-MM-DD>
+release.py prepare <package> <version> <YYYY-MM-DD> --body-file <BODY.md>
 ```
 
 Validate the result against an `origin/master` CHANGELOG snapshot. A pre-edit copy can already contain accidental historical drift and is not release evidence:
@@ -98,7 +98,7 @@ git -C Packages/<package> diff -- CHANGELOG.md
 
 The validator checks the target version/date, removal of `Unreleased`, canonical labels, duplicate structure, and byte-identical published history. Editorial completeness still requires the diff inventory; a structural checker cannot decide whether release notes omitted a public feature.
 
-Commit and push each package independently, staging only its `CHANGELOG.md`. Before syncing notes, prove local `HEAD == origin/develop`; the script additionally proves that the open PR head is the same commit. Leave unrelated host dirt untouched.
+Commit and push each package independently, staging only `CHANGELOG.md` and `package.json`. Before syncing notes, prove local `HEAD == origin/develop`; the script additionally proves that the open PR head is the same commit. Leave unrelated host dirt untouched. A generic request to commit and push does not authorize opening a PR; `open-pr` is the sole release-PR path.
 
 ### Step 0.5 — Synchronize an existing release PR
 
@@ -127,7 +127,9 @@ tarball that had already passed verification.
 
 Use `--ref` when `develop` has moved on after a merge: it packs from a detached
 worktree at that commit, so the artifact reproduces exactly what was merged and
-`G32b` holds. The real working tree is untouched, so `G25` still applies.
+`G32b` holds. The real working tree is untouched, so `G25` still applies. G25
+prints exact before-only/after-only porcelain lines; isolated `--ref` packing
+tolerates attributable concurrent changes under other package paths only.
 
 Before preflight, run the documentation verifier's polarity fixture and its `--base origin/master` package check. The base-aware check requires `.meta` siblings for Unity-visible sample assets added anywhere in the release diff. These checks prevent a clean pack from faithfully packaging incomplete documentation or sample assets.
 
@@ -164,6 +166,17 @@ at this stage. Tagging and publishing still require the explicit phases below.
 
 ### Step 3 — Tag the merge commit (post-merge only)
 
+Normally resume all post-merge work with:
+
+```bash
+release.py complete <package> [--tier N] [--allow-removals]
+```
+
+It derives the current phase on every iteration, recreates a missing tarball from
+the merge commit's develop-side parent, tags, publishes, and performs the guarded
+host bump. The individual commands below remain available for diagnosis and
+deliberately bounded recovery.
+
 ```bash
 release.py tag <package>
 ```
@@ -186,7 +199,7 @@ If the tarball is gone (new session), re-run `pack` first — the pack dir is ca
 release.py bump-host <package>...        # omit args for all six
 ```
 
-Verifies each release is genuinely good, stages only `Packages/<pkg>` and `.architecture-log.md`, writes **one** `.architecture-log.md` entry, makes **one** commit (`chore: bump submodule pointers (...)`), and pushes host `develop`.
+Requires synchronized host `develop`, an empty index, and a clean architecture log. It verifies each release and package source, stages exactly `Packages/<pkg>` plus `.architecture-log.md`, proves the committed path set, writes **one** entry, makes **one** commit (`chore: bump submodule pointers (...)`), pushes host `develop`, and verifies the remote tip. The host pointer records the packaged develop-side source commit; the release tag remains on the two-parent `master` merge commit.
 
 ## The PR gate
 
@@ -201,10 +214,10 @@ It runs on every `pull_request` into `master`, checks out the package with
 `lfs: true` plus the shared tooling from `Frameworks`, and runs:
 
 ```bash
-release.py preflight-pr --path . --base origin/master
+release.py preflight-pr --path . --base origin/master --event "$GITHUB_EVENT_PATH"
 ```
 
-That is the package-local subset — `G7`, `G8`/`G9`, `G10`, `G11`, `G15`, `G28` —
+That is the package-local subset — `G7`, `G8`/`G9`, `G10`, `G11`, `G15`, `G17`, `G28` —
 so it needs no token, no submodules and no network, and works on a bare clone.
 Remote-state gates (`G0`-`G6`, `G12`-`G14`) and the tarball chain (`G20`-`G28`)
 stay local.
@@ -286,6 +299,7 @@ Backfill outcome: 8 leaking releases → 1 (`services 2.0.1`).
 
 - **Stale `origin` URLs.** `services` → `Unity-Services` and `uiservice` → `Unity-UiService` were renamed; `.gitmodules` still has the old names. `G1` halts both. This is not cosmetic — Unity bakes `origin`'s URL into the artifact's `package.json`, and published `uiservice 1.2.1` already carries the wrong one. Fix the remote and `.gitmodules`, don't bypass the gate.
 - **Bare `gh` for a write** → the release gets authored by the wrong account. Always go through the scripts.
+- **Treating a restricted-network `gh auth status` failure as an expired token.** Retry the identity probe with network permission before asking the user to authenticate again. Never print the token while diagnosing it.
 - **`gh release create` without `--verify-tag`** → if the tag push silently failed, `gh` invents a tag at the branch head and you publish a release pointing at the wrong commit.
 - **A stale `.tgz` in the pack dir** → this is exactly how `Unity-Services 2.0.2` shipped `com.gamelovers.services-2.0.1.tgz`. `G20` refuses on any sibling tarball; `pack` empties the dir first.
 - **Reusing a tarball across versions.** `G22` reads the version from *inside* the tarball. Never hand-upload an asset.

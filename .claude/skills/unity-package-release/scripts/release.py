@@ -7,6 +7,7 @@ correctly hours later in a different session. Parallelism is one agent per
 package -- see SKILL.md for the orchestration and the two barriers.
 
     release.py status <pkg> [--json]        derive the facts and resolve the phase
+    release.py prepare <pkg> <version> <date> [--body-file FILE]
     release.py notes-status <pkg>           compare open PR body with pending notes
     release.py sync-pr-body <pkg>           update and verify an existing PR body
     release.py preflight <pkg>              gates G0-G16, no mutation
@@ -15,6 +16,7 @@ package -- see SKILL.md for the orchestration and the two barriers.
     release.py open-pr <pkg>                push develop, open the PR, halt
     release.py tag <pkg>                    tag the merge commit (post-merge only)
     release.py publish <pkg>                draft -> verify digest -> publish
+    release.py complete <pkg> [--tier N]    finish the post-merge release phases
     release.py bump-host <pkg>...           ONE serialized host commit (orchestrator)
     release.py audit [<pkg>...] [--limit N] read-only attestation/identity audit
 
@@ -161,7 +163,20 @@ def gh(args: list[str], check: bool = True) -> str:
 
 def assert_identity() -> None:
     """G0. Re-run immediately before every write, in the same env as the write."""
-    login = gh(["api", "user", "-q", ".login"], check=False)
+    proc = subprocess.run(
+        ["gh", "api", "user", "-q", ".login"],
+        capture_output=True,
+        text=True,
+        env=gh_env(),
+    )
+    if proc.returncode != 0:
+        detail = proc.stderr.strip().splitlines()[-1] if proc.stderr.strip() else "no diagnostic"
+        raise Fail(
+            "G0: GitHub identity probe failed before token ownership could be checked. "
+            "If this ran in a restricted sandbox, retry with network permission before "
+            f"reauthenticating. gh reported: {detail}"
+        )
+    login = proc.stdout.strip()
     if login != GH_ACCOUNT:
         raise Fail(
             f"G0: releases must be authored by '{GH_ACCOUNT}' but the token resolves "
@@ -191,6 +206,94 @@ def notes_match(actual: str, expected: str) -> bool:
         return value.replace("\r\n", "\n").replace("\r", "\n").rstrip("\n")
 
     return canonical(actual) == canonical(expected)
+
+
+def validate_release_pr_metadata(version: str, expected_body: str, title: str, body: str) -> None:
+    """Require the package's established release-PR title and exact changelog body."""
+    expected_title = f"Release {version}"
+    if title != expected_title:
+        raise Fail(f"G17: release PR title is {title!r}; expected {expected_title!r}")
+    if not notes_match(body, expected_body):
+        raise Fail(
+            f"G17: release PR body must exactly match the [{version}] CHANGELOG body "
+            "with no headings, checklist, or footer added"
+        )
+
+
+def replace_manifest_version_bytes(raw: bytes, version: str) -> bytes:
+    """Replace exactly the top-level-looking version field without reformatting JSON."""
+    bom = b"\xef\xbb\xbf" if raw.startswith(b"\xef\xbb\xbf") else b""
+    text = raw[len(bom):].decode("utf-8")
+    pattern = re.compile(r'(^\s*"version"\s*:\s*")([^"]+)(")', re.MULTILINE)
+    replaced, count = pattern.subn(lambda match: f"{match.group(1)}{version}{match.group(3)}", text)
+    if count != 1:
+        raise Fail(f"package.json must contain exactly one version field; found {count}")
+    return bom + replaced.encode("utf-8")
+
+
+def status_delta(before: str, after: str) -> tuple[list[str], list[str]]:
+    """Exact porcelain lines removed from and added to a working-tree snapshot."""
+    before_lines = set(before.splitlines())
+    after_lines = set(after.splitlines())
+    return sorted(before_lines - after_lines), sorted(after_lines - before_lines)
+
+
+def assert_exact_paths(actual: list[str], expected: list[str], label: str) -> None:
+    got = sorted(actual)
+    want = sorted(expected)
+    if got != want:
+        raise Fail(f"{label}: path set is {got}, expected exactly {want}")
+
+
+def porcelain_path(line: str) -> str:
+    path = line[3:] if len(line) > 3 else line
+    return path.rsplit(" -> ", 1)[-1].strip('"')
+
+
+def assert_pack_side_effects(
+    pkg: "Package",
+    before_pkg: str,
+    after_pkg: str,
+    before_host: str,
+    after_host: str,
+    isolated: bool,
+) -> None:
+    """G25 with attributable diagnostics and isolated-worktree concurrency tolerance."""
+    pkg_removed, pkg_added = status_delta(before_pkg, after_pkg)
+    host_removed, host_added = status_delta(before_host, after_host)
+
+    if isolated:
+        prefix = "Packages/com.gamelovers."
+        target = f"Packages/{pkg.folder}"
+        unrelated = [
+            line for line in [*host_removed, *host_added]
+            if porcelain_path(line).startswith(prefix)
+            and not (
+                porcelain_path(line) == target
+                or porcelain_path(line).startswith(f"{target}/")
+            )
+        ]
+        if unrelated:
+            warn(
+                "G25 observed concurrent changes in other package paths; ignored for "
+                f"isolated --ref packing: {unrelated}"
+            )
+            host_removed = [line for line in host_removed if line not in unrelated]
+            host_added = [line for line in host_added if line not in unrelated]
+
+    if pkg_removed or pkg_added or host_removed or host_added:
+        def lines(label: str, values: list[str]) -> str:
+            return f"  {label}:\n" + ("\n".join(f"    {value}" for value in values) if values else "    <none>")
+
+        raise Fail(
+            "G25: packing changed a working tree. Exact status delta:\n"
+            + "\n".join((
+                lines("package before-only", pkg_removed),
+                lines("package after-only", pkg_added),
+                lines("host before-only", host_removed),
+                lines("host after-only", host_added),
+            ))
+        )
 
 
 # --------------------------------------------------------------------------- #
@@ -286,6 +389,7 @@ def remote_version(pkg: Package, ref: str) -> str | None:
 def facts(pkg: Package) -> dict:
     fetch(pkg)
     tags = pkg.remote_tags()
+    master_version = remote_version(pkg, f"origin/{RELEASE_BRANCH}")
 
     tag_line = git(pkg.path, "ls-remote", "--tags", "--refs", "origin", f"refs/tags/{pkg.version}")
     tag_sha = tag_line.split()[0] if tag_line else None
@@ -309,6 +413,13 @@ def facts(pkg: Package) -> dict:
     release = json.loads(rel_raw) if rel_raw.startswith("{") else None
 
     develop_tip = git(pkg.path, "rev-parse", f"origin/{WORK_BRANCH}")
+    master_tip = git(pkg.path, "rev-parse", f"origin/{RELEASE_BRANCH}")
+    master_parents = git(pkg.path, "rev-list", "--parents", "-n1", master_tip).split()
+    release_source = (
+        master_parents[2]
+        if master_version == pkg.version and len(master_parents) == 3
+        else None
+    )
     pointer_line = run(["git", "-C", str(pkg.host), "ls-tree", "HEAD", "--", f"Packages/{pkg.folder}"])
     pointer = pointer_line.split()[2] if pointer_line else None
 
@@ -324,7 +435,7 @@ def facts(pkg: Package) -> dict:
         "version": pkg.version,
         "repo": pkg.repo,
         "origin_slug": pkg.origin_slug,
-        "master_version": remote_version(pkg, f"origin/{RELEASE_BRANCH}"),
+        "master_version": master_version,
         "tag_sha": tag_sha,
         "tags": tags,
         "open_pr": open_pr,
@@ -338,8 +449,9 @@ def facts(pkg: Package) -> dict:
         "branch": git(pkg.path, "rev-parse", "--abbrev-ref", "HEAD"),
         "local_develop": git(pkg.path, "rev-parse", WORK_BRANCH, check=False),
         "develop_tip": develop_tip,
+        "release_source": release_source,
         "pointer": pointer,
-        "pointer_current": pointer == develop_tip,
+        "pointer_current": pointer == (release_source or develop_tip),
         "tarball_present": pkg.tarball.is_file(),
     }
 
@@ -1315,6 +1427,31 @@ def bump_host(names: list[str]) -> None:
     bumped: list[tuple[Package, dict]] = []
 
     with Lock("__host__"):
+        run(["git", "-C", str(root), "fetch", "origin", "--quiet"])
+        branch = run(["git", "-C", str(root), "rev-parse", "--abbrev-ref", "HEAD"])
+        if branch != WORK_BRANCH:
+            raise Fail(f"host bump requires branch {WORK_BRANCH!r}; on {branch!r}")
+        divergence = run([
+            "git", "-C", str(root), "rev-list", "--left-right", "--count",
+            f"origin/{WORK_BRANCH}...HEAD",
+        ]).split()
+        if divergence != ["0", "0"]:
+            raise Fail(
+                f"host {WORK_BRANCH} is not synchronized with origin/{WORK_BRANCH}: "
+                f"remote-only/local-only={divergence}"
+            )
+        staged = run(["git", "-C", str(root), "diff", "--cached", "--name-only"]).splitlines()
+        if staged:
+            raise Fail(f"host index must be empty before bump-host; staged paths: {staged}")
+        arch_log = root / ".architecture-log.md"
+        if not arch_log.is_file():
+            raise Fail(".architecture-log.md is required for an attributable host bump")
+        arch_dirty = run([
+            "git", "-C", str(root), "status", "--porcelain", "--", ".architecture-log.md"
+        ])
+        if arch_dirty:
+            raise Fail(f".architecture-log.md has pre-existing changes:\n{arch_dirty}")
+
         for name in names:
             pkg = Package(name)
             f = facts(pkg)
@@ -1325,6 +1462,13 @@ def bump_host(names: list[str]) -> None:
             if f["pointer_current"]:
                 note(f"{pkg.folder} pointer already current")
                 continue
+            if f["dirty"]:
+                raise Fail(f"{pkg.folder} is dirty; refusing to record its host pointer")
+            if not f["release_source"]:
+                raise Fail(
+                    f"{pkg.folder} has no attributable develop-side source commit for "
+                    f"release {pkg.version}; expected a two-parent {RELEASE_BRANCH} merge"
+                )
             bumped.append((pkg, f))
 
         if not bumped:
@@ -1332,11 +1476,20 @@ def bump_host(names: list[str]) -> None:
             return
 
         paths = [f"Packages/{p.folder}" for p, _ in bumped]
-        for path in paths:
-            run(["git", "-C", str(root), "add", "--", path])
+        for path, (_, facts_for_package) in zip(paths, bumped):
+            run([
+                "git", "-C", str(root), "update-index", "--add", "--cacheinfo",
+                f"160000,{facts_for_package['release_source']},{path}",
+            ])
 
         _append_arch_log(root, bumped)
         run(["git", "-C", str(root), "add", "--", ".architecture-log.md"])
+        expected_paths = [*paths, ".architecture-log.md"]
+        assert_exact_paths(
+            run(["git", "-C", str(root), "diff", "--cached", "--name-only"]).splitlines(),
+            expected_paths,
+            "host bump staged content",
+        )
 
         if len(bumped) == 1:
             pkg = bumped[0][0]
@@ -1353,8 +1506,24 @@ def bump_host(names: list[str]) -> None:
         env["GIT_COMMITTER_EMAIL"] = env["GIT_AUTHOR_EMAIL"] = GIT_EMAIL
         run(["git", "-C", str(root), "commit", "-m", message], env=env)
         ok(f"host commit: {message}")
+        assert_exact_paths(
+            run([
+                "git", "-C", str(root), "diff-tree", "--no-commit-id", "--name-only",
+                "-r", "HEAD",
+            ]).splitlines(),
+            expected_paths,
+            "host bump commit content",
+        )
 
         run(["git", "-C", str(root), "push", "origin", WORK_BRANCH])
+        run(["git", "-C", str(root), "fetch", "origin", "--quiet"])
+        local = run(["git", "-C", str(root), "rev-parse", "HEAD"])
+        remote = run(["git", "-C", str(root), "rev-parse", f"origin/{WORK_BRANCH}"])
+        if local != remote:
+            raise Fail(
+                f"host push could not be verified: HEAD={local[:9]} "
+                f"origin/{WORK_BRANCH}={remote[:9]}"
+            )
         ok(f"pushed host {WORK_BRANCH}")
 
 
@@ -1372,9 +1541,10 @@ def _append_arch_log(root: pathlib.Path, bumped: list[tuple[Package, dict]]) -> 
     for pkg, f in bumped:
         url = (f["release"] or {}).get("url") or f"https://github.com/{pkg.repo}/releases/tag/{pkg.version}"
         lines.append(
-            f"- `Packages/{pkg.folder}`: submodule pointer bumped to the `{pkg.version}` "
-            f"release merge commit. Tag `{pkg.version}` on `{RELEASE_BRANCH}` of "
-            f"`{pkg.repo}`, GitHub Release with the verified "
+            f"- `Packages/{pkg.folder}`: host submodule pointer bumped to the "
+            f"develop-side source commit packaged for `{pkg.version}`. Tag `{pkg.version}` "
+            f"remains on the merge commit in `{RELEASE_BRANCH}` of `{pkg.repo}`; "
+            f"GitHub Release carries the verified "
             f"`{pkg.id}-{pkg.version}.tgz` asset attached. {url}"
         )
     lines += ["", "---", ""]
@@ -1483,6 +1653,110 @@ def audit(names: list[str], limit: int | None) -> int:
 # --------------------------------------------------------------------------- #
 # CLI
 # --------------------------------------------------------------------------- #
+
+
+def cmd_prepare(args) -> int:
+    """Prepare only package.json and CHANGELOG.md for a release."""
+    pkg = Package(args.package)
+    version = args.version
+    if not SEMVER_RE.match(version):
+        raise Fail(f"version {version!r} is not bare X.Y.Z")
+    try:
+        release_date = dt.date.fromisoformat(args.date).isoformat()
+    except ValueError as exc:
+        raise Fail(f"date {args.date!r} is not YYYY-MM-DD") from exc
+
+    with Lock(pkg.folder):
+        fetch(pkg)
+        branch = git(pkg.path, "rev-parse", "--abbrev-ref", "HEAD")
+        if branch != WORK_BRANCH:
+            raise Fail(f"prepare requires attached branch {WORK_BRANCH!r}; on {branch!r}")
+        dirty = git(pkg.path, "status", "--porcelain")
+        if dirty:
+            raise Fail(
+                "prepare requires a clean package working tree so its bounded two-file "
+                f"mutation is attributable:\n{dirty}"
+            )
+
+        base_version = remote_version(pkg, f"origin/{RELEASE_BRANCH}")
+        if base_version and changelog.semver(base_version):
+            if changelog.semver(version) <= changelog.semver(base_version):
+                raise Fail(
+                    f"version {version} must advance past origin/{RELEASE_BRANCH} "
+                    f"version {base_version}"
+                )
+        if version in pkg.remote_tags():
+            raise Fail(f"tag {version} already exists on origin")
+
+        manifest_path = pkg.path / "package.json"
+        original_manifest = manifest_path.read_bytes()
+        original_changelog = pkg.changelog.read_bytes()
+        current_sections = [
+            section for section in changelog.sections(pkg.changelog)
+            if section["version"] == version
+        ]
+        has_unreleased = bool(
+            changelog.RAW_UNRELEASED.search(original_changelog.decode("utf-8-sig"))
+        )
+
+        if args.body_file:
+            try:
+                body = pathlib.Path(args.body_file).read_text(encoding="utf-8-sig")
+            except OSError as exc:
+                raise Fail(f"cannot read release body file {args.body_file}: {exc}") from exc
+        elif current_sections and has_unreleased:
+            raise Fail(
+                f"CHANGELOG contains both Unreleased and [{version}]. Provide --body-file "
+                "to make the intended merged release body explicit."
+            )
+        elif len(current_sections) == 1:
+            body = current_sections[0]["body"]
+        elif len(current_sections) > 1:
+            raise Fail(f"CHANGELOG contains duplicate [{version}] sections")
+        else:
+            try:
+                body = changelog.unreleased_body(pkg.changelog)
+            except changelog.ChangelogError as exc:
+                raise Fail(f"cannot derive release notes: {exc}") from exc
+
+        try:
+            manifest_path.write_bytes(replace_manifest_version_bytes(original_manifest, version))
+            changelog.rewrite_pending(pkg.changelog, version, release_date, body)
+            parsed = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
+            if parsed.get("version") != version:
+                raise Fail("package.json version verification failed after write")
+            changelog.validate_pending(
+                pkg.changelog,
+                version,
+                expected_date=release_date,
+                baseline_bytes=git_bytes(
+                    pkg.path, "show", f"origin/{RELEASE_BRANCH}:CHANGELOG.md"
+                ),
+            )
+        except changelog.ChangelogError as exc:
+            manifest_path.write_bytes(original_manifest)
+            pkg.changelog.write_bytes(original_changelog)
+            raise Fail(f"prepared CHANGELOG did not validate; both files restored: {exc}") from exc
+        except Exception:
+            manifest_path.write_bytes(original_manifest)
+            pkg.changelog.write_bytes(original_changelog)
+            raise
+
+        changed_paths = sorted(
+            porcelain_path(line)
+            for line in git(pkg.path, "status", "--porcelain").splitlines()
+        )
+        unexpected = sorted(set(changed_paths) - {"CHANGELOG.md", "package.json"})
+        if unexpected:
+            manifest_path.write_bytes(original_manifest)
+            pkg.changelog.write_bytes(original_changelog)
+            raise Fail(
+                "prepare produced an unexpected path set; restored both files. "
+                f"Observed: {changed_paths}"
+            )
+        print(f"prepared {pkg.folder} {version} ({release_date})")
+        print(f"changed: {', '.join(changed_paths) if changed_paths else '(none; already prepared)'}")
+    return 0
 
 
 def cmd_status(args) -> int:
@@ -1632,6 +1906,22 @@ def cmd_preflight_pr(args) -> int:
         )
     ok("G15 diff touches package.json and CHANGELOG.md")
 
+    if args.event:
+        try:
+            event = json.loads(pathlib.Path(args.event).read_text(encoding="utf-8"))
+            pr = event["pull_request"]
+            validate_release_pr_metadata(
+                version,
+                section["body"],
+                pr.get("title") or "",
+                pr.get("body") or "",
+            )
+        except (OSError, json.JSONDecodeError, KeyError, TypeError) as exc:
+            raise Fail(f"G17: could not read pull-request metadata from {args.event}: {exc}") from exc
+        ok("G17 PR title and body exactly match the release standard")
+    else:
+        note("G17 skipped: no --event pull-request payload was supplied")
+
     print(f"\npreflight-pr PASSED for {pkg_id} {version}")
     return 0
 
@@ -1686,8 +1976,9 @@ def cmd_pack(args) -> int:
                 git(pkg.path, "worktree", "prune")
             after_pkg = git(pkg.path, "status", "--porcelain")
             after_host = run(["git", "-C", str(pkg.host), "status", "--porcelain"])
-            if after_pkg != before_pkg or after_host != before_host:
-                raise Fail("G25: packing from a worktree changed a working tree")
+            assert_pack_side_effects(
+                pkg, before_pkg, after_pkg, before_host, after_host, isolated=True
+            )
             ok("G25 no working-tree side effects")
             print(f"\ntarball: {tgz}")
             return 0
@@ -1733,12 +2024,9 @@ def cmd_pack(args) -> int:
         # G25 -- packing must not touch either working tree.
         after_pkg = git(pkg.path, "status", "--porcelain")
         after_host = run(["git", "-C", str(pkg.host), "status", "--porcelain"])
-        if after_pkg != before_pkg or after_host != before_host:
-            raise Fail(
-                "G25: packing changed a working tree (likely Unity .meta generation).\n"
-                f"  submodule before/after: {len(before_pkg.splitlines())}/{len(after_pkg.splitlines())}\n"
-                f"  host before/after:      {len(before_host.splitlines())}/{len(after_host.splitlines())}"
-            )
+        assert_pack_side_effects(
+            pkg, before_pkg, after_pkg, before_host, after_host, isolated=False
+        )
         ok("G25 no working-tree side effects")
         print(f"\ntarball: {tgz}")
     return 0
@@ -1794,6 +2082,65 @@ def cmd_publish(args) -> int:
     return 0
 
 
+def run_driver(arguments: list[str], env: dict | None = None) -> None:
+    proc = subprocess.run(
+        [sys.executable, str(pathlib.Path(__file__).resolve()), *arguments],
+        env=env,
+    )
+    if proc.returncode != 0:
+        raise Fail(f"release subcommand failed ({proc.returncode}): {' '.join(arguments)}")
+
+
+def completion_action(phase: str, tarball_present: bool) -> str:
+    if phase in ("P3_TAG", "P4_RELEASE", "P4b_PUBLISH_DRAFT") and not tarball_present:
+        return "pack"
+    return {
+        "P3_TAG": "tag",
+        "P4_RELEASE": "publish",
+        "P4b_PUBLISH_DRAFT": "publish",
+        "P6_HOST_BUMP": "bump-host",
+        "P7_DONE": "done",
+    }.get(phase, "halt")
+
+
+def cmd_complete(args) -> int:
+    """Resume the safe post-merge sequence until the release is complete."""
+    pkg = Package(args.package)
+    env = dict(os.environ)
+    if args.allow_removals:
+        env["RELEASE_ALLOW_REMOVALS"] = "1"
+
+    while True:
+        f = facts(pkg)
+        phase, why = resolve_phase(pkg, f)
+        action = completion_action(phase, f["tarball_present"])
+        note(f"{phase}: {why}")
+        if action == "halt":
+            raise Fail(
+                f"complete is post-merge only; current phase is {phase} ({why}). "
+                "Use prepare/open-pr and wait for the merge first."
+            )
+        if action == "done":
+            print(f"release complete: {pkg.id} {pkg.version}")
+            return 0
+        if action == "pack":
+            find_merge_commit(pkg, f)
+            parents = git(
+                pkg.path, "rev-list", "--parents", "-n1", f"origin/{RELEASE_BRANCH}"
+            ).split()
+            command = ["pack", pkg.folder, "--ref", parents[2]]
+            if args.tier:
+                command += ["--tier", str(args.tier)]
+            run_driver(command, env=env)
+        elif action == "tag":
+            run_driver(["tag", pkg.folder], env=env)
+        elif action == "publish":
+            find_merge_commit(pkg, f)
+            run_driver(["publish", pkg.folder], env=env)
+        elif action == "bump-host":
+            run_driver(["bump-host", pkg.folder], env=env)
+
+
 def cmd_install_preflight(args) -> int:
     """Copy the release-preflight workflow into a package repo and commit it.
 
@@ -1801,7 +2148,24 @@ def cmd_install_preflight(args) -> int:
     `.gitignore`, which Unity's packer uses to exclude CI files from the tarball.
     """
     template = pathlib.Path(__file__).resolve().parent.parent / "workflows/release-preflight.yml"
-    body = template.read_text()
+    tooling_paths = [
+        ".claude/skills/unity-package-release/scripts/release.py",
+        ".claude/skills/unity-package-release/scripts/changelog.py",
+        ".claude/skills/unity-package-release/workflows/release-preflight.yml",
+    ]
+    tooling_dirty = run([
+        "git", "-C", str(host_root()), "status", "--porcelain", "--", *tooling_paths,
+    ])
+    if tooling_dirty:
+        raise Fail(
+            "install-preflight requires committed host tooling so package workflows can "
+            f"pin an immutable implementation:\n{tooling_dirty}"
+        )
+    tooling_ref = run(["git", "-C", str(host_root()), "rev-parse", "HEAD"])
+    template_body = template.read_text()
+    if template_body.count("__FRAMEWORKS_TOOLING_REF__") != 1:
+        raise Fail("release-preflight template must contain exactly one tooling-ref placeholder")
+    body = template_body.replace("__FRAMEWORKS_TOOLING_REF__", tooling_ref)
 
     for name in args.packages or ALL_PACKAGES:
         pkg = Package(name)
@@ -1958,6 +2322,10 @@ def main(argv: list[str]) -> int:
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = parser.add_subparsers(dest="cmd", required=True)
 
+    p = sub.add_parser("prepare")
+    p.add_argument("package"); p.add_argument("version"); p.add_argument("date")
+    p.add_argument("--body-file")
+    p.set_defaults(fn=cmd_prepare)
     p = sub.add_parser("status"); p.add_argument("package"); p.add_argument("--json", action="store_true"); p.set_defaults(fn=cmd_status)
     p = sub.add_parser("notes-status"); p.add_argument("package"); p.set_defaults(fn=cmd_notes_status)
     p = sub.add_parser("sync-pr-body"); p.add_argument("package"); p.set_defaults(fn=cmd_sync_pr_body)
@@ -1965,6 +2333,7 @@ def main(argv: list[str]) -> int:
     p = sub.add_parser("preflight-pr")
     p.add_argument("--path", default=".", help="package directory (standalone checkout)")
     p.add_argument("--base", default="origin/master", help="base ref of the PR")
+    p.add_argument("--event", help="GitHub pull_request event JSON for G17 title/body checks")
     p.set_defaults(fn=cmd_preflight_pr)
     p = sub.add_parser("pack")
     p.add_argument("package")
@@ -1979,6 +2348,11 @@ def main(argv: list[str]) -> int:
     p = sub.add_parser("open-pr"); p.add_argument("package"); p.set_defaults(fn=cmd_open_pr)
     p = sub.add_parser("tag"); p.add_argument("package"); p.set_defaults(fn=cmd_tag)
     p = sub.add_parser("publish"); p.add_argument("package"); p.set_defaults(fn=cmd_publish)
+    p = sub.add_parser("complete")
+    p.add_argument("package")
+    p.add_argument("--tier", type=int, choices=[1, 2, 3])
+    p.add_argument("--allow-removals", action="store_true")
+    p.set_defaults(fn=cmd_complete)
     p = sub.add_parser("install-preflight")
     p.add_argument("packages", nargs="*")
     p.add_argument("--no-push", action="store_true")
