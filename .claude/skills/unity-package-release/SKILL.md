@@ -31,6 +31,9 @@ Do NOT trigger for host-repo-only changes unrelated to a package release.
 - **The package repository is the PR source of truth.** An empty host-repository PR list says nothing about package releases; query each submodule's canonical remote.
 - **Only the pending changelog region may change.** Historical release bytes, BOM, line endings, and EOF convention are invariants.
 - **Sample and native-build changes require the sample-builder gate.** If the release diff touches `Samples~`, sample scene/build preparation, temporary sample configuration, or package-owned native generation, run `unity-package-sample-builder` and retain its applicable imported-artifact, identity, cleanup, and idempotence evidence before packing.
+- **Documentation, dependency, and compatibility changes require the docs-audit gate.** Run `package-docs-audit` before packing and retain its clean-install, link/anchor, sample-inventory, metadata, and claim-evidence results.
+- **Release work happens on an attached package branch.** A detached submodule `HEAD` may be inspected, but do not author or commit release work there. Prove the intended branch and its upstream before the first mutation.
+- **Unity assets must carry stable metadata.** A release that adds a sample file or folder without its `.meta` is incomplete even if a later local Editor open would generate one.
 - Tags are **bare SemVer, no `v` prefix**; annotated with an **empty message**; on the **2-parent merge commit**.
 
 ## Workflow
@@ -63,7 +66,7 @@ Do this before packing, and whenever a user asks to improve pending release note
 
 1. Read the package's `AGENTS.md`, `package.json`, pending changelog entry, and relevant consumer documentation.
 2. Fetch the package remote and inspect the complete `origin/master...origin/develop` diff. Inventory public API, runtime behavior, dependencies, Unity/platform compatibility, samples, migrations, and consumer documentation. Do not infer package PRs from the host repository.
-3. Reconcile every inventory item against the pending entry. A missing breaking change, migration, dependency, sample-compilation fix, or observable runtime change blocks release.
+3. Reconcile every inventory item against the pending entry. A missing breaking change, migration, dependency, sample-compilation fix, or observable runtime change blocks release. If the minimum Unity version, dependency graph, install manifest, or sample inventory changed, require current clean-host evidence for the exact source identity before wording the change as supported or validated.
 4. Rewrite only the pending region. Merge `Unreleased` into the existing unpublished version; do not create another version for work that has not shipped.
 5. Validate structure and preservation. The date must be the intended publication date; re-run this on the actual release day if publication is delayed.
 
@@ -125,6 +128,8 @@ tarball that had already passed verification.
 Use `--ref` when `develop` has moved on after a merge: it packs from a detached
 worktree at that commit, so the artifact reproduces exactly what was merged and
 `G32b` holds. The real working tree is untouched, so `G25` still applies.
+
+Before preflight, run the documentation verifier's polarity fixture and its `--base origin/master` package check. The base-aware check requires `.meta` siblings for Unity-visible sample assets added anywhere in the release diff. These checks prevent a clean pack from faithfully packaging incomplete documentation or sample assets.
 
 `pack` tries tiers in order and reports which it used:
 

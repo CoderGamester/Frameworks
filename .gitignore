@@ -87,7 +87,6 @@ TestResults_*.xml
 TestResults_*.xml
 
 # Immutable clean-consumer Unity compatibility evidence (local validation artifacts)
-.compatibility-evidence/
 
 # PlayMode test-runner scratch scene
 Assets/InitTestScene*.unity
