@@ -9,5 +9,5 @@ Claude Code will automatically import it below.
 
 - Treat `AGENTS.md` as the source of truth.
 - If anything in this file appears to conflict with `AGENTS.md`, prefer `AGENTS.md`.
-- Per-package guides under `Packages/<pkg>/AGENTS.md` win over this file for anything
-  scoped to that package.
+- Per-package guides add local constraints. Ancestor rules remain active unless a
+  child guide explicitly names an override.
