@@ -87,6 +87,12 @@ class ReleaseNotesTests(unittest.TestCase):
                 "fixture",
             )
 
+    def test_porcelain_path_accepts_preserved_and_stripped_leading_status_space(self):
+        self.assertEqual("CHANGELOG.md", release.porcelain_path(" M CHANGELOG.md"))
+        self.assertEqual("CHANGELOG.md", release.porcelain_path("M CHANGELOG.md"))
+        self.assertEqual("new.md", release.porcelain_path("R  old.md -> new.md"))
+        self.assertEqual("new.md", release.porcelain_path("R old.md -> new.md"))
+
 
 if __name__ == "__main__":
     unittest.main()

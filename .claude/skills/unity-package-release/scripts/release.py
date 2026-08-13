@@ -246,7 +246,14 @@ def assert_exact_paths(actual: list[str], expected: list[str], label: str) -> No
 
 
 def porcelain_path(line: str) -> str:
-    path = line[3:] if len(line) > 3 else line
+    # run() strips the whole stdout string, so the first porcelain line can lose
+    # its leading status-space (` M file` -> `M file`) while later lines retain it.
+    if len(line) > 2 and line[2] == " ":
+        path = line[3:]
+    elif len(line) > 1 and line[1] == " ":
+        path = line[2:]
+    else:
+        path = line
     return path.rsplit(" -> ", 1)[-1].strip('"')
 
 
