@@ -21,7 +21,7 @@ with a fabricated relative path, so no file is created under Packages/ where a c
 `git add -A` could sweep it up.
 
 Usage:
-    python3 .claude/skills/code-standards-audit/scripts/polarity-check.py [--verbose]
+    python3 .agents/skills/code-standards-audit/scripts/polarity-check.py [--verbose]
 
 Exit 0 when every expectation holds, 1 otherwise.
 """

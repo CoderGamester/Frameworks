@@ -73,7 +73,7 @@ file:line pairs per rule. This is what caught most of the defects below — a na
 **3. Polarity-test both directions:**
 
 ```bash
-python3 .claude/skills/code-standards-audit/scripts/polarity-check.py
+python3 .agents/skills/code-standards-audit/scripts/polarity-check.py
 ```
 
 False negatives are invisible and false positives cause destructive edits, so the fixture asserts
@@ -192,7 +192,7 @@ Where the rationale already lives in a package's `AGENTS.md`, point at it rather
 Mandatory after any scripted mass edit. Every one of these caught a real self-inflicted defect:
 
 ```bash
-python3 .claude/skills/code-standards-audit/scripts/post-edit-scan.py
+python3 .agents/skills/code-standards-audit/scripts/post-edit-scan.py
 ```
 
 It checks: `///` immediately after an attribute line (attaches to nothing — no compiler error);

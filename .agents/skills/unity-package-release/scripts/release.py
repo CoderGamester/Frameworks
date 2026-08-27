@@ -2156,9 +2156,9 @@ def cmd_install_preflight(args) -> int:
     """
     template = pathlib.Path(__file__).resolve().parent.parent / "workflows/release-preflight.yml"
     tooling_paths = [
-        ".claude/skills/unity-package-release/scripts/release.py",
-        ".claude/skills/unity-package-release/scripts/changelog.py",
-        ".claude/skills/unity-package-release/workflows/release-preflight.yml",
+        ".agents/skills/unity-package-release/scripts/release.py",
+        ".agents/skills/unity-package-release/scripts/changelog.py",
+        ".agents/skills/unity-package-release/workflows/release-preflight.yml",
     ]
     tooling_dirty = run([
         "git", "-C", str(host_root()), "status", "--porcelain", "--", *tooling_paths,

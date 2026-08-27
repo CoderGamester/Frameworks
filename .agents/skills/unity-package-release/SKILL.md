@@ -41,7 +41,7 @@ Do NOT trigger for host-repo-only changes unrelated to a package release.
 Always start here. `status` derives every fact from the package git/GitHub repository and resolves the phase — there is no state file, so this is what makes resuming work:
 
 ```bash
-python3 .claude/skills/unity-package-release/scripts/release.py status <package>
+python3 .agents/skills/unity-package-release/scripts/release.py status <package>
 ```
 
 `<package>` accepts `statechart` or `com.gamelovers.statechart`.
@@ -89,7 +89,7 @@ release.py prepare <package> <version> <YYYY-MM-DD> --body-file <BODY.md>
 Validate the result against an `origin/master` CHANGELOG snapshot. A pre-edit copy can already contain accidental historical drift and is not release evidence:
 
 ```bash
-python3 .claude/skills/unity-package-release/scripts/changelog.py \
+python3 .agents/skills/unity-package-release/scripts/changelog.py \
   validate-pending Packages/<package>/CHANGELOG.md <version> <YYYY-MM-DD> \
   --baseline <BASELINE-CHANGELOG.md>
 git -C Packages/<package> diff --check

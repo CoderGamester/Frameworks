@@ -107,7 +107,7 @@ jobs:
 
       - name: Assert the release tooling checkout
         run: |
-          test -f .claude/skills/unity-package-release/scripts/release.py
+          test -f .agents/skills/unity-package-release/scripts/release.py
 
       - name: Assert a release token is present
         run: |
@@ -135,22 +135,22 @@ jobs:
       - name: Status
         id: status
         run: |
-          python3 .claude/skills/unity-package-release/scripts/release.py status "$PACKAGE"
+          python3 .agents/skills/unity-package-release/scripts/release.py status "$PACKAGE"
 
       - name: Pack and verify
         if: ${{ env.PHASE != 'status' && env.PHASE != 'full' }}
         run: |
-          python3 .claude/skills/unity-package-release/scripts/release.py pack "$PACKAGE"
+          python3 .agents/skills/unity-package-release/scripts/release.py pack "$PACKAGE"
 
       - name: Tag the merge commit
         if: ${{ env.PHASE == 'tag' || env.PHASE == 'publish' }}
         run: |
-          python3 .claude/skills/unity-package-release/scripts/release.py tag "$PACKAGE"
+          python3 .agents/skills/unity-package-release/scripts/release.py tag "$PACKAGE"
 
       - name: Publish the release
         if: ${{ env.PHASE == 'publish' }}
         run: |
-          python3 .claude/skills/unity-package-release/scripts/release.py publish "$PACKAGE"
+          python3 .agents/skills/unity-package-release/scripts/release.py publish "$PACKAGE"
 
       - name: Complete the post-merge release
         if: ${{ env.PHASE == 'full' }}
@@ -159,7 +159,7 @@ jobs:
           if [ -n "$RELEASE_ALLOW_REMOVALS" ]; then
             args+=(--allow-removals)
           fi
-          python3 .claude/skills/unity-package-release/scripts/release.py "${args[@]}"
+          python3 .agents/skills/unity-package-release/scripts/release.py "${args[@]}"
 
       - name: Upload pack artifacts for inspection
         if: ${{ always() && env.PHASE != 'status' }}

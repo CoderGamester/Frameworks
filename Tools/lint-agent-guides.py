@@ -3,14 +3,20 @@
 
 from __future__ import annotations
 
+import os
 import re
+import subprocess
 import sys
+import tempfile
 from pathlib import Path
 from urllib.parse import unquote
 
 
 ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED_PARTS = {".git", "Library", "Temp", "Logs", "obj"}
+CANONICAL_SKILLS_PATH = Path(".agents/skills")
+CLAUDE_SKILLS_PATH = Path(".claude/skills")
+EXPECTED_WRAPPER = b"@AGENTS.md\n"
 LINK_PATTERN = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 HEADING_PATTERN = re.compile(r"^#{1,6}\s+(.+?)\s*#*\s*$", re.MULTILINE)
 SHARED_PATTERN = re.compile(
@@ -82,6 +88,100 @@ def CheckCompanions(path: Path, errors: list[str]) -> None:
             errors.append(f"{relative}: missing companion {name}")
 
 
+def CheckWrappers(root: Path, guides: list[Path], errors: list[str]) -> None:
+    for guide in guides:
+        wrapper = guide.with_name("CLAUDE.md")
+        if not wrapper.is_file():
+            errors.append(f"{guide.relative_to(root)}: missing sibling CLAUDE.md")
+            continue
+        if wrapper.read_bytes() != EXPECTED_WRAPPER:
+            errors.append(
+                f"{wrapper.relative_to(root)}: wrapper must contain exactly @AGENTS.md followed by LF"
+            )
+
+
+def GitIndexModes(root: Path, relative_root: Path, errors: list[str]) -> dict[str, str]:
+    result = subprocess.run(
+        ["git", "-C", str(root), "ls-files", "-s", "--", str(relative_root)],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        errors.append(f"cannot inspect Git modes for {relative_root}: {result.stderr.strip()}")
+        return {}
+
+    modes: dict[str, str] = {}
+    for line in result.stdout.splitlines():
+        match = re.match(r"^(\d{6}) [0-9a-f]+ \d+\t(.+)$", line)
+        if match:
+            modes[match.group(2)] = match.group(1)
+    return modes
+
+
+def VisibleNames(path: Path) -> set[str]:
+    if not path.is_dir():
+        return set()
+    return {child.name for child in path.iterdir() if child.name != ".DS_Store"}
+
+
+def SkillAliasViolations(root: Path, modes: dict[str, str]) -> list[str]:
+    errors: list[str] = []
+    canonical_root = root / CANONICAL_SKILLS_PATH
+    claude_root = root / CLAUDE_SKILLS_PATH
+
+    if canonical_root.is_symlink() or not canonical_root.is_dir():
+        return [f"{CANONICAL_SKILLS_PATH}: canonical skills root must be a real directory"]
+    if claude_root.is_symlink() or not claude_root.is_dir():
+        return [f"{CLAUDE_SKILLS_PATH}: Claude skills root must be a real directory"]
+
+    canonical_names = VisibleNames(canonical_root)
+    claude_names = VisibleNames(claude_root)
+    for name in sorted(canonical_names - claude_names):
+        errors.append(f"{CLAUDE_SKILLS_PATH / name}: missing Claude skill alias")
+    for name in sorted(claude_names - canonical_names):
+        errors.append(f"{CLAUDE_SKILLS_PATH / name}: alias has no canonical skill")
+
+    checkout_root = root.resolve()
+    for name in sorted(canonical_names & claude_names):
+        canonical = canonical_root / name
+        alias = claude_root / name
+        relative_alias = CLAUDE_SKILLS_PATH / name
+        expected_target = f"../../.agents/skills/{name}"
+
+        if canonical.is_symlink() or not canonical.is_dir():
+            errors.append(f"{CANONICAL_SKILLS_PATH / name}: canonical skill must be a real directory")
+            continue
+        if not (canonical / "SKILL.md").is_file():
+            errors.append(f"{CANONICAL_SKILLS_PATH / name}: missing SKILL.md")
+        if not alias.is_symlink():
+            if alias.is_dir():
+                errors.append(f"{relative_alias}: copied skill directory is forbidden")
+            elif alias.is_file() and alias.read_text(encoding="utf-8", errors="ignore") == expected_target:
+                errors.append(f"{relative_alias}: plain Git symlink placeholder; enable Git symlinks")
+            else:
+                errors.append(f"{relative_alias}: expected a symlink")
+            continue
+
+        actual_target = os.readlink(alias)
+        if actual_target != expected_target:
+            errors.append(f"{relative_alias}: expected target {expected_target!r}, found {actual_target!r}")
+        if not alias.exists():
+            errors.append(f"{relative_alias}: dangling Claude skill alias")
+        else:
+            resolved = alias.resolve()
+            if resolved != canonical.resolve() or not resolved.is_relative_to(checkout_root):
+                errors.append(f"{relative_alias}: must resolve to its checkout-local canonical skill")
+        if modes.get(str(relative_alias)) != "120000":
+            errors.append(f"{relative_alias}: Git index mode must be 120000")
+
+    return errors
+
+
+def CheckSkillAliases(root: Path, errors: list[str]) -> None:
+    errors.extend(SkillAliasViolations(root, GitIndexModes(root, CLAUDE_SKILLS_PATH, errors)))
+
+
 def MissingRootSections(text: str) -> list[str]:
     lines = set(text.splitlines())
     return [heading for heading in ROOT_REQUIRED_HEADINGS if heading not in lines]
@@ -123,7 +223,55 @@ def SelfTest() -> int:
     if "### XML documentation" not in EmptyRootSections(empty):
         print("SELF-TEST FAILED: empty XML-documentation family was not detected")
         return 1
-    print("SELF-TEST PASSED: accepts complete root and rejects a missing rule family")
+
+    with tempfile.TemporaryDirectory() as directory:
+        root = Path(directory)
+        guide = root / "AGENTS.md"
+        wrapper = root / "CLAUDE.md"
+        guide.write_text("# Guide\n", encoding="utf-8")
+        wrapper.write_bytes(EXPECTED_WRAPPER)
+        wrapper_errors: list[str] = []
+        CheckWrappers(root, [guide], wrapper_errors)
+        if wrapper_errors:
+            print("SELF-TEST FAILED: valid wrapper fixture was rejected")
+            return 1
+        wrapper.write_bytes(b"@AGENTS.md\r\n")
+        wrapper_errors = []
+        CheckWrappers(root, [guide], wrapper_errors)
+        if not wrapper_errors:
+            print("SELF-TEST FAILED: CRLF wrapper was accepted")
+            return 1
+        wrapper.write_bytes(EXPECTED_WRAPPER)
+
+        canonical = root / CANONICAL_SKILLS_PATH / "example"
+        aliases = root / CLAUDE_SKILLS_PATH
+        canonical.mkdir(parents=True)
+        aliases.mkdir(parents=True)
+        (canonical / "SKILL.md").write_text("---\nname: example\n---\n", encoding="utf-8")
+        alias = aliases / "example"
+        alias.symlink_to("../../.agents/skills/example", target_is_directory=True)
+        modes = {str(CLAUDE_SKILLS_PATH / "example"): "120000"}
+        if SkillAliasViolations(root, modes):
+            print("SELF-TEST FAILED: valid skill alias fixture was rejected")
+            return 1
+        alias.unlink()
+        alias.mkdir()
+        if not any("copied skill directory" in error for error in SkillAliasViolations(root, modes)):
+            print("SELF-TEST FAILED: copied skill directory was accepted")
+            return 1
+        alias.rmdir()
+        alias.write_text("../../.agents/skills/example", encoding="utf-8")
+        if not any("plain Git symlink placeholder" in error for error in SkillAliasViolations(root, modes)):
+            print("SELF-TEST FAILED: plain symlink placeholder was accepted")
+            return 1
+        alias.unlink()
+        alias.symlink_to("../../.agents/skills/missing", target_is_directory=True)
+        wrong_errors = SkillAliasViolations(root, modes)
+        if not any("expected target" in error for error in wrong_errors) or not any("dangling" in error for error in wrong_errors):
+            print("SELF-TEST FAILED: wrong dangling skill target was accepted")
+            return 1
+
+    print("SELF-TEST PASSED: guide sections and skill aliases pass in both directions")
     return 0
 
 
@@ -141,6 +289,9 @@ def Main(argv: list[str]) -> int:
 
     if not guides:
         errors.append("No AGENTS.md files found")
+
+    CheckWrappers(ROOT, guides, errors)
+    CheckSkillAliases(ROOT, errors)
 
     for path in guides:
         text = path.read_text(encoding="utf-8")

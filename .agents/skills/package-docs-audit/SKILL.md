@@ -175,9 +175,9 @@ Inspect tags and the package version before choosing a heading:
 Use the bundled verifier rather than an ad-hoc link regex:
 
 ```bash
-python3 .claude/skills/package-docs-audit/scripts/check_docs.py Packages/<pkg>
-python3 .claude/skills/package-docs-audit/scripts/check_docs.py --base origin/master Packages/<pkg>
-python3 .claude/skills/package-docs-audit/scripts/check_docs.py --self-test
+python3 .agents/skills/package-docs-audit/scripts/check_docs.py Packages/<pkg>
+python3 .agents/skills/package-docs-audit/scripts/check_docs.py --base origin/master Packages/<pkg>
+python3 .agents/skills/package-docs-audit/scripts/check_docs.py --self-test
 ```
 
 It checks JSON metadata, package-description version leakage, sample inventory, relative files and heading anchors, compatibility notices, and Unity `.meta` coverage for newly added sample assets. Use `--base` for committed branch/release diffs. Treat the verifier as code: run its polarity fixture before trusting a clean result.

@@ -75,12 +75,12 @@ jobs:
           # `release.py install-preflight`, never by following a moving branch.
           ref: __FRAMEWORKS_TOOLING_REF__
           path: .release-tooling
-          sparse-checkout: .claude/skills/unity-package-release/scripts
+          sparse-checkout: .agents/skills/unity-package-release/scripts
           persist-credentials: false
 
       - name: Assert the release tooling checkout
         run: |
-          test -f .release-tooling/.claude/skills/unity-package-release/scripts/release.py
+          test -f .release-tooling/.agents/skills/unity-package-release/scripts/release.py
 
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -89,7 +89,7 @@ jobs:
 
       - name: Preflight
         run: |
-          python3 .release-tooling/.claude/skills/unity-package-release/scripts/release.py \
+          python3 .release-tooling/.agents/skills/unity-package-release/scripts/release.py \
             preflight-pr --path . --base "origin/${{ github.base_ref }}" \
             --event "$GITHUB_EVENT_PATH"
 

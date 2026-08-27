@@ -148,4 +148,6 @@ Order methods by access as: public static, public override, public abstract, pub
 
 - Keep rules stable, scoped, and actionable. Move architecture inventories to package docs and keep dated test/coverage evidence in existing test artifacts rather than `AGENTS.md`.
 - Brevity is subordinate to behavioral completeness. Never remove an entire correctness, code-style, documentation, verification, or release rule family merely to meet a size target.
-- A new nested `AGENTS.md` also needs the existing sibling `CLAUDE.md` wrapper pattern and Unity `.meta` files where applicable.
+- Every `CLAUDE.md` is a thin adapter and must contain exactly `@AGENTS.md` followed by LF. A new nested `AGENTS.md` also needs that sibling wrapper and Unity `.meta` files where applicable.
+- Project skills live only in `.agents/skills/`. `.claude/skills/` is a real directory containing one relative per-skill symlink to `../../.agents/skills/<skill>` so clones and worktrees remain self-contained; never copy skill bodies or use absolute links.
+- Run `python3 Tools/lint-agent-guides.py --self-test` after changing the linter, then run `python3 Tools/lint-agent-guides.py` after any guide, wrapper, or skill-layout change.
