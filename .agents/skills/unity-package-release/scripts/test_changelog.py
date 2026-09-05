@@ -79,6 +79,39 @@ class PendingChangelogTests(unittest.TestCase):
             self.assertNotIn(b"\n", rewritten.replace(b"\r\n", b""))
             changelog.validate_pending(path, "1.2.3", "2026-08-04")
 
+    def test_rewrite_promotes_unreleased_when_target_version_does_not_exist(self):
+        with tempfile.TemporaryDirectory() as directory:
+            historical = (
+                b"## [1.2.2] - 2026-07-01\r\n\r\n"
+                b"**Fixed**:\r\n- Historical bytes stay unchanged.\r\n"
+            )
+            path = self.write(
+                directory,
+                b"# Changelog\r\n\r\n## [Unreleased]\r\n\r\n"
+                b"**New**:\r\n- Public capability.\r\n\r\n" + historical,
+            )
+
+            body = changelog.unreleased_body(path)
+            changelog.rewrite_pending(path, "1.3.0", "2026-08-13", body)
+
+            rewritten = path.read_bytes()
+            self.assertNotIn(b"[Unreleased]", rewritten)
+            self.assertIn(b"## [1.3.0] - 2026-08-13\r\n", rewritten)
+            self.assertTrue(rewritten.endswith(historical))
+            self.assertNotIn(b"\n", rewritten.replace(b"\r\n", b""))
+            changelog.validate_pending(path, "1.3.0", "2026-08-13")
+
+    def test_unreleased_body_rejects_ambiguous_sections(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = self.write(
+                directory,
+                b"# Changelog\n\n## [Unreleased]\n\n**New**:\n- One.\n\n"
+                b"## [Unreleased]\n\n**Fixed**:\n- Two.\n",
+            )
+
+            with self.assertRaisesRegex(changelog.ChangelogError, "exactly one"):
+                changelog.unreleased_body(path)
+
     def test_validate_detects_historical_changes_against_baseline(self):
         with tempfile.TemporaryDirectory() as directory:
             baseline = self.write(

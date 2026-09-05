@@ -12,8 +12,8 @@ SKILL.md.
     5  UTF-8 BOM changed against HEAD                 -> read as utf-8-sig, written as utf-8
 
 Usage:
-    python3 .claude/skills/code-standards-audit/scripts/post-edit-scan.py
-    python3 .claude/skills/code-standards-audit/scripts/post-edit-scan.py --baseline
+    python3 .agents/skills/code-standards-audit/scripts/post-edit-scan.py
+    python3 .agents/skills/code-standards-audit/scripts/post-edit-scan.py --baseline
 
 Exit 0 when clean, 1 when anything is found.
 

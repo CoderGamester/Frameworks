@@ -26,7 +26,9 @@
 # Only gates decidable from the package directory plus the base ref, so the check
 # needs no token, no submodules and no network: G7 (bare SemVer), G8/G9 (CHANGELOG
 # heading matches package.json and is newest+highest), G10 (date sane), G11
-# (version advances past master), G15 (the PR touches both files). Remote-state
+# (version advances past master), G15 (the PR touches both files), and G17 (the
+# title is `Release X.Y.Z` and the body exactly matches that CHANGELOG entry).
+# Remote-state
 # gates (G0-G6, G12-G14) and the whole tarball chain (G20-G27) run locally in
 # `release.py preflight` / `pack` before the PR is opened.
 
@@ -71,14 +73,14 @@ jobs:
           repository: CoderGamester/Frameworks
           # Immutable tooling snapshot. Update intentionally through
           # `release.py install-preflight`, never by following a moving branch.
-          ref: be8c147f3d12d94a4055d556ffdc0a26e077e5ec
+          ref: __FRAMEWORKS_TOOLING_REF__
           path: .release-tooling
-          sparse-checkout: .claude/skills/unity-package-release/scripts
+          sparse-checkout: .agents/skills/unity-package-release/scripts
           persist-credentials: false
 
       - name: Assert the release tooling checkout
         run: |
-          test -f .release-tooling/.claude/skills/unity-package-release/scripts/release.py
+          test -f .release-tooling/.agents/skills/unity-package-release/scripts/release.py
 
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -87,8 +89,9 @@ jobs:
 
       - name: Preflight
         run: |
-          python3 .release-tooling/.claude/skills/unity-package-release/scripts/release.py \
-            preflight-pr --path . --base "origin/${{ github.base_ref }}"
+          python3 .release-tooling/.agents/skills/unity-package-release/scripts/release.py \
+            preflight-pr --path . --base "origin/${{ github.base_ref }}" \
+            --event "$GITHUB_EVENT_PATH"
 
   # GITHUB_TOKEN cannot dispatch into another repository. Add a fine-grained
   # FRAMEWORKS_DISPATCH_TOKEN secret (Contents: read/write on Frameworks) to each

@@ -52,7 +52,7 @@ Do not load every reference by default.
 
 ### 4. Implement within the selected ownership boundary
 
-Keep changes narrowly scoped. Preserve stable scene and asset GUIDs when reorganizing a sample. Move `.meta` files with their assets. Give imported sample runtime/editor code explicit asmdefs when either side crosses an assembly boundary.
+Keep changes narrowly scoped. Preserve stable scene and asset GUIDs when reorganizing a sample. Move `.meta` files with their assets. Every newly created Unity-visible file and folder must have its `.meta` before the work is committed; “Unity will generate it later” is not a completed package change. Give imported sample runtime/editor code explicit asmdefs when either side crosses an assembly boundary.
 
 For sample-scoped editor automation:
 
@@ -80,8 +80,11 @@ Require all applicable evidence:
 - Deleting the imported sample removes its assemblies, menus, callbacks, and scene-specific hooks while package production tooling remains available.
 - The sample ships no test assembly unless the user and package policy explicitly require one.
 - Routine sample actions appear in on-screen status/activity UI rather than using Console logs as the user experience.
+- Every newly added or moved file and folder under the declared sample root has a stable, unique `.meta`, including READMEs and `Editor/` folders. Existing metadata debt outside the change is reported separately rather than silently swept into the task.
 
-For dependency or support-matrix changes, also require clean consumer hosts for every supported validation editor. The main development host may resolve a removed dependency transitively through unrelated packages. Record the clean host's editor identity, direct manifest, resolved lock, imported sample path, compile result, and behavioral evidence.
+For dependency or support-matrix changes, also require clean consumer hosts for every reference editor. Run two distinct checks: a local-source host that installs the current workspace package, and an installation host that resolves the exact pinned manifest shown in the README. The former proves the current tree; the latter proves the published installation path. Never record the workspace source identity while actually testing a remote tag. The main development host may resolve a removed dependency transitively through unrelated packages. Record the clean host's editor identity, installed source/ref, direct manifest, resolved lock, imported sample path, compile result, and behavioral evidence.
+
+Use `PASSED`, `FAILED`, and `NOT VALIDATED` consistently. Licensing, unavailable editors, network failures, and harness failures are `NOT VALIDATED`; they do not establish package incompatibility. A batch compile/test pass does not close a cell whose visual, native-platform, fixture-import, or Editor-only gate remains outstanding.
 
 ### 6. Update documentation in lockstep
 
@@ -89,4 +92,4 @@ Treat each `package.json` `samples[]` entry as one documentation unit by default
 
 ## Completion gate
 
-Do not call a sample ready because source files exist, its direct handlers can be invoked, or the package test suite is green. A ready UPM sample has been imported, compiled, played, interacted with, visually inspected, and removed cleanly.
+Do not call a sample ready because source files exist, its direct handlers can be invoked, or the package test suite is green. A ready UPM sample has complete assets and fixtures, stable metadata, has been imported, compiled, played, interacted with, visually inspected, and removed cleanly.
