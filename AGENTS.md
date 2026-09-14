@@ -89,7 +89,7 @@ This repository is a Unity 6 host used to develop and validate GameLovers UPM pa
 - Use `nameof(T)` instead of string literals for paths, keys, or prefixes derived from a type name.
 - Types that own Unity objects, native handles, callbacks, coroutines, or global subscriptions need idempotent teardown and consistent post-disposal behavior.
 - Do not disable or release a shared global facility without exclusive ownership or reference-counted acquisition. Test concurrent owners when changing such lifecycle code.
-- When renaming a captured loop variable, update every body reference and grep the complete method before considering the rename complete.
+- A rename edits the declaration and its identifier references within that scope only — never comment prose, string literals, or same-named identifiers in other scopes such as lambda parameters or production symbols cited in `ADMIT`/`RCR` anchors. Read the staged diff hunk by hunk before committing: a comment-line hunk in a code-rename commit is a stop signal. Run `python3 Tools/rcr-anchor-check.py` after any rename or anchor edit.
 
 ### Code comments
 
