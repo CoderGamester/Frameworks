@@ -12,7 +12,7 @@ Editing a generator or sample Editor script on disk does not mean Unity compiled
 
 ## Input module without actions
 
-Programmatically adding `InputSystemUIInputModule` without `AssignDefaultActions()` produces visible, interactable-looking buttons that receive no input and emit no error.
+Programmatically adding `InputSystemUIInputModule` without `AssignDefaultActions()` produces visible, interactable-looking buttons that receive no input and emit no error. `bash Tools/verify-sample-input-modules.sh` gates this across every `Samples~` tree.
 
 ## Direct handler invocation
 
