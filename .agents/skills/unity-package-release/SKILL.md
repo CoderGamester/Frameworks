@@ -208,6 +208,7 @@ kept in sync by:
 
 ```bash
 release.py install-preflight [<package>...]   # idempotent; --no-push to stage only
+                                              # more than one package needs G18 (below)
 ```
 
 It runs on every `pull_request` into `master`, checks out the package with
@@ -259,7 +260,7 @@ release.py audit                        # all six repos, all releases
 release.py audit statechart --limit 5
 ```
 
-Read-only. Downloads each release asset, verifies the PKCS#7 attestation payload, and tabulates `tag → ownerOrgId / ownerOrgName / tar-owner`, flagging wrong-org attestations and asset-name mismatches. Embarrassingly parallel — no locks — so it can fan out much wider than 6.
+Read-only. Downloads each release asset once into `~/Library/Caches/GameLovers/upm-release/audit/<package>/<tag>/` and reuses that copy on later sweeps — a published asset for a tag is immutable, so delete the directory to force a refetch. Verifies the PKCS#7 attestation payload, and tabulates `tag → ownerOrgId / ownerOrgName / tar-owner`, flagging wrong-org attestations and asset-name mismatches. Embarrassingly parallel — no locks — so it can fan out much wider than 6.
 
 **Why this exists:** the published `statechart 0.9.4` attestation carries `ownerOrgName: "miguel-cartier-supercell-com"`, a work-identity-derived Unity org, inside a public OSS artifact. `G26` prevents recurrence; the audit sizes the historical damage.
 
@@ -310,7 +311,8 @@ Backfill outcome: 8 leaking releases → 1 (`services 2.0.1`).
 - **Pushing notes is not enough.** Require local `HEAD`, `origin/develop`, and the PR head SHA to agree, then re-read the body; a successful CLI exit alone does not prove the right PR was updated.
 - **`.attestation.p7m` in a file-list diff** is a packer artifact, not package content. `G24` excludes it; `G26` checks it separately.
 - **Unity `.meta` pollution.** The packer project lives in `~/Library/Caches`, outside any repo, precisely so a pack can't create `.meta` files in the host tree. `G25` asserts both working trees are unchanged after packing.
-- **`.github/` IS packed into the tarball.** The published `googlesheetimporter 0.7.2` asset still contains `package/.github/workflows/openai.yml`. Each package therefore lists `.github/` in its `.gitignore`, which the packer uses as its pack-ignore list; git keeps tracking the file, so `git add` needs `-f`. **Do not verify this on a copy with `.git` removed** — the packer behaves differently without a repo and will wrongly report `.github` as excluded. An earlier claim in this file was wrong for exactly that reason.
+- **`.github/` IS packed into the tarball.** The published `googlesheetimporter 0.7.2` asset still contains `package/.github/workflows/openai.yml`. Each package therefore lists `.github/` in its `.gitignore`, which the packer uses as its pack-ignore list; git keeps tracking the file, so `git add` needs `-f`. **Do not verify this on a copy with `.git` removed** — the packer behaves differently without a repo and will wrongly report `.github` as excluded. An earlier claim in this file was wrong for exactly that reason; root `AGENTS.md` states the general rule, and this bullet is its recorded instance.
+- **`G18` gates the fan-out.** Installing `release-preflight` into more than one package at a time — which the no-argument default does — requires that some package repository already show a green `release-preflight` run pinned to the same tooling ref. Install into one package, let a real `develop → master` PR exercise it, then fan out. The honest cost: a new tooling ref cannot fan out until one real run has passed. A single-package install is always allowed and is the deliberate override.
 - **Unresolved git-lfs pointers.** A checkout without `git lfs pull` leaves ~130-byte stubs that the packer copies verbatim, so a consumer gets a 129-byte "audio file". `G28` refuses them in both the tarball and the PR checkout; the CI workflow uses `lfs: true` so the check also proves the objects are fetchable from the remote. `uiservice` shipped this way once — published 1.2.1 had real content, so it was a silent regression, not a long-standing gap.
 - **Case-only filename drift is invisible on macOS.** `statechart` tracked two `.meta` files with a capital `C` while their assets were lowercase; the case-insensitive filesystem hid it entirely, and it only surfaced during a repack. Renaming requires two steps (`git mv X tmp && git mv tmp x`) — a direct case-only `git mv` is a silent no-op. Check with a case-insensitive duplicate scan over `git ls-files`, not by looking at the working tree.
 

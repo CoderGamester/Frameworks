@@ -1594,18 +1594,14 @@ def audit(names: list[str], limit: int | None) -> int:
                    "asset": None, "org_id": None, "org_name": None,
                    "tar_owner": None, "status": ""}
             workdir = CACHE / "audit" / pkg.folder / tag
-            shutil.rmtree(workdir, ignore_errors=True)
-            workdir.mkdir(parents=True, exist_ok=True)
-
-            gh(["release", "download", tag, "--repo", pkg.repo,
-                "--pattern", "*.tgz", "--dir", str(workdir)], check=False)
-            found = sorted(workdir.glob("*.tgz"))
-            if not found:
+            tgz = release_asset(workdir, lambda: gh(
+                ["release", "download", tag, "--repo", pkg.repo,
+                 "--pattern", "*.tgz", "--dir", str(workdir)], check=False))
+            if tgz is None:
                 row["status"] = "no asset"
                 rows.append(row)
                 continue
 
-            tgz = found[0]
             row["asset"] = tgz.name
             if tgz.name != f"{pkg.id}-{tag}.tgz":
                 # Distinguish a real defect from benign history. Several packages
@@ -1637,7 +1633,6 @@ def audit(names: list[str], limit: int | None) -> int:
             except Exception as exc:  # noqa: BLE001 - audit must never abort mid-sweep
                 row["status"] = f"read error: {exc}"
 
-            shutil.rmtree(workdir, ignore_errors=True)
             rows.append(row)
 
     print(f"\n{'package':22} {'tag':8} {'org id':15} {'org name':34} {'tar owner':16} status")
@@ -2148,6 +2143,48 @@ def cmd_complete(args) -> int:
             run_driver(["bump-host", pkg.folder], env=env)
 
 
+def release_asset(workdir: pathlib.Path, download) -> pathlib.Path | None:
+    """Fetch once, then read locally. A published asset for a tag is immutable, so re-downloading
+    it on every sweep is a network round trip for bytes already on disk. Delete the directory to
+    force a refetch."""
+    workdir.mkdir(parents=True, exist_ok=True)
+    found = sorted(workdir.glob("*.tgz"))
+    if not found:
+        download()
+        found = sorted(workdir.glob("*.tgz"))
+    return found[0] if found else None
+
+
+TOOLING_REF_LINE = re.compile(r"^\s*ref:\s*([0-9a-f]{40})\s*$", re.MULTILINE)
+
+
+def proven_tooling_refs(runs: dict, workflow_at) -> set[str]:
+    """Tooling refs that a SUCCESSFUL release-preflight run actually executed.
+
+    The ref is read from the workflow file at that run's own head, because the ref is what the
+    workflow pins and a later edit would otherwise let an unrun ref inherit an older run's proof.
+    """
+    refs: set[str] = set()
+    for entry in runs.get("workflow_runs", []):
+        if entry.get("conclusion") != "success":
+            continue
+        match = TOOLING_REF_LINE.search(workflow_at(entry.get("head_sha", "")) or "")
+        if match:
+            refs.add(match.group(1))
+    return refs
+
+
+def assert_fan_out_proven(targets: list[str], tooling_ref: str, proven: set[str]) -> None:
+    """G18. A workflow installed into six repositories before one has run it is six untested copies."""
+    if len(targets) > 1 and tooling_ref not in proven:
+        raise Fail(
+            f"G18: installing release-preflight into {len(targets)} packages requires one green "
+            f"`release-preflight` run pinned to tooling ref {tooling_ref[:12]} in a package "
+            "repository. Install into one package, let a real develop->master PR exercise it, then "
+            "fan out. A single-package install is always allowed and is the deliberate override."
+        )
+
+
 def cmd_install_preflight(args) -> int:
     """Copy the release-preflight workflow into a package repo and commit it.
 
@@ -2174,7 +2211,27 @@ def cmd_install_preflight(args) -> int:
         raise Fail("release-preflight template must contain exactly one tooling-ref placeholder")
     body = template_body.replace("__FRAMEWORKS_TOOLING_REF__", tooling_ref)
 
-    for name in args.packages or ALL_PACKAGES:
+    targets = list(args.packages or ALL_PACKAGES)
+    if len(targets) > 1:
+        proven: set[str] = set()
+        for probe_name in ALL_PACKAGES:
+            probe = Package(probe_name)
+            raw = gh(["api", f"repos/{probe.repo}/actions/workflows/release-preflight.yml/runs"
+                             "?status=success&per_page=10"], check=False)
+            try:
+                runs = json.loads(raw) if raw else {}
+            except ValueError:
+                runs = {}
+            proven |= proven_tooling_refs(
+                runs,
+                lambda sha, owner=probe: git(
+                    owner.path, "show", f"{sha}:.github/workflows/release-preflight.yml", check=False
+                ),
+            )
+        assert_fan_out_proven(targets, tooling_ref, proven)
+        ok(f"G18 tooling ref {tooling_ref[:12]} has a green release-preflight run")
+
+    for name in targets:
         pkg = Package(name)
         dest = pkg.path / ".github/workflows/release-preflight.yml"
 
