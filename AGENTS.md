@@ -6,6 +6,7 @@ This repository is a Unity 6 host used to develop and validate GameLovers UPM pa
 
 - Rules inherit down the directory tree. A child `AGENTS.md` adds local rules; it overrides an ancestor only when it explicitly names the overridden rule.
 - Read the nearest package and folder guide before changing files in that scope.
+- Before editing code, driving Unity, or committing, read `.personal-memory.md` and search its Learned User Preferences and Learned Workspace Facts for the task. Shared guidance wins on rules and placement; personal memory wins on this machine's accounts, tools, and session conventions.
 - `README.md` and package `docs/` are consumer documentation. `AGENTS.md` contains contributor constraints, not an API inventory or audit history.
 - `CLAUDE.md` files are wrappers around adjacent `AGENTS.md` files. Edit the `AGENTS.md`, not the wrapper.
 
@@ -32,6 +33,12 @@ This repository is a Unity 6 host used to develop and validate GameLovers UPM pa
 - Delete tracked files inside a submodule with `git -C Packages/<package> rm <relative-path>`; the host repository does not own paths below a submodule gitlink.
 - Before a deliberate `git reset --soft` squash, stage every intended working-tree change and verify the cached diff. This is the narrow exception where `git add -A` may be required, and only on a quiet, fully inspected tree.
 - Opening Unity may dirty `ProjectSettings/ProjectSettings.asset`. Treat that as unrelated generated churn unless the task intentionally changes project settings.
+- Repository shell under `Tools/` runs on bash 3.2 with BSD userland, and ad-hoc commands run under zsh, so write to the floor they share: quote every glob passed as an argument (`--include='*.cs'`, never bare `--include=*.cs`), never start a word with `=`, and use no associative arrays, `mapfile`, or `${var,,}`.
+- Assume no GNU-only binary or flag such as `timeout`, `cat -A`, or `awk strftime`; show whitespace with `python3 -c 'import sys; print(repr(sys.stdin.read()))'`. Never re-run a failed command unchanged: change the command or the evidence first.
+- An Edit anchor is copied from a line-numbered read of the file, never from `cat`, `head`, or `sed` output, which is not whitespace-faithful. Keep it at the smallest unique span, and re-read before retrying a failed anchor rather than widening it.
+- Establish at content level that a path changed before acting on a dirty entry. `git status` listing a path is not evidence its content changed: compare `git hash-object <path>` against `git rev-parse HEAD:<path>`, and read `git diff -w` before concluding a re-serialization was someone's edit.
+- Fetch a published artifact once into the session scratchpad under an identity-carrying name (`<repo>-<tag>.tgz`) and take every later listing, diff, or attestation read from that copy.
+- Before explaining why a tracked asset or setting exists, consult `.architecture-log.md` and `git log -- <path>`. Write that log through one ceremony — `release.py bump-host` for a release, the session wrap-up otherwise — never from every commit.
 
 ## Unity and verification
 
@@ -53,6 +60,11 @@ This repository is a Unity 6 host used to develop and validate GameLovers UPM pa
 - Resolve a running Unity Editor by project path and `Temp/UnityLockfile`, not by bundle identity or a loose process-name match. Never terminate an Editor belonging to another project.
 - `Unity_RunCommand` snippets use one top-level class, no nested private types, and no NUnit-returned types. Read durable results from a fresh artifact rather than relying on callback objects lost across domain reload.
 - Unity CLI passthrough requires the project argument before `--`, for example `unity test . --mode EditMode -- -flag`.
+- Run a CLI's own `--help` or `help <verb>` before searching its binary with `strings` or `grep`.
+- Define validation from the changed layer. A CHANGELOG, `package.json`, or docs-only change is proven by `changelog.py validate-pending` and a JSON parse; open Unity only when the change affects import or compilation; verify a test-assembly edit with `-runTests`, never a plain Editor open.
+- A claim that Unity does or does not auto-generate an asset is proven by locating the generating code in the installed Editor or package source, or by exercising the generating trigger itself. An Editor open proves only what that open does.
+- A launcher, harness, or workflow gate is proven by one real invocation that produces its report artifact in the environment that will run it — one real package repository before a six-package fan-out — against every input shape it will meet. Argv self-tests prove command construction only, and no dispatch or multi-repository install happens before that run passes.
+- When a fresh probe contradicts a fact recorded in a commit message, log, or skill, the contradiction is the finding: re-run both on the same real checkout with `.git`, `.meta`, and LFS state intact before acting on either. A packer, importer, or git-aware tool run on a stripped copy is a different tool, and a passing positive control does not repair an environment mismatch; `unity-package-release` records the `.github/` packing instance.
 - Batchmode and Editor PlayMode results can target the same persistent path. Snapshot the Editor artifact before batchmode and require distinct start times and matching content-based source ids before comparing them.
 - Before implementing a Unity feature, check in order whether it is already an authorable serialized property, a pipeline-provided feature, or a newer native engine capability.
 
