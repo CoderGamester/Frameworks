@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 import re
 import subprocess
@@ -202,6 +203,28 @@ def CheckSkillScriptLiterals(root: Path, errors: list[str]) -> None:
     errors.extend(SkillScriptLiteralViolations(root))
 
 
+PROJECT_DIR_REFERENCE = re.compile(r"\$CLAUDE_PROJECT_DIR/([^\s\"']+)")
+
+
+def CheckHookConfig(root: Path, errors: list[str]) -> None:
+    """Every script a registered hook names must exist, or the hook fails silently at session start."""
+    settings = root / ".claude/settings.json"
+    if not settings.is_file():
+        return
+    try:
+        document = json.loads(settings.read_text(encoding="utf-8"))
+    except ValueError as error:
+        errors.append(f".claude/settings.json: invalid JSON ({error})")
+        return
+    for event, groups in (document.get("hooks") or {}).items():
+        for group in groups:
+            for hook in group.get("hooks") or []:
+                command = hook.get("command") or ""
+                for match in re.findall(PROJECT_DIR_REFERENCE, command):
+                    if not (root / match).exists():
+                        errors.append(f".claude/settings.json: {event} hook references missing {match}")
+
+
 def CheckReleaseSkillDocs(root: Path, errors: list[str]) -> None:
     """Delegate the release tool's own cross-file references to the checker that owns them."""
     script = root / ".agents/skills/unity-package-release/scripts/check_skill_docs.py"
@@ -352,6 +375,7 @@ def Main(argv: list[str]) -> int:
     CheckSkillAliases(ROOT, errors)
     CheckSkillScriptLiterals(ROOT, errors)
     CheckReleaseSkillDocs(ROOT, errors)
+    CheckHookConfig(ROOT, errors)
 
     for path in guides:
         text = path.read_text(encoding="utf-8")

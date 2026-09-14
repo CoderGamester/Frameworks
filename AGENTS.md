@@ -39,6 +39,8 @@ This repository is a Unity 6 host used to develop and validate GameLovers UPM pa
 - Establish at content level that a path changed before acting on a dirty entry. `git status` listing a path is not evidence its content changed: compare `git hash-object <path>` against `git rev-parse HEAD:<path>`, and read `git diff -w` before concluding a re-serialization was someone's edit.
 - Fetch a published artifact once into the session scratchpad under an identity-carrying name (`<repo>-<tag>.tgz`) and take every later listing, diff, or attestation read from that copy.
 - Before explaining why a tracked asset or setting exists, consult `.architecture-log.md` and `git log -- <path>`. Write that log through one ceremony — `release.py bump-host` for a release, the session wrap-up otherwise — never from every commit.
+- `.claude/settings.json` registers the machine-wide agent roster (`Tools/agent-roster.py join`/`leave`) and the package-version commit gate (`Tools/check-package-version.py`); Cursor reads the same file. Read the session-start roster snapshot, and the one `Tools/test-all.sh batch` prints, before treating this checkout as yours.
+- That gate ships in shadow mode: it reports and denies nothing until `FRAMEWORKS_HOOK_PREDICATES=enforce`, and a `package-version-gate.disabled` marker in the roster state directory stops it mid-session. After changing either hook script run `bash Tools/agent-roster-selftest.sh` or `python3 Tools/check-package-version.py --self-test`, then `python3 Tools/lint-agent-guides.py`.
 
 ## Unity and verification
 

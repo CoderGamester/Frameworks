@@ -158,6 +158,13 @@ PY
 
 case "${1:-batch}" in
 batch)
+  # One project has one lock, and a peer editing a submodule mid-run makes the result unreadable.
+  echo "==> agent roster"
+  python3 Tools/agent-roster.py roster 2>/dev/null || true
+  for package in Packages/com.gamelovers.*/; do
+    dirty="$(git -C "$package" status --short 2>/dev/null)"
+    [ -n "$dirty" ] && printf '    %s\n%s\n' "$package" "$dirty"
+  done
   rc=0
   for MODE in EditMode PlayMode; do
     artifact="$OUT/batch-${MODE}.xml"
