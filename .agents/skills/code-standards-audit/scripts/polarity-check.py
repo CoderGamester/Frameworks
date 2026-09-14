@@ -43,6 +43,41 @@ FAKE_REL = os.path.join("Packages", "com.gamelovers.fixture", "Runtime", "Fixtur
 # ---------------------------------------------------------------- must-flag (synthetic)
 # (rule, snippet, why this must be caught)
 MUST_FLAG = [
+    ("O", """
+namespace Fx {
+    public class C {
+        private int count;
+    }
+}
+""", "a private instance field with no underscore prefix"),
+    ("O", """
+namespace Fx {
+    public class C {
+        private static readonly System.Collections.Generic.Dictionary<int, string> Cache = new();
+    }
+}
+""", "static readonly is still a private field; AGENTS.md says static fields are included"),
+    ("O", """
+namespace Fx {
+    public class C {
+        private int m_count;
+    }
+}
+""", "the m_ prefix is forbidden outright"),
+    ("O", """
+namespace Fx {
+    public class C {
+        private static int s_count;
+    }
+}
+""", "the s_ prefix is forbidden outright"),
+    ("P", """
+namespace Fx {
+    public class C {
+        private const int _max = 3;
+    }
+}
+""", "a private constant is PascalCase, never underscore-prefixed"),
     ("B", """
 namespace Fx {
     public class C {
@@ -163,6 +198,50 @@ namespace Fx {
 
 # ------------------------------------------------------- must-be-silent (synthetic)
 MUST_BE_SILENT_SYNTHETIC = [
+    ("O", """
+namespace Fx {
+    public class C {
+        private const int MaxCount = 3;
+    }
+}
+""", "const is the only carve-out from the field-naming rule"),
+    ("O", """
+namespace Fx {
+    public class C {
+        private int _count;
+        private static int _total;
+        private readonly int _size;
+    }
+}
+""", "conforming instance, static, and readonly fields"),
+    ("O", """
+namespace Fx {
+    public class C {
+        public int Count;
+        protected int count;
+        internal int total;
+    }
+}
+""", "a field that is not private is outside the rule"),
+    ("O", """
+namespace Fx {
+    public class C {
+        [UnityEngine.SerializeField] private int _health;
+    }
+}
+""", "an attribute does not change the rule and is stripped before the declaration is read"),
+    ("O", """
+namespace Fx {
+    public enum E { A, B }
+}
+""", "enum values are not fields"),
+    ("P", """
+namespace Fx {
+    public class C {
+        private const int MaxCount = 3;
+    }
+}
+""", "a conforming private constant"),
     ("L", """
 namespace Fx {
     internal class C {
@@ -236,6 +315,12 @@ namespace Fx {
 # ------------------------------------------------------------ must-be-silent (live repo)
 # (rule, path-fragment, member-fragment, why)
 MUST_BE_SILENT_LIVE = [
+    ("O", "ConfigsScriptableObjectInspector.cs", "",
+     "the inspector's cached colours were renamed to _camelCase"),
+    ("O", "floatP.cs", "",
+     "the math lookup tables were renamed to _camelCase"),
+    ("P", "RngService.cs", "",
+     "the service's private constants were renamed to PascalCase"),
     ("K", "IUiService.cs", "",
      "<param> on a public consumer-facing interface is explicitly permitted by §6.6"),
     ("M", "IHapticsBackend.cs", "",
