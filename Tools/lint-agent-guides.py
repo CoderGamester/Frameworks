@@ -202,6 +202,20 @@ def CheckSkillScriptLiterals(root: Path, errors: list[str]) -> None:
     errors.extend(SkillScriptLiteralViolations(root))
 
 
+def CheckReleaseSkillDocs(root: Path, errors: list[str]) -> None:
+    """Delegate the release tool's own cross-file references to the checker that owns them."""
+    script = root / ".agents/skills/unity-package-release/scripts/check_skill_docs.py"
+    if not script.is_file():
+        return
+    result = subprocess.run([sys.executable, str(script)], capture_output=True, text=True, check=False)
+    if result.returncode != 0:
+        errors.extend(
+            f"unity-package-release docs: {line}"
+            for line in (result.stdout + result.stderr).splitlines()
+            if line.strip().startswith("ERROR:")
+        )
+
+
 def CheckSkillAliases(root: Path, errors: list[str]) -> None:
     errors.extend(SkillAliasViolations(root, GitIndexModes(root, CLAUDE_SKILLS_PATH, errors)))
 
@@ -337,6 +351,7 @@ def Main(argv: list[str]) -> int:
     CheckWrappers(ROOT, guides, errors)
     CheckSkillAliases(ROOT, errors)
     CheckSkillScriptLiterals(ROOT, errors)
+    CheckReleaseSkillDocs(ROOT, errors)
 
     for path in guides:
         text = path.read_text(encoding="utf-8")

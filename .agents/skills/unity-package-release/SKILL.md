@@ -323,10 +323,11 @@ Backfill outcome: 8 leaking releases → 1 (`services 2.0.1`).
 - The pending changelog passes `validate-pending`, and any open PR body exactly matches that entry.
 - The tier used was reported to the user, and any `G23`/`G27` degradation warnings were surfaced rather than swallowed.
 - The published asset contains no git-lfs stubs (`G28`) and no `.github/` directory.
+- After any `scripts/` change, `check_skill_docs.py` and `python3 -m unittest discover -s .agents/skills/unity-package-release/scripts -p 'test_*.py'` pass: every `add_parser` subcommand is documented here, and every gate cited here is defined in `release.py`.
 
 ## Reference
 
-- Scripts: `scripts/release.py`, `scripts/changelog.py`, `scripts/UpmPack.cs`
+- Scripts: `scripts/release.py`, `scripts/changelog.py`, `scripts/UpmPack.cs`, `scripts/check_skill_docs.py`, `scripts/test_*.py`
 - Workflows: `workflows/release-preflight.yml` (per package, installed by `install-preflight`), `../../../.github/workflows/upm-release.yml` (host, dispatch-driven)
 - CHANGELOG dialect: root `AGENTS.md` §6.5 — canonical is `**New**:` / `**Changed**:` / `**Fixed**:` / `**Docs**:`
 - Pre-publication versioning: root `AGENTS.md` §2.7 — do not open a new `## [X.Y.Z]` section until actually cutting a release
