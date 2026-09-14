@@ -37,9 +37,56 @@ mkdir -p "$OUT" "$BATCH_RESULTS_DIR"
 # Digests CONTENT, not commits. An earlier version hashed HEAD plus submodule HEADs, which made
 # the gate fire whenever the halves were committed between runs even though every compiled byte
 # was identical - a false positive, which trains people to ignore the gate.
+#
+# The JSON sidecar beside each .codeid records host HEAD, submodule HEADs, and dirty paths for
+# ATTRIBUTION ONLY. `compare` still gates on the digest alone, so committing between the halves
+# cannot re-introduce that false positive; the sidecar only answers "which code was this?" when a
+# result is read weeks later.
 code_id() {
   { find Packages Assets -type f \( -name '*.cs' -o -name '*.asmdef' \) ! -path '*/Samples~/*' -print0 2>/dev/null \
       | sort -z | xargs -0 shasum 2>/dev/null; } | shasum | cut -c1-12
+}
+
+write_sidecar() { # <sidecar.json> <digest>
+  python3 - "$1" "$2" <<'PY'
+import glob, json, pathlib, subprocess, sys
+
+
+def git(*args, cwd="."):
+    done = subprocess.run(["git", "-C", cwd, *args], capture_output=True, text=True)
+    return done.stdout.strip() if done.returncode == 0 else ""
+
+
+submodules = {path: git("rev-parse", "HEAD", cwd=path) for path in sorted(glob.glob("Packages/com.gamelovers.*/"))}
+dirty = git("status", "--porcelain").splitlines()
+for path in submodules:
+    dirty += [path + line[3:] for line in git("status", "--porcelain", cwd=path).splitlines()]
+pathlib.Path(sys.argv[1]).write_text(json.dumps({
+    "digest": sys.argv[2],
+    "host_head": git("rev-parse", "HEAD"),
+    "submodule_heads": submodules,
+    "dirty_paths": sorted(dirty),
+}, indent=1, sort_keys=True) + "\n")
+PY
+}
+
+sidecar_diff() { # <new.json> <previous.json> ; attribution only, never fails
+  [ -f "$2" ] || { echo "    identity: first sidecar for this half"; return 0; }
+  python3 - "$1" "$2" <<'PY'
+import json, sys
+
+new, old = (json.load(open(path, encoding="utf-8")) for path in sys.argv[1:3])
+for key in ("digest", "host_head"):
+    if new[key] != old[key]:
+        print(f"    identity: {key} {old[key][:12]} -> {new[key][:12]}")
+for name, head in new["submodule_heads"].items():
+    if old["submodule_heads"].get(name) != head:
+        print(f"    identity: {name} {str(old['submodule_heads'].get(name))[:12]} -> {head[:12]}")
+added = sorted(set(new["dirty_paths"]) - set(old["dirty_paths"]))
+gone = sorted(set(old["dirty_paths"]) - set(new["dirty_paths"]))
+if added or gone:
+    print(f"    identity: dirty +{added[:6]} -{gone[:6]}")
+PY
 }
 
 # AssetImportWorker children match the same path as the interactive Editor and can outlive
@@ -124,6 +171,7 @@ batch)
     # outputs first and refuse to summarise unless this invocation recreated the XML.
     # Unity rejects hidden directory names such as `.test-all` for -testResults, so the
     # Editor writes under Library first and the fresh artifact is snapshotted afterwards.
+    [ -f "$code_artifact.json" ] && mv "$code_artifact.json" "$code_artifact.prev.json"
     rm -f "$artifact" "$artifact_log" "$code_artifact" "$run_artifact" "$run_log"
     "$UNITY" -batchmode -runTests -projectPath "$PWD" -testPlatform "$MODE" \
       -testResults "$PWD/$run_artifact" -logFile "$PWD/$run_log" || true
@@ -136,6 +184,8 @@ batch)
     if [ -f "$run_log" ]; then mv "$run_log" "$artifact_log"; fi
     code_id > "$code_artifact"
     summarise "$artifact" "batch-${MODE}" || rc=1
+    write_sidecar "$code_artifact.json" "$(cat "$code_artifact")"
+    sidecar_diff "$code_artifact.json" "$code_artifact.prev.json"
   done
   exit $rc
   ;;
@@ -185,6 +235,7 @@ editor-save)
   cp "$EDITOR_RESULTS" "$OUT/editor-PlayMode.xml"
   code_id > "$OUT/editor-PlayMode.codeid"
   summarise "$OUT/editor-PlayMode.xml" "editor-PlayMode(saved)"
+  write_sidecar "$OUT/editor-PlayMode.codeid.json" "$(cat "$OUT/editor-PlayMode.codeid")"
   ;;
 
 compare)
