@@ -21,9 +21,9 @@ an empty region. Only an experiment separates these.
 1. **State the hypothesis** — name the specific behaviour and the file + symbol that
    implements it.
 2. **Design a perturbation** that should change an observable. One change at a time.
-3. **Establish the baseline.** Green before you start, or you cannot read the result.
+3. **Establish the baseline.** Green before you start, or you cannot read the result. The harness prints `baseline green: N test cases`; read N from that line rather than running the fixture again to count it.
 4. **Apply, observe, revert.** Record what actually happened, not what you predicted.
-5. **Assert restoration** — the source must be byte-identical afterwards.
+5. **Assert restoration** — the source must be byte-identical afterwards, and the revert sits in a `finally` so a timeout, interrupt, or abort cannot leave production mutated.
 
 > **A finding is not a finding until the perturbation has been observed to change the
 > outcome.** If you did not watch it change, you have a hypothesis. Write it down as one.
@@ -41,15 +41,20 @@ table live in each package's `Tests/AGENTS.md` §1–§2 — read them there, do
 them here.
 
 ```bash
-python3 scripts/annotate.py spec-annotations.json   # insert comment blocks
-python3 scripts/verify.py  spec-mutations.json      # mutate -> run -> revert -> report
+python3 .agents/skills/empirical-audit/scripts/annotate.py spec-annotations.json   # insert comment blocks
+python3 .agents/skills/empirical-audit/scripts/verify.py  spec-mutations.json      # mutate -> run -> revert -> report
 ```
+
+`verify.py` invokes exactly `~/.unity/bin/unity test --mode <EditMode|PlayMode> --filter <one expression> --output <xml>` with the host root as its working directory; there is no `--testFilter`. Checkpoints, per-mutation XML, and `results.json` land in `.test-all/rcr/<run-id>/`, and the run id is printed first. The Editor must be closed, because one project has one lock.
 
 Spec shapes:
 
 ```jsonc
-// annotations: file -> test -> comment block (no leading indent; \n between lines)
-{ "path/To/FooTest.cs": { "TestName": "// ADMIT: ...\n// RCR: ..." } }
+// annotations: the production paths the comments cite, then file -> test -> comment block
+// (no leading indent; \n between lines). annotate.py refuses to write while any listed
+// production path is dirty, and refuses a comment citing a file not listed here.
+{ "production": ["path/To/Foo.cs"],
+  "annotations": { "path/To/FooTest.cs": { "TestName": "// ADMIT: ...\n// RCR: Foo.cs Symbol — ..." } } }
 
 // mutations
 { "mode": "EditMode", "filter": "<runner filter>",
@@ -73,7 +78,7 @@ Every clause below exists because its absence produced a wrong answer:
   (`Method(args)` vs `Method`).
 - **Verify each `find` occurs exactly once** before running — ambiguous anchors mutate the
   wrong site.
-- **Assert byte-identical restoration** of every touched file at the end.
+- **Assert byte-identical restoration** of every touched file at the end, and compare `git status --porcelain` for those paths before and after — asked of the repository that owns each one, since a host `git` reports anything below a gitlink as clean.
 - **Subtract the baseline's failures** so a pre-existing red is never counted as a hit.
 - **Record which environment produced each result, and re-run where the observable can
   differ.** A perturbation's effect is only established in the environment you ran it in.

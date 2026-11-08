@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 import re
 import subprocess
@@ -178,6 +179,66 @@ def SkillAliasViolations(root: Path, modes: dict[str, str]) -> list[str]:
     return errors
 
 
+SKILL_SCRIPT_GLOB = ".agents/skills/*/scripts/*.py"
+# A machine-local path in a committed script makes it run on one checkout and no other, and a
+# checkpoint under /tmp is outside the location AGENTS.md reserves for mutation records.
+MACHINE_LOCAL_LITERAL = re.compile(r"""["'][^"'\n]*(?:/tmp(?:/|\b)|/Users/)""")
+
+
+def SkillScriptLiteralViolations(root: Path) -> list[str]:
+    errors: list[str] = []
+    for script in sorted(root.glob(SKILL_SCRIPT_GLOB)):
+        text = script.read_text(encoding="utf-8")
+        for number, line in enumerate(text.splitlines(), start=1):
+            if MACHINE_LOCAL_LITERAL.search(line):
+                errors.append(
+                    f"{script.relative_to(root)}:{number}: machine-local or /tmp path literal; "
+                    "derive the root from __file__ with an env override and keep run artifacts "
+                    "under .test-all/"
+                )
+    return errors
+
+
+def CheckSkillScriptLiterals(root: Path, errors: list[str]) -> None:
+    errors.extend(SkillScriptLiteralViolations(root))
+
+
+PROJECT_DIR_REFERENCE = re.compile(r"\$CLAUDE_PROJECT_DIR/([^\s\"']+)")
+
+
+def CheckHookConfig(root: Path, errors: list[str]) -> None:
+    """Every script a registered hook names must exist, or the hook fails silently at session start."""
+    settings = root / ".claude/settings.json"
+    if not settings.is_file():
+        return
+    try:
+        document = json.loads(settings.read_text(encoding="utf-8"))
+    except ValueError as error:
+        errors.append(f".claude/settings.json: invalid JSON ({error})")
+        return
+    for event, groups in (document.get("hooks") or {}).items():
+        for group in groups:
+            for hook in group.get("hooks") or []:
+                command = hook.get("command") or ""
+                for match in re.findall(PROJECT_DIR_REFERENCE, command):
+                    if not (root / match).exists():
+                        errors.append(f".claude/settings.json: {event} hook references missing {match}")
+
+
+def CheckReleaseSkillDocs(root: Path, errors: list[str]) -> None:
+    """Delegate the release tool's own cross-file references to the checker that owns them."""
+    script = root / ".agents/skills/unity-package-release/scripts/check_skill_docs.py"
+    if not script.is_file():
+        return
+    result = subprocess.run([sys.executable, str(script)], capture_output=True, text=True, check=False)
+    if result.returncode != 0:
+        errors.extend(
+            f"unity-package-release docs: {line}"
+            for line in (result.stdout + result.stderr).splitlines()
+            if line.strip().startswith("ERROR:")
+        )
+
+
 def CheckSkillAliases(root: Path, errors: list[str]) -> None:
     errors.extend(SkillAliasViolations(root, GitIndexModes(root, CLAUDE_SKILLS_PATH, errors)))
 
@@ -271,7 +332,27 @@ def SelfTest() -> int:
             print("SELF-TEST FAILED: wrong dangling skill target was accepted")
             return 1
 
-    print("SELF-TEST PASSED: guide sections and skill aliases pass in both directions")
+        scripts = root / ".agents" / "skills" / "fixture" / "scripts"
+        scripts.mkdir(parents=True)
+        script = scripts / "harness.py"
+        script.write_text('ROOT = "/Users/someone/Frameworks"\n', encoding="utf-8")
+        if not SkillScriptLiteralViolations(root):
+            print("SELF-TEST FAILED: a machine-local root literal was accepted")
+            return 1
+        script.write_text('OUT = "/tmp/harness"\n', encoding="utf-8")
+        if not SkillScriptLiteralViolations(root):
+            print("SELF-TEST FAILED: a /tmp checkpoint literal was accepted")
+            return 1
+        # The rule is about quoted literals: prose naming /tmp, and a tempfile call, are correct.
+        script.write_text(
+            "# never write under /tmp\nimport tempfile\nOUT = tempfile.gettempdir()\n",
+            encoding="utf-8",
+        )
+        if SkillScriptLiteralViolations(root):
+            print("SELF-TEST FAILED: a repo-relative script fixture was rejected")
+            return 1
+
+    print("SELF-TEST PASSED: guide sections, skill aliases, and script path literals pass in both directions")
     return 0
 
 
@@ -292,6 +373,9 @@ def Main(argv: list[str]) -> int:
 
     CheckWrappers(ROOT, guides, errors)
     CheckSkillAliases(ROOT, errors)
+    CheckSkillScriptLiterals(ROOT, errors)
+    CheckReleaseSkillDocs(ROOT, errors)
+    CheckHookConfig(ROOT, errors)
 
     for path in guides:
         text = path.read_text(encoding="utf-8")

@@ -70,7 +70,7 @@ import os
 import re
 import sys
 
-RULESET_VERSION = "AGENTS.md §6.6 as of 2026-08-10"
+RULESET_VERSION = "AGENTS.md documentation and naming rules as of 2026-09-14"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCAN_ROOTS = ("Packages", "Assets")
 EXEMPT_AREAS = ("Tests", "Samples~", "Assets")
@@ -100,7 +100,15 @@ RULE_TITLES = {
     "L": "inline summary exceeds 120 columns",
     "M": "single-line <summary> on public consumer-facing method/type",
     "N": "internal method declared after a private one",
+    "O": "private field is not _camelCase",
+    "P": "private const is not PascalCase",
 }
+
+# AGENTS.md gives private fields `_camelCase` and says explicitly that static fields are included,
+# and gives private constants plain PascalCase. `const` is therefore the only carve-out: static,
+# static readonly, readonly, volatile, and [SerializeField] fields are all private fields.
+FIELD_NAME = re.compile(r"^_[a-z][A-Za-z0-9]*$")
+CONST_NAME = re.compile(r"^[A-Z][A-Za-z0-9]*$")
 
 
 # --------------------------------------------------------------------------- parse
@@ -471,6 +479,14 @@ def evaluate(decls):
         if d.kind == "field":
             if has_doc and d.access == "private":
                 add("B")
+            if d.access == "private" and d.name != "?":
+                # Split on the initialiser: a default value can contain the word `const`.
+                modifiers = d.raw.split("=", 1)[0]
+                if re.search(r"\bconst\b", modifiers):
+                    if not CONST_NAME.match(d.name):
+                        add("P", f" [{d.name}]")
+                elif not FIELD_NAME.match(d.name):
+                    add("O", f" [{d.name}]")
             continue
         if d.kind == "ctor":
             if has_doc:

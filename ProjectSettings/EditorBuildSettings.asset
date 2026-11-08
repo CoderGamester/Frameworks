@@ -18,7 +18,5 @@ EditorBuildSettings:
     path: Assets/Samples/Mobile Services/1.0.0/Mobile Services Samples/DeepLinkRouter/DeepLinkRouter.unity
     guid: 55555555555555555555555555555541
   m_configObjects:
-    com.unity.addressableassets: {fileID: 11400000, guid: 4b041893511e6f345ac35936a669455e,
-      type: 2}
-    com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f,
-      type: 2}
+    com.unity.addressableassets: {fileID: 11400000, guid: 4b041893511e6f345ac35936a669455e, type: 2}
+    com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
