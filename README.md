@@ -9,7 +9,7 @@ This is the Unity host project for the GameLovers UPM package family. It is a de
 | Package | Use it for | Unity / pipeline | Repository |
 | --- | --- | --- | --- |
 | [GameData](Packages/com.gamelovers.gamedata/README.md) | Typed configuration, observables, serialization, deterministic math, and data tools | 6000.0 minimum; pipeline-neutral | [Unity-GameData](https://github.com/CoderGamester/Unity-GameData) |
-| [Google Sheet Importer](Packages/com.gamelovers.googlesheetimporter/README.md) | Editor-time import of published Sheets into configuration assets | 6000.0 minimum; pipeline-neutral | [Unity-GoogleSheet-Importer](https://github.com/CoderGamester/Unity-GoogleSheet-Importer) |
+| [Spreadsheet Importer](Packages/com.gamelovers.googlesheetimporter/README.md) | Editor-time import of Google Sheets, Excel worksheets, and CSV files into ScriptableObject assets | 6000.0 minimum; pipeline-neutral | [Unity-GoogleSheet-Importer](https://github.com/CoderGamester/Unity-GoogleSheet-Importer) |
 | [Services](Packages/com.gamelovers.services/README.md) | Messaging, ticking, pools, persistence, RNG, commands, and Addressables helpers | 6000.0 minimum; pipeline-neutral | [Unity-Services](https://github.com/CoderGamester/Unity-Services) |
 | [Statechart](Packages/com.gamelovers.statechart/README.md) | Hierarchical, parallel, and async state machines | 6000.0 minimum; pipeline-neutral | [Statechart-HFSM](https://github.com/CoderGamester/Statechart-HFSM) |
 | [Mobile Services](Packages/com.gamelovers.mobileservices/README.md) | Local notifications, native UI, haptics, permissions, deep links, and mobile build tooling | 6000.0 minimum; pipeline-neutral | [Unity-MobileServices](https://github.com/CoderGamester/Unity-MobileServices) |
