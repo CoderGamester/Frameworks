@@ -113,7 +113,7 @@ jobs:
 
           case "$PACKAGE_REPOSITORY" in
             Unity-GameData) package=gamedata ;;
-            Unity-GoogleSheet-Importer) package=googlesheetimporter ;;
+            Unity-Spreadsheet-Importer) package=googlesheetimporter ;;
             Unity-MobileServices) package=mobileservices ;;
             Unity-Services) package=services ;;
             Statechart-HFSM) package=statechart ;;

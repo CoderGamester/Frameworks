@@ -9,7 +9,7 @@
 	url = https://CoderGamester@github.com/CoderGamester/Unity-UiService.git
 [submodule "Packages/com.gamelovers.googlesheetimporter"]
 	path = Packages/com.gamelovers.googlesheetimporter
-	url = https://CoderGamester@github.com/CoderGamester/Unity-GoogleSheet-Importer.git
+	url = https://CoderGamester@github.com/CoderGamester/Unity-Spreadsheet-Importer.git
 [submodule "Packages/com.gamelovers.mobileservices"]
 	path = Packages/com.gamelovers.mobileservices
 	url = https://CoderGamester@github.com/CoderGamester/Unity-MobileServices.git
